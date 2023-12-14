@@ -3179,3 +3179,125 @@ D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CopyComplete
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.dll
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.AssemblyReference.cache
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CoreCompileInputs.cache
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.dll.config
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportSource.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.Shared.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.Web.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.SysErrMsgHandler.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.BLL.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.DAL.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.PropertyEntities.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.SqlServer.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.PdfSharp.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\Newtonsoft.Json.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.Charting.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\System.Net.Http.Formatting.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.WebHost.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.DAL.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\stdole.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.BLL.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.BLL.dll.config
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.DAL.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.DAL.dll.config
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.PropertyEntities.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DS.PropertyEntities.dll.config
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.SysErrMsgHandler.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.SysErrMsgHandler.dll.config
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.SqlServer.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.PdfSharp.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\Newtonsoft.Json.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.Charting.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\System.Net.Http.Formatting.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.WebHost.xml
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.DAL.pdb
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\de\PdfSharp.resources.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\bin\de\PdfSharp.Charting.resources.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CopyComplete
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.dll
+D:\New folder (2)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.dll.config
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportSource.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.Shared.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.Web.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.SysErrMsgHandler.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.BLL.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.DAL.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.PropertyEntities.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.SqlServer.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.PdfSharp.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\Newtonsoft.Json.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.Charting.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\System.Net.Http.Formatting.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.WebHost.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.DAL.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.DataDefModel.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.ClientDoc.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.ReportDefModel.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.Controllers.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CommLayer.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.DataSetConversion.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.Prompting.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.XmlSerialize.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CubeDefModel.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.ObjectFactory.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\stdole.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.BLL.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.BLL.dll.config
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.DAL.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.DAL.dll.config
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.PropertyEntities.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DS.PropertyEntities.dll.config
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.SysErrMsgHandler.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.SysErrMsgHandler.dll.config
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\EntityFramework.SqlServer.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\HtmlRenderer.PdfSharp.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\Newtonsoft.Json.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\PdfSharp.Charting.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\System.Net.Http.Formatting.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.WebHost.xml
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.DAL.pdb
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\de\PdfSharp.resources.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\bin\de\PdfSharp.Charting.resources.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.AssemblyReference.cache
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CoreCompileInputs.cache
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CopyComplete
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.dll
+D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.pdb
