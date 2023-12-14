@@ -192,6 +192,7 @@
     </asp:TemplateField>
                <asp:BoundField DataField="AdmissionNo" HeaderText="Admission No" />
                <asp:BoundField DataField="FullName" HeaderText="Full Name" />
+               <asp:BoundField DataField="Mobile" HeaderText="Mobile" />
                 <asp:BoundField DataField="ClassName" HeaderText="Class" />
                
                 <asp:BoundField DataField="GroupName" HeaderText="Group" />

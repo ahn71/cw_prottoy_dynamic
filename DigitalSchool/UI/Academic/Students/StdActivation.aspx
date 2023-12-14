@@ -204,12 +204,18 @@
                               </asp:TemplateField> 
                                <asp:TemplateField HeaderText="Action" HeaderStyle-Width="30px">
                                   <ItemTemplate>
-                                      <asp:Button ID="btnInActive" runat="server" CommandName="InActive" Font-Bold="true" ForeColor="red" Text="In Active" Width="55px" Height="30px" OnClientClick="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
+<%--                                      <asp:Button ID="btnInActive" runat="server" CommandName="InActive" Font-Bold="true" ForeColor="red" Text="In Active" Width="55px" Height="30px" OnClientClick="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />--%>
+                                  <asp:CheckBox ID="cbkInactive" runat="server" 
+                                                CommandName="InActive" AutoPostBack="true"
+                                                onchange="return confirm('Do you want to inactive this student ?')" 
+                                                CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
+
+<%--                                      <asp:CheckBox ID="CbkInActive" runat="server" CommandName="InActive" onchange="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />--%>
                                   </ItemTemplate>
                               </asp:TemplateField>                               
                               <asp:TemplateField HeaderText="Action" HeaderStyle-Width="30px">
                                   <ItemTemplate>
-                                      <asp:Button ID="btnActive" runat="server" CommandName="Active" Font-Bold="true" ForeColor="Green" Text="Active" Width="55px" Height="30px" OnClientClick="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
+                                      <asp:Button ID="btnActive" runat="server" CommandName="Active"  Font-Bold="true" ForeColor="Green" Text="Active" Width="55px" Height="30px" OnClientClick="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
                                   </ItemTemplate>
                               </asp:TemplateField>  
                           </Columns>

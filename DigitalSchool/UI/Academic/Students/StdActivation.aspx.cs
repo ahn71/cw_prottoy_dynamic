@@ -207,7 +207,7 @@ namespace DS.UI.Academic.Students
                 {
                     currentstdEntry.InsertToActivationLog(StudentID, BatchID, txtNote.Text.Trim(), "0");
                     lblMessage.InnerText = "success-> Successfully Inactivated.";
-                    gvForApprovedList.Rows[rIndex].Visible = false;
+                    //gvForApprovedList.Rows[rIndex].Visible = false;
                 }
 
 

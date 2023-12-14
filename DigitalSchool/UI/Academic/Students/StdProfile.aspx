@@ -16,6 +16,11 @@
         .table {
             border-bottom: none;
         }
+        .studentInfo tr{
+            border-bottom: 1px solid #ddd !important;
+        }        .studentInfo td{
+            text-align:start !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -87,12 +92,6 @@
                             <a data-toggle="tab" href="#ParentInfo">Parents Information</a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#GuardianInfo">Guardian Information</a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#Address">Address</a>
-                        </li>
-                        <li>
                             <a data-toggle="tab" href="#OtherInfo">Other Information</a>
                         </li>
                     </ul>
@@ -102,7 +101,7 @@
                         <div id="StdInfo" class="tab-pane active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="table">
+                                    <table class="table studentInfo">
                                         <tr>
                                             <td>Admission No :</td>
                                             <td>
@@ -116,9 +115,16 @@
                                             <td>
                                                 <label id="lblYear" runat="server"></label>
                                             </td>
+
                                         </tr>
                                         <tr>
-                                             <td>Shift :</td>
+                                            
+                                            <td>Student BID/NID :</td>
+                                            <td>
+                                                <label id="lblStudentBIDNID" runat="server"></label>
+                                            </td>
+
+                                            <td>Shift :</td>
                                             <td>
                                                 <label id="lblShift" runat="server"></label>
                                             </td>
@@ -126,13 +132,15 @@
                                             <td>
                                                 <label id="lblAdmissionClass" runat="server"></label>
                                             </td>
+                                        </tr>
+                                        <tr>
+
                                             <td>Group :</td>
                                             <td>
                                                 <label id="lblGroup" runat="server"></label>
-                                            </td>                                       
-                                        </tr>
-                                        <tr>
-                                            <td>Section :</td>
+                                            </td>    
+                                            
+                                              <td>Section :</td>
                                             <td>
                                                 <label id="lblSection" runat="server"></label>
                                             </td>                                            
@@ -140,11 +148,8 @@
                                             <td>
                                                 <label id="lblDateOfBirth" runat="server"></label>
                                             </td>
-                                            <td>Gender :</td>
-                                            <td>
-                                                <label id="lblGender" runat="server"></label>
-                                            </td>
                                         </tr>
+
                                         <tr>                                            
                                             <td>Mobile :</td>
                                             <td>
@@ -158,158 +163,23 @@
                                             <td>
                                                 <label id="lblReligion" runat="server"></label>
                                             </td>                                           
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="ParentInfo" class="tab-pane">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Father's Name :</td>
-                                            <td>
-                                                <label id="lblFatherName" runat="server"></label>
-                                            </td>
-                                            <td>পিতার নাম :</td>
-                                            <td>
-                                                <label id="lblFatherNameBn" runat="server"></label>
-                                            </td>                                            
-
-                                        </tr>                                        
-                                        <tr>
-                                            <td>Father's Occupation :</td>
-                                            <td>
-                                                <label id="lblFatherOccupation" runat="server"></label>
-                                            </td>
-                                            <td>পেশা :</td>
-                                            <td>
-                                                <label id="lblFatherOccupationBn" runat="server"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Father's Mobile :</td>
-                                            <td>
-                                                <label id="lblFathersMobile" runat="server"></label>
-                                            </td>
-                                            <td>পিতার মোবাইল নং :</td>
-                                            <td>
-                                                <label id="lblFathersMobileBn" runat="server"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mother's Name :</td>
-                                            <td>
-                                                <label id="lblMotherName" runat="server"></label>
-                                            </td>
-                                            <td>মাতার নাম :</td>
-                                            <td>
-                                                <label id="lblMotherNameBn" runat="server"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>Mother's Occupation :</td>
-                                            <td>
-                                                <label id="lblMotherOccupation" runat="server"></label>
-                                            </td>
-                                            <td>পেশা :</td>
-                                            <td>
-                                                <label id="lblMotherOccupationBn" runat="server"></label>
-                                            </td>
 
                                         </tr>
+
+                                         <tr>     
+                                            <td>Gender :</td>
+                                            <td>
+                                                <label id="lblGender" runat="server"></label>
+                                            </td>
+                                        </tr>
+
                                         <tr>
-                                            <td>Mother's Mobile :</td>
-                                            <td>
-                                                <label id="lblMothersMobile" runat="server"></label>
-                                            </td>
-                                            <td>মাতার মোবাইল নং :</td>
-                                            <td>
-                                                <label id="lblMothersMobileBn" runat="server"></label>
-                                            </td>
+                                            <td style="text-align:center !important; font-weight:800; font-size24px;" class="text-center fw-bold" colspan="6">Present Address</td>
                                         </tr>
-                                          <tr>
-                                            <td>Village :</td>
-                                            <td>
-                                                <label id="lblParentsVillage" runat="server"></label>
-                                            </td> 
-                                              <td>গ্রাম :</td>
-                                            <td>
-                                                <label id="lblParentsVillageBn" runat="server"></label>
-                                            </td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Post Office :</td>
-                                            <td>
-                                                <label id="lblParentsPostOffice" runat="server"></label>
-                                            </td> 
-                                              <td>ডাকঘর :</td>
-                                            <td>
-                                                <label id="lblParentsPostOfficeBn" runat="server"></label>
-                                            </td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Upazila :</td>
-                                            <td>
-                                                <label id="lblParentsUpazila" runat="server"></label>
-                                            </td> 
-                                              <td>উপজেলা :</td>
-                                            <td>
-                                                <label id="lblParentsUpazilaBn" runat="server"></label>
-                                            </td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>District :</td>
-                                            <td>
-                                                <label id="lblParentsDistrict" runat="server"></label>
-                                            </td> 
-                                              <td>জেলা :</td>
-                                            <td>
-                                                <label id="lblParentsDistrictBn" runat="server"></label>
-                                            </td>                                            
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="GuardianInfo" class="tab-pane">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <table class="table">
-                                        <tr>
-                                            <td>Guardian Name :</td>
-                                            <td>
-                                                <label id="lblGuardianName" runat="server"></label>
-                                            </td>
-                                            <td>Relation :</td>
-                                            <td>
-                                                <label id="lblRelation" runat="server"></label>
-                                            </td>
-                                            <td>Mobile No :</td>
-                                            <td>
-                                                <label id="lblGuardianMobile" runat="server"></label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Guardian Address :</td>
-                                            <td colspan="5">
-                                                <label id="lblGuardianAddress" runat="server"></label>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="Address" class="tab-pane">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5>Present Address</h5>
-                                    <table class="table">
+
+                                        
+                                            <h6 class="m-auto"> </h6>
+                                       
                                         <tr>
                                             <td>Village :</td>
                                             <td>
@@ -319,18 +189,19 @@
                                             <td>
                                                 <label id="lblTaVillageBn" runat="server"></label>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Post Office :</td>
+
+                                             <td>Post Office :</td>
                                             <td>
                                                 <label id="lblTaPostOffice" runat="server"></label>
                                             </td> 
+                                        </tr>
+                                        <tr>
+
                                             <td>ডাকঘর :</td>
                                             <td>
                                                 <label id="lblTaPostOfficeBn" runat="server"></label>
                                             </td>
-                                        </tr>
-                                        <tr>
+
                                             <td>Thana/Upazila :</td>
                                             <td>
                                                 <label id="lblTaThana" runat="server"></label>
@@ -340,6 +211,7 @@
                                                 <label id="lblTaThanaBn" runat="server"></label>
                                             </td>
                                         </tr>
+ 
                                         <tr>
                                             <td>District :</td>
                                             <td>
@@ -351,11 +223,13 @@
                                             </td>
                                            
                                         </tr>
-                                    </table>
-                                    <br />
-                                    <h5>Permanent Address</h5>
-                                    <table class="table">
-                                        <tr>
+
+
+                                         <tr>
+                                            <td style="text-align:center !important; font-weight:800; font-size24px;" class="text-center fw-bold" colspan="6">Pemanent Address</td>
+                                        </tr>
+
+                                          <tr>
                                             <td>Village :</td>
                                             <td>
                                                 <label id="lblPaVillage" runat="server"></label>
@@ -364,18 +238,17 @@
                                             <td>
                                                 <label id="lblPaVillageBn" runat="server"></label>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Post Office :</td>
+                                             <td>Post Office :</td>
                                             <td>
                                                 <label id="lblPaPostOffice" runat="server"></label>
                                             </td>
+                                        </tr>
+                   
+                                        <tr>
                                             <td>ডাকঘর :</td>
                                             <td>
                                                 <label id="lblPaPostOfficeBn" runat="server"></label>
                                             </td>
-                                        </tr>
-                                        <tr>
                                             <td>Thana/Upazila :</td>
                                             <td>
                                                 <label id="lblPaThana" runat="server"></label>
@@ -396,18 +269,199 @@
                                             </td>
                                             
                                         </tr>
+
+                                    </table>
+
+
+
+
+<%--                         <div id="Address" class="tab-pane">
+                            <div class="row">
+                                <div class="col-md-12">
+      
+                                    
+                                    <br />
+                                    <h5>Permanent Address</h5>
+                                    <table class="table">
+                                      
+                                    </table>
+                                </div>
+                            </div>
+                        </div>--%>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ParentInfo" class="tab-pane">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table studentInfo">
+                                        <tr>
+                                            <td>Father's Name :</td>
+                                            <td>
+                                                <label id="lblFatherName" runat="server"></label>
+                                            </td>
+                                            <td>পিতার নাম :</td>
+                                            <td>
+                                                <label id="lblFatherNameBn" runat="server"></label>
+                                            </td>  
+                                            <td>Father's NID</td>
+                                            <td>
+                                                <label id="lblFatherNID" runat="server"></label>
+                                            </td>
+
+                                        </tr>                                        
+                                        <tr>
+
+                                            <td>Father's Occupation :</td>
+                                            <td>
+                                                <label id="lblFatherOccupation" runat="server"></label>
+                                            </td>
+
+                                            <td>Father's Mobile :</td>
+                                            <td>
+                                                <label id="lblFathersMobile" runat="server"></label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+
+<%--                                            <td>পিতার মোবাইল নং :</td>
+                                            <td>
+                                                <label id="lblFathersMobileBn" runat="server"></label>
+                                            </td>--%>
+                                        </tr>
+                                        <tr>
+                                            <td>Mother's Name :</td>
+                                            <td>
+                                                <label id="lblMotherName" runat="server"></label>
+                                            </td>
+                                            <td>মাতার নাম :</td>
+                                            <td>
+                                                <label id="lblMotherNameBn" runat="server"></label>
+                                            </td>
+
+                                             <td>Mother's NID</td>
+                                            <td>
+                                                <label id="lblMotherNID" runat="server"></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+
+                                            <td>Mother's Occupation :</td>
+                                            <td>
+                                                <label id="lblMotherOccupation" runat="server"></label>
+                                            </td>
+
+                                            <td>Mother's Mobile :</td>
+                                            <td>
+                                                <label id="lblMothersMobile" runat="server"></label>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+
+
+
+
+                                        </tr>
+
+                                         <tr>
+                                            <td>Guardian Name :</td>
+                                            <td>
+                                                <label id="lblGuardianName" runat="server"></label>
+                                            </td> 
+                                            <td>Guardian NID :</td>
+                                            <td>
+                                                <label id="lblGuardianNID" runat="server"></label>
+                                            </td>
+                                           
+                                            <td>Relation :</td>
+                                            <td>
+                                                <label id="lblRelation" runat="server"></label>
+                                            </td>
+                                        </tr>
+
+                                          <tr>
+
+
+                                            <td>Mobile No :</td>
+                                            <td>
+                                                <label id="lblGuardianMobile" runat="server"></label>
+                                            </td>
+                                            <td>Guardian Address :</td>
+                                            <td colspan="5">
+                                                <label id="lblGuardianAddress" runat="server"></label>
+                                            </td>
+                                        </tr>
+<%--                                          <tr>
+                                            <td>Village :</td>
+                                            <td>
+                                                <label id="lblParentsVillage" runat="server"></label>
+                                            </td> 
+                                              <td>গ্রাম :</td>
+                                            <td>
+                                                <label id="lblParentsVillageBn" runat="server"></label>
+                                            </td>
+                                            
+                                        </tr>--%>
+ <%--                                       <tr>
+                                            <td>Post Office :</td>
+                                            <td>
+                                                <label id="lblParentsPostOffice" runat="server"></label>
+                                            </td> 
+                                              <td>ডাকঘর :</td>
+                                            <td>
+                                                <label id="lblParentsPostOfficeBn" runat="server"></label>
+                                            </td>                                            
+                                        </tr>--%>
+<%--                                        <tr>
+                                            <td>Upazila :</td>
+                                            <td>
+                                                <label id="lblParentsUpazila" runat="server"></label>
+                                            </td> 
+                                              <td>উপজেলা :</td>
+                                            <td>
+                                                <label id="lblParentsUpazilaBn" runat="server"></label>
+                                            </td>                                            
+                                        </tr>--%>
+<%--                                        <tr>
+                                            <td>District :</td>
+                                            <td>
+                                                <label id="lblParentsDistrict" runat="server"></label>
+                                            </td> 
+                                              <td>জেলা :</td>
+                                            <td>
+                                                <label id="lblParentsDistrictBn" runat="server"></label>
+                                            </td>                                            
+                                        </tr>--%>
                                     </table>
                                 </div>
                             </div>
                         </div>
+<%--                        <div id="GuardianInfo" class="tab-pane">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                       
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>--%>
+                        
                         <div id="OtherInfo" class="tab-pane">
                             <div class="row">
                                 <div class="col-md-12">
-                                    Previous Institute Info 
-                                    <table class="table">
+                                   
+                                    <table class="table studentInfo">
+                                        <tr>
+                                            <td style="text-align:center !important; font-weight:800; font-size24px;" class="text-center fw-bold" colspan="6">Previous Institute Information </td>
+                                        </tr>
                                         <tr>
                                             <td>Institute :</td>
-                                            <td colspan="2">
+                                            <td>
                                                 <label id="lblPreviousSchoolName" runat="server"></label>
                                             </td>
                                             <td> Exam/Class :</td>
@@ -432,23 +486,33 @@
                                             <td>
                                                 <label id="lblPreviousReg" runat="server"></label>
                                             </td>
-                                             <td>GPA:</td>
+                                  
+                                        </tr>  
+                                        <tr>
+                                            <td>GPA:</td>
                                             <td>
                                                 <label id="lblPreviousGPA" runat="server"></label>
-                                            </td>                                  
-                                        </tr>                                        
+                                            </td>
+                                        </tr>
                                     </table>
-                                    TC Information
-                                    <table class="table">
+
+                                    <table class="table studentInfo ">
+                                        <tr>
+                                            <td style="text-align:center !important; font-weight:800; font-size24px;" class="text-center fw-bold" colspan="6">TC Information </td>
+                                        </tr>
                                         <tr>
                                             <td>Institute Name:</td>
                                             <td>
                                                 <label id="lblTCInstituteName" runat="server"></label>
                                             </td>
+                                            <td></td>
+                                            <td></td>
                                             <td>Date :</td>
                                             <td>
                                                 <label id="lblTCDate" runat="server"></label>
-                                            </td>                                          
+                                            </td>  
+                                            
+
                                         </tr>
                                     </table>
                                 </div>

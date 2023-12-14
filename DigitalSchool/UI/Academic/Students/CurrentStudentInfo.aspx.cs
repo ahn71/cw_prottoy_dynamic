@@ -176,6 +176,7 @@ namespace DS.UI.Academics.Students
                     divInfo += "<tr id='r_" + id + "'>";
                     divInfo += "<td class='numeric'>" + sl + "</td>";
                     divInfo += "<td>" + dt.Rows[x]["FullName"].ToString() + "</td>";
+                    divInfo += "<td>" + dt.Rows[x]["Mobile"].ToString() + "</td>";
                     divInfo += "<td>" + dt.Rows[x]["ClassName"].ToString() + "</td>";
                     if (dt.Rows[x]["GroupName"].ToString() == "")
                     {
