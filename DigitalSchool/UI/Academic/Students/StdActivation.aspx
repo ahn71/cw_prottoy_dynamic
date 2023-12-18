@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="StdActivation.aspx.cs" Inherits="DS.UI.Academic.Students.StdActivation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<style>
+    <style>
         .tgPanel {
             width: 100%;
         }
@@ -187,8 +187,7 @@
                                      <%# Container.DataItemIndex + 1 %>                                  
                                 </ItemTemplate>
                                 <ItemStyle HorizontalAlign="Center" />
-                            </asp:TemplateField>                         
-                          
+                            </asp:TemplateField>     
                                  <asp:BoundField DataField="FullName" HeaderText="Full Name" />
                                  <asp:BoundField DataField="ClassName" HeaderText="Class" />
                                  <asp:BoundField DataField="GroupName" HeaderText="Group"  />
@@ -204,11 +203,11 @@
                               </asp:TemplateField> 
                                <asp:TemplateField HeaderText="Action" HeaderStyle-Width="30px">
                                   <ItemTemplate>
-<%--                                      <asp:Button ID="btnInActive" runat="server" CommandName="InActive" Font-Bold="true" ForeColor="red" Text="In Active" Width="55px" Height="30px" OnClientClick="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />--%>
-                                  <asp:CheckBox ID="cbkInactive" runat="server" 
+                                        <asp:Button ID="btnInActive" runat="server" CommandName="InActive" Font-Bold="true" ForeColor="red" Text="In Active" Width="55px" Height="30px" OnClientClick="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
+<%--                                  <asp:CheckBox ID="cbkInactive" runat="server" 
                                                 CommandName="InActive" AutoPostBack="true"
                                                 onchange="return confirm('Do you want to inactive this student ?')" 
-                                                CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />
+                                                CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />--%>
 
 <%--                                      <asp:CheckBox ID="CbkInActive" runat="server" CommandName="InActive" onchange="return confirm('Do you want to inactive this student ?')" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' />--%>
                                   </ItemTemplate>

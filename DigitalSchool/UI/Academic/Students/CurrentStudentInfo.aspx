@@ -68,15 +68,131 @@
               width:100%!important;
           }
         }
+
+       /*----this code for switch button-------*/
+                /* The switch - the box around the slider */
+                .switch {
+                position: relative;
+                display: inline-block;
+                width: 35px;
+                height: 17px;
+                margin-top:17px;
+
+                }
+
+                /* Hide default HTML checkbox */
+                .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+                }
+
+                /* The slider */
+                .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 1px;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+                }
+
+                .slider:before {
+                position: absolute;
+                content: "";
+                height: 9px;
+                width: 9px;
+                left: 3px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+                }
+
+                input:checked + .slider {
+                background-color: #34a836;
+                }
+
+                input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+                }
+
+                input:checked + .slider:before {
+                -webkit-transform: translateX(20px);
+                -ms-transform: translateX(20px);
+                transform: translateX(20px);
+                }
+
+                /* Rounded sliders */
+                .slider.round {
+                border-radius: 34px;
+                }
+
+                .slider.round:before {
+                border-radius: 50%;
+                }
+
+                /*---Design----*/
+                .font_icon i{
+                font-size:16px;
+                color:#34a836;
+
+                }
+
+                #del_col {
+                  color:#ff0505;
+
+                }
+                #usercolor{
+                font-size:16px;
+                color: #0866ff;
+
+                }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <asp:UpdatePanel ID="uplMessage" runat="server">
         <ContentTemplate>
             <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="row">
+
+<%--        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Open Input Box
+        </button>--%>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="text-danger font-weight-bold m-3 p-3 text-center"> Why You Want to Inactive This Student <span class="text-danger fa-2x">?</span></h3>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Input box -->
+                        <asp:TextBox ID="txtNote" runat="server" class="form-control" placeholder="Type Reason"></asp:TextBox>
+                        <%--<input type="text" id="userInput" class="form-control" />--%>
+                    </div>
+                    <div class="modal-footer">
+                      <%--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
+<%--                        <button type="button" class="btn btn-primary" onclick="getUserInput()">Submit</button>--%>
+                        <asp:Button ID="btnModalClose" runat="server" Text="Close"  class="btn btn-secondary" data-dismiss="modal"  OnClick="btnModalClose_Click"/>
+                        <asp:Button ID="btnSubmitStatus" runat="server" Text="Submit"  class="btn btn-primary" OnClick="btnSubmitStatus_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="col-md-12">
             <!--breadcrumbs start -->
             <ul class="breadcrumb">               
@@ -96,6 +212,7 @@
             <!--breadcrumbs end -->
         </div>
     </div>
+
     <div class="tgPanel">
         <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
             <Triggers>
@@ -178,10 +295,12 @@
      <asp:UpdatePanel ID="up2" runat="server" UpdateMode="Conditional">
          <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSearch" />
+                <asp:AsyncPostBackTrigger ControlID="btnSubmitStatus" />
+                <asp:AsyncPostBackTrigger ControlID="btnModalClose" />
             </Triggers>
             <ContentTemplate>
-    <div class="tgPanel">
-                 <asp:GridView ID="gvStudentList" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId" 
+            <div class="tgPanel">
+                 <asp:GridView ID="gvStudentList" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId ,BatchID" 
                      CssClass="table table-bordered" BackColor="White" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White" OnRowCommand="gvStudentList_RowCommand">
                      <%--<PagerStyle CssClass="gridview" />--%>
             <Columns>
@@ -205,6 +324,23 @@
                 <asp:BoundField DataField="GuardianMobileNo" HeaderText="Guardian Mobile" />
                 <asp:BoundField DataField="FirstName" HeaderText="Create By" />
                 <asp:BoundField DataField="CreateOn" HeaderText="Create On" />
+                   <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="Status">
+                    <ItemTemplate>
+                            <label class="switch" data-toggle="modal" data-target="#myModal">
+                               <asp:CheckBox ID="ckbStatus" ClientIDMode="Static" ViewStateMode="Enabled" runat="server" AutoPostBack="true" OnCheckedChanged="ckbStatus_CheckedChanged" Checked='<%#Convert.ToBoolean(Eval("IsActive")) %>' />
+                               <span class="slider round"></span>
+                            </label>
+
+<%--                        <label class="switch">
+                        <asp:CheckBox ID="cbk_Status" Checked="true" runat="server" CommandName="status"/>
+                          <span class="slider round"></span>
+                        </label>--%>
+
+<%--                        <asp:CheckBox ID="cbk_Status" CommandName="Status"  runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />--%>
+<%--                        <asp:ImageButton ID="btnShowUIP" runat="server"  ImageUrl="~/Images/gridImages/view.png" Width="30px" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />                 --%>
+                         
+                    </ItemTemplate>
+                </asp:TemplateField>
                  <asp:TemplateField HeaderStyle-HorizontalAlign="Center">
                     <HeaderTemplate >
                        View
@@ -233,6 +369,19 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
+
+       
+        function getUserInput() {
+            // Get the user input
+            var userInput = document.getElementById("userInput").value;
+
+            // You can now use the userInput variable as needed, for example, display it in an alert.
+            alert("User Input: " + userInput);
+
+            // Close the modal
+            $('#myModal').modal('hide');
+        }
+
          $(document).ready(function () {
             $(document).on("keyup", '.Search_New', function () {
                 searchTable($(this).val(), 'MainContent_gvStudentList', '');
@@ -287,5 +436,19 @@
                 loadStudentInfo();
             }
         }
+
+                function getUserInput() {
+            // Get the user input
+            var userInput = document.getElementById("userInput").value;
+
+            // You can now use the userInput variable as needed, for example, display it in an alert.
+            alert("User Input: " + userInput);
+
+            // Close the modal
+            $('#myModal').modal('hide');
+        }
     </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </asp:Content>

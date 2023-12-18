@@ -258,9 +258,9 @@ namespace DS.BLL.Admission
             return result = CRUD.ExecuteQuery(sql);
         }
 
-        public bool InsertToActivationLog(string studentId, string batchId, string Note, string ActivationType)
+        public bool InsertToActivationLog(string studentId, string batchId, string Node, string ActivationType)
         {
-            sql = string.Format("INSERT INTO [dbo].[StudentActivation_Log] (StudentID,BatchID,Note,ActivationType,EntryDate) values(" + studentId + "," + batchId + ",'" + Note + "'," + ActivationType + ",'" + TimeZoneBD.getCurrentTimeBD("yyyy-MM-dd HH:mm:ss") + "')");
+            sql = string.Format("INSERT INTO [dbo].[StudentActivation_Log] (StudentID,BatchID,Note,ActivationType,EntryDate) values(" + studentId + "," + batchId + ",'" + Node + "'," + ActivationType + ",'" + TimeZoneBD.getCurrentTimeBD("yyyy-MM-dd HH:mm:ss") + "')");
 
             return result = CRUD.ExecuteQuery(sql);
         }
@@ -413,7 +413,7 @@ namespace DS.BLL.Admission
             try
             {
                 dt = new DataTable();
-                sql = string.Format("SELECT AdmissionNo, BatchId,StudentId,ShiftName,ClassName,GroupName,SectionName,FullName,Mobile,"
+                sql = string.Format("SELECT AdmissionNo, BatchId,StudentId,ShiftName,ClassName,GroupName,SectionName,FullName,Mobile, IsActive,"
                 + "RollNo,Gender,GuardianMobileNo,ClsSecId,Format(CreateOn,'dd-MM-yyyy HH:mm:ss') as CreateOn ,CreateBy,FirstName from v_CurrentStudentInfo " + condition + " ORDER BY ShiftName,ClassName,GroupName,SectionName,RollNo");
                 dt = CRUD.ReturnTableNull(sql);
                 return dt;
