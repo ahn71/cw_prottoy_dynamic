@@ -151,7 +151,7 @@
                             <asp:DropDownList ID="dlSection" runat="server" CssClass="form-control kk" ClientIDMode="Static">
                                 <asp:ListItem>All</asp:ListItem>
                             </asp:DropDownList>
-				         </div>
+				         </divrblActiveInActive
 				        <div class="form-group">
 					         <label for="exampleInputName2"></label>
 					            <asp:Button ID="btnSearch"  runat="server" Text="Search" ClientIDMode="Static" CssClass="btn btn-primary litleMargin" 

@@ -76,7 +76,7 @@
                 display: inline-block;
                 width: 35px;
                 height: 17px;
-                margin-top:17px;
+                margin-top:5px;
 
                 }
 
@@ -151,6 +151,23 @@
                 color: #0866ff;
 
                 }
+                .modal-backdrop {
+    /* opacity: .5; */
+    display: none !important;
+}
+                .remove{
+                    display:none;
+                }
+          #iconStyle {
+          width:50px;
+          height:50px;
+          color:green;
+         }
+
+          .modal{
+              box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+          }
+                    
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -167,15 +184,19 @@
         </button>--%>
 
         <!-- The Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade mt-5 p-4" id="myModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content p-5 ">
                     <div class="modal-header">
-                      <h3 class="text-danger font-weight-bold m-3 p-3 text-center"> Why You Want to Inactive This Student <span class="text-danger fa-2x">?</span></h3>
+                      <h3 class="text-danger font-weight-bold mt-5 text-center"> Why You Want to Active or Inactive This Student <span class="text-danger fa-2x">?</span></h3>
 
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <%--              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button>
+                        </button>--%>
+
+<%--                        <asp:LinkButton runat="server" class="close" aria-label="Close" ClientIDMode="Static" ID="lnkModalClose" OnClick="btnModalClose_Click" >
+                              <span aria-hidden="true">&times;</span>
+                        </asp:LinkButton>--%>
                     </div>
                     <div class="modal-body">
                         <!-- Input box -->
@@ -183,14 +204,15 @@
                         <%--<input type="text" id="userInput" class="form-control" />--%>
                     </div>
                     <div class="modal-footer">
-                      <%--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--%>
-<%--                        <button type="button" class="btn btn-primary" onclick="getUserInput()">Submit</button>--%>
-                        <asp:Button ID="btnModalClose" runat="server" Text="Close"  class="btn btn-secondary" data-dismiss="modal"  OnClick="btnModalClose_Click"/>
-                        <asp:Button ID="btnSubmitStatus" runat="server" Text="Submit"  class="btn btn-primary" OnClick="btnSubmitStatus_Click" />
+                        <asp:Button ID="btnModalClose" runat="server" Text="Close"  class="btn btn-secondary"  OnClick="btnModalClose_Click"/>
+                        <asp:Button ID="btnSubmitStatus" runat="server" Text="Submit"  class="btn btn-primary"   OnClick="btnSubmitStatus_Click" />
+     
                     </div>
                 </div>
             </div>
         </div>
+
+
 
 
         <div class="col-md-12">
@@ -225,6 +247,16 @@
               <div class="row tbl-controlPanel"> 
 		        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
 			        <div class="form-inline">
+                            <div class="form-group">
+					         <label for="exampleInputName2">Status</label>
+					            <asp:DropDownList ID="ddlstatus" runat="server" CssClass="form-control kk" ClientIDMode="Static" >
+                                <asp:ListItem Value="00">All</asp:ListItem>                                
+                                <asp:ListItem Value="1">Active Student </asp:ListItem>                                
+                                <asp:ListItem Value="0">inactive Student</asp:ListItem>                                
+                   
+                            </asp:DropDownList>
+				         </div>
+
                         <div class="form-group">
 					         <label for="exampleInputName2">Year</label>
 					            <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control kk" ClientIDMode="Static" >
@@ -296,12 +328,14 @@
          <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSearch" />
                 <asp:AsyncPostBackTrigger ControlID="btnSubmitStatus" />
+              <%--  <asp:AsyncPostBackTrigger ControlID="btnSubmitStatusClose" />--%>
                 <asp:AsyncPostBackTrigger ControlID="btnModalClose" />
+<%--                <asp:AsyncPostBackTrigger ControlID="lnkModalClose" />--%>
             </Triggers>
             <ContentTemplate>
             <div class="tgPanel">
                  <asp:GridView ID="gvStudentList" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId ,BatchID" 
-                     CssClass="table table-bordered" BackColor="White" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White" OnRowCommand="gvStudentList_RowCommand">
+                     CssClass="table table-bordered" BackColor="White" HeaderStyle-ForeColor="Black" OnRowCommand="gvStudentList_RowCommand">
                      <%--<PagerStyle CssClass="gridview" />--%>
             <Columns>
                   <asp:TemplateField HeaderText="SL"> 
@@ -320,6 +354,7 @@
 
                 <asp:BoundField DataField="ShiftName" HeaderText="Shift" />
                 <asp:BoundField DataField="RollNo" HeaderText="Roll" />
+                <asp:BoundField DataField="StatusNote" HeaderText=" Activation Note" />
                 <asp:BoundField DataField="Gender" HeaderText="Gender" />
                 <asp:BoundField DataField="GuardianMobileNo" HeaderText="Guardian Mobile" />
                 <asp:BoundField DataField="FirstName" HeaderText="Create By" />
@@ -346,7 +381,10 @@
                        View
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnShowUIP" runat="server"  ImageUrl="~/Images/gridImages/view.png" Width="30px" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />                 
+<%--                        <asp:ImageButton ID="btnShowUIP" runat="server"  ImageUrl="~/Images/gridImages/view.png" Width="30px" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />--%>
+                        <asp:LinkButton ID="btnShowUIP"  runat="server" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'><i class="fa-regular fa-eye fa-2x text-success"></i></asp:LinkButton>
+
+    
                          
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -355,7 +393,10 @@
                        Edit
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/Images/datatables/edit.png" Width="25px" CommandName="Change" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />
+
+                        <asp:LinkButton ID="btnEdit" Width="25px" runat="server" CommandName="Change" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'><i class="fa-regular fa-2x fa-pen-to-square text-success"></i></asp:LinkButton>
+
+<%--                        <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/Images/datatables/edit.png" Width="25px" CommandName="Change" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />--%>
                     </ItemTemplate>
                 </asp:TemplateField>
                 
@@ -448,7 +489,17 @@
             $('#myModal').modal('hide');
         }
     </script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+             
+        function removeModal() {
+
+            $('#myModal').modal('hide');
+            $('#txtNote').val('');
+            
+        }
+
+                
+    </script>
+
 </asp:Content>

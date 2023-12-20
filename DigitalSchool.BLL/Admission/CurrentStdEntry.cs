@@ -249,11 +249,11 @@ namespace DS.BLL.Admission
                  + " where StudentID='" + studentId + "'");
             return result = CRUD.ExecuteQuery(sql);
         }
-        public bool UpdateCurrentStudentActive(string studentId, string stdStatus)
+        public bool UpdateCurrentStudentActive(string studentId, string stdStatus,string StatusNote)
         {
             sql = string.Format("Update [dbo]."
                 + "[CurrentStudentInfo] Set "
-                 + "[IsActive]='" + stdStatus + "'"
+                 + "[IsActive]='" + stdStatus + "',[StatusNote]=N'"+ StatusNote + "'"
                  + " where StudentId='" + studentId + "'");
             return result = CRUD.ExecuteQuery(sql);
         }
@@ -413,7 +413,7 @@ namespace DS.BLL.Admission
             try
             {
                 dt = new DataTable();
-                sql = string.Format("SELECT AdmissionNo, BatchId,StudentId,ShiftName,ClassName,GroupName,SectionName,FullName,Mobile, IsActive,"
+                sql = string.Format("SELECT AdmissionNo, BatchId,StudentId,ShiftName,ClassName,GroupName,SectionName,FullName,Mobile,StatusNote, IsActive,"
                 + "RollNo,Gender,GuardianMobileNo,ClsSecId,Format(CreateOn,'dd-MM-yyyy HH:mm:ss') as CreateOn ,CreateBy,FirstName from v_CurrentStudentInfo " + condition + " ORDER BY ShiftName,ClassName,GroupName,SectionName,RollNo");
                 dt = CRUD.ReturnTableNull(sql);
                 return dt;

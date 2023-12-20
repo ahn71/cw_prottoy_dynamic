@@ -60,6 +60,7 @@ namespace DS.UI.Academics.Students
                 
                 loadCurrentStudentInfo("");
                 ViewState["__rIndex__"] = "-1";
+                
             }
 
 
@@ -94,6 +95,11 @@ namespace DS.UI.Academics.Students
         {
             try
             {
+                if (ddlstatus.SelectedValue == "")
+                {
+
+                }
+
                 if (dlShift.SelectedValue == "0")
                 {
                     lblMessage.InnerText = "warning-> please, select any shift.";
@@ -113,7 +119,8 @@ namespace DS.UI.Academics.Students
                         conditions += " and ClsSecID=" + dlSection.SelectedValue;
 
                 }
-
+                if (ddlstatus.SelectedValue != "00")
+                    conditions += " and IsActive=" + ddlstatus.SelectedValue;
                 DataTable dt = new DataTable();
                 if (currentstdEntry == null)
                     currentstdEntry = new CurrentStdEntry();
@@ -279,19 +286,25 @@ namespace DS.UI.Academics.Students
 
                 if (currentstdEntry == null)
                     currentstdEntry = new CurrentStdEntry();
-                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, stdStatus))
+                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, stdStatus,txtNote.Text.Trim()))
                 {
                     currentstdEntry.InsertToActivationLog(StudentID, BatchID, txtNote.Text.Trim(), stdStatus);
                     lblMessage.InnerText = "success-> Successfully " + ((ckbStatus.Checked) ? "Activated" : "Deactivated") +".";
                    
                 }
-                txtNote.Text = "";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
+
+
+
             }
             
+
         }
 
         protected void ckbStatus_CheckedChanged(object sender, EventArgs e)
         {
+
+
             GridViewRow gvr = ((GridViewRow)((Control)sender).Parent.Parent);
             int rIndex = gvr.RowIndex;
             ViewState["__rIndex__"] = rIndex;
@@ -309,6 +322,7 @@ namespace DS.UI.Academics.Students
                 else
                     ckbStatus.Checked = true;
             }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
         }
 
         //private bool StatusChange(string SL, byte Status)

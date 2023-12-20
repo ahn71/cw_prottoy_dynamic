@@ -203,7 +203,7 @@ namespace DS.UI.Academic.Students
 
                 if (currentstdEntry == null)
                     currentstdEntry = new CurrentStdEntry();
-                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, "0"))
+                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, "0", txtNote.Text.Trim()))
                 {
                     currentstdEntry.InsertToActivationLog(StudentID, BatchID, txtNote.Text.Trim(), "0");
                     lblMessage.InnerText = "success-> Successfully Inactivated.";
@@ -223,7 +223,7 @@ namespace DS.UI.Academic.Students
 
                 if (currentstdEntry == null)
                     currentstdEntry = new CurrentStdEntry();
-                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, "1"))
+                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, "1", txtNote.Text.Trim()))
                 {
                     currentstdEntry.InsertToActivationLog(StudentID, BatchID, txtNote.Text.Trim(), "1");
                     lblMessage.InnerText = "success-> Successfully Activated.";
