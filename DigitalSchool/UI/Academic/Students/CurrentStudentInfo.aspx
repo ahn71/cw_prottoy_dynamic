@@ -354,11 +354,11 @@
 
                 <asp:BoundField DataField="ShiftName" HeaderText="Shift" />
                 <asp:BoundField DataField="RollNo" HeaderText="Roll" />
-                <asp:BoundField DataField="StatusNote" HeaderText=" Activation Note" />
                 <asp:BoundField DataField="Gender" HeaderText="Gender" />
                 <asp:BoundField DataField="GuardianMobileNo" HeaderText="Guardian Mobile" />
                 <asp:BoundField DataField="FirstName" HeaderText="Create By" />
                 <asp:BoundField DataField="CreateOn" HeaderText="Create On" />
+                <asp:BoundField DataField="StatusNote" HeaderText=" Activation Note" />
                    <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="Status">
                     <ItemTemplate>
                             <label class="switch" data-toggle="modal" data-target="#myModal">

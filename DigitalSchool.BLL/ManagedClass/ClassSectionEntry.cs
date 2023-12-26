@@ -154,6 +154,48 @@ namespace DS.BLL.ManagedClass
             }
             catch { }
         }
+        public static void GetEntitiesData(DropDownList[] dls, int classId, string clsgroupId)
+        {
+            try
+            {
+                ClassSectionEntry SectionName = new ClassSectionEntry();
+                var sectionList = ClassNameList;
+                ClassNameList = SectionName.GetEntitiesData(classId);
+                if (ClassNameList != null)
+                {
+                    if (clsgroupId != "0")
+                    {
+                        sectionList = ClassNameList.FindAll(c => c.ClassID == classId && c.ClsGrpID == int.Parse(clsgroupId));
+                    }
+                    else
+                    {
+                        sectionList = ClassNameList.FindAll(c => c.ClassID == classId);
+                    }
+                    foreach (DropDownList dl in dls)
+                    {
+                        dl.DataTextField = "SectionName";
+                        dl.DataValueField = "ClsSecID";
+                        dl.DataSource = sectionList;
+                        dl.DataBind();
+                        dl.Items.Insert(0, new ListItem("----Select----", "00"));
+
+                    }
+                    
+
+                }
+                else
+                {
+                    
+                    foreach (DropDownList dl in dls)
+                    {
+                        dl.Items.Clear();
+                    }
+                }
+
+
+            }
+            catch { }
+        }
         public static void GetSectionList(DropDownList dl, int classId, string clsgroupId)
         {
             try

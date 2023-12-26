@@ -294,9 +294,11 @@ namespace DS.UI.Academics.Students
                 }
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
 
+               
 
 
             }
+
             
 
         }
