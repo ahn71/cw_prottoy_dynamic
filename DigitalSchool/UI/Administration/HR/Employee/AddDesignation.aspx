@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add Designation" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="AddDesignation.aspx.cs" Inherits="DS.UI.Administration.HR.Employee.AddDesignation" %>
+﻿   <%@ Page Title="Add Designation" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="AddDesignation.aspx.cs" Inherits="DS.UI.Administration.HR.Employee.AddDesignation" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .tgPanel {
@@ -64,23 +64,8 @@
             <div class="col-md-6"></div>
         </div>
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSave" />
-                    </Triggers>
-                    <ContentTemplate>
-                        <div class="tgPanel">
-                        <div id="divDesignationList" class="datatables_wrapper" runat="server"
-                            style="width: 100%;  height:70vh; overflow-y: scroll;overflow-x: hidden; ">
-                        </div>
-                            </div>
-                        <asp:HiddenField ID="lblDesignationId" ClientIDMode="Static" runat="server" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="col-md-6">
+            <%--<div class="col-md-2"></div>--%>
+                        <div class="col-lg-12">
                 <div class="tgPanel">
                     <div class="tgPanelHead">Add Designation</div>
                     <table class="tbl-controlPanel">
@@ -102,6 +87,23 @@
                     </table>                    
                 </div>
             </div>
+
+            <div class="col-md-12">
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnSave" />
+                    </Triggers>
+                    <ContentTemplate>
+                        <div class="tgPanel">
+                        <div id="divDesignationList" class="datatables_wrapper" runat="server"
+                            style="width: 100%;  height:70vh; overflow-y: scroll;overflow-x: hidden; ">
+                        </div>
+                            </div>
+                        <asp:HiddenField ID="lblDesignationId" ClientIDMode="Static" runat="server" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+
         </div>
     </div>
 </asp:Content>

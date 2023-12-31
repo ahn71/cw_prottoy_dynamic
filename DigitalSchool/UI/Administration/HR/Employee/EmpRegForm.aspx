@@ -155,9 +155,6 @@
          .leftsidemnone{
              padding-left:0!important;
          }
-         .z-index-999{
-             z-index:999;
-         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -362,10 +359,7 @@
                                                                     <label class="col-sm-4">Date of Birth<span class="required">*</span></label>
                                                                     <div class="col-sm-8">
                                                                         <asp:TextBox ID="txtE_Birthday" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
-
-                                                                        <asp:CalendarExtender  ID="CalendarExtender1" runat="server" Format="dd-MM-yyyy" TargetControlID="txtE_Birthday"></asp:CalendarExtender>
-
-
+                                                                        <asp:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd-MM-yyyy" TargetControlID="txtE_Birthday"></asp:CalendarExtender>
                                                                     </div>
                                                                 </div>
 
@@ -595,8 +589,7 @@
                                     </div>
                 <%--</ContentTemplate>
                                          </asp:UpdatePanel>--%>
-                                    
-                                    <a data-toggle="tab" class="btn btn-primary btn-md erf-nxt-btn" onclick="tabchange(0)" href="#empRegp1">Next Step>></a>
+                                    <a data-toggle="tab" class="btn btn-primary btn-md erf-nxt-btn" onclick="tabchange(0)" href="#empRegp1">Go to Next Step >></a>
                                     <!-- </form> -->
 
                                 </div>
@@ -685,8 +678,6 @@
                                                             <asp:DropDownList ID="dlEStatus" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">
                                                                 <asp:ListItem>Permanent</asp:ListItem>
                                                                 <asp:ListItem>Temporary</asp:ListItem>
-                                                                  <asp:ListItem>MPO</asp:ListItem>
-
                                                             </asp:DropDownList>
                                                         </div>
                                                     </div>
@@ -746,9 +737,7 @@
                                     </div>
                 </ContentTemplate>
                                   </asp:UpdatePanel>
-                                        <a data-toggle="tab" onclick="tabprevious(0)" class="btn btn-primary btn-md erf-nxt-btn" href="##empRegp">Previous<<</a>
-                                          <a data-toggle="tab" onclick="tabchange(1)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp2">Next Step></a>
-                                     
+                                          <a data-toggle="tab" onclick="tabchange(1)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp2">Go to Next Step >></a>
                                 </div>
                             </div>
                         </div>
@@ -872,8 +861,7 @@
                                     </div>
                 </ContentTemplate>
                                          </asp:UpdatePanel>
-                                     <a data-toggle="tab" class="btn btn-primary btn-md erf-nxt-btn" onclick="tabprevious(1)" href="#empRegp1">Previous<<</a>
-                                    <a data-toggle="tab" onclick="tabchange(2)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp3">Next Step >></a>
+                                    <a data-toggle="tab" onclick="tabchange(2)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp3">Go to Next Step >></a>
                                 </div>
                             </div>
                         </div>
@@ -1000,8 +988,7 @@
                                     </div>
                 </ContentTemplate>
                                          </asp:UpdatePanel>
-                                    <a data-toggle="tab" onclick="tabprevious(2)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp2">Previous<<</a>
-                                    <a data-toggle="tab" onclick="tabchange(3)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp4">Next Step >></a>
+                                    <a data-toggle="tab" onclick="tabchange(3)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp4">Go to Next Step >></a>
                                 </div>
                             </div>
                         </div>
@@ -1103,7 +1090,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                     <a data-toggle="tab" onclick="tabprevious(3)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp3">Previous<<</a>
                                 </div>
                             </div>
                         </div>
@@ -1121,28 +1107,6 @@
         }
     </style>
     <script type="text/javascript">
-
-
-        function tabprevious(index) {
-            if (index == 0) {
-                $("#litab2").removeClass("active");
-                $("#litab1").addClass("active");
-            }
-            else if (index == 1) {
-                $("#litab3").removeClass("active");
-                $("#litab2").addClass("active");
-            }
-            else if (index == 2) {
-                $("#litab4").removeClass("active");
-                $("#litab3").addClass("active");
-            }
-            else if (index == 3) {
-                $("#litab5").removeClass("active");
-                $("#litab4").addClass("active");
-            }
-           
-        }
-
         function tabchange(index) {
             if (index == 0) {
                 $("#litab1").removeClass("active");
@@ -1160,7 +1124,7 @@
                 $("#litab4").removeClass("active");
                 $("#litab5").addClass("active");
             }
-            
+
         }
         function tabControl() {
             $("#empRegp").removeClass("active");
@@ -1181,7 +1145,7 @@
             $("#empRegp1").addClass("active");
             $("#empRegp1").addClass("in");
         }
-         function tabControl4() { //othersback
+         function tabControl4() { //others
             $("#empRegp").removeClass("active");
             $("#empRegp").removeClass("in");
             $("#empRegp4").addClass("active");

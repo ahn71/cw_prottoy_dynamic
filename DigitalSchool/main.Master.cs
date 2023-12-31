@@ -49,7 +49,7 @@ namespace DS
                 Session["__EID__"] = getCookies["__EID__"].ToString();
                 Session["__SchoolName__"] = getCookies["__SchoolName__"].ToString();
                 Session["__SchoolAddress__"] = getCookies["__SchoolAddress__"].ToString();
-                lblUserName.Text = getCookies["__SchoolName__"].ToString() + "|" + getCookies["__UserType__"].ToString();
+                //lblUserName.Text = getCookies["__SchoolName__"].ToString() + "|" + getCookies["__UserType__"].ToString();
                 lblSchoolName.Text = getCookies["__SchoolName__"].ToString();
                 Session["__IsOnline__"] = getCookies["__IsOnline__"].ToString();
                 
