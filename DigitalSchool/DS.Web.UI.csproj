@@ -2098,7 +2098,6 @@
     <Content Include="UI\Administration\DSWS\QuickLink.aspx" />
     <Content Include="UI\Administration\DSWS\SliderAdd.aspx" />
     <Content Include="UI\Administration\DSWS\website-general-settings.aspx" />
-    <Content Include="UI\Administration\HR\Employee\AddDepartmentTest.aspx" />
     <Content Include="UI\Administration\HR\Employee\EmpActivation.aspx" />
     <Content Include="UI\Administration\HR\TeacherEvaluation\EvaCategory.aspx" />
     <Content Include="UI\Administration\HR\TeacherEvaluation\EvaHome.aspx" />
@@ -4531,13 +4530,6 @@
     </Compile>
     <Compile Include="UI\Administration\HR\Employee\AddDepartment.aspx.designer.cs">
       <DependentUpon>AddDepartment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Administration\HR\Employee\AddDepartmentTest.aspx.cs">
-      <DependentUpon>AddDepartmentTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UI\Administration\HR\Employee\AddDepartmentTest.aspx.designer.cs">
-      <DependentUpon>AddDepartmentTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Administration\HR\Employee\AddDesignation.aspx.cs">
       <DependentUpon>AddDesignation.aspx</DependentUpon>

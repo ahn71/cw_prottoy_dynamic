@@ -207,13 +207,13 @@ input:checked + .slider:before {
                         Dashboard
                     </a>
                 </li>
-                <li><a runat="server" href="~/UI/Administration/AdministrationHome.aspx">Administration
+                <li><a runat="server" href="~/UI/Administration/AdministrationHome.aspx">Administration/
                     Module</a></li>
-                <li><a runat="server" href="~/UI/Administration/HR/hrHome.aspx">Human Resource Module</a>
+                <li><a runat="server" href="~/UI/Administration/HR/hrHome.aspx">Human Resource Module/</a>
                 </li>
-                <li><a runat="server" href="~/UI/Administration/HR/Employee/EmpHome.aspx">Employee Management</a>
+                <li><a runat="server" href="~/UI/Administration/HR/Employee/EmpHome.aspx">Employee Management/</a>
                 </li>
-                <li class="active">Add Department</li>
+                <li class="active text-danger">Add Department</li>
             </ul>
             <!--breadcrumbs end -->
         </div>

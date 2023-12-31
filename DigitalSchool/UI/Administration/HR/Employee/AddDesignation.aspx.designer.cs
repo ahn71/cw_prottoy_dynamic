@@ -33,13 +33,31 @@ namespace DS.UI.Administration.HR.Employee
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
 
         /// <summary>
-        /// txtDes_Name control.
+        /// lblDesName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDes_Name;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDesName;
+
+        /// <summary>
+        /// txtDesName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDesName;
+
+        /// <summary>
+        /// chkStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkStatus;
 
         /// <summary>
         /// btnSave control.
@@ -51,30 +69,12 @@ namespace DS.UI.Administration.HR.Employee
         protected global::System.Web.UI.WebControls.Button btnSave;
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// gvDesgtionlist control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
-        /// divDesignationList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDesignationList;
-
-        /// <summary>
-        /// lblDesignationId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField lblDesignationId;
+        protected global::System.Web.UI.WebControls.GridView gvDesgtionlist;
     }
 }
