@@ -13,6 +13,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="digital_school_icon.ico" />
     <title><%: Page.Title %> | Prottoy Education Managemnt System</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/> 
     <!--Core CSS -->
     <link runat="server" href="~/AssetsNew/bs3/css/bootstrap.min.css" rel="stylesheet" />
     <link runat="server" href="~/AssetsNew/bs3/css/dataTables.bootstrap.min.css" rel="stylesheet" />

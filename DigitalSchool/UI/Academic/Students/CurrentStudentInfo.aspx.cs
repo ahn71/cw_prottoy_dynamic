@@ -14,6 +14,7 @@ using DS.BLL.Admission;
 using DS.BLL.ControlPanel;
 using DS.Classes;
 using DS.BLL;
+using System.Data.SqlClient;
 
 namespace DS.UI.Academics.Students
 {
@@ -58,7 +59,13 @@ namespace DS.UI.Academics.Students
                 }
                 
                 loadCurrentStudentInfo("");
+                ViewState["__rIndex__"] = "-1";
+                
             }
+
+
+
+
         }
        
         protected void dlGroup_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,6 +95,11 @@ namespace DS.UI.Academics.Students
         {
             try
             {
+                if (ddlstatus.SelectedValue == "")
+                {
+
+                }
+
                 if (dlShift.SelectedValue == "0")
                 {
                     lblMessage.InnerText = "warning-> please, select any shift.";
@@ -107,7 +119,8 @@ namespace DS.UI.Academics.Students
                         conditions += " and ClsSecID=" + dlSection.SelectedValue;
 
                 }
-
+                if (ddlstatus.SelectedValue != "00")
+                    conditions += " and IsActive=" + ddlstatus.SelectedValue;
                 DataTable dt = new DataTable();
                 if (currentstdEntry == null)
                     currentstdEntry = new CurrentStdEntry();
@@ -176,6 +189,7 @@ namespace DS.UI.Academics.Students
                     divInfo += "<tr id='r_" + id + "'>";
                     divInfo += "<td class='numeric'>" + sl + "</td>";
                     divInfo += "<td>" + dt.Rows[x]["FullName"].ToString() + "</td>";
+                    divInfo += "<td>" + dt.Rows[x]["Mobile"].ToString() + "</td>";
                     divInfo += "<td>" + dt.Rows[x]["ClassName"].ToString() + "</td>";
                     if (dt.Rows[x]["GroupName"].ToString() == "")
                     {
@@ -206,7 +220,7 @@ namespace DS.UI.Academics.Students
 
         protected void gvStudentList_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "View")
+            if (e.CommandName == "View") 
             {
                 int rIndex = int.Parse(e.CommandArgument.ToString());
                 string StudentId = gvStudentList.DataKeys[rIndex].Values[0].ToString();
@@ -257,5 +271,94 @@ namespace DS.UI.Academics.Students
             }
             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "load(0);", true);
         }
+
+        
+        protected void btnSubmitStatus_Click(object sender, EventArgs e)
+        {
+            int rIndex =int.Parse(ViewState["__rIndex__"].ToString());
+            if (rIndex > -1)
+            {
+                string StudentID = gvStudentList.DataKeys[rIndex].Values[0].ToString();
+                string BatchID = gvStudentList.DataKeys[rIndex].Values[1].ToString();
+                CheckBox ckbStatus =(CheckBox) gvStudentList.Rows[rIndex].FindControl("ckbStatus");
+                string stdStatus = (ckbStatus.Checked) ? "1" : "0";
+               
+
+                if (currentstdEntry == null)
+                    currentstdEntry = new CurrentStdEntry();
+                if (currentstdEntry.UpdateCurrentStudentActive(StudentID, stdStatus,txtNote.Text.Trim()))
+                {
+                    currentstdEntry.InsertToActivationLog(StudentID, BatchID, txtNote.Text.Trim(), stdStatus);
+                    lblMessage.InnerText = "success-> Successfully " + ((ckbStatus.Checked) ? "Activated" : "Deactivated") +".";
+                   
+                }
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
+
+               
+
+
+            }
+
+            
+
+        }
+
+        protected void ckbStatus_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+            GridViewRow gvr = ((GridViewRow)((Control)sender).Parent.Parent);
+            int rIndex = gvr.RowIndex;
+            ViewState["__rIndex__"] = rIndex;
+        }
+
+        protected void btnModalClose_Click(object sender, EventArgs e)
+        {
+            int rIndex = int.Parse(ViewState["__rIndex__"].ToString());
+            if (rIndex > -1)
+            {
+                
+                CheckBox ckbStatus = (CheckBox)gvStudentList.Rows[rIndex].FindControl("ckbStatus");
+                if (ckbStatus.Checked)
+                    ckbStatus.Checked = false;
+                else
+                    ckbStatus.Checked = true;
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
+        }
+
+        //private bool StatusChange(string SL, byte Status)
+        //{
+        //    try
+        //    {
+        //        if (currentstdEntry == null)
+        //            currentstdEntry = new CurrentStdEntry();
+        //        if (currentstdEntry.UpdateCurrentStudentActive(SL,, "0"))
+        //        {
+        //            currentstdEntry.InsertToActivationLog(SL, "0");
+        //            lblMessage.InnerText = "success-> Successfully Inactivated.";
+        //            //gvForApprovedList.Rows[rIndex].Visible = false;
+        //        }
+
+        //    }
+        //    catch { return false; }
+        //}
+
+        //protected void ckbStatus_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    GridViewRow gvr = ((GridViewRow)((Control)sender).Parent.Parent);
+        //    int rIndex = gvr.RowIndex;
+        //    string StudentID = gvStudentList.DataKeys[rIndex].Values[0].ToString();
+        //    string BatchID = gvStudentList.DataKeys[rIndex].Values[1].ToString();
+        //    if (currentstdEntry == null)
+        //        currentstdEntry = new CurrentStdEntry();
+        //    if (currentstdEntry.UpdateCurrentStudentActive(StudentID, "0"))
+        //    {
+        //        //currentstdEntry.InsertToActivationLog(StudentID, BatchID "0");
+        //        lblMessage.InnerText = "success-> Successfully Inactivated.";
+        //        //gvForApprovedList.Rows[rIndex].Visible = false;
+        //    }
+
+        //}
     }
 }

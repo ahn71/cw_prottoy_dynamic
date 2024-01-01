@@ -130,13 +130,13 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtStudentNameBn;
         
         /// <summary>
-        /// ddlGender control.
+        /// textStuBidNid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
+        protected global::System.Web.UI.WebControls.TextBox textStuBidNid;
         
         /// <summary>
         /// txtDateOfBirth control.
@@ -146,6 +146,15 @@ namespace DS.UI.Academic.Students {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDateOfBirth;
+        
+        /// <summary>
+        /// ddlGender control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
         
         /// <summary>
         /// ddlReligion control.
@@ -173,15 +182,6 @@ namespace DS.UI.Academic.Students {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStudentMobile;
-        
-        /// <summary>
-        /// ddlShift control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlShift;
         
         /// <summary>
         /// ddlYear control.
@@ -220,6 +220,15 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.DropDownList ddlSection;
         
         /// <summary>
+        /// ddlShift control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlShift;
+        
+        /// <summary>
         /// txtRollNo control.
         /// </summary>
         /// <remarks>
@@ -236,6 +245,105 @@ namespace DS.UI.Academic.Students {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAdmissionDate;
+        
+        /// <summary>
+        /// ddlPresentDistrict control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPresentDistrict;
+        
+        /// <summary>
+        /// ddlPresentUpazila control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPresentUpazila;
+        
+        /// <summary>
+        /// ddlPresentPostOffice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPresentPostOffice;
+        
+        /// <summary>
+        /// txtPresentVillage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPresentVillage;
+        
+        /// <summary>
+        /// txtPresentVillageBn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPresentVillageBn;
+        
+        /// <summary>
+        /// ckbSameAsPresentAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ckbSameAsPresentAddress;
+        
+        /// <summary>
+        /// ddlPermanentDistrict control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPermanentDistrict;
+        
+        /// <summary>
+        /// ddlPermanentUpazila control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPermanentUpazila;
+        
+        /// <summary>
+        /// ddlPermanentPostOffice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPermanentPostOffice;
+        
+        /// <summary>
+        /// txtPermanentVillage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPermanentVillage;
+        
+        /// <summary>
+        /// txtPermanentVillageBn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPermanentVillageBn;
         
         /// <summary>
         /// txtFatherName control.
@@ -256,13 +364,13 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtFatherNameBn;
         
         /// <summary>
-        /// txtFatherMobile control.
+        /// txtFatherBidNid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFatherMobile;
+        protected global::System.Web.UI.WebControls.TextBox txtFatherBidNid;
         
         /// <summary>
         /// txtFatherOccupation control.
@@ -274,13 +382,13 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtFatherOccupation;
         
         /// <summary>
-        /// txtFatherOccupationBn control.
+        /// txtFatherMobile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFatherOccupationBn;
+        protected global::System.Web.UI.WebControls.TextBox txtFatherMobile;
         
         /// <summary>
         /// txtMotherName control.
@@ -301,13 +409,13 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtMotherNameBn;
         
         /// <summary>
-        /// txtMotherMobile control.
+        /// txtMotherBidNid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMotherMobile;
+        protected global::System.Web.UI.WebControls.TextBox txtMotherBidNid;
         
         /// <summary>
         /// txtMotherOccupation control.
@@ -319,58 +427,13 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtMotherOccupation;
         
         /// <summary>
-        /// txtMotherOccupationBn control.
+        /// txtMotherMobile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMotherOccupationBn;
-        
-        /// <summary>
-        /// txtParentsVillage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParentsVillage;
-        
-        /// <summary>
-        /// txtParentsVillageBn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtParentsVillageBn;
-        
-        /// <summary>
-        /// ddlParentsDistrict control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlParentsDistrict;
-        
-        /// <summary>
-        /// ddlParentsUpazila control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlParentsUpazila;
-        
-        /// <summary>
-        /// ddlParentsPostOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlParentsPostOffice;
+        protected global::System.Web.UI.WebControls.TextBox txtMotherMobile;
         
         /// <summary>
         /// chkFather control.
@@ -409,6 +472,15 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtGuardianName;
         
         /// <summary>
+        /// textGuarnBidNid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textGuarnBidNid;
+        
+        /// <summary>
         /// txtGuardianRelation control.
         /// </summary>
         /// <remarks>
@@ -416,15 +488,6 @@ namespace DS.UI.Academic.Students {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGuardianRelation;
-        
-        /// <summary>
-        /// txtGuardianMobile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGuardianMobile;
         
         /// <summary>
         /// txtGuardianAddress control.
@@ -436,112 +499,13 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.TextBox txtGuardianAddress;
         
         /// <summary>
-        /// ckbSameAsParentsAddress control.
+        /// txtGuardianMobile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckbSameAsParentsAddress;
-        
-        /// <summary>
-        /// txtPermanentVillage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPermanentVillage;
-        
-        /// <summary>
-        /// txtPermanentVillageBn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPermanentVillageBn;
-        
-        /// <summary>
-        /// ddlPermanentDistrict control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPermanentDistrict;
-        
-        /// <summary>
-        /// ddlPermanentUpazila control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPermanentUpazila;
-        
-        /// <summary>
-        /// ddlPermanentPostOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPermanentPostOffice;
-        
-        /// <summary>
-        /// ckbSameAsPermanentAddress control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ckbSameAsPermanentAddress;
-        
-        /// <summary>
-        /// txtPresentVillage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPresentVillage;
-        
-        /// <summary>
-        /// txtPresentVillageBn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPresentVillageBn;
-        
-        /// <summary>
-        /// ddlPresentDistrict control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPresentDistrict;
-        
-        /// <summary>
-        /// ddlPresentUpazila control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPresentUpazila;
-        
-        /// <summary>
-        /// ddlPresentPostOffice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPresentPostOffice;
+        protected global::System.Web.UI.WebControls.TextBox txtGuardianMobile;
         
         /// <summary>
         /// ckbPreviousInstituteInfo control.
@@ -551,6 +515,42 @@ namespace DS.UI.Academic.Students {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox ckbPreviousInstituteInfo;
+        
+        /// <summary>
+        /// divForOneToTen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divForOneToTen;
+        
+        /// <summary>
+        /// txtPreviousInstituteName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPreviousInstituteName;
+        
+        /// <summary>
+        /// txtPreviousClass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPreviousClass;
+        
+        /// <summary>
+        /// divForElevenToOthers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divForElevenToOthers;
         
         /// <summary>
         /// txtPreviousExamSchoolName control.
