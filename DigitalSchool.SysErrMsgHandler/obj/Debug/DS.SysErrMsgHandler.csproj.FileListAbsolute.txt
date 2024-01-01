@@ -961,6 +961,7 @@ D:\Running projects git hub\cw_islampurCollege\DigitalSchool.SysErrMsgHandler\ob
 D:\Running projects git hub\cw_islampurCollege\DigitalSchool.SysErrMsgHandler\obj\Debug\DS.SysErrMsgHandler.csproj.CopyComplete
 D:\Running projects git hub\cw_islampurCollege\DigitalSchool.SysErrMsgHandler\obj\Debug\DigitalSchool.SysErrMsgHandler.dll
 D:\Running projects git hub\cw_islampurCollege\DigitalSchool.SysErrMsgHandler\obj\Debug\DigitalSchool.SysErrMsgHandler.pdb
+D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\obj\Debug\DS.SysErrMsgHandler.csproj.CoreCompileInputs.cache
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\bin\Debug\DigitalSchool.SysErrMsgHandler.dll.config
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\bin\Debug\DigitalSchool.SysErrMsgHandler.dll
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\bin\Debug\DigitalSchool.SysErrMsgHandler.pdb
@@ -984,7 +985,6 @@ D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\bi
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\bin\Debug\de\PdfSharp.resources.dll
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\bin\Debug\de\PdfSharp.Charting.resources.dll
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\obj\Debug\DS.SysErrMsgHandler.csprojResolveAssemblyReference.cache
-D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\obj\Debug\DS.SysErrMsgHandler.csproj.CoreCompileInputs.cache
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\obj\Debug\DS.SysErrMsgHandler.csproj.CopyComplete
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\obj\Debug\DigitalSchool.SysErrMsgHandler.dll
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.SysErrMsgHandler\obj\Debug\DigitalSchool.SysErrMsgHandler.pdb
