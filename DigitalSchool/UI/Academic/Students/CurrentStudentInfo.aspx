@@ -68,15 +68,153 @@
               width:100%!important;
           }
         }
+
+       /*----this code for switch button-------*/
+                /* The switch - the box around the slider */
+                .switch {
+                position: relative;
+                display: inline-block;
+                width: 35px;
+                height: 17px;
+                margin-top:5px;
+
+                }
+
+                /* Hide default HTML checkbox */
+                .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+                }
+
+                /* The slider */
+                .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 1px;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+                }
+
+                .slider:before {
+                position: absolute;
+                content: "";
+                height: 9px;
+                width: 9px;
+                left: 3px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+                }
+
+                input:checked + .slider {
+                background-color: #34a836;
+                }
+
+                input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+                }
+
+                input:checked + .slider:before {
+                -webkit-transform: translateX(20px);
+                -ms-transform: translateX(20px);
+                transform: translateX(20px);
+                }
+
+                /* Rounded sliders */
+                .slider.round {
+                border-radius: 34px;
+                }
+
+                .slider.round:before {
+                border-radius: 50%;
+                }
+
+                /*---Design----*/
+                .font_icon i{
+                font-size:16px;
+                color:#34a836;
+
+                }
+
+                #del_col {
+                  color:#ff0505;
+
+                }
+                #usercolor{
+                font-size:16px;
+                color: #0866ff;
+
+                }
+                .modal-backdrop {
+    /* opacity: .5; */
+    display: none !important;
+}
+                .remove{
+                    display:none;
+                }
+          #iconStyle {
+          width:50px;
+          height:50px;
+          color:green;
+         }
+
+          .modal{
+              box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+          }
+                    
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <asp:UpdatePanel ID="uplMessage" runat="server">
         <ContentTemplate>
             <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="row">
+
+<%--        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Open Input Box
+        </button>--%>
+
+        <!-- The Modal -->
+        <div class="modal fade mt-5 p-4" id="myModal" data-backdrop="static" data-keyboard="false"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content p-5 ">
+                    <div class="modal-header">
+                      <h3 class="text-danger font-weight-bold mt-5 text-center"> Why You Want to Active or Inactive This Student <span class="text-danger fa-2x">?</span></h3>
+
+          <%--              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>--%>
+
+<%--                        <asp:LinkButton runat="server" class="close" aria-label="Close" ClientIDMode="Static" ID="lnkModalClose" OnClick="btnModalClose_Click" >
+                              <span aria-hidden="true">&times;</span>
+                        </asp:LinkButton>--%>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Input box -->
+                        <asp:TextBox ID="txtNote" runat="server" class="form-control" placeholder="Type Reason"></asp:TextBox>
+                        <%--<input type="text" id="userInput" class="form-control" />--%>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button ID="btnModalClose" runat="server" Text="Close"  class="btn btn-secondary"  OnClick="btnModalClose_Click"/>
+                        <asp:Button ID="btnSubmitStatus" runat="server" Text="Submit"  class="btn btn-primary"   OnClick="btnSubmitStatus_Click" />
+     
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <div class="col-md-12">
             <!--breadcrumbs start -->
             <ul class="breadcrumb">               
@@ -96,6 +234,7 @@
             <!--breadcrumbs end -->
         </div>
     </div>
+
     <div class="tgPanel">
         <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
             <Triggers>
@@ -108,6 +247,16 @@
               <div class="row tbl-controlPanel"> 
 		        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
 			        <div class="form-inline">
+                            <div class="form-group">
+					         <label for="exampleInputName2">Status</label>
+					            <asp:DropDownList ID="ddlstatus" runat="server" CssClass="form-control kk" ClientIDMode="Static" >
+                                <asp:ListItem Value="00">All</asp:ListItem>                                
+                                <asp:ListItem Value="1">Active Student </asp:ListItem>                                
+                                <asp:ListItem Value="0">inactive Student</asp:ListItem>                                
+                   
+                            </asp:DropDownList>
+				         </div>
+
                         <div class="form-group">
 					         <label for="exampleInputName2">Year</label>
 					            <asp:DropDownList ID="ddlYear" runat="server" CssClass="form-control kk" ClientIDMode="Static" >
@@ -178,11 +327,15 @@
      <asp:UpdatePanel ID="up2" runat="server" UpdateMode="Conditional">
          <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="btnSearch" />
+                <asp:AsyncPostBackTrigger ControlID="btnSubmitStatus" />
+              <%--  <asp:AsyncPostBackTrigger ControlID="btnSubmitStatusClose" />--%>
+                <asp:AsyncPostBackTrigger ControlID="btnModalClose" />
+<%--                <asp:AsyncPostBackTrigger ControlID="lnkModalClose" />--%>
             </Triggers>
             <ContentTemplate>
-    <div class="tgPanel">
-                 <asp:GridView ID="gvStudentList" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId" 
-                     CssClass="table table-bordered" BackColor="White" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White" OnRowCommand="gvStudentList_RowCommand">
+            <div class="tgPanel">
+                 <asp:GridView ID="gvStudentList" runat="server" AutoGenerateColumns="false" DataKeyNames="StudentId ,BatchID" 
+                     CssClass="table table-bordered" BackColor="White" HeaderStyle-ForeColor="Black" OnRowCommand="gvStudentList_RowCommand">
                      <%--<PagerStyle CssClass="gridview" />--%>
             <Columns>
                   <asp:TemplateField HeaderText="SL"> 
@@ -192,6 +345,7 @@
     </asp:TemplateField>
                <asp:BoundField DataField="AdmissionNo" HeaderText="Admission No" />
                <asp:BoundField DataField="FullName" HeaderText="Full Name" />
+               <asp:BoundField DataField="Mobile" HeaderText="Mobile" />
                 <asp:BoundField DataField="ClassName" HeaderText="Class" />
                
                 <asp:BoundField DataField="GroupName" HeaderText="Group" />
@@ -204,12 +358,33 @@
                 <asp:BoundField DataField="GuardianMobileNo" HeaderText="Guardian Mobile" />
                 <asp:BoundField DataField="FirstName" HeaderText="Create By" />
                 <asp:BoundField DataField="CreateOn" HeaderText="Create On" />
+                <asp:BoundField DataField="StatusNote" HeaderText=" Activation Note" />
+                   <asp:TemplateField HeaderStyle-HorizontalAlign="Center" HeaderText="Status">
+                    <ItemTemplate>
+                            <label class="switch" data-toggle="modal" data-target="#myModal">
+                               <asp:CheckBox ID="ckbStatus" ClientIDMode="Static" ViewStateMode="Enabled" runat="server" AutoPostBack="true" OnCheckedChanged="ckbStatus_CheckedChanged" Checked='<%#Convert.ToBoolean(Eval("IsActive")) %>' />
+                               <span class="slider round"></span>
+                            </label>
+
+<%--                        <label class="switch">
+                        <asp:CheckBox ID="cbk_Status" Checked="true" runat="server" CommandName="status"/>
+                          <span class="slider round"></span>
+                        </label>--%>
+
+<%--                        <asp:CheckBox ID="cbk_Status" CommandName="Status"  runat="server" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />--%>
+<%--                        <asp:ImageButton ID="btnShowUIP" runat="server"  ImageUrl="~/Images/gridImages/view.png" Width="30px" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />                 --%>
+                         
+                    </ItemTemplate>
+                </asp:TemplateField>
                  <asp:TemplateField HeaderStyle-HorizontalAlign="Center">
                     <HeaderTemplate >
                        View
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnShowUIP" runat="server"  ImageUrl="~/Images/gridImages/view.png" Width="30px" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />                 
+<%--                        <asp:ImageButton ID="btnShowUIP" runat="server"  ImageUrl="~/Images/gridImages/view.png" Width="30px" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />--%>
+                        <asp:LinkButton ID="btnShowUIP"  runat="server" CommandName="View" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'><i class="fa-regular fa-eye fa-2x text-success"></i></asp:LinkButton>
+
+    
                          
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -218,7 +393,10 @@
                        Edit
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/Images/datatables/edit.png" Width="25px" CommandName="Change" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />
+
+                        <asp:LinkButton ID="btnEdit" Width="25px" runat="server" CommandName="Change" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'><i class="fa-regular fa-2x fa-pen-to-square text-success"></i></asp:LinkButton>
+
+<%--                        <asp:ImageButton ID="btnEdit" runat="server" ImageUrl="~/Images/datatables/edit.png" Width="25px" CommandName="Change" CommandArgument='<%#((GridViewRow)Container).RowIndex %>' />--%>
                     </ItemTemplate>
                 </asp:TemplateField>
                 
@@ -232,6 +410,19 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
+
+       
+        function getUserInput() {
+            // Get the user input
+            var userInput = document.getElementById("userInput").value;
+
+            // You can now use the userInput variable as needed, for example, display it in an alert.
+            alert("User Input: " + userInput);
+
+            // Close the modal
+            $('#myModal').modal('hide');
+        }
+
          $(document).ready(function () {
             $(document).on("keyup", '.Search_New', function () {
                 searchTable($(this).val(), 'MainContent_gvStudentList', '');
@@ -286,5 +477,29 @@
                 loadStudentInfo();
             }
         }
+
+                function getUserInput() {
+            // Get the user input
+            var userInput = document.getElementById("userInput").value;
+
+            // You can now use the userInput variable as needed, for example, display it in an alert.
+            alert("User Input: " + userInput);
+
+            // Close the modal
+            $('#myModal').modal('hide');
+        }
     </script>
+
+    <script>
+             
+        function removeModal() {
+
+            $('#myModal').modal('hide');
+            $('#txtNote').val('');
+            
+        }
+
+                
+    </script>
+
 </asp:Content>

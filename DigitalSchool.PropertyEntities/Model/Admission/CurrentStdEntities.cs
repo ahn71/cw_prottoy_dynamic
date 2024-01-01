@@ -12,6 +12,7 @@ namespace DS.PropertyEntities.Model.Admission
         public int AdmissionID { get; set; }
         public DateTime AdmissionDate { get; set; }
         public string FullName { get; set; }
+        public string StudentBidNid { get; set; }
         public int ClassID { get; set; }
         public string ClassName { get; set; }
         public int? ClsGrpID { get; set; }
@@ -26,13 +27,15 @@ namespace DS.PropertyEntities.Model.Admission
         public string Mobile { get; set; }
         public string Session { get; set; }
         public string BloodGroup { get; set; }
-        public string FathersName { get; set; }       
+        public string FathersName { get; set; }
+        public string FathersBidNid { get; set; }
         public string FathersProfession { get; set; }
         public string FathersProfessionBn { get; set; }
         public int? FathersYearlyIncome { get; set; }
         public string FathersMobile { get; set; }
         public string FatherEmail { get; set; }
         public string MothersName { get; set; }
+        public string MothersBidNid { get; set; }
         public string MothersProfession { get; set; }
         public string MothersProfessionBn { get; set; }
         public int? MothersYearlyIncome { get; set; }
@@ -45,6 +48,7 @@ namespace DS.PropertyEntities.Model.Admission
         public int ParentsThanaId { get; set; }
         public int ParentsDistrictId { get; set; }
         public string GuardianName { get; set; }
+        public string GuardianBidNid { get; set; }
         public string GuardianRelation { get; set; }
         public string GuardianMobileNo { get; set; }
         public string GuardianAddress { get; set; }
@@ -71,6 +75,7 @@ namespace DS.PropertyEntities.Model.Admission
         public string PSCBoard { get; set; }
         public DateTime? CertifiedDate { get; set; }
         public string PreviousSchoolName { get; set; }
+        public string PreviousClassName { get; set; }
         public string PSCJSCRegistration { get; set; }
         public int? TransferCertifiedNo { get; set; }
         public string PreferredClass { get; set; }

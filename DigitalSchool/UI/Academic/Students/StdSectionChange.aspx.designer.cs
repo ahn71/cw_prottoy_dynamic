@@ -121,6 +121,15 @@ namespace DS.UI.Academic.Students {
         protected global::System.Web.UI.WebControls.DropDownList ddlSection;
         
         /// <summary>
+        /// ddlNewSectionAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlNewSectionAll;
+        
+        /// <summary>
         /// txtChangeDate control.
         /// </summary>
         /// <remarks>

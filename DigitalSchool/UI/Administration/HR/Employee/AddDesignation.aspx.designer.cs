@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DS.UI.Administration.HR.Employee {
-    
-    
-    public partial class AddDesignation {
-        
+namespace DS.UI.Administration.HR.Employee
+{
+
+
+    public partial class AddDesignation
+    {
+
         /// <summary>
         /// uplMessage control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DS.UI.Administration.HR.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel uplMessage;
-        
+
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -29,43 +31,34 @@ namespace DS.UI.Administration.HR.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
-        
+
         /// <summary>
-        /// UpdatePanel1 control.
+        /// lblDesName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDesName;
+
         /// <summary>
-        /// divDesignationList control.
+        /// txtDesName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDesignationList;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtDesName;
+
         /// <summary>
-        /// lblDesignationId control.
+        /// chkStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField lblDesignationId;
-        
-        /// <summary>
-        /// txtDes_Name control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDes_Name;
-        
+        protected global::System.Web.UI.WebControls.CheckBox chkStatus;
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -74,5 +67,14 @@ namespace DS.UI.Administration.HR.Employee {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// gvDesgtionlist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvDesgtionlist;
     }
 }
