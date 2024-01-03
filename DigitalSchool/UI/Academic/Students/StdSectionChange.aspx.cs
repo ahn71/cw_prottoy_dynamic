@@ -81,7 +81,8 @@ namespace DS.UI.Academic.Students
                     clsgrpEntry = new ClassGroupEntry();
                 }
                 clsgrpEntry.GetDropDownListClsGrpId(int.Parse(BatchClsID[1]), ddlMainGroup);
-                ClassSectionEntry.GetEntitiesData(ddlSection, int.Parse(BatchClsID[1]), ddlMainGroup.SelectedValue);
+                DropDownList[] dls= { ddlSection,ddlNewSectionAll };
+                ClassSectionEntry.GetEntitiesData(dls, int.Parse(BatchClsID[1]), ddlMainGroup.SelectedValue);
 
                 if (ddlMainGroup.Enabled == true)
                 {
@@ -103,7 +104,8 @@ namespace DS.UI.Academic.Students
         {
             try
             {
-                if (dlPreviousBatch.SelectedValue != "0" && dlShift.SelectedValue != "0" && ddlSection.SelectedValue != "0")
+                if (dlPreviousBatch.SelectedValue != "0" && dlShift.SelectedValue != "0" && int.TryParse(ddlSection.SelectedValue, out int sectionValue) &&
+                sectionValue >= 0)
                 {
 
 
@@ -114,7 +116,16 @@ namespace DS.UI.Academic.Students
                         cstd = new CurrentStdEntry();
                     DataTable dt = new DataTable();
                     string GroupID = (ddlMainGroup.Enabled) ? " and ClsGrpID='" + ddlMainGroup.SelectedValue + "'" : "";
-                    dt = cstd.GetCurrentStudent(" where ShiftID='" + dlShift.SelectedValue + "' and BatchID='" + PBatchClsID[0] + "' " + GroupID + "  and ClsSecID='" + ddlSection.SelectedValue + "' ");
+                    string sectionCondition = "";
+
+                    if (ddlSection.SelectedValue != "00")
+                    {
+                        sectionCondition = " and ClsSecID='" + ddlSection.SelectedValue + "'";
+                    }
+
+                        dt = cstd.GetCurrentStudent(" where ShiftID='" + dlShift.SelectedValue + "' and BatchID='" + PBatchClsID[0] + "' " + GroupID + sectionCondition);
+
+
 
                     gvstdlist.DataSource = dt;
                     gvstdlist.DataBind();
@@ -125,6 +136,7 @@ namespace DS.UI.Academic.Students
             catch { }
         }
 
+        
         protected void gvstdlist_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             try
@@ -134,7 +146,15 @@ namespace DS.UI.Academic.Students
                     //Find the DropDownList in the Row
                     string[] batchClasId = dlPreviousBatch.SelectedValue.Split('_');
                     DropDownList ddlNewSection = (e.Row.FindControl("ddlNewSection") as DropDownList);
-                    ClassSectionEntry.GetEntitiesData(ddlNewSection, int.Parse(batchClasId[1]), ddlMainGroup.SelectedValue);
+                    foreach (ListItem listItem in ddlNewSectionAll.Items)
+                    {
+                        ddlNewSection.Items.Add(new ListItem(listItem.Text, listItem.Value));
+                    }
+                    if (ddlNewSection != null && ddlNewSection.Items.Count > 0)
+                    {
+                        ddlNewSection.SelectedValue = ddlNewSectionAll.SelectedValue;
+                    }
+                    //ClassSectionEntry.GetEntitiesData(ddlNewSection, int.Parse(batchClasId[1]), ddlMainGroup.SelectedValue);
 
                     try
                     {
@@ -153,7 +173,10 @@ namespace DS.UI.Academic.Students
         protected void ddlMainGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
             string[] BatchClsID = dlPreviousBatch.SelectedValue.Split('_');
-            ClassSectionEntry.GetEntitiesData(ddlSection, int.Parse(BatchClsID[1]), ddlMainGroup.SelectedValue);
+            DropDownList[] dls = { ddlSection, ddlNewSectionAll };
+            ClassSectionEntry.GetEntitiesData(dls, int.Parse(BatchClsID[1]), ddlMainGroup.SelectedValue);
+            ddlSection.Items.Insert(ddlSection.Items.Count, new ListItem("Unassigned Section", "0"));
+
         }
 
         protected void hdChk_CheckedChanged(object sender, EventArgs e)

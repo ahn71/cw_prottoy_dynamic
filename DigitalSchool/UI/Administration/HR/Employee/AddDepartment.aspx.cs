@@ -17,144 +17,90 @@ namespace DS.UI.Administration.HR.Employee
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                lblMessage.InnerText = "";
-                if (!IsPostBack)
-                {
-                    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "AddDepartment.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                    LoadDepartment("");
-                }
-        }
-        private Boolean saveDepartments()
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("saveDepartments",DbConnection.Connection );
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@DName", txtDepartment.Text.Trim());
-                if (chkStatus.Checked == true) cmd.Parameters.AddWithValue("@DStatus", 1);
-                else cmd.Parameters.AddWithValue("@DStatus", 0);
-
-                if (chkIsTeacher.Checked == true) cmd.Parameters.AddWithValue("@IsTeacher", 1);
-                else cmd.Parameters.AddWithValue("@IsTeacher", 0);
-
-                int result = (int)
-                cmd.ExecuteScalar();
-
-
-                if (result > 0)
-                {
-                    lblMessage.InnerText = "success->Save Successfully";
-                    txtDepartment.Text = "";
-                    LoadDepartment("");
-                }
-                else lblMessage.InnerText = "error->Unable to save";
-
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
-        }
-
-        private void LoadDepartment(string sqlcmd)
-        {
-            if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "Select *  from Departments_HR  Order by DId ";
-            DataTable dt = new DataTable();
-            dt = CRUD.ReturnTableNull(sqlcmd);
-
-            int totalRows = dt.Rows.Count;
-            string divInfo = "";
-
-            divInfo = " <table id='tblClassList' class='table table-striped table-bordered dt-responsive nowrap'cellspacing='0' Width='100%' > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Department Name</th>";
-            divInfo += "<th>Status</th>";
-            divInfo += "<th>IsTeacher</th>";
-            if (Session["__Update__"].ToString().Equals("true"))
-            divInfo += "<th>Edit</th>";
-            divInfo += "</tr>";
-
-            divInfo += "</thead>";
-
-            divInfo += "<tbody>";
-            if (totalRows == 0)
-            {
-                divInfo += "</tbody></table>";
-                divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                divDepartmentList.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }
-            string id = "";
-
-            for (int x = 0; x < dt.Rows.Count; x++)
-            {
-                id = dt.Rows[x]["DId"].ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td >" + dt.Rows[x]["DName"].ToString() + "</td>";
-                divInfo += "<td>" + dt.Rows[x]["DStatus"].ToString() + "</td>";
-                divInfo += "<td>" + dt.Rows[x]["IsTeacher"].ToString() + "</td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editDepartment(" + id + ");'  />";
+          if (!IsPostBack)
+           {
+                bindData();
             }
 
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-
-            divInfo += "</table>";
-            divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-
-            divDepartmentList.Controls.Add(new LiteralControl(divInfo));
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "loaddatatable();", true); 
-            if (lblDepartmentId.Value.ToString().Length == 0)
+            if (btnSave.Text == "Save")
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; LoadDepartment(""); return; }
-                 saveDepartments();
-            }                
-            else
-                updateDepartments();
+                bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+
+                string insertQuery = "INSERT INTO Departments_HR (DName, DStatus, IsTeacher) VALUES ('" + txtDepartment.Text.ToString().Trim() + "','" + (statusChecked ? 1 : 0) + "','" + (chkIsteacher.Checked ? 1 : 0) + "')";
+                CRUD.ExecuteNonQuery(insertQuery);
+                CleanField();
+            }
+            else if (btnSave.Text == "Update")
+            {
+                bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+
+                string insertQuery = "Update  Departments_HR set DName='" + txtDepartment.Text.ToString().Trim() + "',DStatus='" + (statusChecked ? 1 : 0) + "',IsTeacher='" + (chkIsteacher.Checked ? 1 : 0) + "' where Did=" + ViewState["--Did--"];
+                CRUD.ExecuteNonQuery(insertQuery);
+                CleanField();
+
+            }
+
         }
-        private Boolean updateDepartments()
+        private void bindData()
         {
-            try
+            string query = "select * from Departments_HR order by Did";
+            DataTable dt = CRUD.ReturnTableNull(query);
+            gvDepartment.DataSource = dt;
+            gvDepartment.DataBind();
+        }
+
+
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
+        {
+
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int Did = Convert.ToInt32(gvDepartment.DataKeys[row.RowIndex].Value);
+            string query = "update Departments_HR set DStatus =" + (isChecked ? "1" : "0") + " where Did=" + Did;
+            CRUD.ExecuteNonQuery(query);
+        }
+
+        protected void chkSwitchIsTeacher_CheckedChanged(object sender, EventArgs e)
+        {
+
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchIsTeacher")).Checked;
+            int did = Convert.ToInt32(gvDepartment.DataKeys[row.RowIndex].Value);
+            string query = "update departments_hr set IsTeacher =" + (isChecked ? "1" : "0") + " where did=" + did;
+            CRUD.ExecuteNonQuery(query);
+
+
+        }
+
+        protected void gvDepartment_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Alter")
             {
 
-                SqlCommand cmd = new SqlCommand(" update Departments_HR  Set DName=@DName, DStatus=@DStatus, IsTeacher=@IsTeacher where DId=@DId ", DbConnection.Connection);
-                cmd.Parameters.AddWithValue("@DId", lblDepartmentId.Value.ToString());
-                cmd.Parameters.AddWithValue("@DName", txtDepartment.Text.Trim());
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                if (chkStatus.Checked == true) cmd.Parameters.AddWithValue("@DStatus", 1);
-                else cmd.Parameters.AddWithValue("@DStatus", 0);
 
-                if (chkIsTeacher.Checked == true) cmd.Parameters.AddWithValue("@IsTeacher", 1);
-                else cmd.Parameters.AddWithValue("@IsTeacher", 0);
+                int did = Convert.ToInt32(gvDepartment.DataKeys[rowIndex].Value);
+                ViewState["--Did--"] = did;
 
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    lblMessage.InnerText = "success->Update Successfully";
-                    LoadDepartment("");
-                    lblDepartmentId.Value = "";
-                    btnSave.Text = "Save";
-                    txtDepartment.Text = "";
-                    chkStatus.Checked = true;
-                    chkIsTeacher.Checked = true;
-                }
+                txtDepartment.Text = ((Label)gvDepartment.Rows[rowIndex].FindControl("lblDname")).Text;
+                chkStatus.Checked = ((CheckBox)gvDepartment.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
+                chkIsteacher.Checked = ((CheckBox)gvDepartment.Rows[rowIndex].FindControl("chkSwitchIsTeacher")).Checked;
 
-                return true;
-
+                btnSave.Text = "Update";
+                bindData();
             }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
+        }
+
+        private void CleanField()
+        {
+            txtDepartment.Text = "";
+            chkStatus.Checked = false;
+            chkIsteacher.Checked = false;
         }
     }
 }

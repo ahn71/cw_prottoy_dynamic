@@ -56,7 +56,8 @@ namespace DS.UI.Academic.Students
                 if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "OldStudentEntry.aspx",btnSubmit, EditMode)) Response.Redirect(Request.UrlReferrer.ToString() + "&hasperm=no");
                 txtAdmissionDate.Text = TimeZoneBD.getCurrentTimeBD().ToString("dd-MM-yyyy");
                 ClassEntry.GetEntitiesData(ddlClass);
-                DropDownList[] ddlDistrict = { ddlPermanentDistrict, ddlPresentDistrict, ddlParentsDistrict };
+                //ClassEntry.GetEntitiesData(ddlPreviousclass);
+                DropDownList[] ddlDistrict = { ddlPermanentDistrict, ddlPresentDistrict };
                 DistrictEntry.GetDropDownList(ddlDistrict);
                 ShiftEntry.GetShiftList(ddlShift);
                 commonTask.loadPassingYearForAdmission(ddlPreviousExamPassingYear);
@@ -100,13 +101,15 @@ namespace DS.UI.Academic.Students
 
                 DataTable dt = new DataTable();
                 
-              dt=CRUD.ReturnTableNull(@"Select cs.BatchID,cs.StudentId,asi.AdmissionNo,ImageName, FullName,FullNameBn, Gender,Format(DateOfBirth,'dd-MM-yyyy') as DateOfBirth,Religion, BloodGroup,SUBSTRING(Mobile,4,12)as Mobile,ConfigId,b.Year, cs.ClassID,cs.ClsGrpID, cs.ClsSecID, cs.RollNo,Format(AdmissionDate,'dd-MM-yyyy') as AdmissionDate,FathersName,FatherNameBn,SUBSTRING(FathersMobile,4,12)as FathersMobile,FathersProfession,FathersProfessionBn,MothersName,MotherNameBn,SUBSTRING(MothersMoible,4,12)as MothersMoible, MothersProfession,MothersProfessionBn,ParentsDistrictId,ParentsThanaId,ParentsPostOfficeId,ParentsAddress,ParentsAddressBn, PAVillage,PAVillageBn, PAPostOfficeID, PThanaId,PDistrictId, TAViIlage,TAViIlageBn,TAPostOfficeID, TThanaId, TDistrictId, GuardianName, GuardianRelation, REPLACE(GuardianMobileNo,'+88', '')  as GuardianMobileNo, GuardianAddress, MotherTongue, Nationality, PreviousSchoolName, PSCGPA, PSCRollNo, PSCBoard, PSCPassingYear, PSCJSCRegistration,IsActive, Comments,cs.TCCollegeName,case when convert(varchar(10),cs.TCDate,105)='01-01-1900' then '' else convert(varchar(10),cs.TCDate,105) end as TCDate,cs.PreviousExamType 
+              dt=CRUD.ReturnTableNull(@"Select cs.BatchID,cs.StudentId,asi.AdmissionNo,ImageName, FullName, StudentsBIDNID, FullNameBn, Gender,Format(DateOfBirth,'dd-MM-yyyy') as DateOfBirth,Religion, BloodGroup,SUBSTRING(Mobile,4,12)as Mobile,ConfigId,b.Year, cs.ClassID,cs.ClsGrpID, cs.ClsSecID, cs.RollNo,Format(AdmissionDate,'dd-MM-yyyy') as AdmissionDate,FathersName, FathersNID, FatherNameBn,SUBSTRING(FathersMobile,4,12)as FathersMobile,FathersProfession,FathersProfessionBn,MothersName,MothersNID,MotherNameBn,SUBSTRING(MothersMoible,4,12)as MothersMoible, MothersProfession,MothersProfessionBn,ParentsDistrictId,ParentsThanaId,ParentsPostOfficeId,ParentsAddress,ParentsAddressBn, PAVillage,PAVillageBn, PAPostOfficeID, PThanaId,PDistrictId, TAViIlage,TAViIlageBn,TAPostOfficeID, TThanaId, TDistrictId, GuardianName,GuardianNID, GuardianRelation, REPLACE(GuardianMobileNo,'+88', '')  as GuardianMobileNo, GuardianAddress, MotherTongue, Nationality, PreviousSchoolName, PreviousClassName, PSCGPA, PSCRollNo, PSCBoard, PSCPassingYear, PSCJSCRegistration,IsActive, Comments,cs.TCCollegeName,case when convert(varchar(10),cs.TCDate,105)='01-01-1900' then '' else convert(varchar(10),cs.TCDate,105) end as TCDate,cs.PreviousExamType 
                 From CurrentStudentInfo cs INNER JOIN  TBL_STD_Admission_INFO asi ON cs.StudentId = asi.StudentID inner join BatchInfo b on cs.BatchID=b.BatchId  where cs.StudentId=" + stid);
 
                 ViewState["__AdmissionFormNo__"] = dt.Rows[0]["AdmissionNo"].ToString();
                 ViewState["__StudentID__"]= dt.Rows[0]["StudentId"].ToString();
                 ViewState["__ImageName__"] = dt.Rows[0]["ImageName"].ToString();
                 txtStudentName.Text = dt.Rows[0]["FullName"].ToString();
+                textStuBidNid.Text = dt.Rows[0]["StudentsBIDNID"].ToString();
+
                 txtStudentNameBn.Text = dt.Rows[0]["FullNameBn"].ToString();
                 ddlGender.SelectedValue = dt.Rows[0]["Gender"].ToString();
                 txtDateOfBirth.Text = dt.Rows[0]["DateOfBirth"].ToString();
@@ -128,26 +131,29 @@ namespace DS.UI.Academic.Students
                 txtAdmissionDate.Text = dt.Rows[0]["AdmissionDate"].ToString();
 
                 txtFatherName.Text = dt.Rows[0]["FathersName"].ToString();
+                txtFatherBidNid.Text = dt.Rows[0]["FathersNID"].ToString();
                 txtFatherNameBn.Text = dt.Rows[0]["FatherNameBn"].ToString();
                 txtFatherMobile.Text = dt.Rows[0]["FathersMobile"].ToString();                
                 txtFatherOccupation.Text = dt.Rows[0]["FathersProfession"].ToString();
-                txtFatherOccupationBn.Text = dt.Rows[0]["FathersProfessionBn"].ToString();
+                //txtFatherOccupationBn.Text = dt.Rows[0]["FathersProfessionBn"].ToString();
                 
                 txtMotherName.Text = dt.Rows[0]["MothersName"].ToString();
+                txtMotherBidNid.Text = dt.Rows[0]["MothersNID"].ToString();
                 txtMotherNameBn.Text = dt.Rows[0]["MotherNameBn"].ToString();
                 txtMotherMobile.Text = dt.Rows[0]["MothersMoible"].ToString();
                 txtMotherOccupation.Text = dt.Rows[0]["MothersProfession"].ToString();
-                txtMotherOccupationBn.Text = dt.Rows[0]["MothersProfessionBn"].ToString();
+                //txtMotherOccupationBn.Text = dt.Rows[0]["MothersProfessionBn"].ToString();
 
-                ddlParentsDistrict.SelectedValue =dt.Rows[0]["ParentsDistrictId"].ToString();
-                ThanaEntry.GetDropDownList(int.Parse(ddlParentsDistrict.SelectedValue), ddlParentsUpazila);
-                ddlParentsUpazila.SelectedValue = dt.Rows[0]["ParentsThanaId"].ToString();
-                Classes.commonTask.loadPostoffice(ddlParentsPostOffice, ddlParentsDistrict.SelectedValue, ddlParentsUpazila.SelectedValue);
-                ddlParentsPostOffice.SelectedValue =dt.Rows[0]["ParentsPostOfficeId"].ToString();
-                txtParentsVillage.Text = dt.Rows[0]["ParentsAddress"].ToString();
-                txtParentsVillageBn.Text = dt.Rows[0]["ParentsAddressBn"].ToString();
+                //ddlParentsDistrict.SelectedValue =dt.Rows[0]["ParentsDistrictId"].ToString();
+                //ThanaEntry.GetDropDownList(int.Parse(ddlParentsDistrict.SelectedValue), ddlParentsUpazila);
+                //ddlParentsUpazila.SelectedValue = dt.Rows[0]["ParentsThanaId"].ToString();
+                //Classes.commonTask.loadPostoffice(ddlParentsPostOffice, ddlParentsDistrict.SelectedValue, ddlParentsUpazila.SelectedValue);
+                //ddlParentsPostOffice.SelectedValue =dt.Rows[0]["ParentsPostOfficeId"].ToString();
+                //txtParentsVillage.Text = dt.Rows[0]["ParentsAddress"].ToString();
+                //txtParentsVillageBn.Text = dt.Rows[0]["ParentsAddressBn"].ToString();
 
                 txtGuardianName.Text = dt.Rows[0]["GuardianName"].ToString();
+                textGuarnBidNid.Text = dt.Rows[0]["GuardianNID"].ToString();
                 txtGuardianRelation.Text = dt.Rows[0]["GuardianRelation"].ToString();
                 txtGuardianMobile.Text = dt.Rows[0]["GuardianMobileNo"].ToString();
                 txtGuardianAddress.Text = dt.Rows[0]["GuardianAddress"].ToString();
@@ -168,17 +174,24 @@ namespace DS.UI.Academic.Students
                 txtPresentVillage.Text = dt.Rows[0]["TAViIlage"].ToString();
                 txtPresentVillageBn.Text = dt.Rows[0]["TAViIlageBn"].ToString();
 
-                
-                
-               
-                if (dt.Rows[0]["PreviousSchoolName"].ToString() == "")ckbPreviousInstituteInfo.Checked = true;
+                //Changing zone start
+
+                if (dt.Rows[0]["PreviousSchoolName"].ToString() == "") ckbPreviousInstituteInfo.Checked = true;
                 else ckbPreviousInstituteInfo.Checked = false;
-                txtPreviousExamSchoolName.Text = dt.Rows[0]["PreviousSchoolName"].ToString();
-                ddlPreviousExamBoard.SelectedValue = dt.Rows[0]["PSCBoard"].ToString();
-                ddlPreviousExamPassingYear.SelectedValue = dt.Rows[0]["PSCPassingYear"].ToString();
-                txtPreviousExamRegistrationNo.Text = dt.Rows[0]["PSCJSCRegistration"].ToString();
-                txtPreviousExamRollNo.Text= dt.Rows[0]["PSCRollNo"].ToString();
-                txtPreviousExamGPA.Text = dt.Rows[0]["PSCGPA"].ToString();
+                txtPreviousInstituteName.Text = dt.Rows[0]["PreviousSchoolName"].ToString();
+                txtPreviousClass.Text = dt.Rows[0]["PreviousClassName"].ToString();
+                //changing zone end 
+
+                //if (dt.Rows[0]["PreviousSchoolName"].ToString() == "")
+                //    ckbPreviousInstituteInfo.Checked = true;
+                //else
+                //    ckbPreviousInstituteInfo.Checked = false;
+                //txtPreviousExamSchoolName.Text = dt.Rows[0]["PreviousSchoolName"].ToString();
+                //ddlPreviousExamBoard.SelectedValue = dt.Rows[0]["PSCBoard"].ToString();
+                //ddlPreviousExamPassingYear.SelectedValue = dt.Rows[0]["PSCPassingYear"].ToString();
+                //txtPreviousExamRegistrationNo.Text = dt.Rows[0]["PSCJSCRegistration"].ToString();
+                //txtPreviousExamRollNo.Text = dt.Rows[0]["PSCRollNo"].ToString();
+                //txtPreviousExamGPA.Text = dt.Rows[0]["PSCGPA"].ToString();
 
                 if (dt.Rows[0]["TCCollegeName"].ToString().Trim() == "") ckbTCInfo.Checked = true;
                 else ckbTCInfo.Checked = false;
@@ -205,8 +218,21 @@ namespace DS.UI.Academic.Students
                 clsgrpEntry = new ClassGroupEntry();
             }
             clsgrpEntry.GetDropDownListClsGrpId(int.Parse(ddlClass.SelectedValue), ddlGroup);
-            if (ddlGroup.SelectedValue != "0")
+            if (!ddlGroup.Enabled)
                 ClassSectionEntry.GetSectionList(ddlSection, int.Parse(ddlClass.SelectedValue), ddlGroup.SelectedValue);
+
+
+            if (ddlClass.SelectedItem.Text.Trim().ToLower().Contains("one") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("two") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("three") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("four") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("five") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("six") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("seven") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("eight") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("nine") || ddlClass.SelectedItem.Text.Trim().ToLower().Contains("ten"))
+            {
+                divForOneToTen.Visible = true;
+                divForElevenToOthers.Visible = false;
+
+            }
+            else
+            {
+                divForElevenToOthers.Visible = true;
+                divForOneToTen.Visible = false;
+            }
         }
 
         protected void ddlGroup_SelectedIndexChanged(object sender, EventArgs e)
@@ -315,47 +341,49 @@ namespace DS.UI.Academic.Students
             }
             
         }
-        
 
-        
 
-        protected void ddlParentsDistrict_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ThanaEntry.GetDropDownList(int.Parse(ddlParentsDistrict.SelectedValue), ddlParentsUpazila);
-        }
 
-        protected void ddlParentsUpazila_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Classes.commonTask.loadPostoffice(ddlParentsPostOffice, ddlParentsDistrict.SelectedValue, ddlParentsUpazila.SelectedValue);
-        }
-     
+
+        //protected void ddlParentsDistrict_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    ThanaEntry.GetDropDownList(int.Parse(ddlParentsDistrict.SelectedValue), ddlParentsUpazila);
+        //}
+
+        //protected void ddlParentsUpazila_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    Classes.commonTask.loadPostoffice(ddlParentsPostOffice, ddlParentsDistrict.SelectedValue, ddlParentsUpazila.SelectedValue);
+        //}
+
 
         protected void chkFather_CheckedChanged(object sender, EventArgs e)
         {
             chkOther.Checked = false;
             chkMother.Checked = false;
             txtGuardianName.Text = txtFatherName.Text.Trim();
+            textGuarnBidNid.Text = txtFatherBidNid.Text.Trim();
             txtGuardianRelation.Text = "Father";
             txtGuardianMobile.Text = txtFatherMobile.Text.Trim();
-            set_guardian_address();
+           
         }
-        private void set_guardian_address()
-        {
-            try
-            {
-                txtGuardianAddress.Text = txtParentsVillage.Text.Trim() + ((!ddlParentsPostOffice.SelectedValue.Equals("0")) ? "," + ddlParentsPostOffice.SelectedItem.Text.Trim() : "") + ((!ddlParentsUpazila.SelectedValue.Equals("0")) ? "," + ddlParentsUpazila.SelectedItem.Text.Trim() : "") + ((!ddlParentsDistrict.SelectedValue.Equals("0")) ? "," + ddlParentsDistrict.SelectedItem.Text.Trim() : "");
-            }
-            catch (Exception ex) { }
-        }
+        //private void set_guardian_address()
+        //{
+        //    try
+        //    {
+        //        txtGuardianAddress.Text = txtParentsVillage.Text.Trim() + ((!ddlParentsPostOffice.SelectedValue.Equals("0")) ? "," + ddlParentsPostOffice.SelectedItem.Text.Trim() : "") + ((!ddlParentsUpazila.SelectedValue.Equals("0")) ? "," + ddlParentsUpazila.SelectedItem.Text.Trim() : "") + ((!ddlParentsDistrict.SelectedValue.Equals("0")) ? "," + ddlParentsDistrict.SelectedItem.Text.Trim() : "");
+        //    }
+        //    catch (Exception ex) { }
+        //}
 
         protected void chkMother_CheckedChanged(object sender, EventArgs e)
         {
             chkOther.Checked = false;
             chkFather.Checked = false;
             txtGuardianName.Text = txtMotherName.Text;
+            textGuarnBidNid.Text = txtMotherBidNid.Text;
             txtGuardianRelation.Text = "Mother";
             txtGuardianMobile.Text = txtMotherMobile.Text.Trim();
-            set_guardian_address();
+            //set_guardian_address();
         }
 
         protected void chkOther_CheckedChanged(object sender, EventArgs e)
@@ -365,26 +393,29 @@ namespace DS.UI.Academic.Students
             txtGuardianName.Text = "";
             txtGuardianRelation.Text = "";
             txtGuardianMobile.Text = "";
-            txtGuardianAddress.Text = "";
+            textGuarnBidNid.Text = "";
+            //txtGuardianAddress.Text = "";
         }
 
-        protected void ckbSameAsPermanentAddress_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ckbSameAsPermanentAddress.Checked)
-                {
-                    txtPresentVillage.Text = txtPermanentVillage.Text.Trim();
-                    txtPresentVillageBn.Text = txtPermanentVillageBn.Text.Trim();
-                    ddlPresentDistrict.SelectedValue = ddlPermanentDistrict.SelectedValue;
-                    ThanaEntry.GetDropDownList(int.Parse(ddlPresentDistrict.SelectedValue), ddlPresentUpazila);
-                    ddlPresentUpazila.SelectedValue = ddlPermanentUpazila.SelectedValue;
-                    commonTask.loadPostoffice(ddlPresentPostOffice, ddlPresentDistrict.SelectedValue, ddlPresentUpazila.SelectedValue);
-                    ddlPresentPostOffice.SelectedValue = ddlPermanentPostOffice.SelectedValue;
-                }                
-            }
-            catch { }
-        }
+
+
+        //protected void ckbSameAsPermanentAddress_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (ckbSameAsPermanentAddress.Checked)
+        //        {
+        //            txtPresentVillage.Text = txtPermanentVillage.Text.Trim();
+        //            txtPresentVillageBn.Text = txtPermanentVillageBn.Text.Trim();
+        //            ddlPresentDistrict.SelectedValue = ddlPermanentDistrict.SelectedValue;
+        //            ThanaEntry.GetDropDownList(int.Parse(ddlPresentUpazila.SelectedValue), ddlPresentUpazila);
+        //            ddlPresentUpazila.SelectedValue = ddlPermanentUpazila.SelectedValue;
+        //            commonTask.loadPostoffice(ddlPresentPostOffice, ddlPresentDistrict.SelectedValue, ddlPresentUpazila.SelectedValue);
+        //            ddlPresentPostOffice.SelectedValue = ddlPermanentPostOffice.SelectedValue;
+        //        }
+        //    }
+        //    catch { }
+        //}
         private void preview(string sl)
         {
             Response.Redirect("admission-form.aspx?SL=" + sl);
@@ -498,6 +529,7 @@ namespace DS.UI.Academic.Students
             entities.AdmissionNo = AdmissionFormNo;
             entities.AdmissionDate = AdmissionDate;            
             entities.FullName = commonTask.Replase(txtStudentName.Text.Trim(), '\'', "\''");
+            entities.StudentBidNid = textStuBidNid.Text.Trim();
             entities.FullNameBn = commonTask.Replase(txtStudentNameBn.Text.Trim(), '\'', "\''");
             entities.ClassID = int.Parse(ddlClass.SelectedValue);
             entities.ClsGrpID = int.Parse(ddlGroup.SelectedValue);
@@ -511,24 +543,27 @@ namespace DS.UI.Academic.Students
             entities.Session = "";
 
             entities.FathersName = commonTask.Replase(txtFatherName.Text.Trim(), '\'', "\''");
+            entities.FathersBidNid = txtFatherBidNid.Text.Trim();
             entities.FathersNameBn = commonTask.Replase(txtFatherNameBn.Text.Trim(), '\'', "\''");
             entities.FathersMobile = "+88" + txtFatherMobile.Text.Trim();
             entities.FathersProfession = commonTask.Replase(txtFatherOccupation.Text.Trim(), '\'', "\''");
-            entities.FathersProfessionBn = commonTask.Replase(txtFatherOccupationBn.Text.Trim(), '\'', "\''");
+            //entities.FathersProfessionBn = commonTask.Replase(txtFatherOccupationBn.Text.Trim(), '\'', "\''");
 
             entities.MothersName = commonTask.Replase(txtMotherName.Text.Trim(), '\'', "\''");
+            entities.MothersBidNid = txtMotherBidNid.Text.Trim();
             entities.MothersNameBn = commonTask.Replase(txtMotherNameBn.Text.Trim(), '\'', "\''");
             entities.MothersMobile = (!txtMotherMobile.Text.Trim().Equals("") ? "+88" + txtMotherMobile.Text.Trim() : "");
             entities.MothersProfession = commonTask.Replase(txtMotherOccupation.Text.Trim(), '\'', "\''");
-            entities.MothersProfessionBn = commonTask.Replase(txtMotherOccupationBn.Text.Trim(), '\'', "\''");
+            //entities.MothersProfessionBn = commonTask.Replase(txtMotherOccupationBn.Text.Trim(), '\'', "\''");
 
-            entities.ParentsAddress = commonTask.Replase(txtParentsVillage.Text.Trim(), '\'', "\''");
-            entities.ParentsAddressBn = commonTask.Replase(txtParentsVillageBn.Text.Trim(), '\'', "\''");
-            entities.ParentsPostOfficeId = int.Parse(ddlParentsPostOffice.SelectedValue);
-            entities.ParentsThanaId = int.Parse(ddlParentsUpazila.SelectedValue);
-            entities.ParentsDistrictId = int.Parse(ddlParentsDistrict.SelectedValue);
+            //entities.ParentsAddress = commonTask.Replase(txtParentsVillage.Text.Trim(), '\'', "\''");
+            //entities.ParentsAddressBn = commonTask.Replase(txtParentsVillageBn.Text.Trim(), '\'', "\''");
+            //entities.ParentsPostOfficeId = int.Parse(ddlParentsPostOffice.SelectedValue);
+            //entities.ParentsThanaId = int.Parse(ddlParentsUpazila.SelectedValue);
+            //entities.ParentsDistrictId = int.Parse(ddlParentsDistrict.SelectedValue);
 
             entities.GuardianName = commonTask.Replase(txtGuardianName.Text.Trim(), '\'', "\''");
+            entities.GuardianBidNid = textGuarnBidNid.Text.Trim();
             entities.GuardianRelation = commonTask.Replase(txtGuardianRelation.Text.Trim(), '\'', "\''");
             entities.GuardianMobileNo = "+88" + txtGuardianMobile.Text.Trim();
             entities.GuardianAddress = commonTask.Replase(txtGuardianAddress.Text.Trim(), '\'', "\''");
@@ -626,6 +661,7 @@ namespace DS.UI.Academic.Students
             ViewState["__ImageName__"] ="";
             txtStudentName.Text = "";
             txtStudentNameBn.Text = "";
+            textStuBidNid.Text = "";
             ddlGender.SelectedValue = "0";
             txtDateOfBirth.Text = "";
             ddlReligion.SelectedValue = "0";
@@ -651,29 +687,32 @@ namespace DS.UI.Academic.Students
             txtAdmissionDate.Text = TimeZoneBD.getCurrentTimeBD().ToString("dd-MM-yyyy");
 
             txtFatherName.Text = "";
+            txtFatherBidNid.Text = "";
             txtFatherNameBn.Text = "";
             txtFatherMobile.Text = "";
             txtFatherOccupation.Text = "";
-            txtFatherOccupationBn.Text = "";
+            //txtFatherOccupationBn.Text = "";
 
             txtMotherName.Text = "";
+            txtMotherBidNid.Text = "";
             txtMotherNameBn.Text = "";
             txtMotherMobile.Text = "";
             txtMotherOccupation.Text = "";
-            txtMotherOccupationBn.Text ="";
+            //txtMotherOccupationBn.Text ="";
 
-            if (ddlParentsDistrict != null & ddlParentsDistrict.Items.Count > 1)
-                ddlParentsDistrict.SelectedValue = "0";
-            ThanaEntry.GetDropDownList(int.Parse(ddlParentsDistrict.SelectedValue), ddlParentsUpazila);
-            if (ddlParentsUpazila != null & ddlParentsUpazila.Items.Count > 1)
-                ddlParentsUpazila.SelectedValue ="0";
-            Classes.commonTask.loadPostoffice(ddlParentsPostOffice, ddlParentsDistrict.SelectedValue, ddlParentsUpazila.SelectedValue);
-            if (ddlParentsPostOffice != null & ddlParentsPostOffice.Items.Count > 1)
-                ddlParentsPostOffice.SelectedValue ="0";
-            txtParentsVillage.Text ="";
-            txtParentsVillageBn.Text ="";
+            //if (ddlParentsDistrict != null & ddlParentsDistrict.Items.Count > 1)
+            //    ddlParentsDistrict.SelectedValue = "0";
+            //ThanaEntry.GetDropDownList(int.Parse(ddlParentsDistrict.SelectedValue), ddlParentsUpazila);
+            //if (ddlParentsUpazila != null & ddlParentsUpazila.Items.Count > 1)
+            //    ddlParentsUpazila.SelectedValue ="0";
+            //Classes.commonTask.loadPostoffice(ddlParentsPostOffice, ddlParentsDistrict.SelectedValue, ddlParentsUpazila.SelectedValue);
+            //if (ddlParentsPostOffice != null & ddlParentsPostOffice.Items.Count > 1)
+            //    ddlParentsPostOffice.SelectedValue ="0";
+            //txtParentsVillage.Text ="";
+            //txtParentsVillageBn.Text ="";
 
             txtGuardianName.Text ="";
+            textGuarnBidNid.Text = "";
             txtGuardianRelation.Text ="";
             txtGuardianMobile.Text ="";
             txtGuardianAddress.Text ="";
@@ -707,9 +746,9 @@ namespace DS.UI.Academic.Students
             txtPreviousExamRollNo.Text ="";
             txtPreviousExamGPA.Text = "";
 
-            chkFather.Checked = false;
-            chkMother.Checked = false;
-            chkOther.Checked = false;
+            //chkFather.Checked = false;
+            //chkMother.Checked = false;
+            //chkOther.Checked = false;
 
             ckbTCInfo.Checked = true;
             txtTCCollegeName.Text = "";
@@ -724,23 +763,23 @@ namespace DS.UI.Academic.Students
             allClear();
         }        
 
-        protected void ckbSameAsParentsAddress_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (ckbSameAsParentsAddress.Checked)
-                {
-                    txtPermanentVillage.Text = txtParentsVillage.Text.Trim();
-                    txtPermanentVillageBn.Text = txtParentsVillageBn.Text.Trim();
-                    ddlPermanentDistrict.SelectedValue = ddlParentsDistrict.SelectedValue;
-                    ThanaEntry.GetDropDownList(int.Parse(ddlPermanentDistrict.SelectedValue), ddlPermanentUpazila);
-                    ddlPermanentUpazila.SelectedValue = ddlParentsUpazila.SelectedValue;
-                    commonTask.loadPostoffice(ddlPermanentPostOffice, ddlPermanentDistrict.SelectedValue, ddlPermanentUpazila.SelectedValue);
-                    ddlPermanentPostOffice.SelectedValue = ddlParentsPostOffice.SelectedValue;
-                }
-            }
-            catch { }
-        }
+        //protected void ckbSameAsParentsAddress_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (ckbSameAsParentsAddress.Checked)
+        //        {
+        //            txtPermanentVillage.Text = txtParentsVillage.Text.Trim();
+        //            txtPermanentVillageBn.Text = txtParentsVillageBn.Text.Trim();
+        //            ddlPermanentDistrict.SelectedValue = ddlParentsDistrict.SelectedValue;
+        //            ThanaEntry.GetDropDownList(int.Parse(ddlPermanentDistrict.SelectedValue), ddlPermanentUpazila);
+        //            ddlPermanentUpazila.SelectedValue = ddlParentsUpazila.SelectedValue;
+        //            commonTask.loadPostoffice(ddlPermanentPostOffice, ddlPermanentDistrict.SelectedValue, ddlPermanentUpazila.SelectedValue);
+        //            ddlPermanentPostOffice.SelectedValue = ddlParentsPostOffice.SelectedValue;
+        //        }
+        //    }
+        //    catch { }
+        //}
 
         protected void ckbTCInfo_CheckedChanged(object sender, EventArgs e)
         {
@@ -754,6 +793,34 @@ namespace DS.UI.Academic.Students
                 txtTCCollegeName.Enabled = true;
                 txtTCDate.Enabled = true;
             }
+        }
+
+        protected void ckbSameAsPresentAddress_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ckbSameAsPresentAddress.Checked)
+                {
+                    txtPermanentVillage.Text = txtPresentVillage.Text.Trim();
+                    txtPermanentVillageBn.Text = txtPresentVillageBn.Text.Trim();
+                    ddlPermanentDistrict.SelectedValue = ddlPresentDistrict.SelectedValue;
+
+                    ThanaEntry.GetDropDownList(int.Parse(ddlPermanentDistrict.SelectedValue), ddlPermanentUpazila);
+                    ddlPermanentUpazila.SelectedValue = ddlPresentUpazila.SelectedValue;
+
+                    commonTask.loadPostoffice(ddlPermanentPostOffice, ddlPermanentDistrict.SelectedValue, ddlPermanentUpazila.SelectedValue);
+                    ddlPermanentPostOffice.SelectedValue = ddlPresentPostOffice.SelectedValue;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+
+
+           
         }
     }
 }

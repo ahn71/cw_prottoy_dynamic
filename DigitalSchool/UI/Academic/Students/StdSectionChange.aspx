@@ -123,17 +123,24 @@
                     </asp:DropDownList>
                 </div>
                 <div class="form-group">
-                    <label class="lal" for="exampleInputName2">Section</label>
+                    <label class="lal" for="exampleInputName2">Current Section</label>
                     <asp:DropDownList ID="ddlSection" class="input controlLength form-control" runat="server" ClientIDMode="Static">
                         <asp:ListItem Value="0">...Select...</asp:ListItem>
+                        
                     </asp:DropDownList>
+                </div>
+                <div class="form-group">
+                    <label class="lal" for="exampleInputName2">New Section</label>
+                    <asp:DropDownList ID="ddlNewSectionAll" Width="150px" runat="server"                           CssClass="input">
+                                        <asp:ListItem Value="00">...Select...</asp:ListItem>
+                                    </asp:DropDownList>
                 </div>
                          <div class="form-group">
                     <label class="lal" for="exampleInputName2">Change Date</label>
                    <asp:TextBox ID="txtChangeDate" ClientIDMode="Static" runat="server" CssClass="input controlLength"></asp:TextBox>
                             <asp:CalendarExtender ID="CalendarExtender1" runat="server" Format="dd-MM-yyyy"
                                     TargetControlID="txtChangeDate">
-                                </asp:CalendarExtender>
+                           </asp:CalendarExtender>
                 </div>
            
                 <div class="form-group">
@@ -191,16 +198,21 @@
                                         Text='<%# DataBinder.Eval(Container.DataItem, "GroupName")%>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Current Section">
+                            <asp:TemplateField HeaderText="Current Section">
                                 <ItemTemplate>                                    
                                     <asp:Label ID="lblSection" runat="server"
                                         Text='<%# DataBinder.Eval(Container.DataItem, "SectionName")%>'></asp:Label>
                                 </ItemTemplate>
-                            </asp:TemplateField>                    
+                            </asp:TemplateField>   
+                            
+
+
+
+
                             <asp:TemplateField HeaderText="New. Section">
+                                
                                 <ItemTemplate>                                   
                                     <asp:DropDownList ID="ddlNewSection" Width="150px" runat="server" CssClass="input">
-                                        <asp:ListItem Value="0">...Select...</asp:ListItem>
                                     </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -209,7 +221,7 @@
                                             <asp:CheckBox runat="server" ID="hdChk" Text="All" Checked="true" AutoPostBack="True" OnCheckedChanged="hdChk_CheckedChanged"  /><br />                                                     
                                         </HeaderTemplate>
                                         <ItemTemplate>                               
-                                                    <asp:CheckBox ID="chkStatus" runat="server" AutoPostBack="true" Checked="true" OnCheckedChanged="chkStatus_CheckedChanged"  />                                                
+                                        <asp:CheckBox ID="chkStatus" runat="server" AutoPostBack="true"                     Checked="true" OnCheckedChanged="chkStatus_CheckedChanged"  />                                                
                                         </ItemTemplate>
                                     </asp:TemplateField>
                         </Columns>
