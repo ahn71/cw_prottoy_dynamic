@@ -3423,6 +3423,10 @@ C:\Users\CW\Desktop\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.
 C:\Users\CW\Desktop\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CopyComplete
 C:\Users\CW\Desktop\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.dll
 C:\Users\CW\Desktop\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.pdb
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csprojResolveAssemblyReference.cache
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CoreCompileInputs.cache
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.dll
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\DS.dll.config
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\DS.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\DS.pdb
@@ -3479,8 +3483,4 @@ D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\System.Web.Http.
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\DigitalSchool.DAL.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\de\PdfSharp.resources.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\bin\de\PdfSharp.Charting.resources.dll
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csprojResolveAssemblyReference.cache
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CoreCompileInputs.cache
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.Web.UI.csproj.CopyComplete
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.dll
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool\obj\Debug\DS.pdb

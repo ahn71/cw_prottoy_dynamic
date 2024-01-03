@@ -17,7 +17,7 @@
 
     </section>
 
-
+    <%--his is section--%>
     <section class="news-heading-area">
         <div class="container">
             <div class="row">
