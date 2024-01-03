@@ -54,6 +54,10 @@
     <link href="Styles/tabmenu/css/style.css" rel="stylesheet" />
     <link href="Styles/tabmenu/css/theme.css" rel="stylesheet" />
     <link href="Styles/updatecss/stylev3.css" rel="stylesheet" />
+
+
+    <%--Font Awesome--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.1/css/all.min.css"/>
     <style>
         #MainContent_CalendarExtender1_daysTable tr td {
             padding: 0px;
