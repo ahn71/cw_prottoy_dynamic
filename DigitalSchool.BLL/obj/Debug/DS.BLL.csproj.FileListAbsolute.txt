@@ -1766,3 +1766,36 @@ D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debu
 D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CopyComplete
 D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.dll
 D:\CW Project\New folder (project)\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.BLL.dll.config
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.BLL.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.BLL.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.SysErrMsgHandler.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.DAL.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.PropertyEntities.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\EntityFramework.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\HtmlRenderer.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\HtmlRenderer.PdfSharp.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\PdfSharp.Charting.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\PdfSharp.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.DAL.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.DAL.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.DAL.dll.config
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.PropertyEntities.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.PropertyEntities.dll.config
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.SysErrMsgHandler.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.SysErrMsgHandler.dll.config
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\EntityFramework.xml
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\HtmlRenderer.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\HtmlRenderer.PdfSharp.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\PdfSharp.xml
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\PdfSharp.Charting.xml
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.DAL.pdb
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.AssemblyReference.cache
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CoreCompileInputs.cache
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CopyComplete
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.dll
+C:\Users\CW\Desktop\NewProject\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.pdb
