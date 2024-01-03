@@ -17,9 +17,9 @@
                         Dashboard
                     </a>
                 </li>
-                <li><a runat="server" href="~/UI/Administration/AdministrationHome.aspx">Administration Module</a></li>
-                <li><a runat="server" href="~/UI/Administration/HR/hrHome.aspx">Human Resource Module</a></li>
-                <li class="active">Employee Management</li>               
+                <li><a runat="server" href="~/UI/Administration/AdministrationHome.aspx">Administration Module/</a></li>
+                <li><a runat="server" href="~/UI/Administration/HR/hrHome.aspx">Human Resource Module/</a></li>
+                <li class="active text-danger">Employee Management</li>               
             </ul>
             <!--breadcrumbs end -->
         </div>

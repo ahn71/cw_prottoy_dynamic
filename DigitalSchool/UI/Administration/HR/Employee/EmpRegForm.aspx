@@ -169,13 +169,13 @@
             <ul class="breadcrumb">
                 <li>
                     <a runat="server" href="~/Dashboard.aspx">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
                         Dashboard
                     </a>
                 </li>
-                <li><a runat="server" href="~/UI/Administration/AdministrationHome.aspx">Administration Module</a></li>
-                <li><a runat="server" href="~/UI/Administration/HR/hrHome.aspx">Human Resource Module</a></li>
-                <li><a runat="server" href="~/UI/Administration/HR/Employee/EmpHome.aspx">Employee Management</a></li>
+                <li><a class="p-1" runat="server" href="~/UI/Administration/AdministrationHome.aspx">Administration Module /</a></li>
+                <li><a class="p-1" runat="server" href="~/UI/Administration/HR/hrHome.aspx">Human Resource Module /</a></li>
+                <li><a class="p-1" runat="server" href="~/UI/Administration/HR/Employee/EmpHome.aspx">Employee Management /</a></li>
                 <li class="active">Employee Registration Form</li>
             </ul>
             <!--breadcrumbs end -->
@@ -185,17 +185,29 @@
 
     <div id="Tabs" role="tabpanel">
         
-        <ul id="rowTab" class="nav nav-tabs  nav-pills nav-justified thumbnail setup-panel" role="tablist">
-            <li id="litab1" class="active"><a aria-controls="empRegp" role="tab" data-toggle="tab" href="#empRegp">Personal Information</a></li>
+       <%-- <ul id="rowTab" class="nav nav-tabs  nav-pills nav-justified thumbnail setup-panel" role="tablist">--%>
+ <%--           <li id="litab1" class="active"><a aria-controls="empRegp" role="tab" data-toggle="tab" href="#empRegp">Personal Information</a></li>
+
             <li id="litab2"><a data-toggle="tab" href="#empRegp1" aria-controls="empRegp1" role="tab">Institutional Information</a></li>
             <li id="litab3"><a data-toggle="tab" href="#empRegp2" aria-controls="empRegp2" role="tab">Educational Information</a></li>
             <li id="litab4"><a data-toggle="tab" href="#empRegp3" aria-controls="empRegp3" role="tab">Experience Information</a></li>
-            <li id="litab5"><a data-toggle="tab" href="#empRegp4" aria-controls="empRegp4" role="tab">Others Information</a></li>
-        </ul>
+            <li id="litab5"><a data-toggle="tab" href="#empRegp4" aria-controls="empRegp4" role="tab">Others Information</a></li>--%>
+
+              <div class="d-flex">
+                <ul class="d-flex gap-5">
+                    <li class="btn btn-primary" onclick="personal()">Personal Information</li>
+                    <li class="btn btn-primary" onclick="institute()">Institutional Information</li>
+                    <li class="btn btn-primary" onclick="educationInfo()">Educational Information</li>
+                    <li class="btn btn-primary" onclick="exprienceInfo()">Experience Information</li>
+                    <li class="btn btn-primary" onclick="othersInfo()">Others Information</li>
+                </ul>
+           </div>
+
+       <%-- </ul>--%>
    
                 <div class="tab-content">
                         
-                    <div id="empRegp" role="tabpanel" class="tab-pane active">
+                    <div id="personal" role="tabpanel" class="tab-pane active">
                         <div class="row setup-content">
                             <div class="col-xs-12">
                                 <div class="col-md-12 well text-center">
@@ -217,7 +229,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="tgPanel">
-                                                <div class="tgPanelHead">Personal Information</div>
+                                                <div class="tgPanelHead" >Personal Information</div>
 
 
                                                 <div style="float: left;">
@@ -235,7 +247,7 @@
 
             </Triggers>
             <ContentTemplate>
-                                                        <div class="col-sm-10 leftsidemnone">
+                          <div class="col-sm-10 leftsidemnone">
                                                             <div class="row tbl-controlPanel">
                                                                 <div class="col-sm-6">
                                                                     <label class="col-sm-4">Type</label>
@@ -589,7 +601,7 @@
                                     </div>
                 <%--</ContentTemplate>
                                          </asp:UpdatePanel>--%>
-                                    <a data-toggle="tab" class="btn btn-primary btn-md erf-nxt-btn" onclick="tabchange(0)" href="#empRegp1">Go to Next Step >></a>
+                                    <a data-toggle="tab" class="btn btn-primary btn-md erf-nxt-btn" onclick="institute()">Next Step>></a>
                                     <!-- </form> -->
 
                                 </div>
@@ -597,7 +609,7 @@
                         </div>
                     </div>
 
-                    <div id="empRegp1" role="tabpanel" class="tab-pane">
+                    <div style="display:none" id="institute" role="tabpanel" class="tab-pane">
                         <div class="row setup-content">
                             <div class="col-xs-12">
                                 <div class="col-md-12 well text-center">
@@ -737,12 +749,16 @@
                                     </div>
                 </ContentTemplate>
                                   </asp:UpdatePanel>
-                                          <a data-toggle="tab" onclick="tabchange(1)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp2">Go to Next Step >></a>
+
+                                 <a data-toggle="tab" onclick="personal()" class="btn btn-primary btn-md erf-nxt-btn" >Previous>></a>
+
+                                          <a data-toggle="tab" onclick="educationInfo()" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp2">Next Step >></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="empRegp2" role="tabpanel" class="tab-pane">
+
+                    <div id="educationInfo" role="tabpanel" class="tab-pane">
                         <div class="row setup-content">
                             <div class="col-xs-12">
                                 <div class="col-md-12 well text-center">
@@ -861,14 +877,17 @@
                                     </div>
                 </ContentTemplate>
                                          </asp:UpdatePanel>
-                                    <a data-toggle="tab" onclick="tabchange(2)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp3">Go to Next Step >></a>
+
+
+                                    <a data-toggle="tab" onclick="institute()" class="btn btn-primary btn-md erf-nxt-btn" >Previous>></a>
+                                    <a data-toggle="tab" onclick="exprienceInfo()" class="btn btn-primary btn-md erf-nxt-btn" >  Next Step >></a>
                                 </div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div id="empRegp3" role="tabpanel" class="tab-pane">
+                    <div id="exprienceInfo" role="tabpanel" class="tab-pane">
                         <div class="row setup-content">
                             <div class="col-xs-12">
                                 <div class="col-md-12 well text-center">
@@ -988,14 +1007,17 @@
                                     </div>
                 </ContentTemplate>
                                          </asp:UpdatePanel>
-                                    <a data-toggle="tab" onclick="tabchange(3)" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp4">Go to Next Step >></a>
+                                 <a data-toggle="tab" onclick="educationInfo()" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp4">Previous>></a>
+
+                                    <a data-toggle="tab" onclick="othersInfo()" class="btn btn-primary btn-md erf-nxt-btn" href="#empRegp4">Next Step >></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                <%--  </ContentTemplate>
         </asp:UpdatePanel>--%>
-                    <div id="empRegp4" role="tabpanel" class="tab-pane fade">
+                    <div style="display:none" id="othersInfo" role="tabpanel">
+                    
 
                         <div class="row setup-content">
                             <div class="col-xs-12">
@@ -1082,6 +1104,9 @@
                                         </div>
                 </ContentTemplate>
                                             </asp:UpdatePanel>
+
+                                        <a style="display:inline-block; width:100px"  onclick="exprienceInfo()" class="btn btn-primary" >Previous>></a>
+
                                         <div class="row tbl-controlPanel erf-nxt-btn">
                                             <div class="col-sm-2 col-sm-offset-5">
                                                 <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-primary" ClientIDMode="Static"
@@ -1107,50 +1132,48 @@
         }
     </style>
     <script type="text/javascript">
-        function tabchange(index) {
-            if (index == 0) {
-                $("#litab1").removeClass("active");
-                $("#litab2").addClass("active");
-            }
-            else if (index == 1) {
-                $("#litab2").removeClass("active");
-                $("#litab3").addClass("active");
-            }
-            else if (index == 2) {
-                $("#litab3").removeClass("active");
-                $("#litab4").addClass("active");
-            }
-            else if (index == 3) {
-                $("#litab4").removeClass("active");
-                $("#litab5").addClass("active");
-            }
+        function personal() {
+            $("#institute").hide();
+            $("#educationInfo").hide();
+            $("#exprienceInfo").hide();
+            $("#othersInfo").hide();
+            $("#personal").show();
 
         }
-        function tabControl() {
-            $("#empRegp").removeClass("active");
-            $("#empRegp").removeClass("in");
-            $("#empRegp3").addClass("active");
-            $("#empRegp3").addClass("in");
+
+        function institute() {
+            $("#institute").show();
+            $("#educationInfo").hide();
+            $("#exprienceInfo").hide();
+            $("#othersInfo").hide();
+            $("#personal").hide();
+
         }
 
-        function tabControl2() {
-            $("#empRegp").removeClass("active");
-            $("#empRegp").removeClass("in");
-            $("#empRegp2").addClass("active");
-            $("#empRegp2").addClass("in");
+        function educationInfo() {
+            $("#institute").hide();
+            $("#educationInfo").show();
+            $("#exprienceInfo").hide();
+            $("#othersInfo").hide();
+            $("#personal").hide();
         }
-        function tabControl33() {
-            $("#empRegp").removeClass("active");
-            $("#empRegp").removeClass("in");
-            $("#empRegp1").addClass("active");
-            $("#empRegp1").addClass("in");
+
+        function exprienceInfo() {
+            $("#institute").hide();
+            $("#educationInfo").hide();
+            $("#exprienceInfo").show();
+            $("#othersInfo").hide();
+            $("#personal").hide();
         }
-         function tabControl4() { //others
-            $("#empRegp").removeClass("active");
-            $("#empRegp").removeClass("in");
-            $("#empRegp4").addClass("active");
-            $("#empRegp4").addClass("in");
+
+        function othersInfo() {
+            $("#institute").hide();
+            $("#educationInfo").hide();
+            $("#exprienceInfo").hide();
+            $("#othersInfo").show();
+            $("#personal").hide();
         }
+      
         //$(document).ready(function () {
         //    var i = 0;
         //    $("#add_row").click(function () {

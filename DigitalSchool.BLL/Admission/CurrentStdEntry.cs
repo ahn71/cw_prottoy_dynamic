@@ -29,38 +29,38 @@ namespace DS.BLL.Admission
         public int Insert()
         {
             sql = string.Format("INSERT INTO [dbo].[CurrentStudentInfo] "
-                + "([AdmissionNo],[FullName],[ClassID],"
+                + "([AdmissionNo],[FullName],[StudentsBIDNID], [ClassID],"
                 + "[ClassName],[ClsGrpID],[ClsSecID],[SectionName],"
                 + "[RollNo],[Religion],[ConfigId],[Shift],[DateOfBirth],"
-                + "[Gender],[Mobile],[Session],[BloodGroup],[FathersName]"
-                + ",[FathersProfession],[FathersYearlyIncome],[FathersMobile],"
-                + "[FatherEmail],[MothersName],[MothersProfession],"
+                + "[Gender],[Mobile],[Session],[BloodGroup],[FathersName],"
+                + "[FathersNID],[FathersProfession],[FathersYearlyIncome],[FathersMobile],"
+                + "[FatherEmail],[MothersName],[MothersNID],[MothersProfession],"
                 + "[MothersYearlyIncome],[MothersMoible],[MotherEmail],"
-                + "[HomePhone],[GuardianName],[GuardianRelation],[GuardianMobileNo]"
+                + "[HomePhone],[GuardianName],[GuardianNID],[GuardianRelation],[GuardianMobileNo]"
                 + ",[GuardianAddress],[PAVillage],[PAPostOffice],[PThanaId]"
                 + ",[PAThana],[PDistrictId],[PADistrict],[TAViIlage],"
                 + "[TAPostOffice],[TThanaId],[TAThana],[TDistrictId]"
                 + ",[TADistrict],[MotherTongue],[Nationality],"
                 + "[PreviousExamType],[PSCRollNo],[PSCPassingYear],"
-                + "[PSCGPA],[PSCBoard],[CertifiedDate],[PreviousSchoolName],"
+                + "[PSCGPA],[PSCBoard],[CertifiedDate],[PreviousSchoolName], [PreviousClassName], "
                 + "[PSCJSCRegistration],[TransferCertifiedNo],[PreferredClass],"
                 + "[IsActive],[Comments],[BatchID],[BatchName],[Status],[PaymentStatus],"
                 + "[FullNameBn],[FatherNameBn],[MotherNameBn],[IdCard],[StdTypeId],[PAPostOfficeID],[TAPostOfficeID],[FatherDesg],[FatherOrg],[FatherPhone],[MotherDesg],[MotherOrg],[MotherPhone],[BusID],[LocationID],[PlaceID],[SSCRoll],[TCCollegeName],[TCClass],[TCSemister],[TCDate],[CreateBy],[CreateOn],[FathersProfessionBn],[MothersProfessionBn],[TAViIlageBn],[PAVillageBn],[ParentsAddress],[ParentsAddressBn],[ParentsPostOfficeId],[ParentsThanaId],[ParentsDistrictId])"
                 + " VALUES (" + _Entities.AdmissionNo + ", "
-                + "'" + _Entities.FullName + "','" + _Entities.ClassID + "',"
+                + "'" + _Entities.FullName + "','" + _Entities.StudentBidNid + "','" + _Entities.ClassID + "',"
                 + "'" + _Entities.ClassName + "','" + _Entities.ClsGrpID + "',"
                 + "'" + _Entities.ClsSecID + "','" + _Entities.SectionName + "',"
                 + "'" + _Entities.RollNo + "','" + _Entities.Religion + "',"
                 + "'" + _Entities.ConfigId + "','" + _Entities.Shift + "',"
                 + "'" + _Entities.DateOfBirth?.ToString("yyyy-MM-dd") + "','" + _Entities.Gender + "',"
                 + "'" + _Entities.Mobile + "','" + _Entities.Session + "',"
-                + "'" + _Entities.BloodGroup + "','" + _Entities.FathersName + "',"
+                + "'" + _Entities.BloodGroup + "','" + _Entities.FathersName + "','" + _Entities.FathersBidNid + "',"
                 + "'" + _Entities.FathersProfession + "','" + _Entities.FathersYearlyIncome + "',"
                 + "'" + _Entities.FathersMobile + "','" + _Entities.FatherEmail + "',"
-                + "'" + _Entities.MothersName + "','" + _Entities.MothersProfession + "',"
+                + "'" + _Entities.MothersName + "','" + _Entities.MothersBidNid + "','" + _Entities.MothersProfession + "',"
                 + "'" + _Entities.MothersYearlyIncome + "','" + _Entities.MothersMobile + "',"
                 + "'" + _Entities.MotherEmail + "','" + _Entities.HomePhone + "',"
-                + "'" + _Entities.GuardianName + "','" + _Entities.GuardianRelation + "',"
+                + "'" + _Entities.GuardianName + "','"+_Entities.GuardianBidNid+"','" + _Entities.GuardianRelation + "',"
                 + "'" + _Entities.GuardianMobileNo + "','" + _Entities.GuardianAddress + "',"
                 + "'" + _Entities.PAVillage + "','" + _Entities.PAPostOffice + "',"
                 + "'" + _Entities.PThanaId + "','" + _Entities.PAThana + "',"
@@ -73,7 +73,7 @@ namespace DS.BLL.Admission
                 + "'" + _Entities.PreviousExamType + "','" + _Entities.PSCRollNo + "',"
                 + "'" + _Entities.PSCPassingYear + "','" + _Entities.PSCGPA + "',"
                 + "'" + _Entities.PSCBoard + "','" + _Entities.CertifiedDate?.ToString("yyyy-MM-dd") + "',"
-                + "'" + _Entities.PreviousSchoolName + "','" + _Entities.PSCJSCRegistration + "',"
+                + "'" + _Entities.PreviousSchoolName + "','"+_Entities.PreviousClassName+"' ,'" + _Entities.PSCJSCRegistration + "',"
                 + "'" + _Entities.TransferCertifiedNo + "','" + _Entities.PreferredClass + "',"
                 + "'" + _Entities.IsActive + "','" + _Entities.Comments + "',"
                 + "'" + _Entities.BatchID + "','" + _Entities.BatchName + "',"
@@ -249,18 +249,18 @@ namespace DS.BLL.Admission
                  + " where StudentID='" + studentId + "'");
             return result = CRUD.ExecuteQuery(sql);
         }
-        public bool UpdateCurrentStudentActive(string studentId, string stdStatus)
+        public bool UpdateCurrentStudentActive(string studentId, string stdStatus,string StatusNote)
         {
             sql = string.Format("Update [dbo]."
                 + "[CurrentStudentInfo] Set "
-                 + "[IsActive]='" + stdStatus + "'"
+                 + "[IsActive]='" + stdStatus + "',[StatusNote]=N'"+ StatusNote + "'"
                  + " where StudentId='" + studentId + "'");
             return result = CRUD.ExecuteQuery(sql);
         }
 
-        public bool InsertToActivationLog(string studentId, string batchId, string Note, string ActivationType)
+        public bool InsertToActivationLog(string studentId, string batchId, string Node, string ActivationType)
         {
-            sql = string.Format("INSERT INTO [dbo].[StudentActivation_Log] (StudentID,BatchID,Note,ActivationType,EntryDate) values(" + studentId + "," + batchId + ",'" + Note + "'," + ActivationType + ",'" + TimeZoneBD.getCurrentTimeBD("yyyy-MM-dd HH:mm:ss") + "')");
+            sql = string.Format("INSERT INTO [dbo].[StudentActivation_Log] (StudentID,BatchID,Note,ActivationType,EntryDate) values(" + studentId + "," + batchId + ",'" + Node + "'," + ActivationType + ",'" + TimeZoneBD.getCurrentTimeBD("yyyy-MM-dd HH:mm:ss") + "')");
 
             return result = CRUD.ExecuteQuery(sql);
         }
@@ -285,6 +285,7 @@ namespace DS.BLL.Admission
                                         AdmissionNo = int.Parse(row["AdmissionNo"].ToString()),
                                         AdmissionDate = Convert.ToDateTime(row["AdmissionDate"].ToString()),
                                         FullName = row["FullName"].ToString(),
+                                        StudentBidNid=row["StudentBidNid"].ToString(),
                                         ClassID = int.Parse(row["ClassID"].ToString()),
                                         ClassName = row["ClassName"].ToString(),
                                         ClsGrpID = int.Parse(row["ClsGrpID"].ToString()),
@@ -300,17 +301,20 @@ namespace DS.BLL.Admission
                                         Session = row["Session"].ToString(),
                                         BloodGroup = row["BloodGroup"].ToString(),
                                         FathersName = row["FathersName"].ToString(),
+                                        FathersBidNid = row["FathersBidNid"].ToString(),
                                         FathersProfession = row["FathersProfession"].ToString(),
                                         FathersYearlyIncome = int.Parse(row["FathersYearlyIncome"].ToString()),
                                         FathersMobile = row["FathersMobile"].ToString(),
                                         FatherEmail = row["FatherEmail"].ToString(),
                                         MothersName = row["MothersName"].ToString(),
+                                        MothersBidNid = row["MothersBidNid"].ToString(),
                                         MothersProfession = row["MothersProfession"].ToString(),
                                         MothersYearlyIncome = int.Parse(row["MothersYearlyIncome"].ToString()),
                                         MothersMobile = row["MothersMoible"].ToString(),
                                         MotherEmail = row["MotherEmail"].ToString(),
                                         HomePhone = row["HomePhone"].ToString(),
                                         GuardianName = row["GuardianName"].ToString(),
+                                        GuardianBidNid=row["GuardianBidNid"].ToString(),
                                         GuardianRelation = row["GuardianRelation"].ToString(),
                                         GuardianMobileNo = row["GuardianMobileNo"].ToString(),
                                         GuardianAddress = row["GuardianAddress"].ToString(),
@@ -331,6 +335,7 @@ namespace DS.BLL.Admission
                                         PSCBoard = row["PSCBoard"].ToString(),
                                         CertifiedDate = Convert.ToDateTime(row["CertifiedDate"].ToString()),
                                         PreviousSchoolName = row["PreviousSchoolName"].ToString(),
+                                        PreviousClassName = row["PreviousClassName"].ToString(),
                                         PSCJSCRegistration = row["PSCJSCRegistration"].ToString(),
                                         TransferCertifiedNo = int.Parse(row["TransferCertifiedNo"].ToString()),
                                         PreferredClass = row["PreferredClass"].ToString(),
@@ -408,7 +413,7 @@ namespace DS.BLL.Admission
             try
             {
                 dt = new DataTable();
-                sql = string.Format("SELECT AdmissionNo, BatchId,StudentId,ShiftName,ClassName,GroupName,SectionName,FullName,"
+                sql = string.Format("SELECT AdmissionNo, BatchId,StudentId,ShiftName,ClassName,GroupName,SectionName,FullName,Mobile,StatusNote, IsActive,"
                 + "RollNo,Gender,GuardianMobileNo,ClsSecId,Format(CreateOn,'dd-MM-yyyy HH:mm:ss') as CreateOn ,CreateBy,FirstName from v_CurrentStudentInfo " + condition + " ORDER BY ShiftName,ClassName,GroupName,SectionName,RollNo");
                 dt = CRUD.ReturnTableNull(sql);
                 return dt;

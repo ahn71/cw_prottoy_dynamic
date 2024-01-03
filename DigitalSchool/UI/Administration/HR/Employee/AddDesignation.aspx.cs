@@ -18,127 +18,80 @@ namespace DS.UI.Administration.HR.Employee
         protected void Page_Load(object sender, EventArgs e)
         {
                 if (!IsPostBack)
+                 {
+                  BindData();
+                 }
+        }
+
+
+
+        protected void btnSave_Click1(object sender, EventArgs e)
+        {
+           
+                if (btnSave.Text == "Save")
                 {
-                    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "AddDesignation.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                    loadDesignationList("");
+                    bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+
+                    string insertQuery = "INSERT INTO Designations (DesName,Status) VALUES ('" + txtDesName.Text.ToString().Trim() + "','" + (statusChecked ? 1 : 0) + "')";
+                    CRUD.ExecuteNonQuery(insertQuery);
+                     BindData();
+                    CleanField();
                 }
+                if (btnSave.Text == "Update") 
+                {
+                    bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+
+                    string insertQuery = "Update  Designations set DesName='" + txtDesName.Text.ToString().Trim() + "',Status='" + (statusChecked ? 1 : 0) + "' where DesId=" + ViewState["--Desgd--"];
+                    CRUD.ExecuteNonQuery(insertQuery);
+                    BindData();
+                    CleanField();
+                }
+               
+           
+        }
+        private void BindData() 
+        {
+            string query = "Select * from Designations  Order by DesId";
+            DataTable dt = CRUD.ReturnTableNull(query);
+            gvDesgtionlist.DataSource = dt;
+            gvDesgtionlist.DataBind();
+
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected void gvDesgtionlist_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (lblDesignationId.Value.ToString().Length == 0)
+           if((e.CommandName == "Alter")) 
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "loaddatatable();", true);
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; loadDesignationList(""); return; }
-                saveDesignations();
-            }
-            else
-            {
-                updateDesignations();
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
-            }
-
-            loadDesignationList("");
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
 
 
-        }
+                int desgId = Convert.ToInt32(gvDesgtionlist.DataKeys[rowIndex].Value);
+                ViewState["--Desgd--"] = desgId;
 
-        private Boolean updateDesignations()
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand(" update Designations  Set DesName=@DesName where DesId=@DesId ", DbConnection.Connection);
+                txtDesName.Text = ((Label)gvDesgtionlist.Rows[rowIndex].FindControl("lblDesname")).Text;
+                chkStatus.Checked = ((CheckBox)gvDesgtionlist.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
+                 BindData();
 
-                cmd.Parameters.AddWithValue("@DesId", lblDesignationId.Value.ToString());
-                cmd.Parameters.AddWithValue("@DesName", txtDes_Name.Text.Trim());
-
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
-        }
-
-        private Boolean saveDesignations()
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("saveDesignations", DbConnection.Connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@DesName", txtDes_Name.Text.Trim());
-
-                int result = (int)cmd.ExecuteScalar();
-                btnSave.Text = "Save";
-                if (result > 0) lblMessage.InnerText = "success->Save Successfully";
-                else lblMessage.InnerText = "error->Unable to save";
-
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
+                btnSave.Text = "Update";
+            
             }
         }
 
-
-        protected void btnNew_Click(object sender, EventArgs e)
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
         {
-            txtDes_Name.Text = "";
-            btnSave.Text = "Save";
+
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int Did = Convert.ToInt32(gvDesgtionlist.DataKeys[row.RowIndex].Value);
+            string query = "update Designations set Status =" + (isChecked ? "1" : "0") + " where DesId=" + Did;
+            CRUD.ExecuteNonQuery(query);
         }
 
-        private void loadDesignationList(string sqlcmd)
+        private void CleanField()
         {
-            if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "Select DesId, DesName from Designations  Order by DesId ";
-            DataTable dt = new DataTable();
-            sqlDB.fillDataTable(sqlcmd, dt);
-
-            int totalRows = dt.Rows.Count;
-            string divInfo = "";            
-
-            divInfo = " <table id='tblDesignationList' class='display'  > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Designation</th>";
-            if (Session["__Update__"].ToString().Equals("true"))
-            divInfo += "<th>Edit</th>";
-            divInfo += "</tr>";
-
-            divInfo += "</thead>";
-
-            divInfo += "<tbody>";
-            if (totalRows == 0)
-            {
-                divInfo += "</tbody></table>";                
-                divDesignationList.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }
-            string id = "";
-
-            for (int x = 0; x < dt.Rows.Count; x++)
-            {
-
-                id = dt.Rows[x]["DesId"].ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td >" + dt.Rows[x]["DesName"].ToString() + "</td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editEmployee(" + id + ");'  />";
-            }
-
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-
-            divInfo += "</table>";
-            divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-
-            divDesignationList.Controls.Add(new LiteralControl(divInfo));
-
+            txtDesName.Text = "";
+            chkStatus.Checked = false;
+            
         }
     }
 }
