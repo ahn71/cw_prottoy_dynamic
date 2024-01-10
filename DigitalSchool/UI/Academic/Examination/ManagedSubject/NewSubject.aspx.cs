@@ -12,6 +12,7 @@ using DS.BLL.ManagedSubject;
 using DS.BLL.Examinition;
 using DS.PropertyEntities.Model.Examinition;
 using DS.BLL.ControlPanel;
+using DS.DAL;
 
 namespace DS.UI.Academic.Examination.ManagedSubject
 {
@@ -24,146 +25,96 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         {
                 if (!IsPostBack)
                 {
-                    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "NewSubject.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                    LoadCompulsorySubject("");                   
-                  
+                BindData();
+
+
                 }
         }       
 
+
+
+
+        protected void gvSubjectList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "Alter")
+            {
+
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+
+                int did = Convert.ToInt32(gvSubjectList.DataKeys[rowIndex].Value);
+                ViewState["--Did--"] = did;
+
+                txtSubName.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblDname")).Text;
+                txtOrdering.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblOrder")).Text;
+                chkstatus.Checked = ((CheckBox)gvSubjectList.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
+
+
+                btnSave.Text = "Update";
+                BindData();
+            }
+
+        }
+
+
+        private void BindData() 
+        {
+           
+            List<SubjectEntities> GetCompolsorySubjectList = SubjectEntry.GetEntitiesData;
+            gvSubjectList.DataSource = GetCompolsorySubjectList;
+            gvSubjectList.DataBind();
+
+        }
+
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
+        {
+
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer; 
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int SubId = Convert.ToInt32(gvSubjectList.DataKeys[row.RowIndex].Value);
+            string query = "update newsubject set IsActive =" + (isChecked ? "1" : "0") + " where SubId=" + SubId;
+            CRUD.ExecuteNonQuery(query);
+
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (lblSubId.Value.ToString().Length == 0)
+            if (btnSave.Text == "Save")
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; LoadCompulsorySubject(""); return; }
-                if (saveNewSubject() == true)
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SaveSuccess();", true);
+                bool statusChecked = (chkstatus != null) ? chkstatus.Checked : false;
+
+                string insertQuery = "INSERT INTO newsubject (subName,Ordering,IsActive) VALUES ('" + txtSubName.Text.ToString().Trim() + "','"+txtOrdering.Text.ToString().Trim()+"','" + (statusChecked ? 1 : 0) + "')";
+                CRUD.ExecuteNonQuery(insertQuery);
+                BindData();
+                ClearField();
             }
-            else
+            else if (btnSave.Text == "Update")
             {
-                if (updateNewSubject() == true)
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
+                bool statusChecked = (chkstatus != null) ? chkstatus.Checked : false;
+
+                string insertQuery = "Update  newsubject set subName='" + txtSubName.Text.ToString().Trim() + "',Ordering='" + txtOrdering.Text.ToString().Trim()+ "',IsActive='" + (statusChecked ? 1 : 0) + "' where SubId=" + ViewState["--Did--"];
+                CRUD.ExecuteNonQuery(insertQuery);
+                BindData();
+                btnSave.Text = "Save";
+                ClearField();
+
             }
+
         }
 
-        private SubjectEntities GetData
+
+        private void ClearField() 
         {
-            get 
-            {
-                try
-                {
-                    SubjectEntities se = new SubjectEntities();
-                    se.SubjectId = (lblSubId.Value.ToString() == "") ? 0 : int.Parse(lblSubId.Value.ToString());
-                    se.SubjectName = txtSubName.Text.Trim();                               
-                    se.OrderBy = int.Parse(txtOrder.Text);
-                    se.IsActive = chkIsActive.Checked;
-                    return se;
-                }
-                catch { return null; }
-            
-            }
-
+            txtSubName.Text = "";
+            txtOrdering.Text = "";
+            chkstatus.Checked = false;
         }
 
-        private Boolean saveNewSubject()
+        protected void gvSubjectList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            try
-            {
-                using (SubjectEntities se = GetData)
-                {
-                    if (subject_entry == null) subject_entry = new SubjectEntry();
-                    subject_entry.AddEntities = GetData;
-                    result = subject_entry.Insert();
-
-                }                         
-                if (result)
-                {
-                    lblMessage.InnerText = "success->Successfully saved";
-                    LoadCompulsorySubject("");
-                   
-                    return true;
-                }
-                else
-                {
-                    lblMessage.InnerText = "error->Unable to save";
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
+            gvSubjectList.PageIndex = e.NewPageIndex;
+            BindData();
         }
-        private Boolean updateNewSubject()
-        {
-            try
-            {
-                using(SubjectEntities se=GetData)
-                {
-                    if (subject_entry==null)subject_entry=new SubjectEntry ();
-                    subject_entry.AddEntities=se;
-                    result=subject_entry.Update();
-                    if (result)
-                    {
-                        lblMessage.InnerText = "success->Successfully Updated";
-                        LoadCompulsorySubject("");
-                      
-                        return true;
-                    }
-                    
-                    else
-                    {
-                        lblMessage.InnerText = "error->Unable to Update";
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
-        }
-        private void LoadCompulsorySubject(string sqlcmd)
-        {
-
-            List<SubjectEntities> GetCompolsorySubjectList = SubjectEntry.GetEntitiesData;
-            string divInfo = "";
-            if (GetCompolsorySubjectList==null ||GetCompolsorySubjectList.Count == 0)
-            {
-                divInfo = "<div class='noData'>Compulsory Subject not available</div>";
-                divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                divSubjectList.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }
-            divInfo = " <table id='tblClassList' class='table table-striped table-bordered dt-responsive nowrap' cellspacing='0' width='100%' > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Subject Name</th>";
-            divInfo += "<th style='width:70px;text-align:center;visible:False'>Active</th>";
-            divInfo += "<th style='width:70px;text-align:center;visible:False'>Order</th>";
-            if (Session["__Update__"].ToString().Equals("true")) divInfo += "<th>Edit</th>";           
-            divInfo += "</tr>";
-            divInfo += "</thead>";
-            divInfo += "<tbody>";
-            string id = "";
-            for (int x = 0; x < GetCompolsorySubjectList.Count; x++)
-            {
-                id = GetCompolsorySubjectList[x].SubjectId.ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td >" + GetCompolsorySubjectList[x].SubjectName + "</td>";
-               
-                divInfo += (GetCompolsorySubjectList[x].IsActive.Equals(true)) ? "<td style='width:70px;text-align:center'>Yes</td>" : "<td style='width:70px;text-align:center'>No</td>";
-               
-                divInfo += "<td style='width:70px;text-align:center'>" + GetCompolsorySubjectList[x].OrderBy.ToString() + "</td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editSubject(" + id + ");'  />";
-            }
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-            divInfo += "</table>";
-            divSubjectList.Controls.Add(new LiteralControl(divInfo));
-        }
-       
     }
 }

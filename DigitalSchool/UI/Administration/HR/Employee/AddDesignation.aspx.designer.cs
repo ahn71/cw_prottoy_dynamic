@@ -39,7 +39,7 @@ namespace DS.UI.Administration.HR.Employee
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDesName;
+        protected global::System.Web.UI.WebControls.Label lblDesName;
 
         /// <summary>
         /// txtDesName control.
@@ -49,6 +49,15 @@ namespace DS.UI.Administration.HR.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDesName;
+
+        /// <summary>
+        /// lblSatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSatus;
 
         /// <summary>
         /// chkStatus control.
@@ -67,6 +76,15 @@ namespace DS.UI.Administration.HR.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// txtSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
 
         /// <summary>
         /// gvDesgtionlist control.
