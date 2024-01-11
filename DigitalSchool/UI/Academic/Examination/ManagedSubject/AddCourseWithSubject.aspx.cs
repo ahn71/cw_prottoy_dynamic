@@ -39,7 +39,10 @@ namespace DS.UI.Academic.Examination.ManagedSubject
             {
                 bool statusChecked = (chkStauts != null) ? chkStauts.Checked : false;
 
-                string query = "Update AddCourseWithSubject set SubId='"+ddlSubjectList.SelectedItem.Value.ToString()+"',CourseName='"+txtCourseName.Text.Trim()+"',Ordering='"+txtOrdering.Text.Trim().ToString()+"',isActive='"+ (statusChecked ? 1 : 0) + "' where CourseId=" + ViewState["--Id--"];
+              //  int courseId = Convert.ToInt32(gvCourseSubList.DataKeys[1].Values["CourseId"]);
+            
+
+                string query = "Update AddCourseWithSubject set SubId='"+ddlSubjectList.SelectedValue.ToString()+"',CourseName='"+txtCourseName.Text.Trim()+"',Ordering='"+txtOrdering.Text.Trim().ToString()+"',isActive='"+ (statusChecked ? 1 : 0) + "' where CourseId=" + ViewState["--Id--"];
                 CRUD.ExecuteNonQuerys(query);
                 btnSave.Text = "Save";
                 BindData();
@@ -57,9 +60,10 @@ namespace DS.UI.Academic.Examination.ManagedSubject
             if (e.CommandName == "Alter") 
             {
                 int rowIndex=Convert.ToInt32(e.CommandArgument);
-                int Id = Convert.ToInt32(gvCourseSubList.DataKeys[rowIndex].Value);
-                ViewState["--Id--"] = Id;
-                ddlSubjectList.SelectedItem.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblSubName")).Text;
+                string CourseId =gvCourseSubList.DataKeys[rowIndex].Values[0].ToString();
+                string SubId =gvCourseSubList.DataKeys[rowIndex].Values[1].ToString();
+                ViewState["--Id--"] = CourseId;
+                ddlSubjectList.SelectedValue = SubId;
                 txtCourseName.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblCourse")).Text.Trim();
                 txtOrdering.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblOrder")).Text.Trim();
                 chkStauts.Checked = ((CheckBox)gvCourseSubList.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;

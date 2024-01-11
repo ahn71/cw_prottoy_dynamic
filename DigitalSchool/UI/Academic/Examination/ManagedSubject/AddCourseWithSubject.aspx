@@ -243,7 +243,7 @@
         <div class="gvTable">
             <asp:GridView ID="gvCourseSubList" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" OnRowCommand="gvCourseSubList_RowCommand" OnPageIndexChanging="gvCourseSubList_PageIndexChanging"
                 CssClass="table" AllowPaging="True" PageSize="10"
-                DataKeyNames="SubId" GridLines="Vertical"
+                DataKeyNames="CourseId,SubId" GridLines="Vertical"
                 PagerStyle-CssClass="pgr"
                 Width="100%">
              

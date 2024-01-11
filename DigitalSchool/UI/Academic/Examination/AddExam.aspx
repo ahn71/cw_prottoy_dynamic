@@ -1,24 +1,168 @@
 ﻿<%@ Page Title="Add Exam Type" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="AddExam.aspx.cs" Inherits="DS.UI.Academics.Examination.AddExam" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .tgPanel {
-            width: 100%;
+               th {
+            font-size: 15px;
         }
-        .tbl-controlPanel td:first-child{
-            text-align: right;
-            padding-right: 5px;
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 25px;
         }
-        .dataTables_length, .dataTables_filter{
-            display: none;
-            padding: 15px;
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
         }
-        #tblClassList_info {
-             display: none;
-            padding: 15px;
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
         }
-           input[type="checkbox"]{
-            margin: 5px;
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
         }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+
+
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .active-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+        input#MainContent_chkStauts {
+    width: 20px;
+    display: block;
+    height: 15px;
+}
+        /*.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}*/
+        input:focus {
+    box-shadow: 0px 0px 0px 0px !important;
+    border: 1px solid rgba(255,255,255, 0.8);
+}
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+        th {
+            background: #ddd !important;
+        }
+
+        td, th {
+            text-align: center;
+            border: 1px solid #ddd !important;
+        }
+
+        .table {
+            border: 0 !important;
+            margin: 10px 0;
+        }
+        .border-1{
+            border:1px solid #ddd;
+        }
+
+
+span#MainContent_lblType {
+    font-weight: 700;
+    display: block;
+    margin-top: -2px;
+}
+.table-wrapper tbody tr td label{
+    padding:0 10px;
+    display:inline-block;
+}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -50,152 +194,122 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <h4 class="text-right"  style="float: left;">Exam Type List</h4>
-                <div class="dataTables_filter_New" style="float: right;margin-right:0px;">
-                    <label>
-                        Search:
-                        <input type="text" class="Search_New" placeholder="type here" />
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSave" />
-                    </Triggers>
-                    <ContentTemplate>
-                        <div class="tgPanel">
-                        <div id="divExamList" class="datatables_wrapper" runat="server"
-                            style="width: 100%; height: auto; max-height: 350px; overflow: auto; overflow-x: hidden;">
-                        </div>
-                            </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="col-md-6">
-                <div class="tgPanel">
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                        <ContentTemplate>
-                            <div class="tgPanelHead">Add Exam Type</div>
-                            <table class="tbl-controlPanel">
-                                <tr>
-                                    <td>Exam Name
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtEx_Name" runat="server" ClientIDMode="Static" CssClass="input form-control"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Serial
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtSerial" runat="server" ClientIDMode="Static" CssClass="input form-control"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Type
-                                    </td>
-                                    <td>
-                                        <asp:RadioButtonList runat="server" ID="rblType" RepeatDirection="Horizontal">
-                                            <asp:ListItem Selected="True" Value="1">Semester Exam</asp:ListItem>
-                                             <asp:ListItem Value="2">Quiz Exam</asp:ListItem>
-                                            <asp:ListItem Value="0">Others</asp:ListItem>
-                                        </asp:RadioButtonList>
-                                         <%--<asp:CheckBox ID="chksemesterexam" class="radio-inline" runat="server" Text="Semester Exam" Checked="True" RepeatLayout="Flow" CssClass="radiobuttonlist" RepeatDirection="Horizontal"/>--%>
-                                    </td>
-                                </tr>  
-                                <tr>
-                                    <td>
-                                        
-                                    </td>
-                                    <td>
-                                        <asp:CheckBox ID="chkIsActive" ClientIDMode="Static" runat="server" Text="Is Active" />
-                                    </td>
-                                </tr>
-                               
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <asp:Button CssClass="btn btn-primary" ID="btnSave" runat="server" Text="Save" ClientIDMode="Static"
-                                            OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                        &nbsp;<input type="button" class="btn btn-default" value="Clear" onclick="clearIt();" />
-                                    </td>
-                                </tr>
-                            </table>                            
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </div>
-        </div>
-    </div>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            loaddatatable();
-            $(document).on("keyup", '.Search_New', function () {
-                searchTable($(this).val(), 'tblClassList', '');
-            });
-        });
-        function loaddatatable() {
-            $('#tblClassList').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100],
-                "order": [[ 2, "desc" ]]
-            });
-        }
-        function validateInputs() {
-            if (validateText('txtEx_Name', 1, 50, 'Enter a Exam Name') == false) return false;
-            return true;
-        }
-        function editExam(ExamId) {
-            $('#lblExId').val(ExamId);
-            var strExam = $('#exname' + ExamId).html();
-            $('#txtEx_Name').val(strExam);
-            var strordering = $('#ordering' + ExamId).html();
-            $('#txtSerial').val(strordering);
+   
+   <div class="bg-white p-3 mb-3">
+      <div class="row">
+          <div class="col-md-6">
+              <h4 class="text-right fw-bold mb-3" style="float: left;">Add Exam Type</h4>
+          </div>
+      </div>
+      <div class="inputPannel">
 
-            var status = $('#semesterexam' + ExamId).html();
-            if (status == "Semester") {
-                $('#<%=rblType.ClientID %>').find("input[value='1']").prop("checked", true);
-            }
-            else if (status == "Quiz") {
-                $('#<%=rblType.ClientID %>').find("input[value='2']").prop("checked", true);}
-            else $('#<%=rblType.ClientID %>').find("input[value='0']").prop("checked", true);
-            var IsActive = $('#IsActive' + ExamId).html();
-            if (IsActive == "Yes")
-            {
-                $('#chkIsActive').removeProp('checked');
-                $('#chkIsActive').click(); 
-            }
-            else $('#chkIsActive').removeProp('checked');
-            $("#btnSave").val('Update');
-        }
-        function clearIt() {
-            $('input[type=text]').val('');
-            $('#lblExId').val('');
+          <div class="row">
+
+              <div class="col-lg-4">
+                  <asp:Label runat="server" ID="lblExamName" Text="Exam Name"></asp:Label>
+                  <asp:TextBox  CssClass="form-control" ID="txtExamName" runat="server"></asp:TextBox>
+              </div>    
+              
+             <div class="col-lg-4">
+                  <asp:Label runat="server" ID="lblOrder" Text="Ordering"></asp:Label>
+                  <asp:TextBox  CssClass="form-control" ID="txtOrder" runat="server"></asp:TextBox>
+             </div>  
+
+          </div>
+          <div class="rdioBtn d-flex mt-3 g-3">
+            <asp:Label CssClass="pe-3" runat="server" ID="lblType" Text="Type:"></asp:Label>
+             <div class="d-flex gap-2">
+                 <asp:RadioButton runat="server" ID="rdoSemesterExam" Text="Semester Exam" value="SemesterExam" GroupName="examGroup" />
+                <asp:RadioButton runat="server" ID="rdoExam" Text="Exam" value="Exam" GroupName="examGroup" />
+                <asp:RadioButton runat="server" ID="rdoSemester" Text="Semester" value="Semester" GroupName="examGroup" />
+
+              <%--<asp:RadioButtonList runat="server" ID="rdioList" CssClass="d-flex table-wrapper">
+                <asp:ListItem Text="Semester Exam" Value="SemesterExam" style="border:none; display:flex;"></asp:ListItem>
+                <asp:ListItem Text="Exam" Value="SemesterExam" style="border:none; display:flex;"></asp:ListItem>
+                <asp:ListItem Text="Semester" Value="SemesterExam" style="border:none; display:flex;"></asp:ListItem>
+            </asp:RadioButtonList>--%>
+         </div>
+    </div>
+
+  </div>
+
+      <div class="d-flex gap-3 justify-content-end align-items-center py-3">
+
+          <div class="active-wrapper">
+           <asp:Label runat="server" ID="lblSatus" Text="Is Active?"></asp:Label>
+            <asp:CheckBox  for="lblStats" ID="chkStatus" runat="server" />
+        </div>
+
+
+          <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click1" Text="Save"/>
+          
+          
+      </div>
+</div>
+
+    <div class="main-table">
+         <div class="gvTable">
+           <asp:GridView runat="server" ID="gvExamList" AutoGenerateColumns="False" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
+        DataKeyNames="ExId" GridLines="Vertical" 
+        PagerStyle-CssClass="pgr"  Width="100%">
+               
+
+            <RowStyle CssClass="gridRow" />
+
+                        <Columns>
            
-            $("#btnSave").val('Save');
-            setFocus('txtEx_Name');
-        }
-        function updateSuccess() {
-            loaddatatable();
-            showMessage('Updated successfully', 'success');
-            clearIt();
-        }
-        function SavedSuccess() {
-            showMessage('Saved successfully', 'success');
-            clearIt();
-            loaddatatable();
-        }
-    </script>
+                      <asp:TemplateField HeaderText="SL">
+                            <ItemTemplate>
+                                 <%#Container.DataItemIndex+1 %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="ExamName">
+                            <ItemTemplate>
+                                <asp:Label ID="lblExamName" runat="server" Text='<%# Eval("ExName") %>'></asp:Label>
+                            </ItemTemplate>          
+                        </asp:TemplateField>
+
+                      <asp:TemplateField HeaderText="Ordering">
+                          <ItemTemplate>
+                              <asp:Label ID="lblOrdernig" runat="server" Text='<%# Eval("Ordering") %>'></asp:Label>
+                          </ItemTemplate>          
+                      </asp:TemplateField>
+
+                         <asp:TemplateField HeaderText="Type">
+                             <ItemTemplate>
+                                 <asp:Label ID="lblType" runat="server" Text='<%# Eval("SemesterExam") %>'></asp:Label>
+                             </ItemTemplate>          
+                         </asp:TemplateField>
+
+                       <asp:TemplateField HeaderText="Update">
+                        <ItemTemplate>
+                         <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
+                        <i class="far fa-edit"></i>
+                     </asp:LinkButton>
+                    </ItemTemplate>
+                  </asp:TemplateField>
+
+                  <asp:TemplateField HeaderText="Status">
+                      <ItemTemplate>
+                        <label class="switch">
+                      <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true" 
+                     Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
+                    <span class="slider round"></span>
+                </label>
+   
+               </ItemTemplate>
+            </asp:TemplateField>
+
+       </Columns>
+           </asp:GridView>
+        </div>
+
+    </div>
+
+
+
+
+
 </asp:Content>
+
