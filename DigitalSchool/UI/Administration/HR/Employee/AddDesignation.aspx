@@ -252,7 +252,7 @@
 
    <asp:TemplateField HeaderText="Update">
     <ItemTemplate>
-     <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
+     <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
     <i class="far fa-edit"></i>
 </asp:LinkButton>
     </ItemTemplate>

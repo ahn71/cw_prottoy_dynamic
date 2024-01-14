@@ -158,6 +158,9 @@
         .border-1{
             border:1px solid #ddd;
         }
+        
+
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -189,10 +192,11 @@
       <div class="bg-white p-3 mb-3">
       <div class="row">
           <div class="col-md-6">
-              <h4 class="text-right fw-bold mb-3" style="float: left;">Add Course With Subject List</h4>
+              <h4 class="text-right fw-bold mb-3" style="float: left;">Add Subject</h4>
           </div>
-      </div>
-      <div class="inputPannel">
+
+     </div>
+      <div class="inputPannel" id="inputPannels">
 
           <div class="row">
 
@@ -205,19 +209,12 @@
                   <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
                   <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server"></asp:TextBox>
               </div>
-
+              <div class="col-lg-4 mt-3">
+               <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click" Text="Save" /> 
+             </div>
           </div>
 
   </div>
-
-      <div class="d-flex gap-3 justify-content-end align-items-center py-3">
-          <div class="active-wrapper">
-             <asp:Label runat="server" ID="lblStats" Text="Is Active?"></asp:Label>
-              <asp:CheckBox  for="lblStats" ID="chkstatus" runat="server" />
-          </div>
-           <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click" Text="Save" /> 
-          
-      </div>
 </div>
 
 
@@ -264,7 +261,7 @@ Width="100%">
 
            <asp:TemplateField HeaderText="Update">
             <ItemTemplate>
-             <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
+             <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
             <i class="far fa-edit"></i>
         </asp:LinkButton>
             </ItemTemplate>
@@ -324,6 +321,13 @@ Width="100%">
                  }
              }
          }
+         
+});
+
+    function sms(){
+        alert("hello");
+    }
+
     </script>
 
 </asp:Content>

@@ -23,11 +23,10 @@ namespace DS.UI.Academic.Examination.ManagedSubject
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
                 if (!IsPostBack)
                 {
-                BindData();
-
-
+                  BindData();
                 }
         }       
 
@@ -47,12 +46,8 @@ namespace DS.UI.Academic.Examination.ManagedSubject
                 ViewState["--Did--"] = did;
 
                 txtSubName.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblDname")).Text;
-                txtOrdering.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblOrder")).Text;
-                chkstatus.Checked = ((CheckBox)gvSubjectList.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
-
-
-                btnSave.Text = "Update";
-                BindData();
+                txtOrdering.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblOrder")).Text; btnSave.Text = "Update";
+                  BindData();
             }
 
         }
@@ -82,18 +77,16 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         {
             if (btnSave.Text == "Save")
             {
-                bool statusChecked = (chkstatus != null) ? chkstatus.Checked : false;
-
-                string insertQuery = "INSERT INTO newsubject (subName,Ordering,IsActive) VALUES ('" + txtSubName.Text.ToString().Trim() + "','"+txtOrdering.Text.ToString().Trim()+"','" + (statusChecked ? 1 : 0) + "')";
+               string insertQuery = "INSERT INTO newsubject (subName,Ordering,IsActive) VALUES ('" + txtSubName.Text.ToString().Trim() + "','"+txtOrdering.Text.ToString().Trim()+"','" + 1  + "')";
                 CRUD.ExecuteNonQuery(insertQuery);
                 BindData();
                 ClearField();
             }
             else if (btnSave.Text == "Update")
             {
-                bool statusChecked = (chkstatus != null) ? chkstatus.Checked : false;
+               
 
-                string insertQuery = "Update  newsubject set subName='" + txtSubName.Text.ToString().Trim() + "',Ordering='" + txtOrdering.Text.ToString().Trim()+ "',IsActive='" + (statusChecked ? 1 : 0) + "' where SubId=" + ViewState["--Did--"];
+                string insertQuery = "Update  newsubject set subName='" + txtSubName.Text.ToString().Trim() + "',Ordering='" + txtOrdering.Text.ToString().Trim()+ "' where SubId=" + ViewState["--Did--"];
                 CRUD.ExecuteNonQuery(insertQuery);
                 BindData();
                 btnSave.Text = "Save";
@@ -108,7 +101,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         {
             txtSubName.Text = "";
             txtOrdering.Text = "";
-            chkstatus.Checked = false;
+           
         }
 
         protected void gvSubjectList_PageIndexChanging(object sender, GridViewPageEventArgs e)

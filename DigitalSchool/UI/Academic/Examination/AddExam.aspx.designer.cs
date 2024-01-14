@@ -123,22 +123,22 @@ namespace DS.UI.Academics.Examination
         protected global::System.Web.UI.WebControls.RadioButton rdoSemesterExam;
 
         /// <summary>
-        /// rdoExam control.
+        /// rdoQuiz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdoExam;
+        protected global::System.Web.UI.WebControls.RadioButton rdoQuiz;
 
         /// <summary>
-        /// rdoSemester control.
+        /// rdoOthers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rdoSemester;
+        protected global::System.Web.UI.WebControls.RadioButton rdoOthers;
 
         /// <summary>
         /// lblSatus control.

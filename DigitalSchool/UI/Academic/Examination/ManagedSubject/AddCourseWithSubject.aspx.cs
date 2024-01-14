@@ -32,17 +32,12 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         {
             if (btnSave.Text == "Save") 
             {
-                bool statusChecked = (chkStauts != null) ? chkStauts.Checked : false;
-                string query = "Insert Into AddCourseWithSubject(SubId,CourseName,Ordering,isActive) values('"+ddlSubjectList.SelectedItem.Value+"','"+txtCourseName.Text.Trim().ToString()+"','"+txtOrdering.Text.Trim().ToString()+"','"+(statusChecked?1:0) +"')";
+               
+                string query = "Insert Into AddCourseWithSubject(SubId,CourseName,Ordering,isActive) values('"+ddlSubjectList.SelectedItem.Value+"','"+txtCourseName.Text.Trim().ToString()+"','"+txtOrdering.Text.Trim().ToString()+"','"+1 +"')";
             }
             if (btnSave.Text == "Update") 
             {
-                bool statusChecked = (chkStauts != null) ? chkStauts.Checked : false;
-
-              //  int courseId = Convert.ToInt32(gvCourseSubList.DataKeys[1].Values["CourseId"]);
-            
-
-                string query = "Update AddCourseWithSubject set SubId='"+ddlSubjectList.SelectedValue.ToString()+"',CourseName='"+txtCourseName.Text.Trim()+"',Ordering='"+txtOrdering.Text.Trim().ToString()+"',isActive='"+ (statusChecked ? 1 : 0) + "' where CourseId=" + ViewState["--Id--"];
+            string query = "Update AddCourseWithSubject set SubId='"+ddlSubjectList.SelectedValue.ToString()+"',CourseName='"+txtCourseName.Text.Trim()+"',Ordering='"+txtOrdering.Text.Trim().ToString()+"',isActive='"+1+ "' where CourseId=" + ViewState["--Id--"];
                 CRUD.ExecuteNonQuerys(query);
                 btnSave.Text = "Save";
                 BindData();
@@ -60,16 +55,17 @@ namespace DS.UI.Academic.Examination.ManagedSubject
             if (e.CommandName == "Alter") 
             {
                 int rowIndex=Convert.ToInt32(e.CommandArgument);
-                string CourseId =gvCourseSubList.DataKeys[rowIndex].Values[0].ToString();
-                string SubId =gvCourseSubList.DataKeys[rowIndex].Values[1].ToString();
-                ViewState["--Id--"] = CourseId;
-                ddlSubjectList.SelectedValue = SubId;
-                txtCourseName.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblCourse")).Text.Trim();
-                txtOrdering.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblOrder")).Text.Trim();
-                chkStauts.Checked = ((CheckBox)gvCourseSubList.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
-                btnSave.Text = "Update";
-                BindData();
-
+                
+               
+                    string CourseId = gvCourseSubList.DataKeys[rowIndex].Values[0].ToString();
+                    string SubId = gvCourseSubList.DataKeys[rowIndex].Values[1].ToString();
+                    ViewState["--Id--"] = CourseId;
+                    ddlSubjectList.SelectedValue = SubId;
+                    txtCourseName.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblCourse")).Text.Trim();
+                    txtOrdering.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblOrder")).Text.Trim();
+                    btnSave.Text = "Update";
+                    BindData();
+                
             }
         }
 

@@ -220,8 +220,8 @@ span#MainContent_lblType {
             <asp:Label CssClass="pe-3" runat="server" ID="lblType" Text="Type:"></asp:Label>
              <div class="d-flex gap-2">
                  <asp:RadioButton runat="server" ID="rdoSemesterExam" Text="Semester Exam" value="SemesterExam" GroupName="examGroup" />
-                <asp:RadioButton runat="server" ID="rdoExam" Text="Exam" value="Exam" GroupName="examGroup" />
-                <asp:RadioButton runat="server" ID="rdoSemester" Text="Semester" value="Semester" GroupName="examGroup" />
+                <asp:RadioButton runat="server" ID="rdoQuiz" Text="Quiz" value="Exam" GroupName="examGroup" />
+                <asp:RadioButton runat="server" ID="rdoOthers" Text="Others" value="Semester" GroupName="examGroup" />
 
               <%--<asp:RadioButtonList runat="server" ID="rdioList" CssClass="d-flex table-wrapper">
                 <asp:ListItem Text="Semester Exam" Value="SemesterExam" style="border:none; display:flex;"></asp:ListItem>
@@ -249,7 +249,7 @@ span#MainContent_lblType {
 
     <div class="main-table">
          <div class="gvTable">
-           <asp:GridView runat="server" ID="gvExamList" AutoGenerateColumns="False" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
+           <asp:GridView runat="server" ID="gvExamList" AutoGenerateColumns="False" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" OnRowDataBound="gvExamList_RowDataBound" OnRowCommand="gvExamList_RowCommand"
         DataKeyNames="ExId" GridLines="Vertical" 
         PagerStyle-CssClass="pgr"  Width="100%">
                
@@ -284,7 +284,7 @@ span#MainContent_lblType {
 
                        <asp:TemplateField HeaderText="Update">
                         <ItemTemplate>
-                         <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
+                         <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
                         <i class="far fa-edit"></i>
                      </asp:LinkButton>
                     </ItemTemplate>

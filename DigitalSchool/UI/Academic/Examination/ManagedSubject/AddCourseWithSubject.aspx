@@ -148,12 +148,13 @@
         }
 
         .table {
-            border: 0 !important;
+            border-radius:0 !important;
             margin: 10px 0;
         }
         .border-1{
             border:1px solid #ddd;
         }
+        
     </style>
 
 </asp:Content>
@@ -190,38 +191,30 @@
         <div class="inputPannel">
 
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                      <asp:Label runat="server" ID="lblSubjectName" Text="Subject Name"></asp:Label>
                      <asp:DropDownList CssClass="form-control" ID="ddlSubjectList" runat="server"></asp:DropDownList>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <asp:Label runat="server" ID="lblCourseName" Text="Course Name"></asp:Label>
                     <asp:TextBox  CssClass="form-control" ID="txtCourseName" runat="server"></asp:TextBox>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
                     <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server"></asp:TextBox>
+                </div>
+                <div class="col lg-3 mt-3">
+                  <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSave_Click" />
                 </div>
 
             </div>
 
-           
+  </div>
 
-  
-            
-           
-        </div>
-
-        <div class="d-flex gap-3 justify-content-end align-items-center py-3">
-            <div class="active-wrapper">
-               <asp:Label runat="server" ID="lblStats" Text="Is Active?"></asp:Label>
-                <asp:CheckBox  for="lblStats" ID="chkStauts" runat="server" />
-            </div>
-
-            <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSave_Click" />
-        </div>
+ 
+ 
 
 
 
@@ -279,7 +272,7 @@
 
                     <asp:TemplateField HeaderText="Update">
                         <ItemTemplate>
-                            <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
+                            <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
             <i class="far fa-edit"></i>
                             </asp:LinkButton>
                         </ItemTemplate>
