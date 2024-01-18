@@ -321,7 +321,7 @@ namespace DS.UI.Academics.Students
                 CheckBox ckbStatus = (CheckBox)gvStudentList.Rows[rIndex].FindControl("ckbStatus");
                 if (ckbStatus.Checked)
                     ckbStatus.Checked = false;
-                else
+                else    
                     ckbStatus.Checked = true;
             }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);

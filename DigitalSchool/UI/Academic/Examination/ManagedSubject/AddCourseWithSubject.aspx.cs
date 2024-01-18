@@ -8,6 +8,8 @@ using DS.PropertyEntities.Model.Examinition;
 using DS.BLL.ManagedSubject;
 using DS.PropertyEntities.Model.ManagedSubject;
 using DS.BLL.ControlPanel;
+using DS.DAL;
+using System.Data;
 
 namespace DS.UI.Academic.Examination.ManagedSubject
 {
@@ -16,150 +18,94 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         CourseEntry course_entry;
         bool result;
         protected void Page_Load(object sender, EventArgs e)
-        {
-            lblMessage.InnerText = "";
+        {  
+          
             if (!IsPostBack)
             {
-                if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "AddCourseWithSubject.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                DataBindForView();
-                SubjectEntry.GetSujectList(ddlSubjectName);
+                BindData();
+                BindDropDownData();
             }
         }
 
-        private CourseEntity GetData
-        {
-            get
-            {
-                try
-                {
-                    CourseEntity ce = new CourseEntity();
-                    ce.CourseId = (lblCourseId.Value.ToString() == "") ? 0 : int.Parse(lblCourseId.Value.ToString());
-                    ce.CourseName = txtCourseName.Text.Trim();
-                    ce.Ordering = int.Parse(txtOrder.Text.Trim());
-                    ce.SubId = int.Parse(ddlSubjectName.SelectedValue.ToString());
-                    ce.IsActive = chkIsActive.Checked;
-                    return ce;
-                }
-                catch { return null; }
-            }
-        }
-
-        private void saveCourse()
-        {
-            try
-            {
-                using (CourseEntity ce = GetData)
-                {
-                    if (course_entry == null) course_entry = new CourseEntry();
-                    course_entry.SetValues = ce;
-                    result = course_entry.Insert();
-                    if (result)
-                    {
-                        lblMessage.InnerText = "success->Successfully Saved";
-                        Clear();
-                        //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "clearIt();", true);
-                        DataBindForView();
-
-                    }
-                    else
-                    {
-                        lblMessage.InnerText = "error->Please Check Duplicate Course !";
-                        DataBindForView();
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText=("error->"+ex.Message);
-            }
-        }
-
-        private void updateCourse()
-        {
-            try
-            {
-                using (CourseEntity ce = GetData)
-                {
-                    if (course_entry == null) course_entry = new CourseEntry();
-                    course_entry.SetValues = ce;
-                    result = course_entry.Update();
-                    if (result)
-                    {
-                        lblMessage.InnerText = "success->Successfully Updated";
-                        Clear();
-                     //   ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "clearIt();", true);
-                        DataBindForView();
-                    }
-                
-                }
-            }
-            catch { }
-        }
-
-        private void DataBindForView()
-        {
-            try
-            {
-                List<CourseEntity> GetCourseList = CourseEntry.GetCourseList;
-                string divInfo = "";
-                if (GetCourseList.Count == 0)
-                {
-                    divInfo = "<div class='noData'>Compulsory Subject not available</div>";
-                    divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                    divSubjectList.Controls.Add(new LiteralControl(divInfo));
-                    return;
-                }
-                divInfo = " <table id='tblClassList' class='table table-striped table-bordered dt-responsive nowrap' cellspacing='0' width='100%' > ";
-                divInfo += "<thead>";
-                divInfo += "<tr>";
-                divInfo += "<th>Subject</th>";
-                divInfo += "<th>Course Name</th>";
-                divInfo += "<th style='width:70px;text-align:center;visible:False'>Order</th>";
-                divInfo += "<th style='width:70px;text-align:center;visible:False'>Active</th>";
-                if (Session["__Update__"].ToString().Equals("true")) divInfo += "<th>Edit</th>";
-                divInfo += "</tr>";
-                divInfo += "</thead>";
-                divInfo += "<tbody>";
-                string id = "";
-                for (int x = 0; x < GetCourseList.Count; x++)
-                {
-                    id = GetCourseList[x].CourseId.ToString();
-                    divInfo += "<tr id='r_" + id + "'>";
-                    divInfo += "<td >" + GetCourseList[x].subName + "</td>";
-                    divInfo += "<td >" + GetCourseList[x].CourseName + "</td>";
-                    divInfo += "<td style='text-align:center'>" + GetCourseList[x].Ordering.ToString() + "</td>";
-                    divInfo +=  "<td style='text-align:center'>" +((GetCourseList[x].IsActive)?"Yes":"NO") + "</td>";
-                    if (Session["__Update__"].ToString().Equals("true"))
-                    divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editSubject(" + id + ");'  />";
-                }
-                divInfo += "</tbody>";
-                divInfo += "<tfoot>";
-                divInfo += "</table>";
-                divSubjectList.Controls.Add(new LiteralControl(divInfo));
-            }
-            catch { }
-        }
-
+     
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "load();", true);
-            if (lblCourseId.Value.ToString().Length == 0)
+            if (btnSave.Text == "Save") 
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; DataBindForView(); return; }
-                saveCourse();
+               
+                string query = "Insert Into AddCourseWithSubject(SubId,CourseName,Ordering,isActive) values('"+ddlSubjectList.SelectedItem.Value+"','"+txtCourseName.Text.Trim().ToString()+"','"+txtOrdering.Text.Trim().ToString()+"','"+1 +"')";
+                CRUD.ExecuteNonQuerys(query);
+                BindData();
             }
-            else
+            if (btnSave.Text == "Update") 
             {
-                updateCourse();
+            string query = "Update AddCourseWithSubject set SubId='"+ddlSubjectList.SelectedValue.ToString()+"',CourseName='"+txtCourseName.Text.Trim()+"',Ordering='"+txtOrdering.Text.Trim().ToString()+"',isActive='"+1+ "' where CourseId=" + ViewState["--Id--"];
+                CRUD.ExecuteNonQuerys(query);
+                btnSave.Text = "Save";
+                BindData();
+                
             }
         }
-        private void Clear()        
+
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
         {
-            lblCourseId.Value="";
-            txtCourseName.Text="";
-            txtOrder.Text="";
-            btnSave.Text = "Save";
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool IsChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int CourseID = Convert.ToInt32(gvCourseSubList.DataKeys[row.RowIndex].Values["CourseId"]);
+
+            string query = "update AddCourseWithSubject set IsActive='"+(IsChecked?1:0)+"' where CourseId="+ CourseID;
+            CRUD.ExecuteNonQuerys(query);
+
+        }
+
+        protected void gvCourseSubList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Alter") 
+            {
+                int rowIndex=Convert.ToInt32(e.CommandArgument);
+                
+               
+                    string CourseId = gvCourseSubList.DataKeys[rowIndex].Values[0].ToString();
+                    string SubId = gvCourseSubList.DataKeys[rowIndex].Values[1].ToString();
+                    ViewState["--Id--"] = CourseId;
+                    ddlSubjectList.SelectedValue = SubId;
+                    txtCourseName.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblCourse")).Text.Trim();
+                    txtOrdering.Text = ((Label)gvCourseSubList.Rows[rowIndex].FindControl("lblOrder")).Text.Trim();
+                    btnSave.Text = "Update";
+                    BindData();
+                
+            }
+        }
+
+        private void BindData() 
+        {
+            string query = "select c.CourseId,c.CourseName,c.Ordering,c.SubId,s.SubName,isnull( c.IsActive,1) as IsActive from AddCourseWithSubject as c  inner join NewSubject as s on c.SubId=s.SubId";
+            DataTable dt = CRUD.ReturnTableNull(query);
+            gvCourseSubList.DataSource = dt;
+            gvCourseSubList.DataBind();
+        }
+
+        private void BindDropDownData() 
+        {
+          string query = "SELECT SubId, SubName FROM newsubject WHERE IsActive = 1";
+           DataTable dt = CRUD.ReturnTableNull(query);
+            ddlSubjectList.DataSource = dt;
+            ddlSubjectList.DataTextField = "SubName";
+            ddlSubjectList.DataValueField = "SubId";
+            ddlSubjectList.DataBind();
+            ddlSubjectList.Items.Insert(0, new ListItem("-- Select Subject --", ""));
+        }
+
+        protected void gvCourseSubList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+                gvCourseSubList.PageIndex= e.NewPageIndex;
+            BindData();
+        }
+
+        protected void ddlPageIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCourseSubList.PageSize=int.Parse(ddlPageIndex.SelectedValue);
+            BindData();
         }
     }
 }

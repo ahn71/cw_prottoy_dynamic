@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DS.UI.Academics.Examination {
-    
-    
-    public partial class Grading {
-        
+namespace DS.UI.Academics.Examination
+{
+
+
+    public partial class Grading
+    {
+
         /// <summary>
         /// uplMessage control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel uplMessage;
-        
+
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
-        
+
         /// <summary>
         /// lblGId control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField lblGId;
-        
+
         /// <summary>
         /// aDashboard control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aDashboard;
-        
+
         /// <summary>
         /// aAcademicHome control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aAcademicHome;
-        
+
         /// <summary>
         /// aExamHome control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aExamHome;
-        
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -74,16 +76,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
-        /// <summary>
-        /// divGradingList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGradingList;
-        
+
         /// <summary>
         /// txtGrade control.
         /// </summary>
@@ -92,7 +85,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGrade;
-        
+
         /// <summary>
         /// txtGradeMin control.
         /// </summary>
@@ -101,7 +94,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGradeMin;
-        
+
         /// <summary>
         /// txtGradeMax control.
         /// </summary>
@@ -110,7 +103,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGradeMax;
-        
+
         /// <summary>
         /// txtGPointMin control.
         /// </summary>
@@ -119,7 +112,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGPointMin;
-        
+
         /// <summary>
         /// txtGPointMax control.
         /// </summary>
@@ -128,7 +121,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtGPointMax;
-        
+
         /// <summary>
         /// txtComment control.
         /// </summary>
@@ -137,7 +130,7 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComment;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -146,5 +139,14 @@ namespace DS.UI.Academics.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// gvGradeList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGradeList;
     }
 }

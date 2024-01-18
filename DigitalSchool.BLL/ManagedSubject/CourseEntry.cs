@@ -52,7 +52,7 @@ namespace DS.BLL.ManagedSubject
                 {
                    
                     DataTable dt=new DataTable ();
-                    dt = CRUD.ReturnTableNull("select c.CourseId,c.CourseName,c.Ordering,c.SubId,s.SubName,isnull( c.IsActive,1) as IsActive from AddCourseWithSubject as c  inner join NewSubject as s on c.SubId=s.SubId  ");
+                    dt = CRUD.ReturnTableNull("select c.CourseId,c.CourseName,c.Ordering,c.SubId,s.SubName,isnull( c.IsActive,1) as IsActive from AddCourseWithSubject as c  inner join NewSubject as s on c.SubId=s.SubId");
                     if (dt.Rows.Count >= 0)
                     {
                         List<CourseEntity> GetList = new List<CourseEntity>();

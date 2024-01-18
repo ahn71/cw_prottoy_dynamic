@@ -20,141 +20,74 @@ namespace DS.UI.Administration.HR.Payroll
                 lblMessage.InnerText = "";
                 if (!IsPostBack)
                 {
-                    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "SalaryAllowanceType.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                    loadDesignationList("");
+                    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "SalaryAllowanceType.aspx",btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
+                   BindData();
                 }
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        protected void btnSave_Click1(object sender, EventArgs e)
         {
-            if (lblAId.Value.ToString().Length == 0)
+            if (btnSave.Text == "Save") 
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; loadDesignationList(""); return; }
-                if (saveAllowanceType() == true)
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SavedSuccess();", true);
+                string query = "Insert Into AllowanceType (Atype,APercentage,AStatus) Values('" + txtAllowence.Text + "','" + txtPersantece.Text + "','" + 1 + "')";
+                CRUD.ExecuteQuery(query);
+                lblMessage.InnerText = "Data saved successfully";
+                BindData();
             }
+            else 
+            {
+                string Query = "Update AllowanceType set Atype='" + txtAllowence.Text + "',set APercentage ='" + txtPersantece.Text + "' where Aid=" + ViewState["--Aid--"];
+                CRUD.ExecuteQuery(Query);
+                btnSave.Text = "Save";
+                lblMessage.InnerText = "Data updated successfully";
+                BindData();
+            }
+        }
+
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int Aid = Convert.ToInt32(gvAllowenceList.DataKeys[row.RowIndex].Value);
+            string query = "Update AllowanceType set AStatus='"+(isChecked?1:0) +"'";
+            CRUD.ExecuteQuery(query);
+            if(isChecked) 
+             {
+                lblMessage.InnerText = "Activated successfully";
+             }
             else
+              {
+                lblMessage.InnerText = "InActivated successfully";
+              }
+        }
+
+        protected void gvAllowenceList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Alter")
             {
-               if(updateAllowanceType())
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                int Aid = Convert.ToInt32(gvAllowenceList.DataKeys[rowIndex].Value);
+                ViewState["--Aid--"] = Aid;
+                txtAllowence.Text = ((Label)gvAllowenceList.Rows[rowIndex].FindControl("lblAllowence")).Text;
+                txtPersantece.Text = ((Label)gvAllowenceList.Rows[rowIndex].FindControl("lblPercentance")).Text;
+                btnSave.Text = "Update";
             }
 
         }
-        private Boolean saveAllowanceType()
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("saveAllowanceType",DbConnection.Connection);
-                cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@AType", txtAllowanceType.Text.Trim());
-                cmd.Parameters.AddWithValue("@APercentage", txtPercentage.Text.Trim());
-                if (chkStatus.Checked == true) cmd.Parameters.AddWithValue("@AStatus", 1);
-                else cmd.Parameters.AddWithValue("@AStatus", 0);
-                int result = (int)cmd.ExecuteScalar();
-                if (result > 0)
-                {
-                    lblMessage.InnerText = "success->Successfully saved";
-                    loadDesignationList("");
-                }
-                else lblMessage.InnerText = "error->Unable to save";
-                return true;
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
+        protected void gvAllowenceList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvAllowenceList.PageIndex = e.NewPageIndex;
+            BindData();
         }
 
-        private void saveAllowanceLog(string Aid)
+
+        private void BindData() 
         {
-            try
-            {
-                Session["__username__"] = "0";
-                string UserId = (Session["__username__"].ToString().Equals("")) ? Session["__username__"].ToString() : "0";
-                string[] getColumns = { "AId", "ALNewPercentage", "ALOldPercentage", "ALDate", "ALChangedBy" };
-                string[] getValues = { Aid, txtPercentage.Text, lblOldPercentage.Value.ToString(), DateTime.Now.ToString("yyyy/MM/dd"), UserId };
-                if (ComplexScriptingSystem.SQLOperation.forSaveValue("AllowanceLog", getColumns, getValues, DbConnection.Connection) == true) { }
-            }
-            catch { }
-        }
-
-        private void loadDesignationList(string sqlcmd)
-        {
-            if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "Select *  from AllowanceType  Order by AId ";
-            DataTable dt = new DataTable();
-            sqlDB.fillDataTable(sqlcmd, dt);
-            int totalRows = dt.Rows.Count;
-            string divInfo = "";
-            if (totalRows == 0)
-            {
-                divInfo = "<div class='noData'>No Allowance Type available</div>";
-                divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                divAllowanceType.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }
-
-            divInfo = " <table id='tblDesignationList' class='table table-striped table-bordered dt-responsive nowrap'cellspacing='0' Width='100%' > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Allowance Type</th>";
-            divInfo += "<th>Percentage</th>";
-            divInfo += "<th>Status</th>";
-            if (Session["__Update__"].ToString().Equals("true"))
-            divInfo += "<th>Edit</th>";
-            divInfo += "</tr>";
-            divInfo += "</thead>";
-            divInfo += "<tbody>";
-            string id = "";
-            for (int x = 0; x < dt.Rows.Count; x++)
-            {
-                id = dt.Rows[x]["AId"].ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td>" + dt.Rows[x]["AType"].ToString() + "</td>";
-                divInfo += "<td>" + dt.Rows[x]["APercentage"].ToString() + "</td>";
-                divInfo += "<td>" + dt.Rows[x]["AStatus"].ToString() + "</td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editEmployee(" + id + ");'  />";
-            }
-
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-            divInfo += "</table>";
-            divAllowanceType.Controls.Add(new LiteralControl(divInfo));
-
-        }
-        private Boolean updateAllowanceType()
-        {
-            try
-            {
-                SqlCommand cmd = new SqlCommand("updateAllowanceType", DbConnection.Connection);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@AId", lblAId.Value.ToString());
-                cmd.Parameters.AddWithValue("@AType", txtAllowanceType.Text);
-                cmd.Parameters.AddWithValue("@APercentage", txtPercentage.Text.Trim());
-                if (chkStatus.Checked == true) cmd.Parameters.AddWithValue("@AStatus", 1);
-                else cmd.Parameters.AddWithValue("@AStatus", 0);
-                int result = (int)cmd.ExecuteScalar();
-                if (result > 0)
-                {
-                    saveAllowanceLog(lblAId.Value.ToString());
-                    lblMessage.InnerText = "success->Successfully Updated";
-                    lblAId.Value = "";
-                    loadDesignationList("");
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
+            string Query = "Select *  from AllowanceType  Order by AId ";
+            DataTable dt = CRUD.ReturnTableNull(Query);
+            gvAllowenceList.DataSource = dt;
+            gvAllowenceList.DataBind();
         }
     }
 }

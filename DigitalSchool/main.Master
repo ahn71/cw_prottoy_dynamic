@@ -54,7 +54,15 @@
     <link href="Styles/tabmenu/css/style.css" rel="stylesheet" />
     <link href="Styles/tabmenu/css/theme.css" rel="stylesheet" />
     <link href="Styles/updatecss/stylev3.css" rel="stylesheet" />
+    <%--Bottstrap Js Switch--%>
+     <!-- Bootstrap Switch CSS CDN -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.3.4/dist/css/bootstrap3/bootstrap-switch.min.css">
 
+ <!-- Bootstrap JavaScript and Popper.js CDN (required for Bootstrap) -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-eS1oUVlT5p4feCpTk8UExb6KLX3eJdPcsX5VIK56R/ZmU4uAe1/BKUVRrHDFblOM" crossorigin="anonymous"></script>
+
+ <!-- Bootstrap Switch JavaScript CDN -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.3.4/dist/js/bootstrap-switch.min.js"></script>
 
     <%--Font Awesome--%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.1/css/all.min.css"/>
@@ -230,9 +238,6 @@
 
                        
 
-                    </div>
-                    <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                        <h2 class="text-center fw-bold mb-0">Moni Kanan High School</h2>
                     </div>
                     <div class="col-lg-4 d-flex justify-content-end align-items-center">
 

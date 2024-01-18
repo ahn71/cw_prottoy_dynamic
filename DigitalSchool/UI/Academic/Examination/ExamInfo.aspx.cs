@@ -51,6 +51,7 @@ namespace DS.UI.Academics.Examination
                         BatchEntry.GetDropdownlist(dlBatch,true);
                         ExamTypeEntry.GetExamType(dlExamType);               
                         LoadExamInfoId("");
+                        BindData();
                     }
                 }
             }
@@ -240,46 +241,57 @@ namespace DS.UI.Academics.Examination
         }
         private void LoadExamInfoId(string sqlcmd)
         {
-            if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "Select ExInId +' | ' + case when ExName is null then '' else ExName end ExInId from ExamInfo order by ExInSl Desc ";
-            DataTable dt = new DataTable();
-            sqlDB.fillDataTable(sqlcmd, dt);
+            //if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "Select ExInId +' | ' + case when ExName is null then '' else ExName end ExInId from ExamInfo order by ExInSl Desc ";
+            //DataTable dt = new DataTable();
+            //sqlDB.fillDataTable(sqlcmd, dt);
 
-            int totalRows = dt.Rows.Count;
-            string divInfo = "";
+            //int totalRows = dt.Rows.Count;
+            //string divInfo = "";
 
-            if (totalRows == 0)
-            {
-                divInfo = "<div class='noData'>No Exam ID available</div>";
-                divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                divExamInfoId.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }
+            //if (totalRows == 0)
+            //{
+            //    divInfo = "<div class='noData'>No Exam ID available</div>";
+            //    divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
+            //    divExamInfoId.Controls.Add(new LiteralControl(divInfo));
+            //    return;
+            //}
 
-            divInfo = " <table id='tblClassList' class='display'  > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Exam Info ID</th>";
-            divInfo += "<th>Exam Info ID</th>";
-            divInfo += "</tr>";
+            //divInfo = " <table id='tblClassList' class='display'  > ";
+            //divInfo += "<thead>";
+            //divInfo += "<tr>";
+            //divInfo += "<th>Exam Info ID</th>";
+            //divInfo += "<th>Exam Info ID</th>";
+            //divInfo += "</tr>";
 
-            divInfo += "</thead>";
+            //divInfo += "</thead>";
 
-            divInfo += "<tbody>";
-            string id = "";
+            //divInfo += "<tbody>";
+            //string id = "";
 
-            for (int x = 0; x < dt.Rows.Count; x++)
-            {
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td >" + dt.Rows[x]["ExInId"].ToString() + "</td>";
-            }
+            //for (int x = 0; x < dt.Rows.Count; x++)
+            //{
+            //    divInfo += "<tr id='r_" + id + "'>";
+            //    divInfo += "<td >" + dt.Rows[x]["ExInId"].ToString() + "</td>";
+            //}
 
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
+            //divInfo += "</tbody>";
+            //divInfo += "<tfoot>";
 
-            divInfo += "</table>";
-            divExamInfoId.Controls.Add(new LiteralControl(divInfo));
+            //divInfo += "</table>";
+            //divExamInfoId.Controls.Add(new LiteralControl(divInfo));
         }
 
+
+
+        private void BindData() 
+        {
+            string query = "Select ExInId +' | ' + case when ExName is null then '' else ExName end ExInId from ExamInfo order by ExInSl Desc";
+            DataTable dt = CRUD.ReturnTableNull(query);
+            gvExamInfo.DataSource = dt;
+            gvExamInfo.DataBind();
+
+
+        }
         private void setStudentIdAndSection()   // set student id and section name in marks sheet 
         {
 
@@ -288,6 +300,18 @@ namespace DS.UI.Academics.Examination
         protected void dlDependency_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void gvExamInfo_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvExamInfo.PageIndex = e.NewPageIndex;
+            BindData();
+        }
+
+        protected void ddlPageIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvExamInfo.PageSize = int.Parse(ddlPageIndex.SelectedValue);
+            BindData();
         }
     }
 }

@@ -2,35 +2,175 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .tgPanel {
-            width: 100%;
+               th {
+            font-size: 15px;
         }
-        input[type="checkbox"]
-        {
-            margin: 5px;
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 25px;
         }
-        .controlLength{
-            width: 200px;
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
         }
-        .tbl-controlPanel td:first-child{
-            text-align: right;
-            padding-right: 5px;
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
         }
-         .dataTables_length, .dataTables_filter {
-          display: none;
-          padding: 15px;
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
         }
-        #tblDesignationList_info {
-             display: none;
-            padding: 15px;
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
         }
-        #tblDesignationList_paginate {
-            display: none;
-            padding: 15px;
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
         }
-        .no-footer {
-           border-bottom: 1px solid #ecedee !important;
-        } 
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+
+
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .active-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+        input#MainContent_chkStauts {
+    width: 20px;
+    display: block;
+    height: 15px;
+}
+        /*.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}*/
+        input:focus {
+    box-shadow: 0px 0px 0px 0px !important;
+    border: 1px solid rgba(255,255,255, 0.8);
+}
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+        th {
+            background: #ddd !important;
+        }
+
+        td, th {
+          /*  text-align: center;*/
+            border: 1px solid #ddd !important;
+        }
+
+        .table {
+            border: 0 !important;
+            margin: 10px 0;
+        }
+        .border-1{
+            border:1px solid #ddd;
+        }
+        /*Update*/
+        .update-icon{
+            display:inline-block;
+            padding: 0 6px;
+            height: 30px;
+            width: 30px;
+            line-height:30px;
+            text-align:center;
+            border-radius: 50%;
+            background:#99dde7;
+            color:#1e1e1e;
+            font-size:12px;
+            opacity:0;
+            transition:0.1s all ease;
+        }
+        td:hover .update-icon{
+            opacity:1;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
@@ -59,130 +199,99 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="">
-        <div class="row">
+  
+    <div class="row">
             <div class="col-md-6">
                 <h4 class="text-right" style="float:left">Salary Allowance Type Details</h4>
             </div>
-            <div class="col-md-6"></div>
+            
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSave" />
-                    </Triggers>
-                    <ContentTemplate>
-                        <div id="divAllowanceType" class="datatables_wrapper" runat="server"
-                            style="width: 100%; height: auto; max-height: 500px; overflow: auto; overflow-x: hidden;">
-                        </div>
-                         <asp:HiddenField ID="HiddenField1" ClientIDMode="Static" Value="" runat="server" />
-                        <asp:HiddenField ID="HiddenField2" ClientIDMode="Static" Value="" runat="server" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="col-md-6">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <div class="tgPanel">
-                            <div class="tgPanelHead">Salary Allowance Type</div>
-                            <table class="tbl-controlPanel">
-                                <tr>
-                                    <td>Allowance Type
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtAllowanceType" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Percentage
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtPercentage" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                         <asp:RadioButtonList RepeatLayout="Flow" CssClass="radiobuttonlist" RepeatDirection="Horizontal">
-                                        <asp:CheckBox ID="chkStatus" class="checkbox-inline" runat="server" Text="Is Active" ClientIDMode="Static" Checked="True" />
-                                   </asp:RadioButtonList>   
-                                              </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <asp:Button ID="btnSave" ClientIDMode="Static" CssClass="btn btn-primary" runat="server" Text="Save"
-                                            OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                        &nbsp;<input type="button" class="btn btn-default" value="Clear" onclick="clearIt();" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-        </div>
-    </div>    
+
+
+    
+    <div class="inputPannel" id="inputPannels">
+       
+           <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+               <Triggers>
+                   <asp:AsyncPostBackTrigger ControlID="btnSave" />
+               </Triggers>
+                   <ContentTemplate>
+                    <div class="row">
+                        <div class="col-lg-3">
+                          <asp:Label runat="server" ID="lblAllownece">Allowance Type</asp:Label>
+                          <asp:TextBox runat="server" ID="txtAllowence" 
+                              CssClass="form-control"></asp:TextBox>
+                          </div>
+                        <div class="col-lg-3">
+                              <asp:Label runat="server" ID="lblPersentance">Percentage</asp:Label>
+                              <asp:TextBox runat="server" ID="txtPersantece" 
+                                  CssClass="form-control"></asp:TextBox>
+
+                          </div>
+                      <div class="col-lg-3">
+                              <asp:Button  runat="server" CssClass="btn btn-primary" Text="Save"  style="margin-top:17px;" ID="btnSave" OnClick="btnSave_Click1" />
+
+                          </div>
+
+                      </div> 
+
+                   </ContentTemplate>
+           </asp:UpdatePanel>
+       </div>
+     
+     
+    <div class="gvTable">
+               <asp:GridView runat="server" ID="gvAllowenceList" CssClass="table"  OnRowCommand="gvAllowenceList_RowCommand" AllowPaging="true" PageSize="10"  AutoGenerateColumns="False" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2"  OnPageIndexChanging="gvAllowenceList_PageIndexChanging"
+        DataKeyNames="Aid" GridLines="Vertical" 
+        PagerStyle-CssClass="pgr" Width="100%">
+       <Columns>
+            <asp:TemplateField HeaderText="SL">
+            <ItemTemplate>
+                 <%#Container.DataItemIndex+1 %>
+            </ItemTemplate>
+        </asp:TemplateField>
+
+           <asp:TemplateField HeaderText="Allowence Type">
+    <ItemTemplate>
+        <asp:Label ID="lblAllowence" runat="server" Text='<%# Eval("Atype") %>'></asp:Label>
+             <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+     <span class="update-icon" ><i class="fas fa-edit"></i></span>
+</asp:LinkButton>
+    </ItemTemplate>          
+</asp:TemplateField>
+
+           <asp:TemplateField HeaderText="Percentage">
+                <ItemTemplate>
+                 <asp:Label ID="lblPercentance" runat="server" Text='<%# Eval("APercentage") %>'></asp:Label>        
+            </ItemTemplate>          
+         </asp:TemplateField>
+
+           <asp:TemplateField HeaderText="Status">
+          <ItemTemplate>
+             <label class="switch">
+    <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true" 
+                  Checked='<%# Convert.ToBoolean(Eval("AStatus")) %>' />
+    <span class="slider round"></span>
+</label>
+   
+         </ItemTemplate>
+        </asp:TemplateField>
+
+       </Columns>
+
+   </asp:GridView>
+
+ </div>
+   
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(document).on("keyup", '.Search_New', function () {
-                searchTable($(this).val(), 'tblDesignationList', '');
-            });
-            $('#tblDesignationList').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100]
-            });
-        });
-        function loaddatatable() {
-            $('#tblDesignationList').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100]
-            });
-        }
+    
         function validateInputs() {
             if (validateText('txtAllowanceType', 1, 50, 'Enter Allowance Type') == false) return false;
             if (validateText('txtPercentage', 1, 30, 'Enter Percentage') == false) return false;
             return true;
         }
-        function editEmployee(empId) {
-            $('#lblAId').val(empId);
-            var strAT = $('#r_' + empId + ' td:first-child').html();        
-            $('#txtAllowanceType').val(strAT);
 
-            var strP = $('#r_' + empId + ' td:nth-child(2)').html();
-            $('#txtPercentage').val(strP);
-            $('#lblOldPercentage').val(strP);
-            $("#btnSave").val('Update');
-            var strAS = $('#r_' + empId + ' td:nth-child(3)').html();
-            if (strAS == 'True') {
-                $("#chkStatus").removeProp('checked');
-                $("#chkStatus").click();
-            }
-            else {
-                $("#chkStatus").removeProp('checked');
-            }
-            $("#btnSave").val('Update');
-        }
-        function clearIt() {
-            $('input[type=text]').val('');
-            var n = $("#chkStatus:checked").length;
-            if (n == 0) {
-                $('#chkStatus').click();
-            }
-            $('#lblAId').val('');
-            $("#btnSave").val('Save');
-        }
-        function updateSuccess() {
-            showMessage('Updated successfully', 'success');
-            clearIt();
-        }
-        function SavedSuccess() {
-            loaddatatable();
-            showMessage('Saved successfully', 'success');
-            clearIt();
-        }
     </script>
 </asp:Content>

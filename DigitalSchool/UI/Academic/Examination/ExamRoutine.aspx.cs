@@ -100,19 +100,23 @@ namespace DS.UI.Academic.Examination
             ddlBatch.Enabled = true;
             ddlShift.Enabled = true;
             txtDate.Text = "";
-            ddlStartTimeHH.SelectedValue = "0";
-            ddlStartTimeMM.SelectedValue = "00";
-            ddlEndTimeHH.SelectedValue = "0";
-            ddlEndTimeMM.SelectedValue = "00";
+            txtStartime.Text = "";
+            txtEndTime.Text = "";
+            //ddlStartTimeHH.SelectedValue = "0";
+            //ddlStartTimeMM.SelectedValue = "00";
+            //ddlEndTimeHH.SelectedValue = "0";
+            //ddlEndTimeMM.SelectedValue = "00";
         }
         private void save()
         {
             try {
                 if (examRoutineEntry == null)
                     examRoutineEntry = new ExamRoutineEntry();
-                string _examDate = commonTask.ddMMyyyyToyyyyMMdd(txtDate.Text.Trim());                
-                DateTime startTime = DateTime.Parse(_examDate+" "+ddlStartTimeHH.SelectedValue + ":" + ddlStartTimeMM.SelectedValue + ":00 " + ddlStartTimeTT.SelectedValue);
-                DateTime endTime = DateTime.Parse(_examDate + " " + ddlEndTimeHH.SelectedValue + ":" + ddlEndTimeMM.SelectedValue + ":00 " + ddlEndTimeTT.SelectedValue);
+                string _examDate = commonTask.ddMMyyyyToyyyyMMdd(txtDate.Text.Trim());  
+                
+                DateTime startTime = DateTime.Parse(txtStartime.Text);
+                DateTime endTime = DateTime.Parse(txtEndTime.Text);
+
                 string[] subID = ddlSubject.SelectedValue.Split('_');
                 if (examRoutineEntry.insert(startTime.ToString("yyyy-MM-dd"), startTime.ToString("dddd"), startTime.ToString("HH:mm:hh"), endTime.ToString("HH:mm:hh"), ddlExamId.SelectedValue, ddlBatch.SelectedValue, ddlGroup.SelectedValue, subID[0], subID[1], ddlShift.SelectedValue))
                 {
@@ -136,8 +140,8 @@ namespace DS.UI.Academic.Examination
                 if (examRoutineEntry == null)
                     examRoutineEntry = new ExamRoutineEntry();
                 string _examDate = commonTask.ddMMyyyyToyyyyMMdd(txtDate.Text.Trim());
-                DateTime startTime = DateTime.Parse(_examDate + " " + ddlStartTimeHH.SelectedValue + ":" + ddlStartTimeMM.SelectedValue + ":00 " + ddlStartTimeTT.SelectedValue);
-                DateTime endTime = DateTime.Parse(_examDate + " " + ddlEndTimeHH.SelectedValue + ":" + ddlEndTimeMM.SelectedValue + ":00 " + ddlEndTimeTT.SelectedValue);
+                DateTime startTime = DateTime.Parse(txtStartime.Text);
+                DateTime endTime = DateTime.Parse(txtEndTime.Text);
                 string[] subID = ddlSubject.SelectedValue.Split('_');
                 if (examRoutineEntry.update(ViewState["__ExamRoutineID__"].ToString(),startTime.ToString("yyyy-MM-dd"), startTime.ToString("dddd"), startTime.ToString("HH:mm:hh"), endTime.ToString("HH:mm:hh"), subID[0], subID[1]))
                 {
@@ -217,13 +221,15 @@ namespace DS.UI.Academic.Examination
                 txtDate.Text = gvExamRoutine.Rows[rIndex].Cells[2].Text.Trim();
                 DateTime startTime= DateTime.Parse("2019-03-01 "+gvExamRoutine.Rows[rIndex].Cells[4].Text.Trim());
                 DateTime endTime = DateTime.Parse("2019-03-01 "+ gvExamRoutine.Rows[rIndex].Cells[5].Text.Trim());
-                    ddlStartTimeHH.SelectedValue = startTime.ToString("hh");
-                    ddlStartTimeMM.SelectedValue = startTime.ToString("mm");
-                    ddlStartTimeTT.SelectedValue = startTime.ToString("tt");
+                    //ddlStartTimeHH.SelectedValue = startTime.ToString("hh");
+                    //ddlStartTimeMM.SelectedValue = startTime.ToString("mm");
+                    //ddlStartTimeTT.SelectedValue = startTime.ToString("tt");
 
-                    ddlEndTimeHH.SelectedValue = endTime.ToString("hh");
-                    ddlEndTimeMM.SelectedValue = endTime.ToString("mm");
-                    ddlEndTimeTT.SelectedValue = endTime.ToString("tt");
+                    //ddlEndTimeHH.SelectedValue = endTime.ToString("hh");
+                    //ddlEndTimeMM.SelectedValue = endTime.ToString("mm");
+                    //ddlEndTimeTT.SelectedValue = endTime.ToString("tt");
+                    txtStartime.Text= startTime.ToString();
+                    txtEndTime.Text= endTime.ToString();
 
                     ViewState["__ExamRoutineID__"] = gvExamRoutine.DataKeys[rIndex].Values[0].ToString();
                     btnSave.Text = "Update";

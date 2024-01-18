@@ -1,36 +1,80 @@
 ﻿<%@ Page Title="Add Particulars" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="AddParticular.aspx.cs" Inherits="DS.UI.Administration.Finance.FeeManaged.AddParticular" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .tgPanel {
-            width: 100%;
+        .icon-style{
+            color:green;
         }
-        .tbl-controlPanel td:first-child{
-            text-align: right;
-            padding-right: 5px;
-        }
-         .dataTables_length, .dataTables_filter {
-          display: none;
-          padding: 15px;
-        }
-        #tblDesignationList_info {
-             display: none;
-            padding: 15px;
-        }
-        #tblDesignationList_paginate {
-            display: none;
-            padding: 15px;
-        }
-        .no-footer {
-           border-bottom: 1px solid #ecedee !important;
-        }
+
+        /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
     </style>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
-    <asp:UpdatePanel ID="uplMessage" runat="server">
-        <ContentTemplate>
-            <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
-        </ContentTemplate>
-    </asp:UpdatePanel>    
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">  
+   
     <div class="row">
         <div class="col-md-12">
             <!--breadcrumbs start -->
@@ -49,108 +93,103 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                 <h4 class="text-right" style="float:left">Particulars Information</h4>
-                <div class="dataTables_filter_New" style="float: right;">
-                     <label>
-                         Search:
-                         <input type="text" style="width:168px;margin-right:-7px" class="Search_New" placeholder="type here" />
-                     </label>
-                 </div>               
+
+   
+        <asp:UpdatePanel ID="uplMessage" runat="server">
+        <ContentTemplate>
+           <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
+
+        </ContentTemplate>
+        </asp:UpdatePanel>
+
+
+
+    <asp:UpdatePanel runat="server" ID="updatePanel" UpdateMode="Conditional">
+
+     
+      <ContentTemplate>
+                  <div class=" form-group row">
+
+                <asp:Label runat="server" CssClass="col-sm-1 col-form-label" ID="lblName">Name</asp:Label>
+                   <div class="col-lg-6">
+                <asp:TextBox ClientIDMode="Static" runat="server" CssClass="form-control" ID="txtParticulerName"></asp:TextBox>
+      
             </div>
-            <div class="col-md-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSave" />
-                    </Triggers>
-                    <ContentTemplate>
-                        <div class="tgPanel">
-                        <div id="divFeesType" class="datatables_wrapper" runat="server"
-                            style="width: 100%; height: auto; max-height: 350px; overflow: auto; overflow-x: hidden;">
-                        </div>
-                            </div>
-                        <asp:HiddenField ID="lblFId" ClientIDMode="Static" Value="" runat="server" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+            
+                <asp:Button ID="btnSave" CssClass="btn btn-success " Text="Save" runat="server"  OnClientClick="return validateInputs();" OnClick="btnSave_Click"/>
+
             </div>
-            <div class="col-md-6">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                    <ContentTemplate>
-                        <div class="tgPanel">
-                            <div class="tgPanelHead">Add Particulars</div>
-                            <table class="tbl-controlPanel">
-                                <tr>
-                                    <td>Name
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtFeesType" runat="server" Width="200" ClientIDMode="Static" CssClass="input"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" Text="Save" ClientIDMode="Static"
-                                            OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                        &nbsp;<input type="button" value="Clear" class="btn btn-default" onclick="clearAll();" />
-                                    </td>
-                                </tr>
-                            </table>                            
-                        </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+
+      
+           <div class="gvList">
+            <asp:GridView ID="gv_particularList" runat="server" AutoGenerateColumns="false" CellPadding="6"
+                DataKeyNames="PId" CssClass="table" Width="100%" OnRowCommand="gv_particularList_RowCommand" >
+                <Columns>
+                       <asp:TemplateField HeaderText="Particular Name" HeaderStyle-Width="30px">
+
+                           <ItemTemplate>
+                               <asp:Label runat="server" ID="lblName" Text='<%#Eval("PName") %>'></asp:Label>
+                               <span class="EditStyle">
+                                 <asp:LinkButton ID="btnEdit" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                                       <i class="fa-regular iconStyle fa-pen-to-square"></i>
+
+                                   </asp:LinkButton>
+
+                               </span>
+
+
+                            </ItemTemplate>
+                       </asp:TemplateField>
+
+
+                    <asp:TemplateField HeaderText="Status" HeaderStyle-Width="30px">
+
+                        <ItemTemplate>
+                            <label class="switch">
+
+                                <asp:CheckBox ID="chkStatus" runat="server" OnCheckedChanged="chkStatus_CheckedChanged" AutoPostBack="true" ClientIDMode="Static" EnableViewState="true" Checked='<%#Convert.ToBoolean(Eval("PStatus")) %>' />
+                                <span class="slider round"></span> 
+                            </label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+            </Columns>
+
+
+            </asp:GridView>
             </div>
-        </div>
-    </div>
+        </ContentTemplate>
+
+     </asp:UpdatePanel>
+       
+
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(document).on("keyup", '.Search_New', function () {
-                searchTable($(this).val(), 'tblDesignationList', '');
-            });
-            $('#tblDesignationList').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100]
-            });
-        });
-        function loaddatatable() {
-            $('#tblDesignationList').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100]
-            });
-        }
+
+<asp:Content runat="server" ID="Content3" ClientIDMode="Static" ContentPlaceHolderID="ScriptContent">
+       <script type='text/javascript'>
         function validateInputs() {
-            if (validateText('txtFeesType', 1, 100, 'Enter a Fee Type') == false) return false;
-            return true;
-        }
-        function editFeesType(Fid) {
-            $('#lblFId').val(Fid);
-            var strFT = $('#r_' + Fid + ' td:first-child').html();
-            $('#txtFeesType').val(strFT);
-            $("#btnSave").val('Update');
-        }
-        function clearAll() {
-            $('#lblFId').val('');
-            $('#txtFeesType').val('');
-            setFocus('txtFeesType');
-            $("#btnSave").val('Save');
-        }
-        function updateSuccess() {
-            loaddatatable();
-            showMessage('Update successfully', 'success');
-            clearIt();
-        }
-        function saveSuccess() {
-            loaddatatable();
-            showMessage('Save successfully', 'success');
-            clearIt();
-        }
-    </script>
+                try {
+                    if (!validateText('txtParticulerName', 1, 100, 'Enter valid particular name')) {
+                        return false;
+                    }
+
+
+                }
+                catch (e) {
+                    showMessage("Validation failed: " + e.message, 'error');
+                    console.log(e.message);
+                    return false;
+                }
+
+               
+
+                return true; 
+            }
+
+
+
+
+        </script>
+
 </asp:Content>
+
+
