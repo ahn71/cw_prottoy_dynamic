@@ -17,122 +17,93 @@ namespace DS.UI.Administration.Finance.FeeManaged
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-                if (!IsPostBack)
+            if (!IsPostBack) {
+                //{
+                //    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "AddParticular.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
+                BindData();
+            }
+
+        }
+
+
+
+        private void BindData()
+        {
+            string Query = "Select *  from ParticularsInfo  Order by PId";
+            DataTable dt = CRUD.ReturnTableNull(Query);
+            gv_particularList.DataSource = dt;
+            gv_particularList.DataBind();
+        }
+
+        protected void gv_particularList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+
+                int rIndex = Convert.ToInt32(e.CommandArgument);
+
+                if (e.CommandName == "Alter")
                 {
-                    if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "AddParticular.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                    LoadFessType("");
+                    int  PId = Convert.ToInt32(gv_particularList.DataKeys[rIndex].Value);
+                    ViewState["--PId--"] = PId;
+                    txtParticulerName.Text = ((Label)gv_particularList.Rows[rIndex].FindControl("lblName")).Text;
+                    btnSave.Text = "Update";
                 }
+
+
+            }
+            catch { }
+        }
+
+        protected void chkStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            GridViewRow row=(GridViewRow)((CheckBox)sender).NamingContainer;
+            bool IsChecked = ((CheckBox)row.FindControl("chkStatus")).Checked;
+            int Pid = Convert.ToInt32(gv_particularList.DataKeys[row.RowIndex].Value);
+            
+            string query = "Update ParticularsInfo set Pstatus='" + (IsChecked ? 1 : 0) + "' where PId="+ Pid;
+            CRUD.ExecuteNonQuery(query);
+            if(IsChecked)
+                lblMessage.InnerText = "error->Particular Activation successful ";
+            else
+                lblMessage.InnerText = "error->Particular Inactive successful ";
+
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (lblFId.Value.ToString().Length == 0)
+
+
+            if (btnSave.Text == "Save")
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; LoadFessType(""); return; }
-                saveFeesType();
+
+                string query = " Insert into  ParticularsInfo(PName,PStatus) Values ('" + txtParticulerName.Text + "',1 )";
+                CRUD.ExecuteNonQuery(query);
+                BindData();
+                ClearField();
+                lblMessage.InnerText = "error->Particular Save successful ";
+
             }
             else
-                updateFeesType();
-        }
-        private Boolean saveFeesType()
-        {
-            try
             {
+                string query = "Update ParticularsInfo set PName='"+ txtParticulerName.Text+ "' where PId=" + ViewState["--PId--"];
+                CRUD.ExecuteNonQuery(query);
+             
+                BindData();
+                btnSave.Text = "Save";
+                ClearField();
+                lblMessage.InnerText = "error->Particular update successful ";
 
-                SqlCommand cmd = new SqlCommand("Insert into  ParticularsInfo   values (@PName) ", DbConnection.Connection);
-
-                cmd.Parameters.AddWithValue("@PName", txtFeesType.Text.Trim());
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    lblMessage.InnerText = "success->Save Successfully ";
-                    txtFeesType.Text = "";
-                    lblFId.Value = "";
-                    LoadFessType("");
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "saveSuccess();", true);
-                }
-
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                LoadFessType("");
-                return false;
             }
         }
-        private Boolean updateFeesType()
+
+        private void ClearField()
         {
-            try
-            {
-
-                SqlCommand cmd = new SqlCommand(" update ParticularsInfo  Set PName=@PName where PId=@PId ", DbConnection.Connection);
-
-                cmd.Parameters.AddWithValue("@PId", lblFId.Value.ToString());
-                cmd.Parameters.AddWithValue("@PName", txtFeesType.Text.Trim());
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    txtFeesType.Text = "";
-                    LoadFessType("");
-                    btnSave.Text = "Save";
-                    lblFId.Value = "";
-                    txtFeesType.Focus();
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
-                }
-
-                return true;
-
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                LoadFessType("");
-                return false;
-            }
+            txtParticulerName.Text = "";
         }
-        private void LoadFessType(string sqlcmd)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "Select *  from ParticularsInfo  Order by PId ";
-                DataTable dt = new DataTable();
-                sqlDB.fillDataTable(sqlcmd, dt);
+    }  
 
-                int totalRows = dt.Rows.Count;
-                string divInfo = "";
-                divInfo = " <table id='tblDesignationList' ='displaclassy'  > ";
-                divInfo += "<thead>";
-                divInfo += "<tr>";
-                divInfo += "<th>Fees Type</th>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<th>Edit</th>";
-                divInfo += "</tr>";
-                divInfo += "</thead>";
-                if (totalRows == 0)
-                {
-                    divInfo += "</table>";                    
-                    divFeesType.Controls.Add(new LiteralControl(divInfo));
-                    return;
-                }
-                divInfo += "<tbody>";
-                string id = "";
-
-                for (int x = 0; x < dt.Rows.Count; x++)
-                {
-                    id = dt.Rows[x]["PId"].ToString();
-                    divInfo += "<tr id='r_" + id + "'>";
-                    divInfo += "<td>" + dt.Rows[x]["PName"].ToString() + "</td>";
-                    if (Session["__Update__"].ToString().Equals("true"))
-                    divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editFeesType(" + id + ");'  />";
-                }
-                divInfo += "</tbody>";
-                divInfo += "<tfoot>";
-                divInfo += "</table>";                
-                divFeesType.Controls.Add(new LiteralControl(divInfo));
-            }
-            catch { }
-        }  
-    }
 }
+        
+

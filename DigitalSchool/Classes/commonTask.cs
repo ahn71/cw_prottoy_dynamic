@@ -667,6 +667,19 @@ FROM UserAccount where UserId  in (select distinct MemberId from TE_NumberSheet 
             dl.DataBind();
             dl.Items.Insert(0, new ListItem("...Select...", "0"));
         }
+
+        public static void LoadParticular(DropDownList dl)
+        {
+
+            dt = new DataTable();
+            dt = CRUD.ReturnTableNull("select PId, PName from ParticularsInfo where PStatus=1 ");
+            dl.DataSource = dt;
+            dl.DataTextField = "PName";
+            dl.DataValueField = "PId";
+            dl.DataBind();
+            dl.Items.Insert(0, new ListItem("...Select...", "0"));
+        }
+
         public static void LoadPaymentStores(DropDownList dl)
         {
 
