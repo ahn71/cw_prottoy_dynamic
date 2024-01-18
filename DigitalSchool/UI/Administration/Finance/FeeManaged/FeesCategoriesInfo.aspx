@@ -48,6 +48,56 @@
             
          }
         }
+        
+         .button-panel{
+             text-align:right;
+             padding:20px;
+         }
+         .main-panel{
+             margin:10px;
+         }
+
+            .group-info-box {
+                border: 1px solid #c1c1c1;
+                padding: 20px;
+
+            }
+/*            .group-info-box .control-label{
+                padding-top: 6px;
+            }
+            .group-info-box .group-title {
+                margin-top: -34px;
+                position: absolute;
+                background: #fff;
+                padding: 0px 10px;
+            }*/
+        .particular_section{
+            margin:20px;
+            padding:10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius:10px;
+
+        }
+        .add-particular{
+            padding:10px;
+            color:white;
+            background-color:forestgreen;
+        }
+        .fa-trash {
+            color: red;
+            font-size: 18px;
+            display: block;
+            text-align: center;
+        }
+        .totalLbl{
+            display:block;
+            text-align:end;
+
+            font-weight:bold;
+        }
+        .amountStyle{
+            font-weight:bold;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
@@ -96,6 +146,8 @@
                                 <asp:AsyncPostBackTrigger ControlID="btnSave" />
                                 <asp:AsyncPostBackTrigger ControlID="dlBatchName" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlPaymentFor" />
+                                <asp:AsyncPostBackTrigger ControlID="ddlParticular" />
+                                <asp:AsyncPostBackTrigger ControlID="btnAddParticular" />
                             </Triggers>
                             <ContentTemplate>
                                 <div class="tgPanel">
@@ -106,104 +158,422 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-                    <div class="col-md-5">
+
+                    <!---------Particular List Section Start -------------------------------------->
+
+                                <div>
+                                               <asp:GridView ID="gvParticularList" runat="server" AutoGenerateColumns="False" CellPadding="6" CssClass="table table-hover table-striped" Width="100%" >
+
+                                     <Columns>
+                                         <asp:TemplateField HeaderText="Batch Name">
+                                             <ItemTemplate >
+                                                 <asp:Label runat="server" ID="lblName" Text=' <%# Eval("Particular") %>'></asp:Label>
+
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="Fee Category Name">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+                                            
+                                        </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Start Date">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="End Date">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Fee Fine">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Particular">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Amount">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+
+
+                                         <asp:TemplateField HeaderText="View" HeaderStyle-CssClass="text-center">
+                                             <ItemTemplate>
+                                                 <asp:LinkButton ID="btnEdit" runat="server" CommandName="edit" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                                       <i class="fa-regular fa-pen-to-square"></i>
+
+                                                 </asp:LinkButton>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Update" HeaderStyle-CssClass="text-center">
+                                             <ItemTemplate>
+                                                 <asp:LinkButton ID="btnView" runat="server" CommandName="view" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                                      <i class="fa-regular fa-eye"></i>
+
+                                                 </asp:LinkButton>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+
+
+
+                                     </Columns>
+
+                                 </asp:GridView>           <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" CssClass="table table-hover table-striped" Width="100%" >
+
+                                     <Columns>
+                                         <asp:TemplateField HeaderText="Batch Name">
+                                             <ItemTemplate >
+                                                 <asp:Label runat="server" ID="lblName" Text=' <%# Eval("Particular") %>'></asp:Label>
+
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="Fee Category Name">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+                                            
+                                        </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Start Date">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="End Date">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Fee Fine">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Particular">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Amount">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+
+                                         </asp:TemplateField>
+
+
+
+                                         <asp:TemplateField HeaderText="View" HeaderStyle-CssClass="text-center">
+                                             <ItemTemplate>
+                                                 <asp:LinkButton ID="btnEdit" runat="server" CommandName="edit" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                                       <i class="fa-regular fa-pen-to-square"></i>
+
+                                                 </asp:LinkButton>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Update" HeaderStyle-CssClass="text-center">
+                                             <ItemTemplate>
+                                                 <asp:LinkButton ID="btnView" runat="server" CommandName="view" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                                      <i class="fa-regular fa-eye"></i>
+
+                                                 </asp:LinkButton>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+
+
+
+                                     </Columns>
+
+                                 </asp:GridView>
+                                 </div>
+                       
+
+
+
+
+
+
+
+
+                    <!---------Particular List Section End ---------------------------------------->
+
+                    <div class="col-md-12 m-2">
                         <asp:UpdatePanel runat="server" ID="updatepanel1" UpdateMode="Conditional">
                             <Triggers>    
                                 <asp:AsyncPostBackTrigger ControlID="dlBatchName" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlPaymentFor" />
                             </Triggers>
                             <ContentTemplate>
+
+
                                 <div class="tgPanel">
                                     <asp:HiddenField runat="server" ClientIDMode="Static" ID="hfAcademicInfo" Value="0" />
                                     <div class="tgPanelHead">Fees Category</div>
-                                    <div class="row tbl-controlPanel">
-	                                    <div class="col-sm-10 col-sm-offset-1">   
-                                             <div class="form-group row">
-			                                    <label class="col-sm-4">Payment For</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:DropDownList ID="ddlPaymentFor" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static"
-                                                    AutoPostBack="true" OnSelectedIndexChanged="ddlPaymentFor_SelectedIndexChanged">
-                                                        <%--<asp:ListItem Value="0">...Select...</asp:ListItem>
-                                                        <asp:ListItem Value="admission">Admission</asp:ListItem>
-                                                        <asp:ListItem Value="regular">Regular Fee</asp:ListItem>
-                                                        <asp:ListItem Value="openPayment">Open Payment</asp:ListItem>--%>
-                                                </asp:DropDownList>
-			                                    </div>
-		                                    </div>
 
-                                             
+                             <div class="main-panel">
+                             <div class="row form-group"> <!------------Start----------------->
 
-                                            <asp:Panel runat="server" ClientIDMode="Static" ID="pnlAcademicInfo">
-		                                    <div class="form-group row">
-			                                    <label class="col-sm-4">Batch Name</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:DropDownList ID="dlBatchName" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static"
-                                                    OnSelectedIndexChanged="dlBatchName_SelectedIndexChanged" AutoPostBack="true">
-                                                </asp:DropDownList>
-			                                    </div>
-		                                    </div>
-                                             <div class="form-group row">
-			                                    <label class="col-sm-4">Group</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:DropDownList ID="ddlGroup" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static"
-                                                    >
-                                                        
-                                                </asp:DropDownList>
-			                                    </div>
-		                                    </div>                                           
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4">Exam</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:DropDownList ID="ddlExam" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">
-                                                </asp:DropDownList>
-			                                    </div>
-		                                    </div>
-                                                </asp:Panel>
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4">Fees Category</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:TextBox ID="txtFeesCatName" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
-			                                    </div>
-		                                    </div>
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4">Payment Store</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:DropDownList ID="ddlPaymentStore" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">                                                       
-                                                </asp:DropDownList>
-			                                    </div>
-		                                    </div>
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4">Date of Start</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:TextBox ID="txtDateStart" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
-                                                <asp:CalendarExtender Format="dd-MM-yyyy" ID="CalendarExtender1" runat="server" TargetControlID="txtDateStart"></asp:CalendarExtender>
-			                                    </div>
-		                                    </div>
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4">Date of End</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:TextBox ID="txtDateEnd" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
-                                                <asp:CalendarExtender Format="dd-MM-yyyy" ID="CalendarExtender2" runat="server" TargetControlID="txtDateEnd"></asp:CalendarExtender>
-			                                    </div>
-		                                    </div>
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4">Fine Amount</label>
-			                                    <div class="col-sm-8">
-                                                    <asp:TextBox ID="txtFeesFine" runat="server" ClientIDMode="Static" Text="0" CssClass="input controlLength form-control"></asp:TextBox>
-			                                    </div>
-		                                    </div>
-                                            <div class="form-group row">
-			                                    <label class="col-sm-4"></label>
-			                                    <div class="col-sm-8">
-                                                    <asp:Button CssClass="btn btn-primary" ID="btnSave" ClientIDMode="Static" runat="server" Text="Save"
-                                                    OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                                <input type="button" value="Reset" class="btn btn-default" onclick="clearIt();" />
-			                                    </div>
-		                                    </div>
-	                                    </div>
+                              <div class="col-md-4">
+                                  <div class="row">
+                                      <label for="name" class="col-sm-4 control-label">Payment For <strong class="required">*</strong></label>
+                                      <div class="col-sm-8">
+                                          <asp:DropDownList ID="ddlPaymentFor" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static"
+                                              AutoPostBack="true" OnSelectedIndexChanged="ddlPaymentFor_SelectedIndexChanged">
+                                              <%--<asp:ListItem Value="0">...Select...</asp:ListItem>
+                                                <asp:ListItem Value="admission">Admission</asp:ListItem>
+                                                <asp:ListItem Value="regular">Regular Fee</asp:ListItem>
+                                                <asp:ListItem Value="openPayment">Open Payment</asp:ListItem>--%>
+                                          </asp:DropDownList>
+                                      </div>
+                                  </div>
+                              </div>
+
+                       
+                              <div class="col-md-4">
+                                  <div class="row">
+                                      <label for="namebn" class="col-sm-4 control-label">Fees Category<strong class="required"></strong></label>
+                                      <div class="col-sm-8">
+                                          <asp:TextBox ID="txtFeesCatName" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
+                                      </div>
+                                  </div>
+                              </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <label for="namebn" class="col-sm-4 control-label">Payment Store<strong class="required">*</strong></label>
+                                        <div class="col-sm-8">
+                                            <asp:DropDownList ID="ddlPaymentStore" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">
+                                            </asp:DropDownList>
+                                        </div>
                                     </div>
-                                    
                                 </div>
+
+
+                           
+
+                     </div><!------------End ----------------->
+
+                             <asp:Panel runat="server" ClientIDMode="Static" ID="pnlAcademicInfo">
+                            <div class="row form-group"><!------------Start----------------->
+
+   
+                         <div runat="server" class="col-md-4">
+                             <div class="row">
+                                 <label for="namebn" class="col-sm-4 control-label">Exam<strong class="required">*</strong></label>
+                                 <div class="col-sm-8">
+                                     <asp:DropDownList ID="ddlExam" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">
+                                     </asp:DropDownList>
+                                 </div>
+                             </div>
+                         </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <label for="name" class="col-sm-4 control-label">Batch Name<strong class="required">*</strong></label>
+                                        <div class="col-sm-8">
+                                            <asp:DropDownList ID="dlBatchName" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static" OnSelectedIndexChanged="dlBatchName_SelectedIndexChanged" AutoPostBack="true">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                         <div class="col-md-4">
+                             <div class="row">
+                                 <label for="namebn" class="col-sm-4 control-label">Group<strong class="required"></strong></label>
+                                 <div class="col-sm-8">
+                                     <asp:DropDownList ID="ddlGroup" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">
+                                     </asp:DropDownList>
+                                 </div>
+                             </div>
+                         </div>
+
+
+                            </div>
+                         </asp:Panel>
+                            <!------------End ----------------->
+                     
+
+                            <div class="row form-group"> <!------------Start----------------->                                       
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <label for="name" class="col-sm-4 control-label">Date of Start<strong class="required">*</strong></label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="txtDateStart" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
+                                            <asp:CalendarExtender Format="dd-MM-yyyy" ID="CalendarExtender1" runat="server" TargetControlID="txtDateStart"></asp:CalendarExtender>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <label for="namebn" class="col-sm-4 control-label">Date of End<strong class="required"></strong></label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="txtDateEnd" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
+                                            <asp:CalendarExtender Format="dd-MM-yyyy" ID="CalendarExtender2" runat="server" TargetControlID="txtDateEnd"></asp:CalendarExtender>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <label for="namebn" class="col-sm-4 control-label">Fine Amount<strong class="required">*</strong></label>
+                                        <div class="col-sm-8">
+                                            <asp:TextBox ID="txtFeesFine" runat="server" ClientIDMode="Static" Text="0" CssClass="input controlLength form-control"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <!------------End ----------------->
+
+                        </div>
+
+
+                             <div class="particular_section">
+                             <h6 class="group-title">Particular Section</h6>
+
+                         <div class="row form-group"> <!------------Start----------------->
+
+                                 <div class="col-md-6">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 col-lg-3 control-label">Particular <strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <div class="input-group">
+                                           <asp:DropDownList ID="ddlParticular" runat="server" CssClass=" form-control" ClientIDMode="Static" AutoPostBack="true" >
+<%--                                               <asp:ListItem Value="0">...Select...</asp:ListItem>
+                                               <asp:ListItem Value="admission">Admission</asp:ListItem>
+                                               <asp:ListItem Value="regular">Regular Fee</asp:ListItem>
+                                               <asp:ListItem Value="openPayment">Open Payment</asp:ListItem>--%>
+                                                 </asp:DropDownList>
+
+  
+                                                 <span class="input-group-btn"><asp:Button runat="server" ID="btnParticular" Text="Add+" CssClass="btn btn-success" /></span>
+                                             </div>
+
+                                         </div>
+                                     </div>
+                                 </div>
+
+                       
+                              <div class="col-md-4">
+                                  <div class="row">
+                                      <label for="namebn" class="col-sm-4 control-label">Amount <strong class="required"></strong></label>
+                                      <div class="col-sm-8">
+                                          <asp:TextBox ID="txtAmount" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
+                                      </div>
+                                  </div>
+                              </div>
+
+                       <div class="col-md-2">
+                                  <div class="row">
+                                      <asp:Button runat="server" ID="btnAddParticular" Text="Add Particular+" CssClass="btn btn-success" OnClick="btnAddParticular_Click" />
+         
+                                      </div>
+                                  </div>
+                              </div>
+                               <%--  gridview part--%>
+                         <asp:GridView ID="gvParticularInfo" runat="server"  ShowFooter="true" AutoGenerateColumns="False" CellPadding="6" CssClass="table table-hover table-striped" Width="100%" DataKeyNames="PId" OnRowCommand="gvParticularInfo_RowCommand" OnRowDataBound="gvParticularInfo_RowDataBound">
+                             <FooterStyle BackColor="white" />
+                                     <Columns>
+                                         <asp:TemplateField HeaderText="Particular">
+                                             <ItemTemplate >
+                                                 <asp:Label runat="server" ID="lblName" Text=' <%# Eval("Particular") %>'></asp:Label>
+
+                                             </ItemTemplate>
+                                                <FooterTemplate >
+                                                 <asp:Label runat="server" ID="labeltotaltext"  CssClass="totalLbl" Text="Total Amount "></asp:Label>
+                                             </FooterTemplate>
+                                         </asp:TemplateField>
+                                         <asp:TemplateField HeaderText="Amount">
+                                             <ItemTemplate>
+                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+
+                                             </ItemTemplate>
+                                             
+                                             <FooterTemplate>
+                                                 <asp:Label runat="server" ID="lblTotalAmount"  CssClass="amountStyle" >Total Amount:</asp:Label>
+                                             </FooterTemplate>
+
+                                         </asp:TemplateField>
+
+                                         <asp:TemplateField HeaderText="Delete" HeaderStyle-CssClass="text-center">
+                                             <ItemTemplate>
+                                                 <asp:LinkButton ID="btnEdit" runat="server" CommandName="Remove" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                                       <i class="fa-solid fa-trash"></i></i>
+
+                                                 </asp:LinkButton>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+
+
+
+                                     </Columns>
+
+                                 </asp:GridView>
+
+
+
+
+                               </div>
+                                 <!------------End ----------------->
+                                    <div class="button-panel">
+                                        <asp:Button CssClass="btn btn-primary" ID="btnSave" ClientIDMode="Static" runat="server" Text="Save"
+                                            OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
+                                        <input type="button" value="Reset" class="btn btn-default" onclick="clearIt();" />
+                                    </div>
+
+
+         
+
+                             </div>
+
+
+
+                                   
+
+                                    
+                      </div>
                             </ContentTemplate>
     </asp:UpdatePanel>
                     </div>
@@ -236,7 +606,7 @@
                 if (validateCombo('dlBatchName','0',"Select Batch") == false) return false;
             }             
             if (validateText('txtFeesCatName', 1, 200, "Enter Fees Category") == false) return false;  
-            if (validateCombo('ddlPaymentStore', '0', "Select Payment Store") == false) return false;
+            //if (validateCombo('ddlPaymentStore', '0', "Select Payment Store") == false) return false;
             if (validateText('txtDateStart', 10, 10, "Select Start Date") == false) return false;
             if (validateText('txtDateEnd', 10, 10, "Select End Date") == false) return false;
             return true;

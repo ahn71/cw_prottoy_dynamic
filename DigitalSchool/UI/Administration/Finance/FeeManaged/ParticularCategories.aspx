@@ -117,7 +117,7 @@
 			                                    </div>
                                                 <div class="col-sm-3"></div>
 		                                    </div>
-		                                    <div class="form-group row">
+		                                    <div class="form-group row"> 
 			                                    <label class="col-sm-3">Batch Name</label>
 			                                    <div class="col-sm-6">
                                                     <asp:DropDownList ID="dlBatch" runat="server" CssClass="input form-control" ClientIDMode="Static"
