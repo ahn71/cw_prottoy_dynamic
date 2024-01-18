@@ -35,8 +35,7 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 commonTask.LoadPaymentStores(ddlPaymentStore);
                 BatchEntry.GetDropdownlist(dlBatchName, "True");
                 ClassGroupEntry.GetDropDownWithAll(ddlGroup, -1);//-1 as All
-                ExamInfoEntry.GetExamIdListWithExInSl(ddlExam, "All");
-                 ();
+                ExamInfoEntry.GetExamIdListWithExInSl(ddlExam, "All");                 
                 //stdtypeEntry.GetEntitiesData(ddlStudentType);
 
                 Dataload();

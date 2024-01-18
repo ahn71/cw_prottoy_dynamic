@@ -1733,10 +1733,7 @@ D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\Pd
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CopyComplete
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.dll
 D:\Running projects git hub\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.pdb
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csprojResolveAssemblyReference.cache
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CoreCompileInputs.cache
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.dll
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.BLL.dll.config
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.BLL.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DS.BLL.pdb
@@ -1765,4 +1762,7 @@ D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\PdfSha
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.DAL.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\PdfSharp.resources.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\PdfSharp.Charting.resources.dll
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csprojResolveAssemblyReference.cache
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CopyComplete
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.dll
+D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.pdb
