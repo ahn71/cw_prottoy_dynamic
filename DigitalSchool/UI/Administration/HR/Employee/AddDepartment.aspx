@@ -3,6 +3,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        body {
+            background: #ffffff;
+        }
+
         .tgPanel {
             width: 100%;
         }
@@ -35,134 +39,134 @@
             border-bottom: 1px solid #ecedee !important;
         }
 
-          <style type="text/css">
-    .gridRow {
-        border: 1px solid #999999; /* Set the border style for each row */
-    }
-    .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+        <style type="text/css" >
+        .gridRow {
+            border: 1px solid #999999; /* Set the border style for each row */
+        }
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
 
-.slider.round:before {
-  border-radius: 50%;
-}
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
 
 
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
 
-.slider.round:before {
-  border-radius: 50%;
-}
-
+            .slider.round:before {
+                border-radius: 50%;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -219,72 +223,75 @@ input:checked + .slider:before {
         </div>
     </div>
     <div>
-      <div>
-          <label id="lblDeptName" runat="server">Department</label>
-          <asp:TextBox ID="txtDepartment" runat="server"></asp:TextBox>
-          <asp:CheckBox runat="server" ID="chkIsteacher" Text="IsTeacher"/>
-          <asp:CheckBox runat="server" ID="chkStatus" Text="IsActive"/>
-           
-      </div>
-    <asp:Button runat="server" ID="btnSave" Text="Save" OnClick="btnSave_Click"/>
+        <div>
+            <label id="lblDeptName" runat="server">Department</label>
+            <asp:TextBox ID="txtDepartment" runat="server"></asp:TextBox>
+            <asp:CheckBox runat="server" ID="chkIsteacher" Text="IsTeacher" />
+            <asp:CheckBox runat="server" ID="chkStatus" Text="IsActive" />
 
-    <asp:GridView ID="gvDepartment"  runat="server" AlternatingRowStyle-CssClass="alt"    AutoGenerateColumns="False" CssClass="table"  OnRowCommand="gvDepartment_RowCommand"
-    BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
-    DataKeyNames="Did" GridLines="Vertical" 
-    PagerStyle-CssClass="pgr" 
-    Width="70%">
-         <HeaderStyle BackColor="#006666" CssClass="bg-primary"/>
+        </div>
+        <asp:Button runat="server" ID="btnSave" Text="Save" OnClick="btnSave_Click" />
 
-    <RowStyle CssClass="gridRow" />
-     
-         <Columns>
-           
-      <asp:TemplateField HeaderText="SL">
-            <ItemTemplate>
-                 <%#Container.DataItemIndex+1 %>
-            </ItemTemplate>
-        </asp:TemplateField>
+        <asp:GridView ID="gvDepartment" runat="server" AlternatingRowStyle-CssClass="alt"
+            AutoGenerateColumns="False" CssClass="table" OnRowCommand="gvDepartment_RowCommand"
+            BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2"
+            DataKeyNames="Did" GridLines="Vertical"
+            PagerStyle-CssClass="pgr"
+            Width="70%">
+            <HeaderStyle BackColor="#006666" CssClass="bg-primary" />
 
-<asp:TemplateField HeaderText="Department Name">
-    <ItemTemplate>
-        <asp:Label ID="lblDname" runat="server" Text='<%# Eval("Dname") %>'></asp:Label>
-    </ItemTemplate>          
-</asp:TemplateField>
+            <RowStyle CssClass="gridRow" />
+
+            <Columns>
+
+                <asp:TemplateField HeaderText="SL">
+                    <ItemTemplate>
+                        <%#Container.DataItemIndex+1 %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Department Name">
+                    <ItemTemplate>
+                        <asp:Label ID="lblDname" runat="server" Text='<%# Eval("Dname") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
 
-   <asp:TemplateField HeaderText="Update">
-    <ItemTemplate>
-     <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
+                <asp:TemplateField HeaderText="Update">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%# Container.DataItemIndex %>'>
     <i class="far fa-edit"></i>
-</asp:LinkButton>
-    </ItemTemplate>
-</asp:TemplateField>
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-        <asp:TemplateField HeaderText="Status">
-          <ItemTemplate>
-             <label class="switch">
-    <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true" 
-                  Checked='<%# Convert.ToBoolean(Eval("DStatus")) %>' />
-    <span class="slider round"></span>
-</label>
-   
-         </ItemTemplate>
-        </asp:TemplateField>
+                <asp:TemplateField HeaderText="Status">
+                    <ItemTemplate>
+                        <label class="switch">
+                            <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged"
+                                AutoPostBack="true"
+                                Checked='<%# Convert.ToBoolean(Eval("DStatus")) %>' />
+                            <span class="slider round"></span>
+                        </label>
 
-       <asp:TemplateField HeaderText="IsTeacher">
-    <ItemTemplate>
-        <label class="switch">
-            <asp:CheckBox ID="chkSwitchIsTeacher" runat="server" OnCheckedChanged="chkSwitchIsTeacher_CheckedChanged" ClientIDMode="static" EnableViewState="true" AutoPostBack="true" 
-                          Checked='<%# Convert.ToBoolean(Eval("IsTeacher")) %>' />
-            <span class="slider round"></span>
-        </label>
-    </ItemTemplate>
-</asp:TemplateField>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-       </Columns>
+                <asp:TemplateField HeaderText="IsTeacher">
+                    <ItemTemplate>
+                        <label class="switch">
+                            <asp:CheckBox ID="chkSwitchIsTeacher" runat="server" OnCheckedChanged="chkSwitchIsTeacher_CheckedChanged"
+                                ClientIDMode="static" EnableViewState="true" AutoPostBack="true"
+                                Checked='<%# Convert.ToBoolean(Eval("IsTeacher")) %>' />
+                            <span class="slider round"></span>
+                        </label>
+                    </ItemTemplate>
+                </asp:TemplateField>
 
-    </asp:GridView>
-  </div>
+            </Columns>
+
+        </asp:GridView>
+    </div>
 
 
 </asp:Content>

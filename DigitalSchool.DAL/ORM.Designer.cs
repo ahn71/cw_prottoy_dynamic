@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.DAL\ORM.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\cw_prottoy_dynamic\DigitalSchool.DAL\ORM.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
