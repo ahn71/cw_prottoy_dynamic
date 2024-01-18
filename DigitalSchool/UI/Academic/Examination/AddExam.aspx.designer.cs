@@ -69,6 +69,15 @@ namespace DS.UI.Academics.Examination
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aExamHome;
 
         /// <summary>
+        /// upgvExamTabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upgvExamTabel;
+
+        /// <summary>
         /// lblExamName control.
         /// </summary>
         /// <remarks>
@@ -85,24 +94,6 @@ namespace DS.UI.Academics.Examination
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtExamName;
-
-        /// <summary>
-        /// lblOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrder;
-
-        /// <summary>
-        /// txtOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrder;
 
         /// <summary>
         /// lblType control.
@@ -139,24 +130,6 @@ namespace DS.UI.Academics.Examination
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rdoOthers;
-
-        /// <summary>
-        /// lblSatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSatus;
-
-        /// <summary>
-        /// chkStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkStatus;
 
         /// <summary>
         /// btnSave control.

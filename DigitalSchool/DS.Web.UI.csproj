@@ -2087,6 +2087,7 @@
     <Content Include="UI\Academic\Examination\MarksEntryPanel.aspx" />
     <Content Include="UI\Academic\Examination\ResultPublish.aspx" />
     <Content Include="UI\Academic\Examination\SubjectQuestionPattern.aspx" />
+    <Content Include="UI\Academic\Examination\WebForm1.aspx" />
     <Content Include="UI\Academic\Students\admission-approval.aspx" />
     <Content Include="UI\Academic\Students\StdActivation.aspx" />
     <Content Include="UI\Academic\Students\StdSectionChange.aspx" />
@@ -4040,6 +4041,13 @@
     </Compile>
     <Compile Include="UI\Academic\Examination\SubjectQuestionPattern.aspx.designer.cs">
       <DependentUpon>SubjectQuestionPattern.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Academic\Examination\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UI\Academic\Examination\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="UI\Academic\StudentGuide\AssignGuideTeacher.aspx.cs">
       <DependentUpon>AssignGuideTeacher.aspx</DependentUpon>

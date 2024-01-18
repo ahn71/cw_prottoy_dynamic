@@ -143,7 +143,7 @@
         }
 
         td, th {
-            text-align: center;
+            text-align: left;
             border: 1px solid #ddd !important;
         }
 
@@ -154,6 +154,24 @@
         .border-1{
             border:1px solid #ddd;
         }
+
+      .update-icon{
+        display:inline-block;
+        padding: 0 6px;
+        height: 30px;
+        width: 30px;
+        line-height:30px;
+        text-align:center;
+        border-radius: 50%;
+        background:#99dde7;
+        color:#1e1e1e;
+        font-size:12px;
+        opacity:0;
+        transition:0.1s all ease;
+      }
+      td:hover .update-icon{
+        opacity:1;
+      }
         
     </style>
 
@@ -191,23 +209,27 @@
         <div class="inputPannel">
 
             <div class="row">
-                <div class="col-lg-3">
-                     <asp:Label runat="server" ID="lblSubjectName" Text="Subject Name"></asp:Label>
-                     <asp:DropDownList CssClass="form-control" ID="ddlSubjectList" runat="server"></asp:DropDownList>
-                </div>
+                 <div class="col-lg-3">
+        <asp:Label runat="server" ID="lblSubjectName" Text="Subject Name"></asp:Label>
+        <asp:DropDownList CssClass="form-control" ID="ddlSubjectList" runat="server" oninput="validateSubject();"></asp:DropDownList>
+        <span id="subjectError" style="color: red;"></span>
+    </div>
 
-                <div class="col-lg-3">
-                    <asp:Label runat="server" ID="lblCourseName" Text="Course Name"></asp:Label>
-                    <asp:TextBox  CssClass="form-control" ID="txtCourseName" runat="server"></asp:TextBox>
-                </div>
+    <div class="col-lg-3">
+        <asp:Label runat="server" ID="lblCourseName" Text="Course Name"></asp:Label>
+        <asp:TextBox CssClass="form-control" ID="txtCourseName" runat="server" oninput="validateCourseName();"></asp:TextBox>
+        <span id="courseNameError" style="color: red;"></span>
+    </div>
 
-                <div class="col-lg-3">
-                    <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
-                    <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server"></asp:TextBox>
-                </div>
-                <div class="col lg-3 mt-3">
-                  <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSave_Click" />
-                </div>
+    <div class="col-lg-3">
+        <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
+        <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server" oninput="validateOrdering();"></asp:TextBox>
+        <span id="orderingError" style="color: red;"></span>
+    </div>
+
+    <div class="col lg-3 mt-3">
+        <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClientClick="return validateForm();" OnClick="btnSave_Click" />
+    </div>
 
             </div>
 
@@ -233,67 +255,65 @@
             </div>
         </div>
 
-        <div class="gvTable">
-            <asp:GridView ID="gvCourseSubList" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" OnRowCommand="gvCourseSubList_RowCommand" OnPageIndexChanging="gvCourseSubList_PageIndexChanging"
-                CssClass="table" AllowPaging="True" PageSize="10"
-                DataKeyNames="CourseId,SubId" GridLines="Vertical"
-                PagerStyle-CssClass="pgr"
-                Width="100%">
-             
-                <RowStyle CssClass="gridRow" />
-                <HeaderStyle CssClass="gridHeader" />
-                <Columns>
+   <asp:UpdatePanel runat="server" ID="upgvTable" ClientIDMode="Static">
+            <ContentTemplate>
+                 <div class="gvTable">
+                     <asp:DropDownList runat="server" ID="ddlPageIndex" AutoPostBack="true" EnableViewState="true"  OnSelectedIndexChanged="ddlPageIndex_SelectedIndexChanged">
+                        <asp:ListItem Text="Select Page"></asp:ListItem>
+                         <asp:ListItem Text="10" Value="10" />
+                         <asp:ListItem Text="20" Value="20" />
+                         <asp:ListItem Text="50" Value="50" />
+                     </asp:DropDownList>
+     <asp:GridView ID="gvCourseSubList" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" OnRowCommand="gvCourseSubList_RowCommand" OnPageIndexChanging="gvCourseSubList_PageIndexChanging"
+         CssClass="table" AllowPaging="True" PageSize="20"
+         DataKeyNames="CourseId,SubId" GridLines="Vertical"
+         PagerStyle-CssClass="pgr"
+         Width="100%">
+      
+         <RowStyle CssClass="gridRow" />
+         <HeaderStyle CssClass="gridHeader" />
+         <Columns>
 
-                    <asp:TemplateField HeaderText="SL">
-                        <ItemTemplate>
-                            <%#Container.DataItemIndex+1 %>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+             <asp:TemplateField HeaderText="SL">
+                 <ItemTemplate>
+                     <%#Container.DataItemIndex+1 %>
+                 </ItemTemplate>
+             </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Subject Name">
-                        <ItemTemplate>
-                            <asp:Label ID="lblSubName" runat="server" Text='<%# Eval("SubName") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+             <asp:TemplateField HeaderText="Subject Name">
+                 <ItemTemplate>
+                     <asp:Label ID="lblSubName" runat="server" Text='<%# Eval("SubName") %>'></asp:Label>
+                      <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+                 <span class="update-icon" ><i class="fas fa-edit"></i></span>
+                               </asp:LinkButton>
+                 </ItemTemplate>
+             </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Course Tittle">
-                        <ItemTemplate>
-                            <asp:Label ID="lblCourse" runat="server" Text='<%# Eval("CourseName") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+             <asp:TemplateField HeaderText="Course Tittle">
+                 <ItemTemplate>
+                     <asp:Label ID="lblCourse" runat="server" Text='<%# Eval("CourseName") %>'></asp:Label>
+                 </ItemTemplate>
+             </asp:TemplateField>
 
-                    <asp:TemplateField HeaderText="Orderning">
-                        <ItemTemplate>
-                            <asp:Label ID="lblOrder" runat="server" Text='<%# Eval("Ordering") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+          <asp:TemplateField HeaderText="Status">
+                 <ItemTemplate>
+                     <label class="switch">
+                         <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true"
+                             EnableViewState="true" Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
+                         <span class="slider round"></span>
+                     </label>
 
-
-
-                    <asp:TemplateField HeaderText="Update">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
-            <i class="far fa-edit"></i>
-                            </asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-
-                    <asp:TemplateField HeaderText="Status">
-                        <ItemTemplate>
-                            <label class="switch">
-                                <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true"
-                                    EnableViewState="true" Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
-                                <span class="slider round"></span>
-                            </label>
-
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                 </ItemTemplate>
+             </asp:TemplateField>
 
 
-                </Columns>
+         </Columns>
 
-            </asp:GridView>
-        </div>
+     </asp:GridView>
+ </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+       
 
     </div>
 

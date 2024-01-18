@@ -1,6 +1,37 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="ExamRoutine.aspx.cs" Inherits="DS.UI.Academic.Examination.ExamRoutine" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">   
+
+    <style>
+       
+        th {
+            background: #ddd !important;
+        }
+
+        td, th {
+           /* text-align: center;*/
+            border: 1px solid #ddd !important;
+        }
+
+        .table {
+            border: 0 !important;
+            margin: 10px 0;
+        }
+        .border-1{
+            border:1px solid #ddd;
+        }
+
+
+span#MainContent_lblType {
+    font-weight: 700;
+    display: block;
+    margin-top: -2px;
+}
+.table-wrapper tbody tr td label{
+    padding:0 10px;
+    display:inline-block;
+}
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
      <asp:UpdatePanel ID="uplMessage" runat="server">
@@ -29,7 +60,7 @@
         </div>
     </div>
     <div class="row" id="divSearchPanel" runat="server">
-        <div class="col-md-12">
+        
             <div class="tgPanel">
                 <div class="tgPanelHead">
                 </div>
@@ -41,138 +72,87 @@
                         <asp:AsyncPostBackTrigger ControlID="gvExamRoutine" />                        
                     </Triggers>
                     <ContentTemplate>
-                        <div class="row tbl-controlPanel" >
-                            <div class="col-sm-8 col-sm-offset-2" runat="server" id="tblOp">
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Shift</label>
-                                    <div class="col-sm-10">
-                                        <asp:DropDownList ID="ddlShift" runat="server" CssClass="input controlLengthMin form-control" ClientIDMode="Static">                                    
+                       <%-- <div class="row tbl-controlPanel" >
+                            <div class="col-sm-8 col-sm-offset-2" runat="server" id="tblOp">--%>
+
+                                <div class="row">
+                             <div class="col-lg-3">
+                                        
+                                         <label>Shift</label>
+                                      <asp:DropDownList ID="ddlShift" runat="server" CssClass="input  controlLengthMin form-control" ClientIDMode="Static">                                    
+                                  </asp:DropDownList>
+                                                           
+                               </div>
+                               
+                              <div class="col-lg-3">
+                                   
+                                    <label>Batch</label>    
+                                  <asp:DropDownList ID="ddlBatch" runat="server" ClientIDMode="Static" CssClass="input controlLengthMin form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="True">
                                     </asp:DropDownList>
-                                        </div>                               
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Batch</label>                                  
-                                       <div class="col-sm-10"> 
-                                            <asp:DropDownList ID="ddlBatch" runat="server" ClientIDMode="Static" CssClass="input controlLengthMin form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="True">
+                                  
+                               </div>
+                                 <div class="col-lg-3">
+                                   
+                                    <labe>Group</labe>
+                                   <asp:DropDownList ID="ddlGroup" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="ddlGroup_SelectedIndexChanged" CssClass="input controlLengthMin form-control" Enabled="false" >
                                     </asp:DropDownList>
-                                    </div>                                   
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Group</label>
-                                    <div class="col-sm-10">
-                                        <asp:DropDownList ID="ddlGroup" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="ddlGroup_SelectedIndexChanged" CssClass="input controlLengthMin form-control" Enabled="false" >
-                                    </asp:DropDownList>
-                                        </div>                                   
-                                </div>                               
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Exam Id</label>
-                                    <div class="col-sm-10">
+                                
+                                 </div>  
+                                  <div class="col-lg-3">
+                                 
+                                    <label>Exam Id</label>
+                                   
                                         <asp:DropDownList ID="ddlExamId" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"
                                          AutoPostBack="True" OnSelectedIndexChanged="ddlExamId_SelectedIndexChanged">
                                         <asp:ListItem Value="0">...Select Exam Id...</asp:ListItem>
                                     </asp:DropDownList>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Subject</label>
-                                    <div class="col-sm-10">
+                              
+                               
+                                  </div>
+                                 <div class="col-lg-3">
+                                       
+                                    <label>Subject</label>
+                                   
                                         <asp:DropDownList ID="ddlSubject" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">         
                                     </asp:DropDownList>
-                                    </div>
-                                </div>
-                                    <div class="form-group row">
-                                    <label class="col-sm-2">Date</label>
-                                    <div class="col-sm-10">
+                                  
+                                   </div>
+
+                                    <div class="col-lg-3">
+                                
+                                    <label>Date</label>
+                                 
                                         <asp:TextBox ID="txtDate" runat="server" ClientIDMode="Static" AutoComplete="off" CssClass="input form-control"></asp:TextBox>
                                         <asp:CalendarExtender ID="CalendarExtender2" TargetControlID="txtDate" Format="dd-MM-yyyy" runat="server"></asp:CalendarExtender>                                           
+                                  
+                                 </div>
+
+                                    <div class="col-lg-3">
+                                         
+                                    <label>Start Time</label>
+                                     <br />
+                                   <asp:TextBox runat="server" ID="txtStartime"   type="time" CssClass="timepicker  input form-control"></asp:TextBox>
+                                 
+                                     </div>
+
+                                    <div class="col-lg-3">
+                                       
+                                    <label>End Time</label>
+                                      <br />
+
+                                    <asp:TextBox runat="server" ID="txtEndTime" type="time"  CssClass="timepicker input form-control" ></asp:TextBox>                                        
+                                   
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Start Time</label>
-                                    <div class="col-sm-10">
-                                        <asp:DropDownList ID="ddlStartTimeHH" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">   
-                                                <asp:ListItem Value="0">...HH...</asp:ListItem>
-                                                <asp:ListItem>01</asp:ListItem>
-                                                <asp:ListItem>02</asp:ListItem>
-                                                <asp:ListItem>03</asp:ListItem>
-                                                <asp:ListItem>04</asp:ListItem>
-                                                <asp:ListItem>05</asp:ListItem>
-                                                <asp:ListItem>06</asp:ListItem>
-                                                <asp:ListItem>07</asp:ListItem>
-                                                <asp:ListItem>08</asp:ListItem>
-                                                <asp:ListItem>09</asp:ListItem>
-                                                <asp:ListItem>10</asp:ListItem>
-                                                <asp:ListItem>11</asp:ListItem>
-                                                <asp:ListItem>12</asp:ListItem>
-                                    </asp:DropDownList>
-                                          <asp:DropDownList ID="ddlStartTimeMM" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">                                              
-                                              <asp:ListItem>00</asp:ListItem>                                            
-                                                <asp:ListItem>05</asp:ListItem>
-                                                <asp:ListItem>10</asp:ListItem>
-                                                <asp:ListItem>15</asp:ListItem>
-                                                <asp:ListItem>20</asp:ListItem>
-                                                <asp:ListItem>25</asp:ListItem>
-                                                <asp:ListItem>30</asp:ListItem>
-                                                <asp:ListItem>35</asp:ListItem>
-                                                <asp:ListItem>40</asp:ListItem>
-                                                <asp:ListItem>45</asp:ListItem>
-                                                <asp:ListItem>50</asp:ListItem>
-                                                <asp:ListItem>55</asp:ListItem>
-                                    </asp:DropDownList>
-                                         <asp:DropDownList ID="ddlStartTimeTT" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">                                                 
-                                              <asp:ListItem>AM</asp:ListItem>                                               
-                                                <asp:ListItem>PM</asp:ListItem>
-                                    </asp:DropDownList>                                          
-                                    </div>
-                                </div> 
-                                  <div class="form-group row">
-                                    <label class="col-sm-2">End Time</label>
-                                    <div class="col-sm-10">
-                                        <asp:DropDownList ID="ddlEndTimeHH" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">   
-                                                <asp:ListItem Value="0">...HH...</asp:ListItem>
-                                                <asp:ListItem>01</asp:ListItem>
-                                                <asp:ListItem>02</asp:ListItem>
-                                                <asp:ListItem>03</asp:ListItem>
-                                                <asp:ListItem>04</asp:ListItem>
-                                                <asp:ListItem>05</asp:ListItem>
-                                                <asp:ListItem>06</asp:ListItem>
-                                                <asp:ListItem>07</asp:ListItem>
-                                                <asp:ListItem>08</asp:ListItem>
-                                                <asp:ListItem>09</asp:ListItem>
-                                                <asp:ListItem>10</asp:ListItem>
-                                                <asp:ListItem>11</asp:ListItem>
-                                                <asp:ListItem>12</asp:ListItem>
-                                    </asp:DropDownList>
-                                          <asp:DropDownList ID="ddlEndTimeMM" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">                                                                                   
-                                              <asp:ListItem>00</asp:ListItem>                                               
-                                                <asp:ListItem>05</asp:ListItem>
-                                                <asp:ListItem>10</asp:ListItem>
-                                                <asp:ListItem>15</asp:ListItem>
-                                                <asp:ListItem>20</asp:ListItem>
-                                                <asp:ListItem>25</asp:ListItem>
-                                                <asp:ListItem>30</asp:ListItem>
-                                                <asp:ListItem>35</asp:ListItem>
-                                                <asp:ListItem>40</asp:ListItem>
-                                                <asp:ListItem>45</asp:ListItem>
-                                                <asp:ListItem>50</asp:ListItem>
-                                                <asp:ListItem>55</asp:ListItem>
-                                    </asp:DropDownList>
-                                         <asp:DropDownList ID="ddlEndTimeTT" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">                                                 
-                                              <asp:ListItem>AM</asp:ListItem>                                               
-                                                <asp:ListItem>PM</asp:ListItem>
-                                    </asp:DropDownList>                                          
-                                    </div>
-                                </div> 
-                                <div class="form-group row">                                    
-                                    <div class="col-sm-2 col-sm-offset-2">     
-                                        <asp:CheckBox Visible="false" runat="server" ID="chkForCoutAsFinalResult" />
+
+                                    <div class="col-lg-3 mt-2 d-flex gap-3">
+                                  <asp:CheckBox Visible="false" runat="server"  ID="chkForCoutAsFinalResult" />
                                     
                                         <asp:Button ID="btnSave" Text="Save" ClientIDMode="Static" runat="server" 
                                           OnClick="btnSave_Click" CssClass="btn btn-primary" OnClientClick="return validateInputs();"/>  
-                                        </div>
-                                    <div class="col-sm-2">  
-                                        <asp:Button ID="btnPrintPreview" runat="server" Text="Print" CssClass="btn btn-primary"  ClientIDMode="Static" OnClick="btnPrintPreview_Click" />                             
-                                    </div>
+
+                       <asp:Button ID="btnPrintPreview" runat="server" Text="Print" CssClass="btn btn-primary mr5"  ClientIDMode="Static" OnClick="btnPrintPreview_Click" />                             
+                                   </div>
+
                                     <div class="col-sm-12 col-sm-offset-2">
                              <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                                 <ProgressTemplate>                           
@@ -184,13 +164,17 @@
                                 </ProgressTemplate>                        
                             </asp:UpdateProgress>
                                     </div>                                    
-                                </div>                         
-                            </div>
-                        </div>
+                                </div>     
+                                    </div>
+                               </div>
+                          <%--  </div>
+                        </div>--%>
                                                                       
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
+
+
 
             <div class="tgPanel">
                  <asp:UpdatePanel ID="up2" runat="server" UpdateMode="Conditional">
@@ -200,7 +184,7 @@
             </Triggers>
             <ContentTemplate>
                  <asp:GridView ID="gvExamRoutine" runat="server" AutoGenerateColumns="false" DataKeyNames="ExamRoutineID,SubID,CourseID,ExamID,ClsGrpID,BatchID,ShiftID" 
-                     CssClass="table table-bordered" BackColor="White" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White" OnRowCommand="gvExamRoutine_RowCommand">
+                     CssClass="table table-bordered" BackColor="White" HeaderStyle-BackColor="Black" HeaderStyle-ForeColor="White" OnRowCommand="gvExamRoutine_RowCommand" Width="103%">
                      <%--<PagerStyle CssClass="gridview" />--%>
             <Columns>
                   <asp:TemplateField HeaderText="SL"> 
@@ -230,7 +214,7 @@
                     </div>
         </div>
        
-    </div>    
+    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
    

@@ -101,17 +101,7 @@
     display: block;
     height: 15px;
 }
-        /*.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}*/
+        
         input:focus {
     box-shadow: 0px 0px 0px 0px !important;
     border: 1px solid rgba(255,255,255, 0.8);
@@ -145,7 +135,7 @@
         }
 
         td, th {
-            text-align: center;
+           /* text-align: center;*/
             border: 1px solid #ddd !important;
         }
 
@@ -156,11 +146,29 @@
         .border-1{
             border:1px solid #ddd;
         }
+          .update-icon{
+      display:inline-block;
+      padding: 0 6px;
+      height: 30px;
+      width: 30px;
+      line-height:30px;
+      text-align:center;
+      border-radius: 50%;
+      background:#99dde7;
+      color:#1e1e1e;
+      font-size:12px;
+      opacity:0;
+      transition:0.1s all ease;
+  }
+  td:hover .update-icon{
+      opacity:1;
+  }
+        
     </style>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:UpdatePanel ID="uplMessage" runat="server">
+    <asp:UpdatePanel ID="uplMessage" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
         </ContentTemplate>
@@ -220,32 +228,22 @@
               <h4 class="text-right fw-bold mb-3" style="float: left;">Add Department</h4>
           </div>
       </div>
-      <div class="inputPannel">
 
+
+      <div class="inputPannel">
           <div class="row">
 
               <div class="col-lg-4">
                   <asp:Label runat="server" ID="lblDeptName" Text="Department Name"></asp:Label>
                   <asp:TextBox  CssClass="form-control" ID="txtDepartment" runat="server"></asp:TextBox>
-              </div>            
-
-          </div>
-
-  </div>
-
-      <div class="d-flex gap-3 justify-content-end align-items-center py-3">
-          <div class="active-wrapper">
-             <asp:Label runat="server" ID="lblStats" Text="Is Teacher?"></asp:Label>
-              <asp:CheckBox  for="lblStats" ID="chkIsteacher" runat="server" />
-          </div>
-
-          <div class="active-wrapper">
-           <asp:Label runat="server" ID="lblSatus" Text="Is Active?"></asp:Label>
-            <asp:CheckBox  for="lblStats" ID="chkStatus" runat="server" />
-        </div>
-
-           <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click" Text="Save" /> 
+              </div> 
+              
+              <div class="col-lg-4" style="margin-top:17px;">
+                    <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click" Text="Save" /> 
           
+              </div>
+
+          </div>
       </div>
 </div>
 
@@ -260,7 +258,9 @@
              </div>
          </div>
    </div>
-    <div class="gvTable">
+<asp:UpdatePanel runat="server" ID="upPannel" ClientIDMode="Static">
+    <ContentTemplate>
+            <div class="gvTable">
             <asp:GridView ID="gvDepartment"  runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" CssClass="table"  OnRowCommand="gvDepartment_RowCommand"
     BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
     DataKeyNames="Did" GridLines="Vertical" 
@@ -281,16 +281,10 @@
 <asp:TemplateField HeaderText="Department Name">
     <ItemTemplate>
         <asp:Label ID="lblDname" runat="server" Text='<%# Eval("Dname") %>'></asp:Label>
-    </ItemTemplate>          
-</asp:TemplateField>
-
-
-   <asp:TemplateField HeaderText="Update">
-    <ItemTemplate>
-     <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
-    <i class="far fa-edit"></i>
+             <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+       <span class="update-icon" ><i class="fas fa-edit"></i></span>
 </asp:LinkButton>
-    </ItemTemplate>
+    </ItemTemplate>          
 </asp:TemplateField>
 
         <asp:TemplateField HeaderText="Status">
@@ -318,42 +312,45 @@
 
     </asp:GridView>
    </div>
+
+    </ContentTemplate>
+</asp:UpdatePanel>
+   
+
   </div>
 
+ 
+</asp:Content>
 
-
-
-    
-    <script type="text/javascript">
-        function filterGridView() {
+<asp:Content ID="content3" runat="server" ContentPlaceHolderID="ScriptContent">
+        <script type="text/javascript">
+            function filterGridView() {
             
-            var searchValue = document.getElementById('<%=txtSearch.ClientID%>').value.toLowerCase();
-             var grid = document.getElementById('<%=gvDepartment.ClientID%>');
-             var rows = grid.getElementsByTagName('tr');
+                var searchValue = document.getElementById('<%=txtSearch.ClientID%>').value.toLowerCase();
+            var grid = document.getElementById('<%=gvDepartment.ClientID%>');
+                var rows = grid.getElementsByTagName('tr');
 
-             for (var i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
-                 var row = rows[i];
-                 var cells = row.getElementsByTagName('td');
-                 var found = false;
+                for (var i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+                    var row = rows[i];
+                    var cells = row.getElementsByTagName('td');
+                    var found = false;
 
-                 for (var j = 0; j < cells.length; j++) {
-                     var cellText = cells[j].innerText.toLowerCase();
+                    for (var j = 0; j < cells.length; j++) {
+                        var cellText = cells[j].innerText.toLowerCase();
 
-                     if (cellText.indexOf(searchValue) > -1) {
-                         found = true;
-                         break;
-                     }
-                 }
+                        if (cellText.indexOf(searchValue) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
 
-                 if (found) {
-                     row.style.display = ''; // Show the row if found
-                 } else {
-                     row.style.display = 'none'; // Hide the row if not found
-                 }
-             }
-         }
-    </script>
+                    if (found) {
+                        row.style.display = ''; // Show the row if found
+                    } else {
+                        row.style.display = 'none'; // Hide the row if not found
+                    }
+                }
+            }
 
-
-
+        </script>
 </asp:Content>

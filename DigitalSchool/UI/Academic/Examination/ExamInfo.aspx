@@ -27,6 +27,34 @@
         
         }
 
+                th {
+            background: #ddd !important;
+        }
+
+        td, th {
+           /* text-align: center;*/
+            border: 1px solid #ddd !important;
+        }
+
+        .table {
+            border: 0 !important;
+            margin: 10px 0;
+        }
+        .border-1{
+            border:1px solid #ddd;
+        }
+
+
+span#MainContent_lblType {
+    font-weight: 700;
+    display: block;
+    margin-top: -2px;
+}
+.table-wrapper tbody tr td label{
+    padding:0 10px;
+    display:inline-block;
+}
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -56,7 +84,7 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="">
+   
         <div class="row">
             <div class="col-md-2">
                 </div>
@@ -71,9 +99,9 @@
             </div>
             <div class="col-md-6"></div>
         </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
+    
+         
+         <%--   <div class="col-md-4">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnSave" />
@@ -86,8 +114,8 @@
                             </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </div>
-            <div class="col-md-6">
+            </div>--%>
+         
                 <div class="tgPanel">
                     <div class="tgPanelHead">Exam Information Entry</div>
                     <asp:UpdatePanel ID="up3" runat="server" UpdateMode="Conditional">
@@ -97,17 +125,18 @@
                             <asp:AsyncPostBackTrigger ControlID="ddlGroup" />
                         </Triggers>
                         <ContentTemplate>
-                            <div class="row tbl-controlPanel">
-                                <div class="col-sm-8 col-sm-offset-2">
-                                    <div class="form-group row">
+                            <div class="row">
+                                    <div class="col-lg-3">
+                                      <div class="form-group row">
                                         <label class="col-sm-4">Batch</label>
                                         <div class="col-sm-8">
                                             <asp:DropDownList ID="dlBatch" runat="server" ClientIDMode="Static"
                                             CssClass="input form-control" OnSelectedIndexChanged="dlBatch_SelectedIndexChanged" AutoPostBack="True">
                                         </asp:DropDownList>
                                         </div>                                        
-                                    </div>                                    
-                                    <div class="form-group row" runat="server" id="trGroup" visible="false">
+                                    </div>                                        </div>
+                                    <div class="col-lg-3">
+                                      <div class="form-group row" runat="server" id="trGroup" visible="false">
                                         <label class="col-sm-4">Group</label>
                                         <div class="col-sm-8">
                                              <asp:DropDownList ID="ddlGroup" runat="server" ClientIDMode="Static"
@@ -115,7 +144,9 @@
                                         </asp:DropDownList>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                   </div>
+                                    <div class="col-lg-3">
+                                       <div class="form-group row">
                                         <label class="col-sm-4">Start Date</label>
                                         <div class="col-sm-8">
                                             <asp:TextBox ID="txtStartDate" runat="server" ClientIDMode="Static" AutoComplete="off" CssClass="input form-control"
@@ -123,7 +154,9 @@
                                         <asp:CalendarExtender ID="CalendarExtender1" TargetControlID="txtStartDate" Format="dd-MM-yyyy" runat="server"></asp:CalendarExtender>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                   </div>
+                                    <div class="col-lg-3">
+                                       <div class="form-group row">
                                         <label class="col-sm-4">End Date</label>
                                         <div class="col-sm-8">
                                             <asp:TextBox ID="txtEndDate" runat="server" ClientIDMode="Static" AutoComplete="off" CssClass="input form-control"
@@ -131,7 +164,9 @@
                                         <asp:CalendarExtender ID="CalendarExtender2" TargetControlID="txtEndDate" Format="dd-MM-yyyy" runat="server"></asp:CalendarExtender>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                  </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group row">
                                         <label class="col-sm-4">ExamType</label>
                                         <div class="col-sm-8">
                                             <asp:DropDownList ID="dlExamType" runat="server" ClientIDMode="Static"
@@ -140,7 +175,9 @@
                                         </div>
 
                                     </div>
-                                      <div class="form-group row">
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group row">
                                         <label class="col-sm-4">Exam Name</label>
                                         <div class="col-sm-8">
                                             <asp:TextBox ID="txtExamName" runat="server" ClientIDMode="Static" CssClass="input form-control"
@@ -148,6 +185,8 @@
                                        
                                         </div>
                                     </div>
+                                  </div>    
+                                    <div class="col-lg-3">
                                     <div class="form-group row">
                                         <label class="col-sm-4">Exam Id</label>
                                         <div class="col-sm-8">
@@ -156,8 +195,10 @@
                                         </div>
 
                                     </div>
-                                    
-                                    <div class="form-group row">
+                                       </div>
+                                    <div class="col-lg-3">
+
+                                        <div class="form-group row">
                                         <label class="col-sm-4"></label>
                                         <div class="col-sm-8">
                                             <asp:Button ID="btnSave" CssClass="btn btn-primary" runat="server" ClientIDMode="Static" Text="Save"
@@ -167,8 +208,13 @@
                                         </div>
 
                                     </div>
+
+                                    </div>
+                                <div class="col-lg-3">
+
+                               
                                        <div class="form-group row">
-                       <label class="col-sm-4"></label>
+                                            <label class="col-sm-4"></label>
                                         <div class="col-sm-8">
                     <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>                           
@@ -180,11 +226,41 @@
                         </ProgressTemplate>                        
                     </asp:UpdateProgress>
                           </div>
-                      </div>
-                                    
                                     </div>
+                                    
+                                     </div>
                                 </div>
                             
+
+
+                            <div class="gvTable">
+
+                                <asp:DropDownList runat="server" ID="ddlPageIndex" OnSelectedIndexChanged="ddlPageIndex_SelectedIndexChanged">
+                                    <asp:ListItem>Select One</asp:ListItem>
+                                    <asp:ListItem>10</asp:ListItem>
+                                    <asp:ListItem>30</asp:ListItem>
+                                    <asp:ListItem>50</asp:ListItem>
+                                </asp:DropDownList>
+
+
+
+                                <asp:GridView runat="server" ID="gvExamInfo" AutoGenerateColumns="False" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" DataKeyNames="ExInId" GridLines="Vertical" 
+ PagerStyle-CssClass="pgr"  Width="100%"  AllowPaging="true" OnPageIndexChanging="gvExamInfo_PageIndexChanging">
+                                    <Columns>
+                                         <asp:TemplateField HeaderText="SL">
+                                           <ItemTemplate>
+                                                <%#Container.DataItemIndex+1 %>
+                                           </ItemTemplate>
+                                       </asp:TemplateField>
+
+                                        <asp:TemplateField HeaderText="ExamName">
+                                           <ItemTemplate>
+                                         <asp:Label ID="lblExInId" runat="server" Text='<%# Eval                        ("ExInId") %>'></asp:Label>
+                                         </ItemTemplate>          
+                                       </asp:TemplateField>   
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
                             <%--<table class="tbl-controlPanel">
                                 <tr>
                                     <td>Batch
@@ -253,9 +329,9 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-            </div>
-        </div>
-    </div>
+          
+       
+    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">

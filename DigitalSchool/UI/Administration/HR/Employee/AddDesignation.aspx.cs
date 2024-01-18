@@ -30,18 +30,18 @@ namespace DS.UI.Administration.HR.Employee
            
                 if (btnSave.Text == "Save")
                 {
-                    bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+                    
 
-                    string insertQuery = "INSERT INTO Designations (DesName,Status) VALUES ('" + txtDesName.Text.ToString().Trim() + "','" + (statusChecked ? 1 : 0) + "')";
+                    string insertQuery = "INSERT INTO Designations (DesName,Status) VALUES ('" + txtDesName.Text.ToString().Trim() + "','" +  1  + "')";
                     CRUD.ExecuteNonQuery(insertQuery);
                      BindData();
                     CleanField();
                 }
                 if (btnSave.Text == "Update") 
                 {
-                    bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+                  
 
-                    string insertQuery = "Update  Designations set DesName='" + txtDesName.Text.ToString().Trim() + "',Status='" + (statusChecked ? 1 : 0) + "' where DesId=" + ViewState["--Desgd--"];
+                    string insertQuery = "Update  Designations set DesName='" + txtDesName.Text.ToString().Trim() + "' where DesId=" + ViewState["--Desgd--"];
                     CRUD.ExecuteNonQuery(insertQuery);
                     BindData();
                     CleanField();
@@ -69,7 +69,6 @@ namespace DS.UI.Administration.HR.Employee
                 ViewState["--Desgd--"] = desgId;
 
                 txtDesName.Text = ((Label)gvDesgtionlist.Rows[rowIndex].FindControl("lblDesname")).Text;
-                chkStatus.Checked = ((CheckBox)gvDesgtionlist.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
                  BindData();
 
                 btnSave.Text = "Update";
@@ -90,8 +89,6 @@ namespace DS.UI.Administration.HR.Employee
         private void CleanField()
         {
             txtDesName.Text = "";
-            chkStatus.Checked = false;
-            
         }
     }
 }

@@ -28,6 +28,9 @@
         .inbox {
         min-width:130px;
         }
+        .row.salary {
+          margin-top: 33px;
+         }
          @media (min-width: 320px) and (max-width: 480px) {
       
             .inbox {
@@ -40,6 +43,7 @@
             #btnSalaryRange {
                 margin-top:5px;
             }
+
         }
        
     </style>
@@ -74,52 +78,47 @@
                 <div class="tgPanel">
                     <div class="tgPanelHead">Department Ways Salary Details Information</div>
                     <div class="row tbl-controlPanel"> 
-                        <div class="col-sm-12">
-                            <div class="">
-                                 <div class="col-sm-5">
-                                     <label class="col-sm-5">Department</label>
-                                     <div class="col-sm-7">
-                                        <asp:DropDownList runat="server" ID="dlDepartment" ClientIDMode="Static" CssClass="input controlLength form-control"
-                                    AutoPostBack="true" OnSelectedIndexChanged="dlDepartment_SelectedIndexChanged">
-                                    <asp:ListItem>--Select--</asp:ListItem>
-                                </asp:DropDownList>
-                                     </div>
-                                 </div>
-                                <div class="col-sm-5">
 
-                                     <label class="col-sm-5">Name</label>
-                                    <div class="col-sm-7">
-                                        <asp:UpdatePanel ID="up1" runat="server">
-                                    <Triggers>
-                                        <asp:AsyncPostBackTrigger ControlID="dlDepartment" />
-                                    </Triggers>
-                                    <ContentTemplate>
-                                        <asp:DropDownList ID="dlTeacher" runat="server" CssClass="input controlLength form-control"></asp:DropDownList>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                                        </div>
-                                 </div>
-                                <div class="col-sm-2">
-                                     <asp:Button runat="server" ID="btnSearch" ClientIDMode="Static" Text="Search" CssClass="btn btn-success" OnClientClick="return validateInputs();"
-                                    OnClick="btnSearch_Click" />
+                        <div class="row">
+                             <div class="col-lg-3">
+      <label class="col-sm-5">Department</label>
+      <div class="col-sm-7">
+         <asp:DropDownList runat="server" ID="dlDepartment" ClientIDMode="Static" CssClass="input controlLength form-control"
+     AutoPostBack="true" OnSelectedIndexChanged="dlDepartment_SelectedIndexChanged">
+     <asp:ListItem>--Select--</asp:ListItem>
+ </asp:DropDownList>
+      </div>
+  </div>
+ <div class="col-lg-3">
+
+      <label>Name</label>
+     <div class="col-lg-3">
+         <asp:UpdatePanel ID="up1" runat="server">
+     <Triggers>
+         <asp:AsyncPostBackTrigger ControlID="dlDepartment" />
+     </Triggers>
+     <ContentTemplate>
+         <asp:DropDownList ID="dlTeacher" runat="server" CssClass="input controlLength form-control"></asp:DropDownList>
+     </ContentTemplate>
+ </asp:UpdatePanel>
+         </div>
+  </div>
+ <div class="col-lg-3">
+      <asp:Button runat="server" ID="btnSearch" ClientIDMode="Static"  Text="Search" CssClass="btn btn-success mt-3" OnClientClick="return validateInputs();"
+     OnClick="btnSearch_Click" />
                 
-                                 </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                 
+   </div>
+ </div>
+</div>
                     <br />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="tgPanel">
                     <div class="tgPanelHead">Searching by Salary</div>
-                    <div class="row tbl-controlPanel"> 
-                        <div class="col-sm-12">
-                            <div class="">
-                                 <div class="col-sm-3">
+                    <div class="row salary"> 
+                        
+                                 <div class="col-lg-3">
                                      <asp:DropDownList ID="dlSalaryType" runat="server" CssClass="form-control inbox">
                                         <asp:ListItem>Basic Salary</asp:ListItem>
                                         <asp:ListItem>School Salary</asp:ListItem>
@@ -127,23 +126,23 @@
                                     </asp:DropDownList>
                     
                                  </div>
-                                <div class="col-sm-3">
+                                <div class="col-lg-3">
                                       <asp:TextBox runat="server" ID="txtFromSalary" CssClass="form-control inbox" PlaceHolder="From Salary"></asp:TextBox>
                 
                                  </div>
-                                <div class="col-sm-3">
+                                <div class="col-lg-3">
                                     <asp:TextBox runat="server" ID="txtToSalary" CssClass="form-control inbox" PlaceHolder="To Salary"></asp:TextBox>
                 
                                  </div>
-                                <div class="col-sm-3">
+                                <div class="col-lg-3">
                                      <asp:Button runat="server" ID="btnSalaryRange" ClientIDMode="Static" CssClass="btn btn-success" Text="Search" OnClientClick="return validateInput2();"
                                     OnClick="btnSalaryRange_Click" />
                 
                                  </div>
                                 
                             </div>
-                        </div>
-                    </div>
+                      
+                  
 
                  
                     <br />

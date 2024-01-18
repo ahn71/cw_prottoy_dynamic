@@ -42,6 +42,15 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         protected global::System.Web.UI.WebControls.HiddenField lblSubId;
 
         /// <summary>
+        /// upPannel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upPannel;
+
+        /// <summary>
         /// lblSubName control.
         /// </summary>
         /// <remarks>
@@ -60,24 +69,6 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         protected global::System.Web.UI.WebControls.TextBox txtSubName;
 
         /// <summary>
-        /// lblOrdering control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrdering;
-
-        /// <summary>
-        /// txtOrdering control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrdering;
-
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -94,6 +85,15 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
+
+        /// <summary>
+        /// ddlPageIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageIndex;
 
         /// <summary>
         /// gvSubjectList control.

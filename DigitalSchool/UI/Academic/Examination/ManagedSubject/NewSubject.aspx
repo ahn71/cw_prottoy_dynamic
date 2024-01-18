@@ -147,7 +147,7 @@
         }
 
         td, th {
-            text-align: center;
+           /* text-align: center;*/
             border: 1px solid #ddd !important;
         }
 
@@ -158,9 +158,24 @@
         .border-1{
             border:1px solid #ddd;
         }
-        
-
-
+        /*Update*/
+        .update-icon{
+            display:inline-block;
+            padding: 0 6px;
+            height: 30px;
+            width: 30px;
+            line-height:30px;
+            text-align:center;
+            border-radius: 50%;
+            background:#99dde7;
+            color:#1e1e1e;
+            font-size:12px;
+            opacity:0;
+            transition:0.1s all ease;
+        }
+        td:hover .update-icon{
+            opacity:1;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -176,7 +191,7 @@
             <ul class="breadcrumb">
                 <li>
                     <a runat="server" href="~/Dashboard.aspx">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="far fa-tachometer-alt-slow"></i>
                         Dashboard
                     </a>
                 </li>
@@ -188,7 +203,9 @@
      
         </div>
     </div>
-  
+
+   <asp:UpdatePanel runat="server" ID="upPannel" ClientIDMode="Static">
+     <ContentTemplate>
       <div class="bg-white p-3 mb-3">
       <div class="row">
           <div class="col-md-6">
@@ -196,6 +213,8 @@
           </div>
 
      </div>
+                
+
       <div class="inputPannel" id="inputPannels">
 
           <div class="row">
@@ -203,11 +222,6 @@
               <div class="col-lg-4">
                   <asp:Label runat="server" ID="lblSubName" Text="Subject Name"></asp:Label>
                   <asp:TextBox  CssClass="form-control" ID="txtSubName" runat="server"></asp:TextBox>
-              </div>
-
-              <div class="col-lg-4">
-                  <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
-                  <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server"></asp:TextBox>
               </div>
               <div class="col-lg-4 mt-3">
                <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click" Text="Save" /> 
@@ -229,8 +243,17 @@
              </div>
        </div>
 
-            <div class="gvTable">
-         <asp:GridView runat="server" ID="gvSubjectList"  OnRowCommand="gvSubjectList_RowCommand" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" CssClass="table" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2"  AllowPaging="true" PageSize="10" OnPageIndexChanging="gvSubjectList_PageIndexChanging"
+
+       <div class="gvTable">
+
+     <asp:DropDownList runat="server" ID="ddlPageIndex" AutoPostBack="true"  OnSelectedIndexChanged="ddlPageIndex_SelectedIndexChanged" EnableViewState="true">
+            <asp:ListItem Text="Select Page"></asp:ListItem>
+            <asp:ListItem Text="10" Value="10" />
+            <asp:ListItem Text="20" Value="20" />
+            <asp:ListItem Text="50" Value="50" />
+     </asp:DropDownList>
+
+         <asp:GridView runat="server" ID="gvSubjectList"  OnRowCommand="gvSubjectList_RowCommand" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" CssClass="table" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2"  AllowPaging="true" PageSize="20" OnPageIndexChanging="gvSubjectList_PageIndexChanging"
 DataKeyNames="SubjectId" GridLines="Vertical" 
 PagerStyle-CssClass="pgr" 
 Width="100%">
@@ -245,29 +268,17 @@ Width="100%">
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Department Name">
-                <ItemTemplate>
-                    <asp:Label ID="lblDname" runat="server" Text='<%# Eval("SubjectName") %>'></asp:Label>
-                </ItemTemplate>          
-            </asp:TemplateField>
-
-            <asp:TemplateField HeaderText="Orderning">
-                <ItemTemplate>
-                    <asp:Label ID="lblOrder" runat="server" Text='<%# Eval("OrderBy") %>'></asp:Label>
-                </ItemTemplate>          
-            </asp:TemplateField>
-
-
-
-           <asp:TemplateField HeaderText="Update">
-            <ItemTemplate>
-             <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
-            <i class="far fa-edit"></i>
+            <asp:TemplateField HeaderText="Subject Name">
+               <ItemTemplate>
+        <asp:Label ID="lblDname" runat="server" Text='<%# Eval("SubjectName") %>'></asp:Label>
+         <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+ 
+             <span class="update-icon" ><i class="fas fa-edit"></i></span>
         </asp:LinkButton>
-            </ItemTemplate>
-        </asp:TemplateField>
+    </ItemTemplate>         
+            </asp:TemplateField>
 
-           <asp:TemplateField HeaderText="Status">
+         <asp:TemplateField HeaderText="Status">
                   <ItemTemplate>
                      <label class="switch">
             <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true" 
@@ -282,10 +293,12 @@ Width="100%">
    </Columns>
 
   </asp:GridView>
+  </div>
+     </ContentTemplate>
+ </asp:UpdatePanel>
+           
 
-    </div>
 
-    </div>
 
 
 
@@ -321,12 +334,8 @@ Width="100%">
                  }
              }
          }
-         
-});
 
-    function sms(){
-        alert("hello");
-    }
+});
 
     </script>
 

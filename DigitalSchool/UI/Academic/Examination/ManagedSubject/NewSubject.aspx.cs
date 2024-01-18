@@ -23,10 +23,11 @@ namespace DS.UI.Academic.Examination.ManagedSubject
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
-                if (!IsPostBack)
+            if (!IsPostBack)
                 {
-                  BindData();
+               
+                BindData();
+
                 }
         }       
 
@@ -46,7 +47,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject
                 ViewState["--Did--"] = did;
 
                 txtSubName.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblDname")).Text;
-                txtOrdering.Text = ((Label)gvSubjectList.Rows[rowIndex].FindControl("lblOrder")).Text; btnSave.Text = "Update";
+                btnSave.Text = "Update";
                   BindData();
             }
 
@@ -77,7 +78,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         {
             if (btnSave.Text == "Save")
             {
-               string insertQuery = "INSERT INTO newsubject (subName,Ordering,IsActive) VALUES ('" + txtSubName.Text.ToString().Trim() + "','"+txtOrdering.Text.ToString().Trim()+"','" + 1  + "')";
+               string insertQuery = "INSERT INTO newsubject (subName,Ordering,IsActive) VALUES ('" + txtSubName.Text.ToString().Trim() + "','" + 1  + "')";
                 CRUD.ExecuteNonQuery(insertQuery);
                 BindData();
                 ClearField();
@@ -86,7 +87,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject
             {
                
 
-                string insertQuery = "Update  newsubject set subName='" + txtSubName.Text.ToString().Trim() + "',Ordering='" + txtOrdering.Text.ToString().Trim()+ "' where SubId=" + ViewState["--Did--"];
+                string insertQuery = "Update  newsubject set subName='" + txtSubName.Text.ToString().Trim() + "' where SubId=" + ViewState["--Did--"];
                 CRUD.ExecuteNonQuery(insertQuery);
                 BindData();
                 btnSave.Text = "Save";
@@ -100,13 +101,18 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         private void ClearField() 
         {
             txtSubName.Text = "";
-            txtOrdering.Text = "";
            
         }
 
         protected void gvSubjectList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvSubjectList.PageIndex = e.NewPageIndex;
+            BindData();
+        }
+
+        protected void ddlPageIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvSubjectList.PageSize = int.Parse(ddlPageIndex.SelectedValue);
             BindData();
         }
     }

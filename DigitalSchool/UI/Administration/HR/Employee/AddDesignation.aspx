@@ -99,17 +99,7 @@
     display: block;
     height: 15px;
 }
-        /*.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}*/
+      
         input:focus {
     box-shadow: 0px 0px 0px 0px !important;
     border: 1px solid rgba(255,255,255, 0.8);
@@ -143,7 +133,7 @@
         }
 
         td, th {
-            text-align: center;
+          /*  text-align: center;*/
             border: 1px solid #ddd !important;
         }
 
@@ -154,6 +144,25 @@
         .border-1{
             border:1px solid #ddd;
         }
+
+                .update-icon{
+    display:inline-block;
+    padding: 0 6px;
+    height: 30px;
+    width: 30px;
+    line-height:30px;
+    text-align:center;
+    border-radius: 50%;
+    background:#99dde7;
+    color:#1e1e1e;
+    font-size:12px;
+    opacity:0;
+    transition:0.1s all ease;
+}
+td:hover .update-icon{
+    opacity:1;
+}
+
     </style>
 
 </asp:Content>
@@ -193,25 +202,17 @@
 
           <div class="row">
 
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                   <asp:Label runat="server" ID="lblDesName" Text="Designation Name"></asp:Label>
                   <asp:TextBox  CssClass="form-control" ID="txtDesName" runat="server"></asp:TextBox>
-              </div>            
+              </div>    
+              <div class="col-lg-3">
+                   <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" style="margin-top:17px;" OnClick="btnSave_Click1" Text="Save" /> 
+              </div>
 
           </div>
 
   </div>
-
-      <div class="d-flex gap-3 justify-content-end align-items-center py-3">
-
-          <div class="active-wrapper">
-           <asp:Label runat="server" ID="lblSatus" Text="Is Active?"></asp:Label>
-            <asp:CheckBox  for="lblStats" ID="chkStatus" runat="server" />
-        </div>
-
-           <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click1" Text="Save" /> 
-          
-      </div>
 </div>
  
     <div class="main-table">
@@ -225,7 +226,9 @@
          </div>
        </div>
            
-            <div class="gvTable">
+          <asp:UpdatePanel runat="server" ID="UpdatePannel" ClientIDMode="Static">
+              <ContentTemplate>
+                              <div class="gvTable">
                <h4 class="text-right" style="float:left">Designation List</h4> 
                  <asp:GridView runat="server" ID="gvDesgtionlist" OnRowCommand="gvDesgtionlist_RowCommand" AutoGenerateColumns="False" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
         DataKeyNames="DesId" GridLines="Vertical" 
@@ -246,16 +249,10 @@
 <asp:TemplateField HeaderText="Desgination Name">
     <ItemTemplate>
         <asp:Label ID="lblDesname" runat="server" Text='<%# Eval("DesName") %>'></asp:Label>
-    </ItemTemplate>          
-</asp:TemplateField>
-
-
-   <asp:TemplateField HeaderText="Update">
-    <ItemTemplate>
-     <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
-    <i class="far fa-edit"></i>
+             <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+     <span class="update-icon" ><i class="fas fa-edit"></i></span>
 </asp:LinkButton>
-    </ItemTemplate>
+    </ItemTemplate>          
 </asp:TemplateField>
 
         <asp:TemplateField HeaderText="Status">
@@ -273,6 +270,9 @@
 
         </asp:GridView>
             </div>
+              </ContentTemplate>
+          </asp:UpdatePanel>
+            
     </div>
    
        

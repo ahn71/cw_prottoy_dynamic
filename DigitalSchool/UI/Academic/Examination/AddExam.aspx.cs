@@ -11,6 +11,7 @@ using DS.PropertyEntities.Model.Examinition;
 using DS.BLL.Examinition;
 using DS.BLL.ControlPanel;
 using DS.DAL;
+using CrystalDecisions.Shared.Json;
 
 namespace DS.UI.Academics.Examination
 {
@@ -42,11 +43,38 @@ namespace DS.UI.Academics.Examination
         {
             if (btnSave.Text == "Save")
             {
+              if(txtExamName.Text != "") 
+                {
+                    if (rdoQuiz.Checked == true || rdoOthers.Checked == true || rdoSemesterExam.Checked == true)
+                    {
+                        string query = $"INSERT INTO ExamType(ExName, SemesterExam, IsActive) VALUES('{txtExamName.Text}', {(rdoSemesterExam.Checked ? "1" : (rdoOthers.Checked ? "0" : "NULL"))}, '1')";
+                        CRUD.ExecuteNonQuery(query);
+                        lblMessage.InnerText = "Data saved successfully";
+                        BindData();
+                        ClearField();
+                    }
+                    else
+                        lblMessage.InnerText = "Must be select any type";
+                }
+                else
+                {
+                    lblMessage.InnerText = "Exam Name is empty";
+                }
+                    
 
+
+
+                
             }
             else 
             {
-            
+                string query = $"Update ExamType set ExName='{txtExamName.Text}',SemesterExam={(rdoSemesterExam.Checked ? "1" : (rdoOthers.Checked ? "0" : "NULL"))} where ExId=" + ViewState["--ExamId"];
+                CRUD.ExecuteNonQuery(query);
+                btnSave.Text = "";
+                lblMessage.InnerText = "Data updated successfully";
+                BindData();
+                ClearField();
+
             }
 
         }
@@ -95,7 +123,6 @@ namespace DS.UI.Academics.Examination
                 int examId = Convert.ToInt32(gvExamList.DataKeys[rowIndex].Value);
                 ViewState["--ExamId"] = examId;
                 txtExamName.Text = ((Label)gvExamList.Rows[rowIndex].FindControl("lblExamName")).Text;
-                txtOrder.Text = ((Label)gvExamList.Rows[rowIndex].FindControl("lblOrdernig")).Text;
                 string radioButtonValue = ((Label)gvExamList.Rows[rowIndex].FindControl("lblType")).Text;
                 if (radioButtonValue == "Semester")
                 {
@@ -109,11 +136,18 @@ namespace DS.UI.Academics.Examination
                 {
                     rdoQuiz.Checked = true;
                 }
-
-                chkStatus.Checked = ((CheckBox)gvExamList.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
                 btnSave.Text = "Update";
 
             }
+        }
+
+
+        private void ClearField() 
+        {
+            txtExamName.Text = "";
+            rdoQuiz.Checked = false;
+            rdoOthers.Checked = false;
+            rdoSemesterExam.Checked= false;
         }
     }
 

@@ -22,10 +22,26 @@
         .litleMargin{
             margin-right: 5px;
         }
-        .table tr th{
-            background-color: #23282C;
-            color: white;
+           th {
+        background: #ddd !important;
+    }
+
+        td, th {
+           /* text-align: center;*/
+            border: 1px solid #ddd !important;
         }
+
+        .table {
+            border: 0 !important;
+            margin: 10px 0;
+        }
+      label {
+                display: inline-block;
+                margin-left: 9px;
+            }
+
+
+
          @media only screen and (min-width: 320px) and (max-width: 479px) {
 
             #btnProcess {
@@ -63,44 +79,51 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tgPanel">
-                    <div class="tgPanelHead">Set  Optional Subject</div>
+                    <div class="tgPanelHead">Set Optional Subject</div>
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                         <Triggers>
                             <asp:AsyncPostBackTrigger ControlID="dlBatch" />
                         </Triggers>
                         <ContentTemplate>
-                            <div class="row tbl-controlPanel">
-                            <div class="col-sm-8 col-sm-offset-2">
+                            <div class="row">
+                            <div class="col-lg-3">
                                  <div class="form-inline">
                                       <div class="form-group">
                                         <label for="exampleInputName2">Shift</label>
                                         <asp:DropDownList ID="dlShift" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">
                                         </asp:DropDownList>
                                       </div>
-                                      <div class="form-group">
-                                        <label for="exampleInputName2">Batch</label>
-                                        <asp:DropDownList ID="dlBatch" runat="server" AutoPostBack="true" ClientIDMode="Static"
-                                            OnSelectedIndexChanged="dlBatch_SelectedIndexChanged" CssClass="input controlLength form-control">
-                                        </asp:DropDownList>
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="exampleInputName2">Group</label>
-                                        
-                                          <asp:DropDownList ID="dlGroup" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:DropDownList>
-                                      </div>
-                                      <div class="form-group">
-                                         <asp:Button ID="btnProcess" Text="Process" ClientIDMode="Static" runat="server"
-                                            OnClientClick="return validateInputs();" CssClass="btn btn-primary" OnClick="btnProcess_Click" />
-                                        <span style="position: absolute">
-                                            <asp:UpdateProgress ID="UpdateProgress2" runat="server" ClientIDMode="Static" AssociatedUpdatePanelID="UpdatePanel2">
-                                                <ProgressTemplate>
-                                                    <img class="LoadingImg" src="../../../../AssetsNew/images/input-spinner.gif" />
-                                                </ProgressTemplate>
-                                            </asp:UpdateProgress>
-                                        </span>
-                                      </div>
-                                      
-                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3">
+                                     <div class="form-group">
+   <label for="exampleInputName2">Batch</label>
+   <asp:DropDownList ID="dlBatch" runat="server" AutoPostBack="true" ClientIDMode="Static"
+       OnSelectedIndexChanged="dlBatch_SelectedIndexChanged" CssClass="input controlLength form-control">
+   </asp:DropDownList>
+ </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                          <div class="form-group">
+                                            <label for="exampleInputName2">Group</label>
+    
+                                              <asp:DropDownList ID="dlGroup" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:DropDownList>
+                                   </div>
+                                </div>
+
+                                <div class="col-lg-3 mt-4">
+                                         <div class="form-group">
+        <asp:Button ID="btnProcess" Text="Process" ClientIDMode="Static" runat="server"
+           OnClientClick="return validateInputs();" CssClass="btn btn-primary" OnClick="btnProcess_Click" />
+       <span style="position: absolute">
+           <asp:UpdateProgress ID="UpdateProgress2" runat="server" ClientIDMode="Static" AssociatedUpdatePanelID="UpdatePanel2">
+               <ProgressTemplate>
+                   <img class="LoadingImg" src="../../../../AssetsNew/images/input-spinner.gif" />
+               </ProgressTemplate>
+           </asp:UpdateProgress>
+       </span>
+     </div>
                                 </div>
                             </div>
                             <%--<table class="tbl-controlPanel">
@@ -163,10 +186,10 @@
                             </Triggers>
                             <ContentTemplate>
                                 <asp:Panel ID="admStdAssignPanel" runat="server" CssClass="datatables_wrapper" Width="100%" ScrollBars="Auto">
-                                    <asp:GridView ID="gvstdgrpsubsetuplist" runat="server" CssClass="table table-bordered" DataKeyNames="StudentId"
+                                    <asp:GridView ID="gvstdgrpsubsetuplist" runat="server" CssClass="table" DataKeyNames="StudentId"
                                         OnRowDataBound="gvstdgrpsubsetuplist_RowDataBound"  AutoGenerateColumns="False" 
                                          OnPageIndexChanging="gvstdgrpsubsetuplist_PageIndexChanging">
-                                        <PagerStyle CssClass="gridview" />
+                                        <PagerStyle CssClass="gridview"/>
                                         <RowStyle CssClass="str" />
                                         <Columns>
                                             
@@ -210,7 +233,7 @@
                                                     </asp:RadioButtonList>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Status">
+                                            <asp:TemplateField HeaderText="Action">
                                                 <ItemTemplate>
                                                     <asp:Button ID="btnSave" OnClick="btnSave_Click" Text="Save" runat="server" CssClass="btn btn-success custom_save_btn"></asp:Button>
                                                 </ItemTemplate>

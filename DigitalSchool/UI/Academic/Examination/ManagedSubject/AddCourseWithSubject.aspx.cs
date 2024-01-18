@@ -34,6 +34,8 @@ namespace DS.UI.Academic.Examination.ManagedSubject
             {
                
                 string query = "Insert Into AddCourseWithSubject(SubId,CourseName,Ordering,isActive) values('"+ddlSubjectList.SelectedItem.Value+"','"+txtCourseName.Text.Trim().ToString()+"','"+txtOrdering.Text.Trim().ToString()+"','"+1 +"')";
+                CRUD.ExecuteNonQuerys(query);
+                BindData();
             }
             if (btnSave.Text == "Update") 
             {
@@ -47,6 +49,12 @@ namespace DS.UI.Academic.Examination.ManagedSubject
 
         protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
         {
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool IsChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int CourseID = Convert.ToInt32(gvCourseSubList.DataKeys[row.RowIndex].Values["CourseId"]);
+
+            string query = "update AddCourseWithSubject set IsActive='"+(IsChecked?1:0)+"' where CourseId="+ CourseID;
+            CRUD.ExecuteNonQuerys(query);
 
         }
 
@@ -90,7 +98,13 @@ namespace DS.UI.Academic.Examination.ManagedSubject
 
         protected void gvCourseSubList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            gvCourseSubList.PageIndex= e.NewPageIndex;
+                gvCourseSubList.PageIndex= e.NewPageIndex;
+            BindData();
+        }
+
+        protected void ddlPageIndex_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gvCourseSubList.PageSize=int.Parse(ddlPageIndex.SelectedValue);
             BindData();
         }
     }

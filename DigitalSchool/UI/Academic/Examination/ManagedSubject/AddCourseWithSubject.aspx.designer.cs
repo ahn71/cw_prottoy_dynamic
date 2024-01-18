@@ -105,6 +105,24 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
 
         /// <summary>
+        /// upgvTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upgvTable;
+
+        /// <summary>
+        /// ddlPageIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageIndex;
+
+        /// <summary>
         /// gvCourseSubList control.
         /// </summary>
         /// <remarks>

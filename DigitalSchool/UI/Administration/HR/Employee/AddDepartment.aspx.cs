@@ -19,6 +19,7 @@ namespace DS.UI.Administration.HR.Employee
         {
           if (!IsPostBack)
            {
+                lblMessage.InnerText = "";
                 bindData();
             }
 
@@ -28,20 +29,21 @@ namespace DS.UI.Administration.HR.Employee
         {
             if (btnSave.Text == "Save")
             {
-                bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+                //bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
 
-                string insertQuery = "INSERT INTO Departments_HR (DName, DStatus, IsTeacher) VALUES ('" + txtDepartment.Text.ToString().Trim() + "','" + (statusChecked ? 1 : 0) + "','" + (chkIsteacher.Checked ? 1 : 0) + "')";
+                string insertQuery = "INSERT INTO Departments_HR (DName, DStatus, IsTeacher) VALUES ('" + txtDepartment.Text.ToString().Trim() + "','" +  1  + "','" +  1  + "')";
                 CRUD.ExecuteNonQuery(insertQuery);
                 CleanField();
+                lblMessage.InnerText = "Data saved successfuly";
             }
             else if (btnSave.Text == "Update")
             {
-                bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
+              //  bool statusChecked = (chkStatus != null) ? chkStatus.Checked : false;
 
-                string insertQuery = "Update  Departments_HR set DName='" + txtDepartment.Text.ToString().Trim() + "',DStatus='" + (statusChecked ? 1 : 0) + "',IsTeacher='" + (chkIsteacher.Checked ? 1 : 0) + "' where Did=" + ViewState["--Did--"];
+                string insertQuery = "Update  Departments_HR set DName='" + txtDepartment.Text.ToString().Trim() + "',DStatus='" + 1 + "',IsTeacher='" +  1  + "' where Did=" + ViewState["--Did--"];
                 CRUD.ExecuteNonQuery(insertQuery);
                 CleanField();
-
+                lblMessage.InnerText = "Data Updated successfuly";
             }
 
         }
@@ -62,6 +64,7 @@ namespace DS.UI.Administration.HR.Employee
             int Did = Convert.ToInt32(gvDepartment.DataKeys[row.RowIndex].Value);
             string query = "update Departments_HR set DStatus =" + (isChecked ? "1" : "0") + " where Did=" + Did;
             CRUD.ExecuteNonQuery(query);
+           
         }
 
         protected void chkSwitchIsTeacher_CheckedChanged(object sender, EventArgs e)
@@ -72,7 +75,14 @@ namespace DS.UI.Administration.HR.Employee
             int did = Convert.ToInt32(gvDepartment.DataKeys[row.RowIndex].Value);
             string query = "update departments_hr set IsTeacher =" + (isChecked ? "1" : "0") + " where did=" + did;
             CRUD.ExecuteNonQuery(query);
-
+            if (!isChecked)
+            {
+                lblMessage.InnerText = "Teacher InActived successfuly";
+               
+            }
+            else
+                lblMessage.InnerText = "Teacher activated successfuly";
+               
 
         }
 
@@ -88,9 +98,6 @@ namespace DS.UI.Administration.HR.Employee
                 ViewState["--Did--"] = did;
 
                 txtDepartment.Text = ((Label)gvDepartment.Rows[rowIndex].FindControl("lblDname")).Text;
-                chkStatus.Checked = ((CheckBox)gvDepartment.Rows[rowIndex].FindControl("chkSwitchStatus")).Checked;
-                chkIsteacher.Checked = ((CheckBox)gvDepartment.Rows[rowIndex].FindControl("chkSwitchIsTeacher")).Checked;
-
                 btnSave.Text = "Update";
                 bindData();
             }
@@ -99,8 +106,7 @@ namespace DS.UI.Administration.HR.Employee
         private void CleanField()
         {
             txtDepartment.Text = "";
-            chkStatus.Checked = false;
-            chkIsteacher.Checked = false;
+           
         }
     }
 }

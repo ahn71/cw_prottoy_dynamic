@@ -20,9 +20,24 @@
             text-align:left;
         }
          .table tr th{
-            background-color: #23282C;
-            color: white;
+             background: #ddd !important;
+            color: black;
         }
+
+          td, th {
+             text-align: center;
+             border: 1px solid #ddd !important;
+             }
+
+             .table {
+                 border-radius:0 !important;
+                 margin: 10px 0;
+             }
+             .border-1{
+                 border:1px solid #ddd;
+             }
+
+
         .rbl label {
             margin:5px;
         }
@@ -30,6 +45,25 @@
             margin-top:0px!important;
         
         }
+
+         .update-icon{
+   display:inline-block;
+   padding: 0 6px;
+   height: 30px;
+   width: 30px;
+   line-height:30px;
+   text-align:center;
+   border-radius: 50%;
+   background:#99dde7;
+   color:#1e1e1e;
+   font-size:12px;
+   opacity:0;
+   transition:0.1s all ease;
+ }
+ td:hover .update-icon{
+   opacity:1;
+ }
+
         @media only screen and (min-width: 320px) and (max-width: 479px) {
 
             .radio-inline {
@@ -64,9 +98,116 @@
             <!--breadcrumbs end -->
         </div>
   
- 
+    <h4 class="text-right fw-bold mb-3" style="float: left;">Class Subject Setup</h4>
+
+   <div class="row w-100">
+      <div class="tgPanel row g-2">
+                     
+          <div class="col-md-3">
+                <asp:Label runat="server" ID="lblClaas">Class</asp:Label>
+                             
+                   <asp:DropDownList ID="ddlClassName" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control" AutoPostBack="True"
+                                     OnSelectedIndexChanged="ddlClassName_SelectedIndexChanged">
+                                 </asp:DropDownList>
+                           
+          </div>
+                         
+
+         <div class="col-md-3">
+                             <asp:Label runat="server" ID="lblSubjectName">Subject Name</asp:Label>
+                           
+                                 <asp:DropDownList ID="ddlSubject" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static"
+                                     AutoPostBack="True" OnSelectedIndexChanged="ddlSubject_SelectedIndexChanged">
+                                 </asp:DropDownList>
+                           
+                   </div>  
+                         
+
+               <div class="col-md-3">
+                        <asp:Label runat="server" ID="lblCourseName">Course</asp:Label>
+                             
+                                 <asp:DropDownList ID="ddlCourse" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static" >
+                                 </asp:DropDownList>
+                           
+                       
+                  </div>       
+               <div class="col-md-3">
+                            <asp:Label runat="server" ID="lblMarks">Marks</asp:Label>
+                          
+                                 <asp:TextBox ID="txtMarks" CssClass="input controlLength form-control" runat="server" MaxLength="7"  ClientIDMode="Static"></asp:TextBox>
+                        
+                         
+                </div>            
+                     
+               <div class="col-md-3">
+             <asp:Label runat="server" ID="lblCode">Code</asp:Label>
+                                
+                                     <asp:TextBox ID="txtSubCode" CssClass="input controlLength form-control" runat="server" MaxLength="7"  ClientIDMode="Static"></asp:TextBox>
+                                 
+       </div>          
+             
+               <div class="col-md-3">
+                            <asp:Label runat="server" ID="lblGroup">Group</asp:Label>
+                          <%--   <tr id="trGroup" runat="server">--%>
+                            
+                            
+                                <asp:RadioButtonList ID="rblGroupList" runat="server"  RepeatDirection="Vertical" RepeatColumns="2" AutoPostBack="True" CssClass="rbl" OnSelectedIndexChanged="rblGroupList_SelectedIndexChanged" >
+                                   
+                                </asp:RadioButtonList>
+                            
+                         <%--</tr>--%>
+                         
+                           <asp:Label runat="server" ID="lblOrder">Order</asp:Label>
+                           
+                                 <asp:TextBox ID="txtOrderBy" CssClass="input controlLength form-control" runat="server" MaxLength="7"  ClientIDMode="Static"></asp:TextBox>
+                                                                                                                                 </div>  
+                            
+                        
+
+                        <%-- Related Subject--%>
+               <div class="col-md-3">
+                        <asp:Label runat="server" ID="lblRelatedSubject">Related Subject</asp:Label>
+                             
+                                 <asp:DropDownList ID="ddlRelatedSubject" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">
+                                 </asp:DropDownList>
+                            
+                        
+
+                        </div>  
+                        <%-- Related Subject dropown end--%>
+
+
+                       <div class="col-md-3">
+                            <asp:CheckBoxList runat="server" ID="chkSubjectType"  ClientIDMode="Static" RepeatDirection="Horizontal"  OnSelectedIndexChanged="chkSubjectType_SelectedIndexChanged">
+                                     <asp:ListItem class="radio-inline" Value="0">Optional</asp:ListItem>
+                                     <asp:ListItem class="radio-inline" Value="1">Optional + Mandatory</asp:ListItem>
+                                 </asp:CheckBoxList> 
+
+
+                             <asp:Button CssClass="btn btn-primary" ID="btnSave" runat="server" ClientIDMode="Static"
+                                     Text="Save" OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
+                                 &nbsp;<asp:Button runat="server" ID="btnReset" Text="Reset" CssClass="btn btn-default" OnClientClick="return clearText();"/> 
+                                 &nbsp;<asp:LinkButton ID="lnkbtnpassMarks" style="border-bottom:solid 1px;"
+                                      OnClientClick="return validatePassMarks();" 
+                                     OnClick="lnkbtnpassMarks_Click" runat="server" ForeColor="#1fb5ad" 
+                                     Text="Set Dependency Subject Pass Marks"
+                                      ClientIDMode="Static"></asp:LinkButton>
+                          
+                      </div>  
+                                                          
+                 </div>
+          
+      </div>
+
+
+
        
-            <div class="col-md-7">
+         
+    
+    
+    
+    
+    <div class="col-md-7">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnSave" />
@@ -100,6 +241,11 @@
                                 </td>
                             </tr>
                         </table>
+
+
+
+
+
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -108,7 +254,7 @@
            <%-- <div class="col-md-12">--%>
               
                    
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+           <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnSave" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlClassList" />
@@ -122,18 +268,29 @@
                                <%-- <div id="divClassSubject" class="datatables_wrapper tgPanel" runat="server"
                                     style="width: 100%; height: auto; max-height: 450px; overflow: auto; overflow-x: hidden;">
                                 </div>--%>                                
-                                 <div class="col-md-7">
-                                     <div class="tgPanel">
-                                <asp:GridView runat="server" ClientIDMode="Static" CssClass="table table-striped table-bordered dt-responsive nowrap"
-                                cellspacing="0" ID="gvClassSubject" AutoGenerateColumns="false" Width="100%"  HeaderStyle-HorizontalAlign="Center" DataKeyNames="ClassSubjectId,ClassId,GroupId" HeaderStyle-ForeColor="White" HeaderStyle-BackColor="Black" HeaderStyle-Height="28px" AllowPaging="true" PageSize="15" OnPageIndexChanging="gvClassSubject_PageIndexChanging" OnRowCommand="gvClassSubject_RowCommand">
-                                    <RowStyle HorizontalAlign="Center" />
-                                    <EditRowStyle Height="32px" />
-                                    <HeaderStyle BackColor="Black" ForeColor="White" Height="28px" HorizontalAlign="Center" />
-                                    <PagerStyle CssClass="gridview" />
+                                 
+                         
+                      <div class="gvTable">
+                                <asp:GridView runat="server" ClientIDMode="Static" CssClass="table"
+                               ID="gvClassSubject" AutoGenerateColumns="false" Width="100%"  HeaderStyle-HorizontalAlign="Center" DataKeyNames="ClassSubjectId,ClassId,GroupId" AllowPaging="true" PageSize="15" OnPageIndexChanging="gvClassSubject_PageIndexChanging" OnRowCommand="gvClassSubject_RowCommand">
+                                   
+                                  
                                     <Columns>
                                          <asp:BoundField DataField="Class.ClassName" HeaderText="Class" />
-                                        <asp:BoundField DataField="Subject.SubjectName" HeaderText="Subject" />
+                                       
+                                        
+                                         <asp:TemplateField HeaderText="Subject">
+                                             <ItemTemplate>
+                                             <asp:Label ID="lblSubName" runat="server" Text='<%# Eval("Subject.SubjectName") %>'></asp:Label>
+
+                                                  <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+                                        <span class="update-icon" ><i class="fas fa-edit"></i></span>
+                                            </asp:LinkButton>
+                                             </ItemTemplate>
+                                         </asp:TemplateField>
+
                                         <asp:BoundField DataField="Course.CourseName" HeaderText="Course" />
+
                                         
                                         <asp:BoundField DataField="SubjectCode" HeaderText="Code" ItemStyle-HorizontalAlign="Center" >
 
@@ -154,122 +311,11 @@
                                          <HeaderStyle HorizontalAlign="Center" />
                                          <ItemStyle HorizontalAlign="Center" />
                                          </asp:BoundField>
-                                       <asp:ButtonField CommandName="Alter" HeaderText="Alter" Text="Edit" ItemStyle-ForeColor="blue" ItemStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" >
-                                                                       
-                                         <HeaderStyle HorizontalAlign="Center" />
-                                         <ItemStyle Font-Bold="True" ForeColor="Blue" HorizontalAlign="Center" />
-                                         </asp:ButtonField>
-                                                                       
-                                    </Columns>
+                                  </Columns>
                                 </asp:GridView>
                                      <div runat="server" style="font-size:x-large; text-align:center;color:black;margin: 125px auto;" id="divSub"></div>
                                          </div>
-                           
-                    </div>
-                    <div class="col-md-5">
-                       
-                                <div class="">
-                                    <div class="tgPanel">
-                                        <div class="tgPanelHead">Class Subject Setup</div>
-                                        
-                                        <table class="tbl-controlPanel">
-                                            <tr>
-                                                <td>    Class</td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlClassName" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control" AutoPostBack="True"
-                                                        OnSelectedIndexChanged="ddlClassName_SelectedIndexChanged">
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Subject</td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlSubject" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static"
-                                                        AutoPostBack="True" OnSelectedIndexChanged="ddlSubject_SelectedIndexChanged">
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-                                             <tr>
-                                                <td>Course</td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlCourse" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static" >
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-                                             <tr>
-                                                <td>Marks</td>
-                                                <td>
-                                                    <asp:TextBox ID="txtMarks" CssClass="input controlLength form-control" runat="server" MaxLength="7"  ClientIDMode="Static"></asp:TextBox>
-                                                </td>
-                                             </tr>
-                                                <tr>
-                                                    <td>Code</td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtSubCode" CssClass="input controlLength form-control" runat="server" MaxLength="7"  ClientIDMode="Static"></asp:TextBox>
-                                                    </td>
-                                                </tr>
-                                                <tr id="trGroup" runat="server">
-                                                <td style="vertical-align:top">Group</td>
-                                                <td>
-                                                   <asp:RadioButtonList ID="rblGroupList" runat="server"  RepeatDirection="Vertical" RepeatColumns="2" AutoPostBack="True" CssClass="rbl" OnSelectedIndexChanged="rblGroupList_SelectedIndexChanged" >
-                                                      
-                                                   </asp:RadioButtonList>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Order</td>
-                                                <td>
-                                                    <asp:TextBox ID="txtOrderBy" CssClass="input controlLength form-control" runat="server" MaxLength="7"  ClientIDMode="Static"></asp:TextBox>
-                                                                                                                                               
-                                                </td>
-                                            </tr>
 
-                                           <%-- Related Subject--%>
-
-                                             <tr>
-                                                <td>Related Subject</td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlRelatedSubject" runat="server" CssClass="input controlLength form-control" ClientIDMode="Static">
-                                                    </asp:DropDownList>
-                                                </td>
-                                            </tr>
-
-
-                                           <%-- Related Subject dropown end--%>
-
-
-                                            <tr>
-                                                <td></td>
-                                                <td><asp:CheckBoxList runat="server" ID="chkSubjectType"  ClientIDMode="Static" RepeatDirection="Horizontal"  OnSelectedIndexChanged="chkSubjectType_SelectedIndexChanged">
-                                                        <asp:ListItem class="radio-inline" Value="0">Optional</asp:ListItem>
-                                                        <asp:ListItem class="radio-inline" Value="1">Optional + Mandatory</asp:ListItem>
-                                                    </asp:CheckBoxList>  </td>
-                                            </tr>
-                                            <tr runat="server" id="trIsOptional" >
-                                             
-                                                <td></td>
-                                                <td>
-                                                 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    <asp:Button CssClass="btn btn-primary" ID="btnSave" runat="server" ClientIDMode="Static"
-                                                        Text="Save" OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                                    &nbsp;<asp:Button runat="server" ID="btnReset" Text="Reset" CssClass="btn btn-default" OnClientClick="return clearText();"/> 
-                                                    &nbsp;<asp:LinkButton ID="lnkbtnpassMarks" style="border-bottom:solid 1px;"
-                                                         OnClientClick="return validatePassMarks();" 
-                                                        OnClick="lnkbtnpassMarks_Click" runat="server" ForeColor="#1fb5ad" 
-                                                        Text="Set Dependency Subject Pass Marks"
-                                                         ClientIDMode="Static"></asp:LinkButton>
-                                                </td>
-                                            </tr>
-                                        </table>                                        
-                                    </div>
-                                </div>
-                         </div>
-                    
                             </ContentTemplate>
                         </asp:UpdatePanel>
 
@@ -277,7 +323,7 @@
                 
               
                       <!-- Dependency modal -->
-                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+           <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                             <Triggers>                                
                                 <asp:AsyncPostBackTrigger ControlID="lnkbtnpassMarks" />   
                                 <asp:AsyncPostBackTrigger ControlID="btnSaveDepedencyMarks" />                             

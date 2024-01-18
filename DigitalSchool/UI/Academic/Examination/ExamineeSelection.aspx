@@ -40,53 +40,53 @@
                         <asp:AsyncPostBackTrigger ControlID="gvExamRoutine" />                        
                     </Triggers>
                     <ContentTemplate>
-                        <div class="row tbl-controlPanel" >
-                            <div class="col-sm-8 col-sm-offset-2" runat="server" id="tblOp">
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Shift</label>
-                                    <div class="col-sm-10">
-                                        <asp:DropDownList ID="ddlShift" runat="server" CssClass="input controlLengthMin form-control" ClientIDMode="Static">                                    
+                        <div class="row">
+                           
+                                <div class="col-lg-3">
+                                    <label>Shift</label>
+                                       <asp:DropDownList ID="ddlShift" runat="server" CssClass="input controlLengthMin form-control" ClientIDMode="Static">                                    </asp:DropDownList>
+                              </div>
+                                <div class="col-lg-3">
+                                        <label>Batch</label>                                  
+                                           <asp:DropDownList ID="ddlBatch" runat="server" ClientIDMode="Static" CssClass="input controlLengthMin form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="True">
                                     </asp:DropDownList>
-                                        </div>                               
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Batch</label>                                  
-                                       <div class="col-sm-10"> 
-                                            <asp:DropDownList ID="ddlBatch" runat="server" ClientIDMode="Static" CssClass="input controlLengthMin form-control" OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="True">
-                                    </asp:DropDownList>
-                                    </div>                                   
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Group</label>
-                                    <div class="col-sm-10">
+                                 </div>
+                                <div class="col-lg-3">
+                                 
+                                    <label>Group</label>
+                                   
                                         <asp:DropDownList ID="ddlGroup" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="ddlGroup_SelectedIndexChanged" CssClass="input controlLengthMin form-control" Enabled="false" >
                                     </asp:DropDownList>
-                                        </div>                                   
-                                </div>                               
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Exam Id</label>
-                                    <div class="col-sm-10">
+                                                                         
+                                  
+                                 </div>
+                                <div class="col-lg-3">
+                                  
+                                    <label>Exam Id</label>
+                                    
                                         <asp:DropDownList ID="ddlExamId" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"
                                          AutoPostBack="True" OnSelectedIndexChanged="ddlExamId_SelectedIndexChanged">
                                         <asp:ListItem Value="0">...Select Exam Id...</asp:ListItem>
                                     </asp:DropDownList>
-                                    </div>
+                                  
+                                
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Section</label>
-                                    <div class="col-sm-10">
+                                <div class="col-lg-3">
+                                   
+                                    <label>Section</label>
+                                    
                                         <asp:DropDownList ID="ddlSection" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"
                                          AutoPostBack="True" OnSelectedIndexChanged="ddlSection_SelectedIndexChanged">         
-                                    </asp:DropDownList>
-                                    </div>
-                                </div>                               
-                                <div class="form-group row">                                    
-                                    <div class="col-sm-8 col-sm-offset-2">     
+                                    </asp:DropDownList>    
+                                </div>
+                                <div class="col-lg-3 mt-3">  
                                         <asp:CheckBox Visible="false" runat="server" ID="chkForCoutAsFinalResult" />
                                         <asp:Button ID="btnSave" Text="Save" ClientIDMode="Static" runat="server" 
                                           OnClick="btnSave_Click" CssClass="btn btn-primary" OnClientClick="return validateInputs();"/>            
                                         <asp:Button ID="btnPrintPreview" runat="server" Text="Print Full Marksheet" CssClass="btn btn-primary" ClientIDMode="Static" OnClick="btnPrintPreview_Click" />                             
                                     </div>
+
+
                                     <div class="col-sm-8 col-sm-offset-2">
                              <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                                 <ProgressTemplate>                           
@@ -98,9 +98,8 @@
                                 </ProgressTemplate>                        
                             </asp:UpdateProgress>
                                     </div>                                    
-                                </div>                         
                             </div>
-                        </div>
+                       
                                                                       
                     </ContentTemplate>
                 </asp:UpdatePanel>
