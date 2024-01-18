@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DS.UI.Academic.Examination.ManagedSubject {
-    
-    
-    public partial class NewSubject {
-        
+namespace DS.UI.Academic.Examination.ManagedSubject
+{
+
+
+    public partial class NewSubject
+    {
+
         /// <summary>
         /// uplMessage control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel uplMessage;
-        
+
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
-        
+
         /// <summary>
         /// lblSubId control.
         /// </summary>
@@ -38,34 +40,25 @@ namespace DS.UI.Academic.Examination.ManagedSubject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField lblSubId;
-        
+
         /// <summary>
-        /// UpdatePanel1 control.
+        /// upPannel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+        protected global::System.Web.UI.UpdatePanel upPannel;
+
         /// <summary>
-        /// divSubjectList control.
+        /// lblSubName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSubjectList;
-        
-        /// <summary>
-        /// UpdatePanel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+        protected global::System.Web.UI.WebControls.Label lblSubName;
+
         /// <summary>
         /// txtSubName control.
         /// </summary>
@@ -74,25 +67,7 @@ namespace DS.UI.Academic.Examination.ManagedSubject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSubName;
-        
-        /// <summary>
-        /// txtOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrder;
-        
-        /// <summary>
-        /// chkIsActive control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -101,5 +76,32 @@ namespace DS.UI.Academic.Examination.ManagedSubject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// txtSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+
+        /// <summary>
+        /// ddlPageIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPageIndex;
+
+        /// <summary>
+        /// gvSubjectList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvSubjectList;
     }
 }

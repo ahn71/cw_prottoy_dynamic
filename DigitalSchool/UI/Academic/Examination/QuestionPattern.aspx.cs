@@ -23,24 +23,39 @@ namespace DS.UI.Academic.Examination
                 aAcademicHome.HRef = "~/" + Classes.Routing.AcademicRouteUrl;
                 aExamHome.HRef = "~/" + Classes.Routing.ExaminationHomeRouteUrl;
                 //---url bind end---
-                if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "QuestionPattern.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                    loadQuestionPattern("");
+                //if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "QuestionPattern.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
+                BindData();
                 }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (lblQPId.Value.ToString().Length == 0)
+
+            if (btnSave.Text == "Save") 
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; loadQuestionPattern(""); return; }
-                if (saveQuestionPattern() == true)
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SaveSuccess();", true);
+                saveQuestionPattern();
+                clearField();
+
+
             }
-            else
+            else 
             {
-                if (updateQuestionPattern() == true)
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
+              updateQuestionPattern();
+                clearField();
+              btnSave.Text = "Save";
+                
             }
+            //if (lblQPId.Value.ToString().Length == 0)
+            //{
+            //    //if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; loadQuestionPattern(""); return; }
+            //    if (saveQuestionPattern() == true)
+            //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SaveSuccess();", true);
+            //}
+            //else
+            //{
+            //    if (updateQuestionPattern() == true)
+            //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
+            //}
         }
         private Boolean saveQuestionPattern()
         {
@@ -48,12 +63,12 @@ namespace DS.UI.Academic.Examination
             {
                 SqlCommand cmd = new SqlCommand("Insert into  QuestionPattern values (@QPName,@IsActive) ", DbConnection.Connection);
                 cmd.Parameters.AddWithValue("@QPName", txtQPName.Text.Trim());
-                cmd.Parameters.AddWithValue("@IsActive", chkIsActive.Checked.ToString());
+                cmd.Parameters.AddWithValue("@IsActive", 1);
                 int result = (int)cmd.ExecuteNonQuery();
                 if (result > 0)
                 {
                     lblMessage.InnerText = "success->Successfully saved";
-                    loadQuestionPattern("");
+                    //loadQuestionPattern("");
                     return true;
                 }
                 else
@@ -73,15 +88,15 @@ namespace DS.UI.Academic.Examination
             try
             {
 
-                SqlCommand cmd = new SqlCommand(" update QuestionPattern  Set QPName=@QPName,IsActive=@IsActive where QPId=@QPId ", DbConnection.Connection);
+                SqlCommand cmd = new SqlCommand(" update QuestionPattern  Set QPName=@QPName where QPId=@QPId ", DbConnection.Connection);
                 cmd.Parameters.AddWithValue("@QPId", lblQPId.Value.ToString());
                 cmd.Parameters.AddWithValue("@QPName", txtQPName.Text.Trim());
-                cmd.Parameters.AddWithValue("@IsActive", chkIsActive.Checked.ToString());
+                
                 int result = (int)cmd.ExecuteNonQuery();
                 if (result > 0)
                 {
                     lblMessage.InnerText = "success->Successfully Updated";
-                    loadQuestionPattern("");
+                    //loadQuestionPattern("");
                     return true;
                 }
                 else
@@ -97,48 +112,61 @@ namespace DS.UI.Academic.Examination
                 return false;
             }
         }
-        private void loadQuestionPattern(string sqlcmd)
+
+        protected void gvQuestionMarks_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (string.IsNullOrEmpty(sqlcmd)) sqlcmd = "select QPId,QPName,ISNULL(IsActive,1) as IsActive from QuestionPattern  Order by QPId ";
-            DataTable dt = new DataTable();
-            sqlDB.fillDataTable(sqlcmd, dt);
-
-            int totalRows = dt.Rows.Count;
-            string divInfo = "";
-
-            if (totalRows == 0)
+            if(e.CommandName == "Alter") 
             {
-                divInfo = "<div class='noData'>No Question Pattern available</div>";
-                divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                divQuestionPattern.Controls.Add(new LiteralControl(divInfo));
-                return;
+                try
+                {
+                    int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+
+                    string QpId = gvQuestionMarks.DataKeys[rowIndex].Values[0].ToString();
+
+                    ViewState["--QpId--"] = QpId;
+
+                    txtQPName.Text = ((Label)gvQuestionMarks.Rows[rowIndex].FindControl("lblQuestionPname")).Text.Trim();
+                    btnSave.Text = "Update";
+                    BindData();
+                }
+                catch (Exception ex)
+                {
+                    
+                    
+                }
+               
             }
 
-            divInfo = " <table id='tblClassList' class='display'  > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Question Pattern Name</th>";
-            divInfo += "<th>Active</th>";
-            if (Session["__Update__"].ToString().Equals("true"))
-            divInfo += "<th>Edit</th>";
-            divInfo += "</tr>";
-            divInfo += "</thead>";
-            divInfo += "<tbody>";
-            string id = "";
-            for (int x = 0; x < dt.Rows.Count; x++)
-            {
-                id = dt.Rows[x]["QPId"].ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td >" + dt.Rows[x]["QPName"].ToString() + "</td>";
-                divInfo += "<td >" + ((bool.Parse(dt.Rows[x]["IsActive"].ToString()))?"Yes":"NO") + "</td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editQuestionPattern(" + id + ");'  />";
-            }
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-            divInfo += "</table>";
-            divQuestionPattern.Controls.Add(new LiteralControl(divInfo));
+        }
 
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
+        {
+
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool IsChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int QpId = Convert.ToInt32(gvQuestionMarks.DataKeys[row.RowIndex].Values["QpId"]);
+
+            string query = "update QuestionPattern set IsActive='" + (IsChecked ? 1 : 0) + "' where CourseId=" + QpId;
+            CRUD.ExecuteNonQuerys(query);
+         
+
+
+        }
+
+
+        private void BindData() 
+        {
+            string Query = "select QPId,QPName,ISNULL(IsActive,1) as IsActive from QuestionPattern  Order by QPId";
+            DataTable dt = CRUD.ReturnTableNull(Query);
+            gvQuestionMarks.DataSource = dt;
+            gvQuestionMarks.DataBind();
+        }
+        
+       private void clearField() 
+        {
+            txtQPName.Text = "";
+        
         }
     }
 }

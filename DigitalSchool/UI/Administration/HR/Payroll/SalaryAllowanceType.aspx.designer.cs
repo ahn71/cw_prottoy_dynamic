@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DS.UI.Administration.HR.Payroll {
-    
-    
-    public partial class SalaryAllowanceType {
-        
+namespace DS.UI.Administration.HR.Payroll
+{
+
+
+    public partial class SalaryAllowanceType
+    {
+
         /// <summary>
         /// uplMessage control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DS.UI.Administration.HR.Payroll {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel uplMessage;
-        
+
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DS.UI.Administration.HR.Payroll {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
-        
+
         /// <summary>
         /// lblAId control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DS.UI.Administration.HR.Payroll {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField lblAId;
-        
+
         /// <summary>
         /// lblOldPercentage control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DS.UI.Administration.HR.Payroll {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField lblOldPercentage;
-        
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -56,70 +58,43 @@ namespace DS.UI.Administration.HR.Payroll {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
-        /// divAllowanceType control.
+        /// lblAllownece control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAllowanceType;
-        
+        protected global::System.Web.UI.WebControls.Label lblAllownece;
+
         /// <summary>
-        /// HiddenField1 control.
+        /// txtAllowence control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtAllowence;
+
         /// <summary>
-        /// HiddenField2 control.
+        /// lblPersentance control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenField2;
-        
+        protected global::System.Web.UI.WebControls.Label lblPersentance;
+
         /// <summary>
-        /// UpdatePanel2 control.
+        /// txtPersantece control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
-        /// <summary>
-        /// txtAllowanceType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAllowanceType;
-        
-        /// <summary>
-        /// txtPercentage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPercentage;
-        
-        /// <summary>
-        /// chkStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkStatus;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtPersantece;
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -128,5 +103,14 @@ namespace DS.UI.Administration.HR.Payroll {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// gvAllowenceList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAllowenceList;
     }
 }

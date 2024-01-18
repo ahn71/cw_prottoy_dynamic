@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DS.UI.Academic.Examination {
-    
-    
-    public partial class ExamineeSelection {
-        
+namespace DS.UI.Academic.Examination
+{
+
+
+    public partial class ExamineeSelection
+    {
+
         /// <summary>
         /// uplMessage control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel uplMessage;
-        
+
         /// <summary>
         /// lblMessage control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
-        
+
         /// <summary>
         /// aDashboard control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aDashboard;
-        
+
         /// <summary>
         /// aAcademicHome control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aAcademicHome;
-        
+
         /// <summary>
         /// aExamHome control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor aExamHome;
-        
+
         /// <summary>
         /// divSearchPanel control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSearchPanel;
-        
+
         /// <summary>
         /// UpdatePanel2 control.
         /// </summary>
@@ -74,16 +76,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
-        /// <summary>
-        /// tblOp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tblOp;
-        
+
         /// <summary>
         /// ddlShift control.
         /// </summary>
@@ -92,7 +85,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlShift;
-        
+
         /// <summary>
         /// ddlBatch control.
         /// </summary>
@@ -101,7 +94,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBatch;
-        
+
         /// <summary>
         /// ddlGroup control.
         /// </summary>
@@ -110,7 +103,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGroup;
-        
+
         /// <summary>
         /// ddlExamId control.
         /// </summary>
@@ -119,7 +112,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlExamId;
-        
+
         /// <summary>
         /// ddlSection control.
         /// </summary>
@@ -128,7 +121,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSection;
-        
+
         /// <summary>
         /// chkForCoutAsFinalResult control.
         /// </summary>
@@ -137,7 +130,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkForCoutAsFinalResult;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -146,7 +139,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-        
+
         /// <summary>
         /// btnPrintPreview control.
         /// </summary>
@@ -155,7 +148,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPrintPreview;
-        
+
         /// <summary>
         /// UpdateProgress1 control.
         /// </summary>
@@ -164,7 +157,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-        
+
         /// <summary>
         /// up2 control.
         /// </summary>
@@ -173,7 +166,7 @@ namespace DS.UI.Academic.Examination {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel up2;
-        
+
         /// <summary>
         /// gvExamRoutine control.
         /// </summary>

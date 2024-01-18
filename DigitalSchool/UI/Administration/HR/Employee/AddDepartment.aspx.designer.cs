@@ -39,7 +39,7 @@ namespace DS.UI.Administration.HR.Employee
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDeptName;
+        protected global::System.Web.UI.WebControls.Label lblDeptName;
 
         /// <summary>
         /// txtDepartment control.
@@ -51,24 +51,6 @@ namespace DS.UI.Administration.HR.Employee
         protected global::System.Web.UI.WebControls.TextBox txtDepartment;
 
         /// <summary>
-        /// chkIsteacher control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsteacher;
-
-        /// <summary>
-        /// chkStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkStatus;
-
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -76,6 +58,24 @@ namespace DS.UI.Administration.HR.Employee
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+
+        /// <summary>
+        /// txtSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+
+        /// <summary>
+        /// upPannel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upPannel;
 
         /// <summary>
         /// gvDepartment control.

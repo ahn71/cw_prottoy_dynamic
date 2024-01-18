@@ -1,32 +1,191 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="AddCourseWithSubject.aspx.cs" Inherits="DS.UI.Academic.Examination.ManagedSubject.AddCourseWithSubject" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
     <style>
-        .tgPanel {
-            width: 100%;            
-        } 
-        .NoneBorder{
-            border: none;
-        }        
-        .dataTables_length, .dataTables_filter {
-          display: none;
-          padding: 15px;
-        } 
-         #tblClassList_info {
-             display: none;
-            padding: 15px;
-        }     
+        th {
+            font-size: 15px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 25px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+
+
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .active-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+        input#MainContent_chkStauts {
+    width: 20px;
+    display: block;
+    height: 15px;
+}
+        /*.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}*/
+        input:focus {
+    box-shadow: 0px 0px 0px 0px !important;
+    border: 1px solid rgba(255,255,255, 0.8);
+}
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+        th {
+            background: #ddd !important;
+        }
+
+        td, th {
+            text-align: left;
+            border: 1px solid #ddd !important;
+        }
+
+        .table {
+            border-radius:0 !important;
+            margin: 10px 0;
+        }
+        .border-1{
+            border:1px solid #ddd;
+        }
+
+      .update-icon{
+        display:inline-block;
+        padding: 0 6px;
+        height: 30px;
+        width: 30px;
+        line-height:30px;
+        text-align:center;
+        border-radius: 50%;
+        background:#99dde7;
+        color:#1e1e1e;
+        font-size:12px;
+        opacity:0;
+        transition:0.1s all ease;
+      }
+      td:hover .update-icon{
+        opacity:1;
+      }
+        
     </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="uplMessage" runat="server">
         <ContentTemplate>
             <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
         </ContentTemplate>
-    </asp:UpdatePanel>   
+    </asp:UpdatePanel>
     <div class="row">
         <div class="col-md-12">
             <!--breadcrumbs start -->
-            <ul class="breadcrumb">
+            <ul class="breadcrumb py-3">
                 <li>
                     <a runat="server" href="~/Dashboard.aspx">
                         <i class="fa fa-dashboard"></i>
@@ -36,170 +195,157 @@
                 <li><a runat="server" href="~/UI/Academic/AcademicHome.aspx">Academic Module</a></li>
                 <li><a runat="server" href="~/UI/Academic/Examination/ExamHome.aspx">Examination Module</a></li>
                 <li><a runat="server" href="~/UI/Academic/Examination/ManagedSubject/SubjectManageHome.aspx">Subject Management</a></li>
-                <li class="active">Add Course With Subject</li>               
+                <li class="active">Add Course With Subject</li>
             </ul>
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="">
+    <div class="bg-white p-3 mb-3">
         <div class="row">
             <div class="col-md-6">
-                <h4 class="text-right" style="float: left;">Add Course With Subject List</h4>
-                <div class="dataTables_filter_New" style="float: right;margin-right:0px;">
-                    <label>
-                        Search:
-                        <input type="text" class="Search_New" placeholder="type here Subject/Course" />
-                    </label>
-                </div>                
+                <h4 class="text-right fw-bold mb-3" style="float: left;">Add Course With Subject List</h4>
             </div>
-            <div class="col-md-5"></div>
         </div>
-         <div class="row">
-            
-                <div class="col-md-6">
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="btnSave" />
-                        </Triggers>
-                        <ContentTemplate>
-                            <div class="tgPanel">
-                            <div id="divSubjectList" class="datatables_wrapper" runat="server"
-                                style="width: 100%; height: auto; max-height: 350px; overflow: auto; overflow-x: hidden;">
-                            </div>
-                                </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div> 
-             <div class="col-md-6">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
-                    </Triggers>
-                    <ContentTemplate>
-                         <asp:HiddenField ID="lblCourseId" ClientIDMode="Static" runat="server" />
-                        <div class="tgPanel">
-                            <div class="tgPanelHead">Add Course With Subject</div>
-                             
-                           <table class="tbl-controlPanel">                                
-                                <tr>
-                                   <td>Select Subject</td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlSubjectName" runat="server"  ClientIDMode="Static" CssClass="input controlLength form-control" AutoPostBack="False">
-                                                    </asp:DropDownList>
-                                                </td>
-                                </tr>
-                                <tr>
-                                    <td>Course Name   </td>
-                                 
-                                    <td>
-                                        <asp:TextBox ID="txtCourseName" runat="server" ClientIDMode="Static" Style="margin-right: 5px" CssClass="input form-control"></asp:TextBox>
+        <div class="inputPannel">
 
-                                    </td>
-                                </tr>
-                               <tr>
-                                   <td>Ordering </td>
-                                   <td>
-                                      <asp:TextBox ID="txtOrder" runat="server"  ClientIDMode="Static" CssClass="input form-control" Style="margin-left: 0px"></asp:TextBox>
-                                        
-                                   </td>
-                               </tr>
-                               <tr>
-                                   <td> </td>
-                                   <td>                                      
-                                        <asp:CheckBox ID="chkIsActive" ClientIDMode="Static" runat="server" Text="Is Active" />
-                                   </td>
-                               </tr>
-                            </table>
-                            <div class="buttonBox">
-                                <asp:Button ID="btnSave" ClientIDMode="Static" CssClass="btn btn-primary" runat="server" Text="Save" 
-                                    OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                &nbsp;<input type="button" class="btn btn-default" value="Reset" onclick="clearIt();" />
-                            </div>
-                        </div>                        
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>             
-            
-        </div>       
+            <div class="row">
+                 <div class="col-lg-3">
+        <asp:Label runat="server" ID="lblSubjectName" Text="Subject Name"></asp:Label>
+        <asp:DropDownList CssClass="form-control" ID="ddlSubjectList" runat="server" oninput="validateSubject();"></asp:DropDownList>
+        <span id="subjectError" style="color: red;"></span>
+    </div>
+
+    <div class="col-lg-3">
+        <asp:Label runat="server" ID="lblCourseName" Text="Course Name"></asp:Label>
+        <asp:TextBox CssClass="form-control" ID="txtCourseName" runat="server" oninput="validateCourseName();"></asp:TextBox>
+        <span id="courseNameError" style="color: red;"></span>
+    </div>
+
+    <div class="col-lg-3">
+        <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
+        <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server" oninput="validateOrdering();"></asp:TextBox>
+        <span id="orderingError" style="color: red;"></span>
+    </div>
+
+    <div class="col lg-3 mt-3">
+        <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClientClick="return validateForm();" OnClick="btnSave_Click" />
+    </div>
+
+            </div>
+
+  </div>
+
+ 
+ 
+
+
+
+
+
+    </div>
+
+    <div class="main-table">
+                <%--Seaech--%>
+        <div class="btnSection row justify-content-end">
+            <div class="col-lg-4">
+                <div class="search-wrapper d-flex align-items-center border-1 rounded bg-white">
+                    <asp:TextBox CssClass="form-control border-0" runat="server" ID="txtSearch" oninput="filterGridView()" placeholder="Type to Search"></asp:TextBox>
+                    <span class="d-block pe-3"><i class="fas fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+
+   <asp:UpdatePanel runat="server" ID="upgvTable" ClientIDMode="Static">
+            <ContentTemplate>
+                 <div class="gvTable">
+                     <asp:DropDownList runat="server" ID="ddlPageIndex" AutoPostBack="true" EnableViewState="true"  OnSelectedIndexChanged="ddlPageIndex_SelectedIndexChanged">
+                        <asp:ListItem Text="Select Page"></asp:ListItem>
+                         <asp:ListItem Text="10" Value="10" />
+                         <asp:ListItem Text="20" Value="20" />
+                         <asp:ListItem Text="50" Value="50" />
+                     </asp:DropDownList>
+     <asp:GridView ID="gvCourseSubList" runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" OnRowCommand="gvCourseSubList_RowCommand" OnPageIndexChanging="gvCourseSubList_PageIndexChanging"
+         CssClass="table" AllowPaging="True" PageSize="20"
+         DataKeyNames="CourseId,SubId" GridLines="Vertical"
+         PagerStyle-CssClass="pgr"
+         Width="100%">
+      
+         <RowStyle CssClass="gridRow" />
+         <HeaderStyle CssClass="gridHeader" />
+         <Columns>
+
+             <asp:TemplateField HeaderText="SL">
+                 <ItemTemplate>
+                     <%#Container.DataItemIndex+1 %>
+                 </ItemTemplate>
+             </asp:TemplateField>
+
+             <asp:TemplateField HeaderText="Subject Name">
+                 <ItemTemplate>
+                     <asp:Label ID="lblSubName" runat="server" Text='<%# Eval("SubName") %>'></asp:Label>
+                      <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+                 <span class="update-icon" ><i class="fas fa-edit"></i></span>
+                               </asp:LinkButton>
+                 </ItemTemplate>
+             </asp:TemplateField>
+
+             <asp:TemplateField HeaderText="Course Tittle">
+                 <ItemTemplate>
+                     <asp:Label ID="lblCourse" runat="server" Text='<%# Eval("CourseName") %>'></asp:Label>
+                 </ItemTemplate>
+             </asp:TemplateField>
+
+          <asp:TemplateField HeaderText="Status">
+                 <ItemTemplate>
+                     <label class="switch">
+                         <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true"
+                             EnableViewState="true" Checked='<%# Convert.ToBoolean(Eval("IsActive")) %>' />
+                         <span class="slider round"></span>
+                     </label>
+
+                 </ItemTemplate>
+             </asp:TemplateField>
+
+
+         </Columns>
+
+     </asp:GridView>
+ </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
        
-    </div>    
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
+
+    </div>
+
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#ddlSubjectName").select2();
-            $(document).on("keyup", '.Search_New', function () {
-                searchTable($(this).val(), 'gvClassSubject', '');
-            });
-            $('#gvClassSubject').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100]
-            });
-        });
-        function loaddatatable() {
-            $('#gvClassSubject').dataTable({
-                "iDisplayLength": 10,
-                "lengthMenu": [10, 20, 30, 40, 50, 100]
-            });
-        }
-        function validateInputs() {
-            if (validateText('txtCourseName', 1, 60, 'Enter Course Name') == false) return false;
-            if (validateText('txtOrder', 1, 10, 'Enter Order no') == false) return false;
-            return true;
-        }
+        function filterGridView() {
 
-        function editSubject(Id) {
-           
-            $('#lblCourseId').val(Id);
-            var strAT = $('#r_' + Id + ' td:first-child').html();
-           // $('#txtCourseName').val(strAT);
-            var strP = $('#r_' + Id + ' td:nth-child(2)').html();
-            $('#txtCourseName').val(strP);
-            var strP = $('#r_' + Id + ' td:nth-child(3)').html();
-            $('#txtOrder').val(strP);
-            var strO = $('#r_' + Id + ' td:nth-child(4)').html();
-            
-            if (strO == "Yes") {              
-                $('#chkIsActive').removeProp('checked');
-                $('#chkIsActive').click();
+            var searchValue = document.getElementById('<%=txtSearch.ClientID%>').value.toLowerCase();
+             var grid = document.getElementById('<%=gvCourseSubList.ClientID%>');
+            var rows = grid.getElementsByTagName('tr');
 
+            for (var i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+                var row = rows[i];
+                var cells = row.getElementsByTagName('td');
+                var found = false;
+
+                for (var j = 0; j < cells.length; j++) {
+                    var cellText = cells[j].innerText.toLowerCase();
+
+                    if (cellText.indexOf(searchValue) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    row.style.display = ''; // Show the row if found
+                } else {
+                    row.style.display = 'none'; // Hide the row if not found
+                }
             }
-            else $('#chkIsActive').removeProp('checked');
-
-            var serverURL = window.location.protocol + "//" + window.location.host + "/";
-            jx.load(serverURL + 'UI/Academic/Examination/ForUpdate.aspx?tbldata=CourseSubInfo,' + Id + '&val=' + Id + '&do=GetSubjectStatus', function (data) {
-
-                var getStatus = data.split('_');
-                $('#ddlSubjectName').val(getStatus[0]);
-               // alert(getStatus);
-                load();
-                
-
-            });
-
-            $("#btnSave").val('Update');
-
         }
-
-        function clearIt() {
-            $('#lblCourseId').val('');
-            $('#txtCourseName').val('');
-            $('#txtOrder').val('');
-            setFocus('txtCourseName');
-            $("#btnSave").val('Save');
-        }
-        function updateSuccess() {
-            showMessage('Updated successfully', 'success');
-          //  clearIt();
-        }
-        function SaveSuccess() {
-            showMessage('Save Successfully', 'success');
-           // clearIt();
-        }
-        function load() {
-            $("#ddlSubjectName").select2();
-            loaddatatable();
-        }
-
     </script>
+
 </asp:Content>
+

@@ -10,191 +10,145 @@ using System.Web.UI.WebControls;
 using DS.PropertyEntities.Model.Examinition;
 using DS.BLL.Examinition;
 using DS.BLL.ControlPanel;
+using DS.DAL;
+using CrystalDecisions.Shared.Json;
 
 namespace DS.UI.Academics.Examination
 {
     public partial class AddExam : System.Web.UI.Page
     {
 
-        ExamTypeEntry examTypeEntry;
-        bool result;
         protected void Page_Load(object sender, EventArgs e)
         {
-               
+
             if (!IsPostBack)
             {
-                //---url bind---
-                aDashboard.HRef = "~/" + Classes.Routing.DashboardRouteUrl;
-                aAcademicHome.HRef = "~/" + Classes.Routing.AcademicRouteUrl;
-                aExamHome.HRef = "~/" + Classes.Routing.ExaminationHomeRouteUrl;                
-                //---url bind end---
-                if (!PrivilegeOperation.SetPrivilegeControl(int.Parse(Session["__UserTypeId__"].ToString()), "AddExam.aspx", btnSave)) Response.Redirect(Request.UrlReferrer.ToString() + "?hasperm=no");
-                DataBindForView();
+                BindData();
             }
-            
+
         }
 
-        private void DataBindForView()
+
+        private void BindData()
         {
+            string query = "Select ExId,ExName,SemesterExam,Ordering,ISNULL(IsActive,1) as IsActive from ExamType Order by Ordering";
+            DataTable dt = CRUD.ReturnTableNull(query);
+            gvExamList.DataSource = dt;
+            gvExamList.DataBind();
+        }
 
 
-            if (examTypeEntry == null) examTypeEntry = new ExamTypeEntry();
-            List<ExamTypeEntities> loadExamTypeList = examTypeEntry.GetAllExamTypeList;   // for get all exam list
-            string divInfo = "";
 
-            if (loadExamTypeList.Count == 0)
+        protected void btnSave_Click1(object sender, EventArgs e)
+        {
+            if (btnSave.Text == "Save")
             {
-                divInfo = "<div class='noData'>No Exam available</div>";
-                divInfo += "<div class='dataTables_wrapper'><div class='head'></div></div>";
-                divExamList.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }
-
-            divInfo = " <table id='tblClassList' class='display'  > ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Exam Name</th>";
-            divInfo += "<th>Serial</th>";
-            divInfo += "<th>Type</th>";
-            divInfo += "<th>Active</th>";
-            if (Session["__Update__"].ToString().Equals("true"))
-            divInfo += "<th>Edit</th>";
-            divInfo += "</tr>";
-
-            divInfo += "</thead>";
-
-            divInfo += "<tbody>";
-            string id = "";
-
-            for (int x = 0; x < loadExamTypeList.Count; x++)
-            {
-
-                id = loadExamTypeList[x].ExId.ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td ><span id=exname" + id + ">" + loadExamTypeList[x].ExName+ "</span></td>";
-                divInfo += "<td ><span id=ordering" + id + ">" + loadExamTypeList[x].Ordering + "</span></td>";
-               
-                if (loadExamTypeList[x].semesterexam == null) 
+              if(txtExamName.Text != "") 
                 {
-                    divInfo += "<td ><span id=semesterexam" + id + ">Quiz</span></td>";
-                }
-                else if (loadExamTypeList[x].semesterexam == true)
-                {
-                    divInfo += "<td ><span id=semesterexam" + id + ">Semester</span></td>";
+                    if (rdoQuiz.Checked == true || rdoOthers.Checked == true || rdoSemesterExam.Checked == true)
+                    {
+                        string query = $"INSERT INTO ExamType(ExName, SemesterExam, IsActive) VALUES('{txtExamName.Text}', {(rdoSemesterExam.Checked ? "1" : (rdoOthers.Checked ? "0" : "NULL"))}, '1')";
+                        CRUD.ExecuteNonQuery(query);
+                        lblMessage.InnerText = "Data saved successfully";
+                        BindData();
+                        ClearField();
+                    }
+                    else
+                        lblMessage.InnerText = "Must be select any type";
                 }
                 else
                 {
-                    divInfo += "<td ><span id=semesterexam" + id + ">Others</span></td>";
+                    lblMessage.InnerText = "Exam Name is empty";
                 }
-                divInfo += "<td ><span id=IsActive" + id + ">" + ((loadExamTypeList[x].IsActive) ? "Yes" : "No") + "</span></td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg'   onclick='editExam(" + id + ");'  />";
-            }
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-            divInfo += "</table>";         
-            divExamList.Controls.Add(new LiteralControl(divInfo));
-        }
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            if (lblExId.Value.ToString().Length == 0)
-            {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; DataBindForView(); return; }
-                if (saveExam() == true)
-                {
-                    DataBindForView();
+                    
 
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SavedSuccess();", true);
-                }
+
+
+                
             }
-            else
+            else 
             {
-                if (updateExam() == true)
-                {
-                    DataBindForView();
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
-                }
+                string query = $"Update ExamType set ExName='{txtExamName.Text}',SemesterExam={(rdoSemesterExam.Checked ? "1" : (rdoOthers.Checked ? "0" : "NULL"))} where ExId=" + ViewState["--ExamId"];
+                CRUD.ExecuteNonQuery(query);
+                btnSave.Text = "";
+                lblMessage.InnerText = "Data updated successfully";
+                BindData();
+                ClearField();
+
             }
+
         }
 
-       
-
-        private ExamTypeEntities GetExamTypeData()
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
         {
-            try
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int ExamID = Convert.ToInt32(gvExamList.DataKeys[row.RowIndex].Value);
+            string query = "update ExamType set IsActive =" + (isChecked ? "1" : "0") + " where ExId=" + ExamID;
+            CRUD.ExecuteNonQuery(query);
+        }
+
+        protected void gvExamList_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                ExamTypeEntities examType = new ExamTypeEntities();
+                Label lblType = e.Row.FindControl("lblType") as Label;
+                if (lblType != null && lblType.Text!="")
+                {
+                    bool semesterE = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "SemesterExam"));
 
-
-                examType.ExId = (lblExId.Value.ToString() == "") ? 0 : int.Parse(lblExId.Value.ToString()); ;
-                examType.ExName = txtEx_Name.Text.Trim();
-                examType.Ordering = int.Parse(txtSerial.Text);
-                if (rblType.SelectedValue == "0")
-                    examType.semesterexam = false;
-                else if (rblType.SelectedValue == "1")
-                    examType.semesterexam = true;
+                    if (!semesterE)
+                    {
+                        lblType.Text = "Other";
+                    }
+                    else if (semesterE)
+                    {
+                        lblType.Text = "Semester";
+                    }
+                }
                 else
-                   examType.semesterexam = null;
-                examType.IsActive = chkIsActive.Checked;
-                
-               
-                return examType;
-            }
-            catch { return null; }
-        }
-
-        private Boolean saveExam()
-        {
-            try
-            {
-                using (ExamTypeEntities examTypeEntities = GetExamTypeData())
                 {
-                    if (examTypeEntry==null) examTypeEntry = new ExamTypeEntry();
-                    examTypeEntry.SetEntities = examTypeEntities;                   
-                    result = examTypeEntry.Insert();
-
-                    if (!result)
-                    {
-                        lblMessage.InnerText = "error-> Unable to save";
-                        return false;
-                    }
-                    return true;
-
-                }     
-            }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
-            }
-        }
-
-        private Boolean updateExam()
-        {
-            try
-            {
-
-                using (ExamTypeEntities examTypeEntities = GetExamTypeData())
-                {
-                    if (examTypeEntry == null) examTypeEntry = new ExamTypeEntry();
-                    examTypeEntry.SetEntities = examTypeEntities;
-                    result = examTypeEntry.Update();
-
-                    if (!result)
-                    {
-                        lblMessage.InnerText = "error-> Unable to update";
-                        return false;
-                    }
-                    return true;
-                
+  
+                    lblType.Text = "Quiz";
                 }
 
             }
-            catch (Exception ex)
-            {
-                lblMessage.InnerText = "error->" + ex.Message;
-                return false;
+        }
+
+        protected void gvExamList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Alter") 
+             {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                int examId = Convert.ToInt32(gvExamList.DataKeys[rowIndex].Value);
+                ViewState["--ExamId"] = examId;
+                txtExamName.Text = ((Label)gvExamList.Rows[rowIndex].FindControl("lblExamName")).Text;
+                string radioButtonValue = ((Label)gvExamList.Rows[rowIndex].FindControl("lblType")).Text;
+                if (radioButtonValue == "Semester")
+                {
+                    rdoSemesterExam.Checked = true;
+                }
+                else if (radioButtonValue == "Other")
+                {
+                    rdoOthers.Checked = true;
+                }
+                else 
+                {
+                    rdoQuiz.Checked = true;
+                }
+                btnSave.Text = "Update";
+
             }
+        }
+
+
+        private void ClearField() 
+        {
+            txtExamName.Text = "";
+            rdoQuiz.Checked = false;
+            rdoOthers.Checked = false;
+            rdoSemesterExam.Checked= false;
         }
     }
+
 }
