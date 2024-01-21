@@ -6,11 +6,11 @@
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 body {
-  margin: 0;
-  height: 100%;
-  background: url(../img/bg-2.jpg) #cdcdcd;
-  font-family: Lato, sans-serif, serif;
-  color: #111
+    margin: 0;
+    height: 100%;
+    font-family: Lato, sans-serif, serif;
+    color: #111;
+    font-family: 'Jost', sans-serif;
 }
 /*=============================================================*/
 
