@@ -1,6 +1,7 @@
 /.vs
 /DigitalSchool/bin
 /DigitalSchool.BLL/bin
+/DigitalSchool/obj
 /DigitalSchool.DAL/bin
 /DigitalSchool.PropertyEntities/bin
 /DigitalSchool.SysErrMsgHandler/bin

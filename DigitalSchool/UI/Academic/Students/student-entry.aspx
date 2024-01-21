@@ -145,7 +145,11 @@
                      </Triggers>
                      <ContentTemplate>
                          <div class="group-info-box student-info">
+<<<<<<< HEAD
                              <h4 class="group-title">Student Information</h4>
+=======
+                             <h6 class="group-title">Student Information</h6>
+>>>>>>> origin/rokibul_monikanan
                              <div class="row form-group">  <!--------Start--->
                                  <div class="col-md-4">
                                      <div class="row">
