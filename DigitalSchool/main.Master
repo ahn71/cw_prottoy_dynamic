@@ -249,7 +249,7 @@
 
                     </div>
                     <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                        <h2 class="text-center fw-bold mb-0">Moni Kanan High School</h2>
+                        <h2>Prottoy Dynamic</h2>
                     </div>
                     <div class="col-lg-4 d-flex justify-content-end align-items-center">
 
@@ -472,6 +472,7 @@
                 args.set_errorHandled(true);
             }
         }
+       
     </script>
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server">
     </asp:ContentPlaceHolder>
