@@ -3915,6 +3915,7 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 ul.clock-category {
     padding: 15px 0;
 }
+
 .clock {
     background: #73aa08;
     color: #fff;
@@ -3923,6 +3924,7 @@ ul.clock-category {
     border-radius: 5px;
     width: 130px;
 }
+
 .clock-2 {
     background: #73aa08;
     color: #fff;
@@ -3939,24 +3941,24 @@ ul.clock-category li {
     border: none;
 }
 
-        ul.clock-category li a span {
-            display: block;
-            line-height: normal;
-        }
+    ul.clock-category li a span {
+        display: block;
+        line-height: normal;
+    }
 
-        ul.clock-category li a i {
-            font-size: 30px;
-            padding-right: 0;
-        }
+    ul.clock-category li a i {
+        font-size: 30px;
+        padding-right: 0;
+    }
 
-        ul.clock-category li a:hover, ul.clock-category li a.active {
+    ul.clock-category li a:hover, ul.clock-category li a.active {
+        color: #1fb5ad !important;
+        background: none !important;
+    }
+
+        ul.clock-category li a:hover i, ul.clock-category li a.active i {
             color: #1fb5ad !important;
-            background: none !important;
         }
-
-            ul.clock-category li a:hover i, ul.clock-category li a.active i {
-                color: #1fb5ad !important;
-            }
 
 .clock-row h1 {
     font-size: 22px !important;
@@ -6019,12 +6021,14 @@ div.tagsinput span.tag {
     border: 1px solid #F1F2F6;
 }
 
-p{
-    font-size:15px;
+p {
+    font-size: 15px;
 }
+
 .box-header {
     background-color: #f2f7ff;
 }
+
 .enquiry-icon-1 {
     background-color: #F6BF8C;
     color: #ffffff;
@@ -6034,6 +6038,7 @@ p{
     text-align: center;
     border-radius: 4px;
 }
+
 .enquiry-icon-2 {
     background-color: #97B863;
     color: #ffffff;
@@ -6043,6 +6048,7 @@ p{
     text-align: center;
     border-radius: 4px;
 }
+
 .enquiry-icon-3 {
     background-color: #DF5D6F;
     color: #ffffff;
@@ -6052,6 +6058,7 @@ p{
     text-align: center;
     border-radius: 4px;
 }
+
 .enquiry-icon-4 {
     background-color: #69BEDC;
     color: #ffffff;
@@ -6061,12 +6068,15 @@ p{
     text-align: center;
     border-radius: 4px;
 }
-.card{
-    border:1px solid #ddd !important;
+
+.card {
+    border: 1px solid #ddd !important;
 }
-td{
-    font-size:16px !important;
+
+td {
+    font-size: 16px !important;
 }
+
 .mini-stat-icon {
     width: 60px;
     height: 60px;

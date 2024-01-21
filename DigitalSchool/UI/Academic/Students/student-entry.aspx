@@ -43,9 +43,13 @@
         .mbm-10 {
             margin-bottom:20px;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+        
      <asp:UpdatePanel ID="uplMessage" runat="server">
         <ContentTemplate>
             <p class="message" id="lblMessage" clientidmode="Static" runat="server"></p>
@@ -123,8 +127,8 @@
                      <Triggers>
                          <asp:AsyncPostBackTrigger ControlID="ddlClass" />
                          <asp:AsyncPostBackTrigger ControlID="ddlGroup" />
-                         <asp:AsyncPostBackTrigger ControlID="ddlParentsDistrict" />
-                         <asp:AsyncPostBackTrigger ControlID="ddlParentsUpazila" />
+                         <%--<asp:AsyncPostBackTrigger ControlID="ddlParentsDistrict" />--%>
+                         <%--<asp:AsyncPostBackTrigger ControlID="ddlParentsUpazila" />--%>
                          <asp:AsyncPostBackTrigger ControlID="ddlPermanentDistrict" />
                          <asp:AsyncPostBackTrigger ControlID="ddlPermanentUpazila" />
                          <asp:AsyncPostBackTrigger ControlID="ddlPresentDistrict" />
@@ -132,8 +136,8 @@
                          <asp:AsyncPostBackTrigger ControlID="chkFather" />
                          <asp:AsyncPostBackTrigger ControlID="chkMother" />
                          <asp:AsyncPostBackTrigger ControlID="chkOther" />
-                         <asp:AsyncPostBackTrigger ControlID="ckbSameAsPermanentAddress" />
-                         <asp:AsyncPostBackTrigger ControlID="ckbSameAsParentsAddress" />
+                         <asp:AsyncPostBackTrigger ControlID="ckbSameAsPresentAddress" />
+                       <%--  <asp:AsyncPostBackTrigger ControlID="ckbSameAsParentsAddress" />--%>
                          <asp:PostBackTrigger ControlID="btnSubmit" />
                          <asp:AsyncPostBackTrigger ControlID="btnClear" />
                          <asp:AsyncPostBackTrigger ControlID="ckbTCInfo" />
@@ -141,8 +145,8 @@
                      </Triggers>
                      <ContentTemplate>
                          <div class="group-info-box student-info">
-                             <h4 class="group-title">Student Information</h4>
-                             <div class="row form-group">
+                             <h6 class="group-title">Student Information</h6>
+                             <div class="row form-group">  <!--------Start--->
                                  <div class="col-md-4">
                                      <div class="row">
                                          <label for="name" class="col-sm-4 control-label">Student Name<strong class="required">*</strong></label>
@@ -159,7 +163,28 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-4">
+                                <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Student BID/NID<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="textStuBidNid" class="form-control" placeholder="Student BID/NID"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                             
+
+                             </div> <!-----------End--->
+                             <div class="row form-group"> <!-------Start-------->
+                                <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="name" class="col-sm-4 control-label">Date of Birth<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtDateOfBirth" class="form-control" placeholder="dd-MM-yyyy"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                     <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Gender<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
@@ -172,16 +197,6 @@
                                      </div>
                                  </div>
 
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">Date of Birth<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtDateOfBirth" class="form-control" placeholder="dd-MM-yyyy"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
                                  <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Religion<strong class="required">*</strong></label>
@@ -198,6 +213,10 @@
                                          </div>
                                      </div>
                                  </div>
+                                 
+
+                             </div> <!----------end--->
+                             <div class="row form-group"> <!----------Start--->
                                  <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Blood Group</label>
@@ -216,9 +235,6 @@
                                          </div>
                                      </div>
                                  </div>
-
-                             </div>
-                             <div class="row form-group">
                                  <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Mobile<strong class="required">*</strong></label>
@@ -231,15 +247,8 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Shift<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlShift" class="form-control"></asp:DropDownList>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
+
+                                <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Year<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
@@ -248,9 +257,11 @@
                                      </div>
                                  </div>
 
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
+
+
+                             </div> <!-----------End---------->
+                             <div class="row form-group"> <!-----------Start---------->
+                                <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Class<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
@@ -258,7 +269,7 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-4">
+                                <div class="col-md-4">
                                      <div class="row">
                                          <label for="name" class="col-sm-4 control-label">Group<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
@@ -266,7 +277,10 @@
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-4">
+
+                           
+
+                                   <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Section<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
@@ -274,8 +288,29 @@
                                          </div>
                                      </div>
                                  </div>
-                             </div>
-                             <div class="row form-group">
+
+
+
+
+
+
+ 
+                             </div> <!---------end--->
+                             <div class="row form-group"> <!-----------Start--->
+
+                                 
+                                   <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Section<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlShift" class="form-control"></asp:DropDownList>
+                                         </div>
+                                     </div>
+                                 </div>
+
+
+
+
                                  <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Roll<strong class="required">*</strong></label>
@@ -292,137 +327,21 @@
                                          </div>
                                      </div>
                                  </div>
-                             </div>
+
+                             </div><!---end------>
                          </div>
                          <br />
-                         <div class="group-info-box student-info">
-                             <h4 class="group-title">Parents Information</h4>
+
+                         <!-------Student Information part --->
+                         <div class="group-info-box student-info"> <!-----------Student Present Addrsss Start ------------------>
+                            <h4 class="group-title">Present Address</h4>
+                             
                              <div class="row form-group">
                                  <div class="col-md-4">
                                      <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">Father's Name<strong class="required">*</strong></label>
+                                         <label for="name" class="col-sm-4 control-label">District <strong class="required">*</strong></label>
                                          <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherName" class="form-control" placeholder="Enter Father's Name"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">পিতার নাম <strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherNameBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Mobile<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">+88</span>
-                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherMobile" class="form-control" placeholder="Enter Father's Mobile"></asp:TextBox>
-                                             </div>
-
-                                         </div>
-                                     </div>
-                                 </div>
-
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Occupation<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherOccupation" class="form-control" placeholder="Enter Father's Occupation"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">পেশা<strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherOccupationBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-
-
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">Mother's Name<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherName" class="form-control" placeholder="Enter Mother's Name"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">মাতার নাম<strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherNameBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Mobile</label>
-                                         <div class="col-sm-8">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">+88</span>
-                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherMobile" class="form-control" placeholder="Enter Mother's Mobile"></asp:TextBox>
-                                             </div>
-
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Occupation<strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherOccupation" class="form-control" placeholder="Enter Mother's Occupation"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">পেশা<strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherOccupationBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-
-                               <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Address<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtParentsVillage" class="form-control" placeholder="Enter Parents Address"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">ঠিকানা<strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtParentsVillageBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">District<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlParentsDistrict" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlParentsDistrict_SelectedIndexChanged"></asp:DropDownList>
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPresentDistrict" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPresentDistrict_SelectedIndexChanged"></asp:DropDownList>
                                          </div>
                                      </div>
                                  </div>
@@ -430,7 +349,7 @@
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Upazila<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlParentsUpazila" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlParentsUpazila_SelectedIndexChanged"></asp:DropDownList>
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPresentUpazila" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPresentUpazila_SelectedIndexChanged"></asp:DropDownList>
                                          </div>
                                      </div>
                                  </div>
@@ -438,105 +357,56 @@
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Post Office<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlParentsPostOffice" class="form-control"></asp:DropDownList>
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPresentPostOffice" class="form-control"></asp:DropDownList>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div >
+                             <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Address (Village/Ward/)<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPresentVillage" class="form-control" placeholder="Enter Present Address"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">ঠিকানা (গ্রাম/ওয়ার্ড/)<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPresentVillageBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
                                          </div>
                                      </div>
                                  </div>
                              </div>
-                           
-
-                         </div>
+                         </div> <!-----------Student Present Addrsss end ------------------>
                          <br />
-                         <div class="group-info-box student-info">
-                             <h4 class="group-title">Guardian Information</h4>
 
-                             <div class="row form-group">
-                                 <div class="col-md-8"></div>
-                                 <div class="col-md-4">
-                                     <div class="pull-right">
-                                         <asp:CheckBox runat="server" ID="chkFather" AutoPostBack="true" CssClass="chkBox"
-                                             ClientIDMode="Static" Text=" Father ?" OnCheckedChanged="chkFather_CheckedChanged" />
-                                         <asp:CheckBox runat="server" ID="chkMother" AutoPostBack="true" CssClass="chkBox"
-                                             ClientIDMode="Static" Text="  Mother ?" OnCheckedChanged="chkMother_CheckedChanged" />
-                                         <asp:CheckBox runat="server" ID="chkOther" AutoPostBack="true" CssClass="chkBox"
-                                             ClientIDMode="Static" Text=" Other ?" OnCheckedChanged="chkOther_CheckedChanged" />
-                                     </div>
-                                 </div>
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">Guardian Name<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianName" class="form-control" placeholder="Enter Guardian Name"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Relation<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianRelation" class="form-control" placeholder="Enter Guardian Relation"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Mobile<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <div class="input-group">
-                                                 <span class="input-group-addon">+88</span>
-                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianMobile" class="form-control" placeholder="Enter Guardian Mobile"></asp:TextBox>
-                                             </div>
-
-                                         </div>
-                                     </div>
-                                 </div>
-
-                             </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Address<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianAddress" class="form-control" placeholder="Enter Guardian Address"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <br />
-                         <div class="group-info-box student-info">
+                           <div class="group-info-box student-info"> <!-----------Student Permanent Addrsss Start ------------------>
                              <h4 class="group-title">Permanent Address</h4>
-                             <div class="row form-group">
+                              <div class="row form-group">
                                  <div class="col-sm-9"></div>
                                  <div class="col-sm-3 ">
                                      <div class="pull-right">
-                                         <asp:CheckBox runat="server" ID="ckbSameAsParentsAddress" AutoPostBack="true" CssClass="chkBox"
-                                             ClientIDMode="Static" Text=" Same as Parents Address ? " OnCheckedChanged="ckbSameAsParentsAddress_CheckedChanged"  />
+<%--                                         <asp:CheckBox runat="server" ID="ckbSameAsPermanentAddress" AutoPostBack="true" CssClass="chkBox"
+                                             ClientIDMode="Static" Text=" Same as Present Address ? " OnCheckedChanged="ckbSameAsPermanentAddress_CheckedChanged" />--%>
+
+                                           <asp:CheckBox runat="server" ID="ckbSameAsPresentAddress" AutoPostBack="true" 
+                                             ClientIDMode="Static" Text=" Same as Present Address ? " OnCheckedChanged="ckbSameAsPresentAddress_CheckedChanged" />
 
                                      </div>
                                  </div>
                              </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Address<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPermanentVillage" class="form-control" placeholder="Enter Present Address"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">ঠিকানা<strong class="required"></strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPermanentVillageBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>
+<%--                             <div class="row form-group">
+                                 <div class="col-sm-9"></div>
+                                 <div class="col-sm-3 ">
+                                     <div class="pull-right">
+<%--                                         <asp:CheckBox runat="server" ID="ckbSameAsParentsAddress" AutoPostBack="true" CssClass="chkBox"
+                                             ClientIDMode="Static" Text=" Same as Parents Address ? " OnCheckedChanged="ckbSameAsParentsAddress_CheckedChanged"  />--%>
+
+
+                           
                              <div class="row form-group">
                                  <div class="col-md-4">
                                      <div class="row">
@@ -564,67 +434,282 @@
                                  </div>
 
                              </div>
-                             
 
-                         </div>
-                         <br />
-                         <div class="group-info-box student-info">
-                             <h4 class="group-title">Present Address</h4>
-                             <div class="row form-group">
-                                 <div class="col-sm-9"></div>
-                                 <div class="col-sm-3 ">
-                                     <div class="pull-right">
-                                         <asp:CheckBox runat="server" ID="ckbSameAsPermanentAddress" AutoPostBack="true" CssClass="chkBox"
-                                             ClientIDMode="Static" Text=" Same as Permanent Address ? " OnCheckedChanged="ckbSameAsPermanentAddress_CheckedChanged" />
-
+                               <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Address (Village/Ward/)<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPermanentVillage" class="form-control" placeholder="Enter Present Address"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">ঠিকানা (গ্রাম/ওয়ার্ড/)<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPermanentVillageBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
+                                         </div>
                                      </div>
                                  </div>
                              </div>
+                             
+                            </div>
+                      <!-----------Student Permanent Addrsss End ------------------>
+                         <br />
+
+
+
+                         <div class="group-info-box student-info"> <!----------- Parents Informations Start ------------------>
+                             <!----Start------>
+                             <h4 class="group-title">Parents Information</h4>
+                             <div class="row form-group"> <!-Start--->
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="name" class="col-sm-4 control-label">Father's Name<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherName" class="form-control" placeholder="Enter Father's Name"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">পিতার নাম <strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherNameBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                              <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Father's NID<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherBidNid" class="form-control" placeholder="Enter Father's NID"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                    </div>
+
+
+
+                             </div><!------end--->
+                             <div class="row form-group"> <!-----Start--->
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Occupation<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherOccupation" class="form-control" placeholder="Enter Father's Occupation"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+ 
+
+                               <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Mobile<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">+88</span>
+                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherMobile" class="form-control" placeholder="Enter Father's Mobile"></asp:TextBox>
+                                             </div>
+
+                                         </div>
+                                     </div>
+                                 </div>
+
+
+
+                                 </div>
+<%--                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">পেশা<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtFatherOccupationBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>--%>
+
+
+                                    
+                             <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="name" class="col-sm-4 control-label">Mother's Name<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherName" class="form-control" placeholder="Enter Mother's Name"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">মাতার নাম<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherNameBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Mother's NID<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherBidNid" class="form-control" placeholder="Enter Mother's NID"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Occupation<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherOccupation" class="form-control" placeholder="Enter Mother's Occupation"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+
+                                <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Mobile</label>
+                                         <div class="col-sm-8">
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">+88</span>
+                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtMotherMobile" class="form-control" placeholder="Enter Mother's Mobile"></asp:TextBox>
+                                             </div>
+
+                                         </div>
+                                     </div>
+                                 </div>
+
+
+
+                             </div>
+
+<%--                               <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Address<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtParentsVillage" class="form-control" placeholder="Enter Parents Address"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+<%--                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">ঠিকানা<strong class="required"></strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtParentsVillageBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>--%>
+                             <%--</div>--%>
+<%--                             <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="name" class="col-sm-4 control-label">District<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlParentsDistrict" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlParentsDistrict_SelectedIndexChanged"></asp:DropDownList>
+                                         </div>
+                                     </div>
+                                 </div>--%>
+<%--                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Upazila<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlParentsUpazila" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlParentsUpazila_SelectedIndexChanged"></asp:DropDownList>
+                                         </div>
+                                     </div>
+                                 </div>--%>
+<%--                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Post Office<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlParentsPostOffice" class="form-control"></asp:DropDownList>
+                                         </div>
+                                     </div>
+                                 </div>--%>
+                             </<%--div>--%>
+                           
+
+                         </div>
+                         </div><!-----------Parents Informations End ------------------>
+                         <br />
+                         <div class="group-info-box student-info"> <!----------- Guardian Addrees  Start ------------------>
+                             <h4 class="group-title">Guardian Information</h4>
+
+                             <div class="row form-group">
+                                 <div class="col-md-8"></div>
+                                 <div class="col-md-4">
+                                     <div class="pull-right">
+                                         <asp:CheckBox runat="server" ID="chkFather" AutoPostBack="true" CssClass="chkBox"
+                                             ClientIDMode="Static" Text=" Father ?" OnCheckedChanged="chkFather_CheckedChanged" />
+                                         <asp:CheckBox runat="server" ID="chkMother" AutoPostBack="true" CssClass="chkBox"
+                                             ClientIDMode="Static" Text="  Mother ?" OnCheckedChanged="chkMother_CheckedChanged" />
+                                         <asp:CheckBox runat="server" ID="chkOther" AutoPostBack="true" CssClass="chkBox"
+                                             ClientIDMode="Static" Text=" Other ?" OnCheckedChanged="chkOther_CheckedChanged" />
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="row form-group">
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="name" class="col-sm-4 control-label">Guardian Name<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianName" class="form-control" placeholder="Enter Guardian Name"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="name" class="col-sm-4 control-label">Guardian NID<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="textGuarnBidNid" class="form-control" placeholder="Enter Guardian NID"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+
+
+
+                                 <div class="col-md-4">
+                                     <div class="row">
+                                         <label for="namebn" class="col-sm-4 control-label">Relation<strong class="required">*</strong></label>
+                                         <div class="col-sm-8">
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianRelation" class="form-control" placeholder="Enter Guardian Relation"></asp:TextBox>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+
+
+
                              <div class="row form-group">
                                  <div class="col-md-4">
                                      <div class="row">
                                          <label for="namebn" class="col-sm-4 control-label">Address<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPresentVillage" class="form-control" placeholder="Enter Present Address"></asp:TextBox>
+                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianAddress" class="form-control" placeholder="Enter Guardian Address"></asp:TextBox>
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-4">
+                                 
+                               <div class="col-md-4">
                                      <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">ঠিকানা<strong class="required"></strong></label>
+                                         <label for="namebn" class="col-sm-4 control-label">Mobile<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPresentVillageBn" class="form-control" placeholder="বাংলায়"></asp:TextBox>
+                                             <div class="input-group">
+                                                 <span class="input-group-addon">+88</span>
+                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtGuardianMobile" class="form-control" placeholder="Enter Guardian Mobile"></asp:TextBox>
+                                             </div>
+
                                          </div>
                                      </div>
                                  </div>
                              </div>
-                             <div class="row form-group">
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">District <strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPresentDistrict" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPresentDistrict_SelectedIndexChanged"></asp:DropDownList>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Upazila<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPresentUpazila" class="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPresentUpazila_SelectedIndexChanged"></asp:DropDownList>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Post Office<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPresentPostOffice" class="form-control"></asp:DropDownList>
-                                         </div>
-                                     </div>
-                                 </div>
-                             </div>                             
-                         </div>
+
+                         </div>  <!-------guardian Informations End----------------->
+                         <br />
+
                          <br />
                          <div class="group-info-box student-info">
                              <h4 class="group-title">Previous Institute Info</h4>
@@ -637,41 +722,72 @@
                                      </div>
                                  </div>
                              </div>
-                             <div class="row form-group">
+                             <!---------------Previous institute information CLass one two ten start---->
+                             <div id="divForOneToTen"   runat="server" visible="false">
+                                 <div class="row form-group"> 
+                                  
+                                     <div class="col-md-4">
+                                         <div class="row">
+                                             <label for="name" class="col-sm-4 control-label">Institute Name<strong class="required">*</strong></label>
+                                             <div class="col-sm-8">
+                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPreviousInstituteName" class="form-control" placeholder="Enter Institute Name"></asp:TextBox>
+                                             </div>
+                                         </div>
+                                     </div>
                                  <div class="col-md-4">
                                      <div class="row">
-                                         <label for="name" class="col-sm-4 control-label">Institute Name<strong class="required">*</strong></label>
+                                         <label for="namebn" class="col-sm-4 control-label">Previous Class<strong class="required">*</strong></label>
                                          <div class="col-sm-8">
-                                             <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPreviousExamSchoolName" class="form-control" placeholder="Enter Institute Name"></asp:TextBox>
+                                             <asp:TextBox  runat="server" ClientIDMode="Static"  ID="txtPreviousClass" class="form-control" placeholder="Enter Previous Class" ></asp:TextBox>
+                                             
                                          </div>
                                      </div>
                                  </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Board<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPreviousExamBoard" class="form-control"></asp:DropDownList>
-                                         </div>
-                                     </div>
-                                 </div>
-                                 <div class="col-md-4">
-                                     <div class="row">
-                                         <label for="namebn" class="col-sm-4 control-label">Passing Year<strong class="required">*</strong></label>
-                                         <div class="col-sm-8">
-                                             <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPreviousExamPassingYear" class="form-control">
-                                                 <%--<asp:ListItem Value="0">...Select...</asp:ListItem>
-                                                 <asp:ListItem Value="2020">2020</asp:ListItem>
-                                                 <asp:ListItem Value="2019">2019</asp:ListItem>
-                                                 <asp:ListItem Value="2018">2018</asp:ListItem>
-                                                 <asp:ListItem Value="2017">2017</asp:ListItem>
-                                                 <asp:ListItem Value="2016">2016</asp:ListItem>
-                                                 <asp:ListItem Value="2015">2015</asp:ListItem>--%>
-                                             </asp:DropDownList>
-                                         </div>
-                                     </div>
-                                 </div>
-
+                                </div>
                              </div>
+                             </div>
+
+                              <!---------------Previous institute information CLass one two three end---->
+
+
+
+
+                             <div id="divForElevenToOthers" runat="server" visible="false"> <!---------------Previous institute information Class eleven to others start ---->
+                                 <div class="row form-group"> 
+                                     <div class="col-md-4">
+                                         <div class="row">
+                                             <label for="name" class="col-sm-4 control-label">Institute Name<strong class="required">*</strong></label>
+                                             <div class="col-sm-8">
+                                                 <asp:TextBox runat="server" ClientIDMode="Static" ID="txtPreviousExamSchoolName" class="form-control" placeholder="Enter Institute Name"></asp:TextBox>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-4">
+                                         <div class="row">
+                                             <label for="namebn" class="col-sm-4 control-label">Board<strong class="required">*</strong></label>
+                                             <div class="col-sm-8">
+                                                 <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPreviousExamBoard" class="form-control"></asp:DropDownList>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-4">
+                                         <div class="row">
+                                             <label for="namebn" class="col-sm-4 control-label">Passing Year<strong class="required">*</strong></label>
+                                             <div class="col-sm-8">
+                                                 <asp:DropDownList runat="server" ClientIDMode="Static" ID="ddlPreviousExamPassingYear" class="form-control">
+                                                     <%--<asp:ListItem Value="0">...Select...</asp:ListItem>
+                                                     <asp:ListItem Value="2020">2020</asp:ListItem>
+                                                     <asp:ListItem Value="2019">2019</asp:ListItem>
+                                                     <asp:ListItem Value="2018">2018</asp:ListItem>
+                                                     <asp:ListItem Value="2017">2017</asp:ListItem>
+                                                     <asp:ListItem Value="2016">2016</asp:ListItem>
+                                                     <asp:ListItem Value="2015">2015</asp:ListItem>--%>
+                                                 </asp:DropDownList>
+                                             </div>
+                                         </div>
+                                     </div>
+
+                                </div>
                              <div class="row form-group">
                                  <div class="col-md-4">
                                      <div class="row">
@@ -699,8 +815,8 @@
                                  </div>
 
                              </div>
+                         </div><!---------------Previous institute information Class eleven to others end ---->
 
-                         </div>
                          <br />
                          <div class="group-info-box student-info">
                              <h4 class="group-title">TC Information</h4>
@@ -757,6 +873,39 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
       <script type="text/javascript">
+
+          <!--------class wise previuse institute function start---------->
+
+        //  $(document).ready(function() {
+        //    $("#ddlClass").change(function() {
+        //        // Hide all divs initially
+        //        //$("#divForOneToTen, #divForElevenToOthers").addClass("hidden");
+
+        //        // Get the selected option text
+        //        var selectedText = $(this).find("option:selected").text().toLowerCase();
+
+        //        // Show the corresponding div based on the selected text
+        //        if  (selectedText.includes('play')||selectedText.includes('one')||selectedText.includes('two')||selectedText.includes('three')||selectedText.includes('four')||selectedText.includes('five')||selectedText.includes('six')||selectedText.includes('seven')||selectedText.includes('eight') ||selectedText.includes('nine')||selectedText.includes('ten'))  {
+
+        //            console.log('work start');
+        //            className = document.getElementById('divForOneToTen').className;
+        //             console.log('class name:'+className);
+        //            $("#divForOneToTen").removeClass("hidden");
+        //             className = document.getElementById('divForOneToTen').className;
+        //             console.log('class name:'+className);
+        //        } 
+        //        else{ 
+        //            $("#divForElevenToOthers").removeClass("hidden");
+        //        }
+
+        //        // Add more else-if conditions for additional options
+        //    });
+        //});
+
+
+
+
+
         function previewFile() {
             var preview = document.querySelector('#<%=imgProfile.ClientID %>');
             var file = document.querySelector('#<%=FileUpload1.ClientID %>').files[0];
@@ -793,7 +942,8 @@
                    }
                 
                 if (validateText('txtStudentName', 1, 100, 'Enter valid Student Name') == false) return false;
-               // if (validateText('txtStudentNameBn', 1, 100, 'Enter valid Student Name in Bengali') == false) return false;               
+                if (validateText('txtStudentNameBn', 1, 100, 'Enter valid Student Name in Bengali') == false) return false;               
+                if (validateText('textStuBidNid', 1, 100, 'Enter Student  valid BID/NID Number') == false) return false;               
                 if (validateCombo('ddlGender', "0", 'Select Gender') == false) return false;
                 if (validateText('txtDateOfBirth', 10, 10, 'Enter valid Date of Birth') == false) return false;
                 if (validateCombo('ddlReligion', "0", 'Select Religion') == false) return false;
@@ -801,52 +951,92 @@
                 if (validateCombo('ddlShift', "0", 'Select a Shift') == false) return false;
                 if (validateCombo('ddlYear', "0", 'Select Year') == false) return false;
                 if (validateCombo('ddlClass', "0", 'Select Class') == false) return false;
-                if (validateCombo('ddlGroup', "0", 'Select Group') == false) return false;                
+
+
+                var isDdlGroupEnabled = $('#ddlGroup').prop('disabled');
+
+                if (isDdlGroupEnabled === false) {
+                    // Check if ddlGroup is enabled
+                    if (!validateCombo('ddlGroup', "0", 'Select Group')) {
+                        // If validation fails, return false
+                        return false; 
+                    }
+                }
+
+                
+
+                //if (ddlGroup.Enabled == true) {
+                //    // Check if ddlGroup is enabled
+                //    if (!validateCombo('ddlGroup', "0", 'Select Group')) {
+                //        // If validation fails, return false
+                //        return false; 
+                //    }
+                //}
+
+                
                 if (validateCombo('ddlSection', "0", 'Select Section') == false) return false;
                  if (validateText('txtRollNo', 1, 100, 'Enter valid Roll No.') == false) return false;
                  if (validateText('txtAdmissionDate', 1, 100, 'Enter valid Admission Date') == false) return false;
 
+
+
+                if (validateCombo('ddlPresentDistrict', "0", 'Select a District for Present Address') == false) return false; 
+                if (validateCombo('ddlPresentUpazila', "0", 'Select a Upazila for Present Address') == false) return false; 
+                if (validateCombo('ddlPresentPostOffice', "0", 'Select a Post Office for Present Address') == false) return false; 
+                if (validateText('txtPresentVillage', 1, 100, 'Enter Present Address') == false) return false;
+                if (validateText('txtPresentVillageBn', 1, 100, 'Enter a Village in Bengali for Present Address') == false) return false;
+
+
+                if (validateCombo('ddlPermanentDistrict', "0", 'Select a District for Permanent Address') == false) return false; 
+                if (validateCombo('ddlPermanentUpazila', "0", 'Select a Upazila for Permanent Address') == false) return false; 
+                if (validateCombo('ddlPermanentPostOffice', "0", 'Select a Post Office for Permanent Address') == false) return false; 
+                if (validateText('txtPermanentVillage', 1, 100, 'Enter Permanent Address') == false) return false;
+                if (validateText('txtPermanentVillageBn', 1, 100, 'Enter a Village in Bengali for Permanent Address') == false) return false;
+           
+
+
+
+
+
                 if (validateText('txtFatherName', 1, 100, 'Enter Father\'s Name') == false) return false;
-               // if (validateText('txtFatherNameBn', 1, 100, 'Enter Father\'s Name in Bengali') == false) return false;
+                if (validateText('txtFatherNameBn', 1, 100, 'Enter Father\'s Name in Bengali') == false) return false;
+                if (validateText('txtFatherBidNid', 1, 100, 'Enter Valid Father NID Number') == false) return false;
                 if (validateText('txtFatherMobile', 1, 100, 'Enter Father\'s Mobile') == false) return false;
                 if (validateText('txtFatherOccupation', 1, 100, 'Enter Father\'s Occupation') == false) return false;
                // if (validateText('txtFatherOccupationBn', 1, 100, 'Enter Father\'s Occupation in Bengali') == false) return false;
                 if (validateText('txtMotherName', 1, 100, 'Enter Mother\'s Name') == false) return false;
-               // if (validateText('txtMotherNameBn', 1, 100, 'Enter Mother\'s Name in Bengali') == false) return false;
-               // if (validateText('txtMotherOccupation', 1, 100, 'Enter Mother\'s Occupation') == false) return false;
+                if (validateText('txtMotherNameBn', 1, 100, 'Enter Mother\'s Name in Bengali') == false) return false;
+                if (validateText('txtMotherBidNid', 1, 100, 'Enter Mother NID Number') == false) return false;
+                if (validateText('txtMotherMobile', 1, 100, 'Enter Mother\'s Mobile No') == false) return false;
+                if (validateText('txtMotherOccupation', 1, 100, 'Enter Mother\'s Occupation') == false) return false;
                // if (validateText('txtMotherOccupationBn', 1, 100, 'Enter Mother\'s Occupation in Bengali') == false) return false;
 
-                if (validateText('txtParentsVillage', 1, 100, 'Enter Parents Address') == false) return false;
+                //if (validateText('txtParentsVillage', 1, 100, 'Enter Parents Address') == false) return false;
                // if (validateText('txtParentsVillageBn', 1, 100, 'Enter a Village in Bengali for Parents Address') == false) return false;
-                if (validateCombo('ddlParentsDistrict', "0", 'Select a District for Parents Address') == false) return false; 
-                if (validateCombo('ddlParentsUpazila', "0", 'Select a Upazila for Parents Address') == false) return false; 
-                if (validateCombo('ddlParentsPostOffice', "0", 'Select a Post Office for Parents Address') == false) return false;                 
+                //if (validateCombo('ddlParentsDistrict', "0", 'Select a District for Parents Address') == false) return false; 
+                //if (validateCombo('ddlParentsUpazila', "0", 'Select a Upazila for Parents Address') == false) return false; 
+                //if (validateCombo('ddlParentsPostOffice', "0", 'Select a Post Office for Parents Address') == false) return false;                 
 
                 if (validateText('txtGuardianName', 1, 100, 'Enter Guardian Name') == false) return false;
+                if (validateText('textGuarnBidNid', 1, 100, 'Enter Guardian NID Number') == false) return false;
+
                 if (validateText('txtGuardianRelation', 1, 100, 'Enter Guardian Relation') == false) return false;
                 if (validateText('txtGuardianMobile', 11, 11, 'Enter Guardian Mobile') == false) return false;
                 if ($("#txtStudentMobile").val() == $("#txtGuardianMobile").val()) {                    
                      showMessage('Student Mobile and Guardian Mobile No can\'t be the same', 'error');return false;
                 }
-                if (validateText('txtGuardianAddress', 1, 200, 'Enter Guardian Address') == false) return false;                
+                if (validateText('txtGuardianAddress', 1, 200, 'Enter Guardian Address') == false) return false;  
 
-                if (validateText('txtPermanentVillage', 1, 100, 'Enter Permanent Address') == false) return false;
-               // if (validateText('txtPermanentVillageBn', 1, 100, 'Enter a Village in Bengali for Permanent Address') == false) return false;
-                if (validateCombo('ddlPermanentDistrict', "0", 'Select a District for Permanent Address') == false) return false; 
-                if (validateCombo('ddlPermanentUpazila', "0", 'Select a Upazila for Permanent Address') == false) return false; 
-                if (validateCombo('ddlPermanentPostOffice', "0", 'Select a Post Office for Permanent Address') == false) return false; 
-                
-                if (validateText('txtPresentVillage', 1, 100, 'Enter Present Address') == false) return false;
-               // if (validateText('txtPresentVillageBn', 1, 100, 'Enter a Village in Bengali for Present Address') == false) return false;
-                if (validateCombo('ddlPresentDistrict', "0", 'Select a District for Present Address') == false) return false; 
-                if (validateCombo('ddlPresentUpazila', "0", 'Select a Upazila for Present Address') == false) return false; 
-                if (validateCombo('ddlPresentPostOffice', "0", 'Select a Post Office for Present Address') == false) return false; 
-                
+                //if (validateText('txtPreviousInstituteName', 1, 150, 'Enter Previous Institute Name') == false) return false;
+                //if (validateText('txtPreviousClass', 1, 150, 'Enter Previous Institute Name') == false) return false;
 
                 if ($("#ckbPreviousInstituteInfo").is(':checked')) {
                 }
                 else {
-                    if (validateText('txtPreviousExamSchoolName', 1, 150, 'Enter Previous Institute Name') == false) return false;
+                    //if (validateText('txtPreviousInstituteName', 1, 150, 'Enter Previous Institute Name') == false) return false;
+                    //if (validateText('txtPreviousClass', 1, 150, 'Enter Previous Institute Name') == false) return false;
+
+                    if (validateText('textprevInstituteName', 1, 150, 'Enter Previous Institute Name') == false) return false;
                     if (validateCombo('ddlPreviousExamBoard', "0", 'Select Education Board') == false) return false; 
                     if (validateCombo('ddlPreviousExamPassingYear', "0", 'Select Passing Year') == false) return false; 
                     if (validateText('txtPreviousExamRegistrationNo', 1, 20, 'Enter Registration No') == false) return false;

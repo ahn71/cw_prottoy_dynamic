@@ -6842,7 +6842,6 @@
     </Content>
     <None Include="UI\Reports\Attendance\CreateDataSet\LeaveList.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>LeaveList.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <Content Include="UI\Reports\Attendance\CreateDataSet\LeaveList.xss">

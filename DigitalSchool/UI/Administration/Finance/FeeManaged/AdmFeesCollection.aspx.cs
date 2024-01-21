@@ -191,11 +191,11 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 {
                     if (classId == null)
                     {
-                        result = EntryStudent.UpdateCurrentStudentActive(ddlAdmissionNo.SelectedValue, "True");
+                        result = EntryStudent.UpdateCurrentStudentActive(ddlAdmissionNo.SelectedValue, "True", "");
                     }
                     else
                     {
-                        result = EntryStudent.UpdateCurrentStudentActive(hdfstdId.Value, "True");
+                        result = EntryStudent.UpdateCurrentStudentActive(hdfstdId.Value, "True","");
                     }
                     if (result)
                     {

@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="DS.main" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/Controls/SideMenuControls.ascx" TagPrefix="uc1" TagName="SideMenuControls" %>
 <!DOCTYPE html>
@@ -11,6 +12,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="digital_school_icon.ico" />
     <title><%: Page.Title %> | Prottoy Education Managemnt System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!--Core CSS -->
     <%-- <link runat="server" href="~/AssetsNew/css/bootstrap.min.css" rel="stylesheet" />--%>
     <link runat="server" href="~/AssetsNew/bs3/css/dataTables.bootstrap.min.css" rel="stylesheet" />
@@ -47,24 +49,20 @@
     <link runat="server" href="~/AssetsNew/css/modalStyle.css" rel="stylesheet" />
     <link runat="server" href="~/AssetsNew/css/style.css" rel="stylesheet" />
     <link runat="server" href="~/AssetsNew/css/style-responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+        integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <%-- <link href="Styles/tabmenu/css/midea.css" rel="stylesheet" />--%>
 
     <link href="Styles/tabmenu/css/style.css" rel="stylesheet" />
     <link href="Styles/tabmenu/css/theme.css" rel="stylesheet" />
     <link href="Styles/updatecss/stylev3.css" rel="stylesheet" />
-    <%--Bottstrap Js Switch--%>
-     <!-- Bootstrap Switch CSS CDN -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.3.4/dist/css/bootstrap3/bootstrap-switch.min.css">
 
- <!-- Bootstrap JavaScript and Popper.js CDN (required for Bootstrap) -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-eS1oUVlT5p4feCpTk8UExb6KLX3eJdPcsX5VIK56R/ZmU4uAe1/BKUVRrHDFblOM" crossorigin="anonymous"></script>
-
- <!-- Bootstrap Switch JavaScript CDN -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.3.4/dist/js/bootstrap-switch.min.js"></script>
+    <%--Google Font--%> 
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
     <%--Font Awesome--%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.1/css/all.min.css" />
     <style>
         #MainContent_CalendarExtender1_daysTable tr td {
             padding: 0px;
@@ -126,6 +124,22 @@
         input[type="search"] {
             margin-right: -9px;
         }
+        .notification-count {
+            background-color: red;
+            color: #fff;
+            display: inline-block;
+            padding: 0px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+            left: 10px;
+            bottom: 12px;
+            line-height: 20px;
+            font-size: 12px;
+            z-index: 11;
+        }
+        .boxshadow{
+            border-bottom:1px solid #ddd;
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -136,124 +150,115 @@
         <asp:ScriptManager ID="ScriptManager1" AsyncPostBackTimeout="600" runat="server">
         </asp:ScriptManager>
         <%--Header Start--%>
-        <header class="bg-white py-2">
+        <header class="bg-white py-2 boxshadow">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 d-flex align-items-center">
-                        <div class="logo-wrapper" style="width: 30%">
+
+                        <a runat="server" href="~/Dashboard.aspx">
                             <img style="width: 100%" class="img-fluid" runat="server" src="~/AssetsNew/images/logo.png" />
-                        </div>
-
-
-
-                        
-
+                        </a>
 
                         <div class="time d-flex align-items-center gap-2">
-                            <p id="time" class="time clock mb-0"></p>
-                        <div class="timer clock-2 d-flex gap-2">
-                            <div class="day"></div>
-                            <div class="date"></div>
+                                                   <script>
+                                                       function updateClock() {
+                                                           var currentTime = new Date();
+                                                           // Operating System Clock Hours for 12h clock
+                                                           var currentHoursAP = currentTime.getHours();
+                                                           // Operating System Clock Hours for 24h clock
+                                                           var currentHours = currentTime.getHours();
+                                                           // Operating System Clock Minutes
+                                                           var currentMinutes = currentTime.getMinutes();
+                                                           // Operating System Clock Seconds
+                                                           var currentSeconds = currentTime.getSeconds();
+                                                           // Adding 0 if Minutes & Seconds is More or Less than 10
+                                                           currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+                                                           currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+                                                           // Picking "AM" or "PM" 12h clock if time is more or less than 12
+                                                           var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+                                                           // transform clock to 12h version if needed
+                                                           currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
+                                                           // transform clock to 12h version after mid night
+                                                           currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
+                                                           // display first 24h clock and after line break 12h version
+                                                           var currentTimeString = currentHoursAP + ":" + currentMinutes + ":" + + " " + ;
+                                                           // print clock js in div #clock.
+                                                           $("#clockDg").html(currentTimeString);
+                                                       }
+                                                       $(document).ready(function () {
+                                                           setInterval(updateClock, 1000);
+                                                       });
+                                                   </script>
+
+                            <p id="clockDg" class="time clock mb-0"></p>
+                            <div class="timer clock-2 d-flex gap-2">
+                                <div class="day"></div>
+                                <div class="date"></div>
+                            </div>
+
                         </div>
-                           
-                        </div>
-
-                         <script>
-                             const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                             const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-                             let days = document.querySelector('.day');
-                             let date = document.querySelector('.date');
-                             let clock = document.querySelector('.clock');
-
-                             // day
-                             let theDay = new Date(), dy;
-                             dy = day[theDay.getDay()];
-
-                             days.innerHTML = `${dy}`;
-
-                             // date
-                             let dates = new Date(), dt, mt, yr;
-                             dt = dates.getDate();
-                             mt = month[dates.getMonth()];
-                             yr = dates.getFullYear();
-
-                             dt = dt < 10 ? '0' + dt : dt;
-                             mt = mt < 10 ? '0' + mt : mt;
-
-                             date.innerHTML = `${mt}, ${dt}/${yr}`;
-
-                             // time
-                             function timer() {
-                                 let time = new Date(), h, m, s, t;
-                                 h = time.getHours();
-                                 m = time.getMinutes();
-                                 s = time.getSeconds();
-                                 t = 'Am';
-
-                                 if (h >= 12) {
-                                     h -= 12;
-                                     t = 'Pm';
-                                 };
-
-                                 h = h < 10 ? '0' + h : h;
-                                 m = m < 10 ? '0' + m : m;
-                                 s = s < 10 ? '0' + s : s;
-
-                                 clock.innerHTML = `${h}:${m}:${s} ${t}`;
-                             }; setInterval(timer, 1000);
-                         </script>
 
                         <script>
-                            var today = new Date();
-                            var day = today.getDate();
-                            var month = today.getMonth() + 1;
+                            const day = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                            const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-                            function appendZero(value) {
-                                return "0" + value;
-                            }
+                            let days = document.querySelector('.day');
+                            let date = document.querySelector('.date');
+                            let clock = document.querySelector('.clock');
 
-                            function theTime() {
-                                var d = new Date();
-                                document.getElementById("time").innerHTML = d.toLocaleTimeString("en-US");
-                            }
+                            // day
+                            let theDay = new Date(), dy;
+                            dy = day[theDay.getDay()];
 
-                            if (day < 10) {
-                                day = appendZero(day);
-                            }
+                            days.innerHTML = `${dy}`;
 
-                            if (month < 10) {
-                                month = appendZero(month);
-                            }
+                            // date
+                            let dates = new Date(), dt, mt, yr;
+                            dt = dates.getDate();
+                            mt = month[dates.getMonth()];
+                            yr = dates.getFullYear();
 
-                            today = day + "/" + month + "/" + today.getFullYear();
+                            dt = dt < 10 ? '0' + dt : dt;
+                            mt = mt < 10 ? '0' + mt : mt;
 
-                            document.getElementById("date").innerHTML = today;
+                            date.innerHTML = `${mt}, ${dt}/${yr}`;
 
-                            var myVar = setInterval(function () {
-                                theTime();
-                            }, 1000);
+                            // time
+                            function timer() {
+                                let time = new Date(), h, m, s, t;
+                                h = time.getHours();
+                                m = time.getMinutes();
+                                s = time.getSeconds();
+                                t = 'Am';
+
+                                if (h >= 12) {
+                                    h -= 12;
+                                    t = 'Pm';
+                                };
+
+                                h = h < 10 ? '0' + h : h;
+                                m = m < 10 ? '0' + m : m;
+                                s = s < 10 ? '0' + s : s;
+
+                                clock.innerHTML = `${h}:${m}:${s} ${t}`;
+                            }; setInterval(timer, 1000);
                         </script>
 
-                       
 
+
+
+                    </div>
+                    <div class="col-lg-4 d-flex align-items-center justify-content-center">
+                        <h2 class="text-center fw-bold mb-0">Moni Kanan High School</h2>
                     </div>
                     <div class="col-lg-4 d-flex justify-content-end align-items-center">
 
-                        <div class="dropdown">
-                            <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <span class="username">
+                           <button class="btn" type="button">
+                                <div class="position-relative">
                                     <span class="pe-2"><i class="far fa-bell"></i></span>
-                                    <asp:Label ID="Label2" runat="server" Text="Admin"></asp:Label>
-                                </span>
+                                    <span class="notification-count position-absolute">21</span>
+                                </div>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
-                            </ul>
-                        </div>
 
                         <div class="dropdown">
                             <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -266,7 +271,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                <li><a runat="server"  class="dropdown-item" href="~/UserLogin.aspx">Log Out</a></li>
                             </ul>
                         </div>
                     </div>
@@ -302,9 +307,10 @@
     <footer class="footer bg-white">
         <div class="row">
 
-             <p class="text-center mb-0">Copyright © 2023 Prottoy | Developed by <a target="_blank" href="https://codewareltd.com">Codeware Ltd</a></p>
-       
-   
+            <p class="text-center mt-4 fw-bold mb-0">Copyright © 2023 Prottoy | Developed by <a target="_blank"
+                href="https://codewareltd.com">Codeware Ltd</a></p>
+
+
             <div class="col-md-3 d-none">
                 <div style="background: rgb(31, 181, 173) none repeat scroll 0% 0%; color: rgb(255, 255, 255);
                     padding: 19px 10px; font-size: 20px; text-align: center;">
