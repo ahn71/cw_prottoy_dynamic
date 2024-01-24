@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DS.BLL.Timetable
 {
@@ -30,8 +31,8 @@ namespace DS.BLL.Timetable
         public bool Insert()
         {
             sql = string.Format("INSERT INTO [dbo].[Tbl_BuildingWith_Room] " +
-                "([RoomName],[RoomCapacity],[BuildingId]) VALUES ( '" + _Entities.RoomName + "', " +
-                " '" + _Entities.RoomCapacity + "', '" + _Entities.BuildingId + "')");
+                "([RoomName],[RoomCapacity],[BuildingId],[Status]) VALUES ( '" + _Entities.RoomName + "', " +
+                " '" + _Entities.RoomCapacity + "', '" + _Entities.BuildingId + "','"+1+"')");
             return result = CRUD.ExecuteQuery(sql);
         }
         public bool Update()
@@ -49,13 +50,13 @@ namespace DS.BLL.Timetable
             List<RoomEntities> ListEntities = new List<RoomEntities>();
             if(BuildingId != null)
             {
-                sql = string.Format("SELECT r.[RoomId], r.[RoomCode], r.[RoomName], r.[RoomCapacity], r.[BuildingId], b.[BuildingName] " +
+                sql = string.Format("SELECT r.[RoomId], r.[RoomCode], r.[RoomName], r.[RoomCapacity], r.[BuildingId], b.[BuildingName],r.[Status] " +
                       " FROM [dbo].[Tbl_BuildingWith_Room] r JOIN [dbo].[Tbl_Bu‎ilding_Name] b ON (r.[BuildingId] = b.[BuildingId]) " +
                       " WHERE r.[BuildingId] = '" + BuildingId + "'");
             }
             else
             {
-                sql = string.Format("SELECT r.[RoomId], r.[RoomCode], r.[RoomName], r.[RoomCapacity], r.[BuildingId], b.[BuildingName] " +
+                sql = string.Format("SELECT r.[RoomId], r.[RoomCode], r.[RoomName], r.[RoomCapacity], r.[BuildingId], b.[BuildingName],r.[Status]" +
                                     " FROM [dbo].[Tbl_BuildingWith_Room] r JOIN [dbo].[Tbl_Bu‎ilding_Name] b ON (r.[BuildingId] = b.[BuildingId])");
             }
             
@@ -74,7 +75,8 @@ namespace DS.BLL.Timetable
                                         RoomName = row["RoomName"].ToString(),
                                         RoomCapacity = int.Parse(row["RoomCapacity"].ToString()),
                                         BuildingId = int.Parse(row["BuildingId"].ToString()),
-                                        BuildingName = row["BuildingName"].ToString()
+                                        BuildingName = row["BuildingName"].ToString(),
+                                        Status = row["Status"].ToString()
                                     }).ToList();
                     return ListEntities;
                 }

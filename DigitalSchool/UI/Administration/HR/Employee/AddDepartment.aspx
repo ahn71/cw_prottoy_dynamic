@@ -222,7 +222,24 @@
     </div>
     
 
-  <div class="bg-white p-3 mb-3">
+ 
+
+             
+    <div class="main-table">
+
+   
+<asp:UpdatePanel runat="server" ID="upPannel" ClientIDMode="Static">
+    <ContentTemplate>
+
+
+
+          
+
+
+
+
+
+          <div class="bg-white p-3 mb-3">
       <div class="row">
           <div class="col-md-6">
               <h4 class="text-right fw-bold mb-3" style="float: left;">Add Department</h4>
@@ -233,12 +250,12 @@
       <div class="inputPannel">
           <div class="row">
 
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                   <asp:Label runat="server" ID="lblDeptName" Text="Department Name"></asp:Label>
                   <asp:TextBox  CssClass="form-control" ID="txtDepartment" runat="server"></asp:TextBox>
               </div> 
               
-              <div class="col-lg-4" style="margin-top:17px;">
+              <div class="col-lg-3" style="margin-top:17px;">
                     <asp:Button runat="server" ID="btnSave" CssClass="btn btn-primary" OnClick="btnSave_Click" Text="Save" /> 
           
               </div>
@@ -247,10 +264,11 @@
       </div>
 </div>
 
-             
-    <div class="main-table">
 
-   <div class="btnSection row justify-content-end">
+
+
+
+                   <div class="btnSection row justify-content-end">
          <div class="col-lg-4">
              <div class="search-wrapper d-flex align-items-center border-1 rounded bg-white">
 <asp:TextBox  CssClass="form-control border-0" ID="txtSearch" runat="server" oninput="filterGridView()" placeholder="Type to Search"></asp:TextBox>
@@ -258,13 +276,17 @@
              </div>
          </div>
    </div>
-<asp:UpdatePanel runat="server" ID="upPannel" ClientIDMode="Static">
-    <ContentTemplate>
+
+
+
+
+
+
             <div class="gvTable">
             <asp:GridView ID="gvDepartment"  runat="server" AlternatingRowStyle-CssClass="alt" AutoGenerateColumns="False" CssClass="table"  OnRowCommand="gvDepartment_RowCommand"
     BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
     DataKeyNames="Did" GridLines="Vertical" 
-    PagerStyle-CssClass="pgr" 
+    PagerStyle-CssClass="pgr"  AllowPaging="true"  OnPageIndexChanging="gvDepartment_PageIndexChanging"
     Width="100%">
          <HeaderStyle BackColor="#006666" CssClass="bg-primary"/>
 

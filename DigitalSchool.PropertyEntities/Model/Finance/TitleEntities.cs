@@ -10,6 +10,8 @@ namespace DS.PropertyEntities.Model.Finance
         public int ID { get; set; }
         public string Title { get; set; }
         public bool Type { get; set; }
+        public bool Status { get; set; }
+
         bool disposed = false;
         public void Dispose()
         {

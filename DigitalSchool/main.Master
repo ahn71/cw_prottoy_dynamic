@@ -171,7 +171,7 @@
                                                            var currentMinutes = currentTime.getMinutes();
                                                            // Operating System Clock Seconds
                                                            var currentSeconds = currentTime.getSeconds();
-                                                           // Adding 0 if Minutes & Seconds is More or Less than 10
+                                                           // Adding 0 if Minutes & Seconds is More or Less than 10 
                                                            currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
                                                            currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
                                                            // Picking "AM" or "PM" 12h clock if time is more or less than 12

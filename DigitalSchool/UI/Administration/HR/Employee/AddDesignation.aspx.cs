@@ -27,7 +27,8 @@ namespace DS.UI.Administration.HR.Employee
 
         protected void btnSave_Click1(object sender, EventArgs e)
         {
-           
+            try
+            {
                 if (btnSave.Text == "Save")
                 {
                     
@@ -46,44 +47,77 @@ namespace DS.UI.Administration.HR.Employee
                     BindData();
                     CleanField();
                 }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
                
            
         }
         private void BindData() 
         {
-            string query = "Select * from Designations  Order by DesId";
-            DataTable dt = CRUD.ReturnTableNull(query);
-            gvDesgtionlist.DataSource = dt;
-            gvDesgtionlist.DataBind();
+            try
+            {
+                string query = "Select * from Designations  Order by DesId";
+                DataTable dt = CRUD.ReturnTableNull(query);
+                gvDesgtionlist.DataSource = dt;
+                gvDesgtionlist.DataBind();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
 
         }
 
         protected void gvDesgtionlist_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-           if((e.CommandName == "Alter")) 
+            try
             {
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                if ((e.CommandName == "Alter"))
+                {
+                    int rowIndex = Convert.ToInt32(e.CommandArgument);
 
 
-                int desgId = Convert.ToInt32(gvDesgtionlist.DataKeys[rowIndex].Value);
-                ViewState["--Desgd--"] = desgId;
+                    int desgId = Convert.ToInt32(gvDesgtionlist.DataKeys[rowIndex].Value);
+                    ViewState["--Desgd--"] = desgId;
 
-                txtDesName.Text = ((Label)gvDesgtionlist.Rows[rowIndex].FindControl("lblDesname")).Text;
-                 BindData();
+                    txtDesName.Text = ((Label)gvDesgtionlist.Rows[rowIndex].FindControl("lblDesname")).Text;
+                    BindData();
 
-                btnSave.Text = "Update";
-            
+                    btnSave.Text = "Update";
+
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+          
         }
 
         protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
         {
+            try
+            {
+                GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+                bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+                int Did = Convert.ToInt32(gvDesgtionlist.DataKeys[row.RowIndex].Value);
+                string query = "update Designations set Status =" + (isChecked ? "1" : "0") + " where DesId=" + Did;
+                CRUD.ExecuteNonQuery(query);
+            }
+            catch (Exception)
+            {
 
-            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
-            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
-            int Did = Convert.ToInt32(gvDesgtionlist.DataKeys[row.RowIndex].Value);
-            string query = "update Designations set Status =" + (isChecked ? "1" : "0") + " where DesId=" + Did;
-            CRUD.ExecuteNonQuery(query);
+                throw;
+            }
+           
         }
 
         private void CleanField()

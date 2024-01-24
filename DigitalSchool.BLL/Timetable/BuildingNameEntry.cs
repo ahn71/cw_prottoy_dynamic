@@ -29,14 +29,14 @@ namespace DS.BLL.Timetable
         public bool Insert()
         {            
             sql = string.Format("INSERT INTO [dbo].[Tbl_Bu‎ilding_Name] " +
-                "([BuildingName]) VALUES ( '" + _Entities.BuildingName + "')");
+                "([BuildingName],[Status]) VALUES ( '" + _Entities.BuildingName + "','"+1+"')");
             return result = CRUD.ExecuteQuery(sql);             
         }
 
         public List<BuildingNameEntities> GetEntitiesData()
         {
             List<BuildingNameEntities> ListEntities = new List<BuildingNameEntities>();
-            sql = string.Format("SELECT [BuildingId],[BuildingName],[BuildingCode] FROM [dbo].[Tbl_Bu‎ilding_Name]");
+            sql = string.Format("SELECT [BuildingId],[BuildingName],[BuildingCode],[Status] FROM [dbo].[Tbl_Bu‎ilding_Name]");
             DataTable dt = new DataTable();
  
             dt = CRUD.ReturnTableNull(sql);
@@ -50,8 +50,8 @@ namespace DS.BLL.Timetable
                                      {
                                          BuildingId = int.Parse(row["BuildingId"].ToString()),
                                          BuildingName = row["BuildingName"].ToString(),
-                                         BuildingCode = row["BuildingCode"].ToString()
-
+                                         BuildingCode = row["BuildingCode"].ToString(),
+                                         Status = Convert.ToBoolean(row["Status"].ToString())
                                      }).ToList();
                     return ListEntities;
                 

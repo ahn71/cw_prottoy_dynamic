@@ -10,6 +10,7 @@ using DS.PropertyEntities.Model;
 using DS.PropertyEntities.Model.Timetable;
 using DS.SysErrMsgHandler;
 using DS.BLL.ControlPanel;
+using DS.DAL;
 
 namespace DS.UI.Academic.Timetable.RoomAllocation
 {
@@ -41,7 +42,11 @@ namespace DS.UI.Academic.Timetable.RoomAllocation
         private RoomEntities GetFormData()
         {
             RoomEntities rmEntities = new RoomEntities();
-            rmEntities.RoomId = int.Parse(lblRmId.Value);
+            if (btnSubmit.Text == "Update") 
+            {
+                rmEntities.RoomId = int.Parse(ViewState["--roomId"].ToString());
+            }
+           
             rmEntities.RoomName = TxtRName.Text.Trim();
             rmEntities.RoomCapacity = int.Parse(TxtRCapacity.Text.Trim());
             rmEntities.BuildingId = int.Parse(drpBuildingName.SelectedValue);
@@ -50,21 +55,27 @@ namespace DS.UI.Academic.Timetable.RoomAllocation
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (lblRmId.Value.ToString() == string.Empty)
+
+            if (btnSubmit.Text == "Save") 
             {
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; DataBindToTableView(int.Parse(drpBuildingName.SelectedValue)); return; }
-                lblRmId.Value = "0";
-                if (SaveName() == true)
+                if (lblRmId.Value.ToString() == string.Empty)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SavedSuccess();", true);
+                    if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; DataBindToTableView(int.Parse(drpBuildingName.SelectedValue)); return; }
+                    lblRmId.Value = "0";
+                    if (SaveName() == true)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "SavedSuccess();", true);
+                    }
                 }
             }
+           
             else
-            {
+               {
                 if (UpdateName() == true)
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);                
-            }            
-        }
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
+                  btnSubmit.Text = "Save";
+               }            
+        } 
 
         private Boolean SaveName()
         {
@@ -157,42 +168,34 @@ namespace DS.UI.Academic.Timetable.RoomAllocation
                 rmEntry = new RoomEntry();
             }
             List<RoomEntities> RMList = rmEntry.GetEntitiesData(buildingId);
-            divInfo = " <table id='tblClassList' class='display'> ";
-            divInfo += "<thead>";
-            divInfo += "<tr>";
-            divInfo += "<th>Building Name</th>";
-            divInfo += "<th>Room Name</th>";
-            divInfo += "<th>Capacity</th>";
-            if (Session["__Update__"].ToString().Equals("true"))
-            divInfo += "<th>Edit</th>";
-            divInfo += "</tr>";
-            divInfo += "</thead>";
-            divInfo += "<tbody>";
-            if(RMList == null)
-            {                           
-                divInfo += "</tbody>";                
-                divInfo += "</table>";
-                divList.Controls.Add(new LiteralControl(divInfo));
-                return;
-            }            
-            string id = string.Empty;
-            string buildingsId = string.Empty;
-            for (int x = 0; x < RMList.Count; x++)
+            gvRoomList.DataSource= RMList;
+            gvRoomList.DataBind();
+        }
+
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
+        {
+          GridViewRow row =(GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int roomId = Convert.ToInt32(gvRoomList.DataKeys[row.RowIndex].Values["RoomId"]);
+            string query = "update [Tbl_BuildingWith_Room]  set Status='" + (isChecked ? 1 : 0) + "' where RoomId=" + roomId;
+            CRUD.ExecuteNonQuery(query);
+
+        }
+
+        protected void gvRoomList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Alter") 
             {
-                id = RMList[x].RoomId.ToString();
-                buildingsId = RMList[x].BuildingId.ToString();
-                divInfo += "<tr id='r_" + id + "'>";
-                divInfo += "<td><span id=buildingId" + buildingId + ">" + RMList[x].BuildingName.ToString() + "</span></td>";
-                divInfo += "<td><span id=roomName" + id + ">" + RMList[x].RoomName.ToString() + "</span></td>";
-                divInfo += "<td><span id=capacity" + id + ">" + RMList[x].RoomCapacity.ToString() + "</span></td>";
-                if (Session["__Update__"].ToString().Equals("true"))
-                divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg' onclick='editRM(" + id + ", " + buildingsId + ");'/>";
-                divInfo += "</tr>";
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+                string roomId = gvRoomList.DataKeys[rowIndex].Values[0].ToString();
+                string buildingId = gvRoomList.DataKeys[rowIndex].Values[1].ToString();
+                 ViewState["--roomId"] = roomId;
+                 drpBuildingName.SelectedValue = buildingId;
+                TxtRName.Text = ((Label)gvRoomList.Rows[rowIndex].FindControl("lblRoomName")).Text;
+                TxtRCapacity.Text = ((Label)gvRoomList.Rows[rowIndex].FindControl("lblCapacity")).Text;
+                btnSubmit.Text = "Update";
             }
-            divInfo += "</tbody>";
-            divInfo += "<tfoot>";
-            divInfo += "</table>";
-            divList.Controls.Add(new LiteralControl(divInfo));
         }
     }
 }

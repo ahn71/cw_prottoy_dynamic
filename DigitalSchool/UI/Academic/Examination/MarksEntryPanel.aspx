@@ -77,73 +77,83 @@
                         <asp:AsyncPostBackTrigger ControlID="btnHideSearchOptions" />
                     </Triggers>
                     <ContentTemplate>
-                        <div class="row tbl-controlPanel" >
-                            <div class="col-sm-8 col-sm-offset-2" runat="server" id="tblOp">
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Shift</label>
-                                    <div class="col-sm-10">
+                        <div class="row" >
+                                <div class="col-lg-3">
+                                  
+                                    <label>Shift</label>
+                                   
                                         <asp:DropDownList ID="ddlShift" runat="server" CssClass="input controlLengthMin form-control" ClientIDMode="Static">                                    
                                     </asp:DropDownList>
-                                        </div>                                   
-                                        
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Batch</label>                                  
-                                       <div class="col-sm-10"> 
+                                <div class="col-lg-3">
+                                    
+                                    <label>Batch</label>                                  
+                                      
                                             <asp:DropDownList ID="ddlBatch" runat="server" ClientIDMode="Static" CssClass="input controlLengthMin form-control"
                                         OnSelectedIndexChanged="ddlBatch_SelectedIndexChanged" AutoPostBack="True">
                                     </asp:DropDownList>
-                                    </div>
-                                                                     
-                                        
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Group</label>
-                                    <div class="col-sm-10">
+                                <div class="col-lg-3">
+                                 
+                                    <label>Group</label>
+                                  
                                         <asp:DropDownList ID="ddlGroup" runat="server" ClientIDMode="Static" AutoPostBack="true" OnSelectedIndexChanged="ddlGroup_SelectedIndexChanged" CssClass="input controlLengthMin form-control" Enabled="false" >
-                                    </asp:DropDownList>
-                                        </div>                                   
-                                </div> 
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Section</label>
-                                    <div class="col-sm-10">
+                                    </asp:DropDownList>      
+                                 </div>
+                                <div class="col-lg-3">
+                                   
+                                    <label>Section</label>
+                                   
                                             <asp:DropDownList ID="ddlSectionName" runat="server" CssClass="input controlLengthMin form-control" ClientIDMode="Static">
                                     </asp:DropDownList>
-                                        </div>                                   
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Exam Id</label>
-                                    <div class="col-sm-10">
+                                 </div>
+                                <div class="col-lg-3">
+                                   
+                                    <label>Exam Id</label>
+                                   
                                         <asp:DropDownList ID="ddlExamId" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"
                                          AutoPostBack="True" OnSelectedIndexChanged="ddlExamId_SelectedIndexChanged">
                                         <asp:ListItem Value="0">...Select Exam Id...</asp:ListItem>
                                     </asp:DropDownList>
-                                    </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Subject</label>
-                                    <div class="col-sm-10">
+                                <div class="col-lg-3">
+                                    
+                                    <label>Subject</label>
+                                   
                                         <asp:DropDownList ID="ddlSubject" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control">         
                                     </asp:DropDownList>
-                                    </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2">Roll No</label>
-                                    <div class="col-sm-10">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" ID="txtRollNo" CssClass="input controlLength" ></asp:TextBox>
-                                    </div>
-                                </div>
+                                <div class="col-lg-3">
+                                  <label>Roll No</label>
+                                    <asp:TextBox runat="server" ClientIDMode="Static" ID="txtRollNo" CssClass="input controlLength form-control" ></asp:TextBox>
+                                    
+                               </div>
+                                <div class="col-lg-3 mt-3">
+                                  
+         <asp:CheckBox runat="server" ID="chkForCoutAsFinalResult" />
+         <asp:Button ID="btnSearch" Text="Search" ClientIDMode="Static" runat="server" 
+         OnClick="btnSearch_Click" CssClass="btn btn-primary" OnClientClick="return validateInputs();"/>
+     <asp:Button ID="btnRefresh" Text="Refresh" ClientIDMode="Static" runat="server" 
+         OnClick="btnRefresh_Click" CssClass="btn btn-default"/>
+  
+       </div>
+                                   <div class="col-lg-3 d-flex gap-2 mt-2">
+
+                                        <asp:Button ID="btnResultProcessing" Text="Result Processing"  ClientIDMode="Static" runat="server" 
+ OnClick="btnResultProcessing_Click" CssClass="btn btn-success" OnClientClick="return GetConfirmation();"/>
+
+
+                                     <asp:Button ID="btnPrintPreview" runat="server" Text="Print Full Marksheet" CssClass="btn btn-primary" ClientIDMode="Static" OnClick="btnPrintPreview_Click" />
+                                     </div>
+
+
+                      </div>
+
+
+                            </div>
+
                                 <div class="form-group row">                                    
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <asp:CheckBox runat="server" ID="chkForCoutAsFinalResult" />
-                                        <asp:Button ID="btnSearch" Text="Search" ClientIDMode="Static" runat="server" 
-                                        OnClick="btnSearch_Click" CssClass="btn btn-primary" OnClientClick="return validateInputs();"/>
-                                    <asp:Button ID="btnRefresh" Text="Refresh" ClientIDMode="Static" runat="server" 
-                                        OnClick="btnRefresh_Click" CssClass="btn btn-default"/>
-                                        <asp:Button ID="btnPrintPreview" runat="server" Text="Print Full Marksheet" CssClass="btn btn-primary" ClientIDMode="Static" OnClick="btnPrintPreview_Click" />
-                                         <asp:Button ID="btnResultProcessing" Text="Result Processing"  ClientIDMode="Static" runat="server" 
-                                         OnClick="btnResultProcessing_Click" CssClass="btn btn-success" OnClientClick="return GetConfirmation();"/>
-                                    </div>
+                               
                                     <div class="col-sm-8 col-sm-offset-2">
                                         <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                         <ProgressTemplate>                           

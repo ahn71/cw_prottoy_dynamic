@@ -1,4 +1,5 @@
 ﻿using DS.BLL.Finance;
+using DS.DAL;
 using DS.PropertyEntities.Model.Finance;
 using System;
 using System.Collections.Generic;
@@ -29,38 +30,10 @@ namespace DS.UI.Administration.Finance.Accounts
                     TleEntry = new TitleEntry();
                 }
                 List<TitleEntities> TitleList = TleEntry.GetEntitiesData();
-                divInfo = " <table id='tblClassList' class='display'> ";
-                divInfo += "<thead>";
-                divInfo += "<tr>";
-                divInfo += "<th>Title</th>";
-                divInfo += "<th>Type</th>"; 
-                divInfo += "<th>Edit</th>";
-                divInfo += "</tr>";
-                divInfo += "</thead>";
-                divInfo += "<tbody>";
-                if (TitleList == null)
-                {
-                    divInfo += "<tr><td colspan='2'>No Title available</td></tr>";
-                    divInfo += "</tbody>";
-                    divInfo += "<tfoot>";
-                    divInfo += "</table>";
-                    divTemplateList.Controls.Add(new LiteralControl(divInfo));
-                    return;
-                }
-                string id = string.Empty;
-                for (int x = 0; x < TitleList.Count; x++)
-                {
-                    id = TitleList[x].ID.ToString();
-                    string Type = (TitleList[x].Type.ToString() == "True") ? "Expense" : "Income";
-                    divInfo += "<tr id='r_" + id + "'>";
-                    divInfo += "<td><span id=title" + id + ">" + TitleList[x].Title.ToString() + "</span></td>";
-                    divInfo += "<td><span id=type" + id + ">" + Type + "</span></td>"; 
-                    divInfo += "<td class='numeric_control' >" + "<img src='/Images/gridImages/edit.png' class='editImg' onclick='editTemplate(" + id + ");'/>";
-                }
-                divInfo += "</tbody>";
-                divInfo += "<tfoot>";
-                divInfo += "</table>";
-                divTemplateList.Controls.Add(new LiteralControl(divInfo));
+                gvTittleList.DataSource = TitleList;
+                gvTittleList.DataBind();
+
+
             }
             catch { }
         }
@@ -116,7 +89,14 @@ namespace DS.UI.Administration.Finance.Accounts
             TitleEntities tleEntities = new TitleEntities();
             tleEntities.ID = int.Parse(lblTitleID.Value);
             tleEntities.Title = txtTitle.Text.Trim();
-            tleEntities.Type = bool.Parse(rblTitleType.SelectedValue);
+            if (rdoIncome.Checked)
+            {
+                tleEntities.Type = false;
+            }
+            else if (rdExapanse.Checked) 
+             {
+              tleEntities.Type = true;
+             }
             return tleEntities;
         }
         private Boolean UpdateName()
@@ -145,6 +125,34 @@ namespace DS.UI.Administration.Finance.Accounts
                 lblMessage.InnerText = "error->" + ex.Message;
                 return false;
             }
+        }
+
+        protected void gvTittleList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Alter") 
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+                int Id = Convert.ToInt32(gvTittleList.DataKeys[rowIndex].Value);
+                ViewState["__Id__"] = Id;
+
+                txtTitle.Text = ((Label)gvTittleList.Rows[rowIndex].FindControl("lblTitle")).Text;
+                btnSave.Text = "Update";
+            }
+        }
+
+        protected void chkSwitchStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = (GridViewRow)((CheckBox)sender).NamingContainer;
+            bool isChecked = ((CheckBox)row.FindControl("chkSwitchStatus")).Checked;
+            int Id = Convert.ToInt32(gvTittleList.DataKeys[row.RowIndex].Value);
+            string query = "update Accounts_Title  set Status='"+(isChecked?1:0)+"' where TitleID="+ Id;
+            CRUD.ExecuteNonQuery(query);
+            if (!isChecked)
+            {
+                lblMessage.InnerText = "DeActivated successfully";
+            }
+            else
+                lblMessage.InnerText = "Activated succesfully";
         }
     }
 }

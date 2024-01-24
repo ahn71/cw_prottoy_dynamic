@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DS.BLL.Finance
 {
@@ -25,7 +26,7 @@ namespace DS.BLL.Finance
         {
             sql = string.Format("INSERT INTO [dbo].[Accounts_Title] " +
                 "([Title],[Type]) VALUES (" +
-                "'" + _Entities.Title + "','" + _Entities.Type + "')");
+                "'" + _Entities.Title + "','" + _Entities.Type + "','"+1+"')");
                bool result = CRUD.ExecuteQuery(sql);
                return result;
         }
@@ -39,7 +40,7 @@ namespace DS.BLL.Finance
         public List<TitleEntities> GetEntitiesData()
         {
             List<TitleEntities> ListEntities = new List<TitleEntities>();
-            sql = string.Format("SELECT [TitleID],[Title],[Type] FROM [dbo].[Accounts_Title]");
+            sql = string.Format("SELECT [TitleID],[Title],[Type],[Status] FROM [dbo].[Accounts_Title]");
             DataTable dt = new DataTable();
 
             dt = CRUD.ReturnTableNull(sql);
@@ -52,7 +53,8 @@ namespace DS.BLL.Finance
                                     {
                                         ID = int.Parse(row["TitleID"].ToString()),
                                         Title = row["Title"].ToString() ,
-                                        Type = bool.Parse(row["Type"].ToString())
+                                        Type = bool.Parse(row["Type"].ToString()),
+                                        Status = bool.Parse(row["Status"].ToString())
                                     }).ToList();
                     return ListEntities;
                 }

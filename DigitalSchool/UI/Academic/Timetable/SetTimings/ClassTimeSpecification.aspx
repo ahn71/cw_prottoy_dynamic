@@ -67,6 +67,80 @@
             <!--breadcrumbs end -->
         </div>
     </div>
+
+                   <div class="tgPanel">
+                   <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">                        
+                       <ContentTemplate>
+                           <asp:HiddenField ID="lblClsTimeId" ClientIDMode="Static" runat="server"/>  
+                           <asp:HiddenField ID="lblClsTimeSetNameId" ClientIDMode="Static" runat="server"/>  
+                           <div class="fw-bold">Add New Class Time</div>
+                                     <div class="row mt-2">
+                                         <div class="col-lg-3">
+                                             <label>Shift</label>
+                                              <asp:DropDownList ID="dlShift" runat="server" ClientIDMode="Static"
+     CssClass="form-control" AutoPostBack="true"
+    OnSelectedIndexChanged="dlShift_SelectedIndexChanged">
+</asp:DropDownList>
+                                         </div>
+
+                                         <div class="col-lg-3">
+                                             <label>Name</label>
+                                               <asp:DropDownList ID="ddlPeriod" runat="server" ClientIDMode="Static"
+      CssClass="form-control" AutoPostBack="false">
+  <asp:ListItem>...Select Period...</asp:ListItem>
+     <asp:ListItem>Period 1</asp:ListItem>
+      <asp:ListItem>Period 2</asp:ListItem>
+      <asp:ListItem>Period 3</asp:ListItem>
+      <asp:ListItem>Period 4</asp:ListItem>
+      <asp:ListItem>Period 5</asp:ListItem>
+      <asp:ListItem>Period 6</asp:ListItem>
+      <asp:ListItem>Period 7</asp:ListItem>
+      <asp:ListItem>Period 8</asp:ListItem>
+      <asp:ListItem>Period 9</asp:ListItem>
+      <asp:ListItem>Period 10</asp:ListItem>
+ </asp:DropDownList>  
+                                         </div>
+
+                                         <div class="col-lg-3">
+                                             <label>Start Time</label>
+                                             <asp:TextBox id="txtstartTime"   runat="server" class="form-control"></asp:TextBox>
+
+                                         </div>
+
+                                         <div class="col-lg-3">
+                                              <label>End Time</label>
+                                               <asp:TextBox id="txtEndTime"  runat="server"  CssClass="form-control"></asp:TextBox>                             
+
+                                     </div>
+
+                                         <div class="col-lg-3">
+                                           <label>Order by</label>
+                                              <asp:TextBox ID="txtOrderBy" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
+                                         </div>
+
+                                         <div class="col-lg-3 mt-4">
+                                             <asp:CheckBox ID="ChkBrkTime" runat="server"  ClientIDMode="Static" Text="Is Break Time"/>   
+
+                                         </div>
+
+                                         <div class="col-lg-3 mt-3">
+                                             
+                                       <asp:Button CssClass="btn btn-primary" ID="btnSave" runat="server" Text="Save" ClientIDMode="Static"
+                                           OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
+                                       &nbsp;
+                                         </div>
+                                </div>
+
+                                                         
+                       </ContentTemplate>
+                   </asp:UpdatePanel>
+               </div>
+
+
+
+
+
+
     <div class="">
         <div class="row">
             <div class="col-md-6">
@@ -96,85 +170,9 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-6">
-                <div class="tgPanel">
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">                        
-                        <ContentTemplate>
-                            <asp:HiddenField ID="lblClsTimeId" ClientIDMode="Static" runat="server"/>  
-                            <asp:HiddenField ID="lblClsTimeSetNameId" ClientIDMode="Static" runat="server"/>  
-                            <div class="tgPanelHead">Add New Class Time</div>
-                            <table class="tbl-controlPanel">
-                                <tr>
-                                    <td>Shift</td>
-                                    <td>
-                                        <asp:DropDownList ID="dlShift" runat="server" ClientIDMode="Static"
-                                             CssClass="input controlLength" AutoPostBack="true"
-                                            OnSelectedIndexChanged="dlShift_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlPeriod" runat="server" ClientIDMode="Static"
-                                             CssClass="input controlLength" AutoPostBack="false">
-                                            <asp:ListItem>Period 1</asp:ListItem>
-                                             <asp:ListItem>Period 2</asp:ListItem>
-                                             <asp:ListItem>Period 3</asp:ListItem>
-                                             <asp:ListItem>Period 4</asp:ListItem>
-                                             <asp:ListItem>Period 5</asp:ListItem>
-                                             <asp:ListItem>Period 6</asp:ListItem>
-                                             <asp:ListItem>Period 7</asp:ListItem>
-                                             <asp:ListItem>Period 8</asp:ListItem>
-                                             <asp:ListItem>Period 9</asp:ListItem>
-                                             <asp:ListItem>Period 10</asp:ListItem>
-                                        </asp:DropDownList>                                       
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Start Time</td>
-                                    <td>                                      
-                                        <div class="input-group">
-                                            <asp:TextBox id="txtstartTime"   runat="server" class="input controlLength"></asp:TextBox>                                 
-
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>End Time</td>
-                                    <td>                                     
-                                        <div class="input-group">
-                                            <asp:TextBox id="txtEndTime"   runat="server" class="input controlLength"></asp:TextBox>                                         
-                                            
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Order By</td>
-                                    <td>
-                                        <asp:TextBox ID="txtOrderBy" runat="server" CssClass="input controlLength" ClientIDMode="Static"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <asp:CheckBox ID="ChkBrkTime" runat="server" ClientIDMode="Static" Text="Is Break Time"/>                                                                     
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <asp:Button CssClass="btn btn-primary" ID="btnSave" runat="server" Text="Save" ClientIDMode="Static"
-                                            OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
-                                        &nbsp;<input type="button" class="btn btn-default" value="Clear" onclick="clearIt();" />
-                                    </td>
-                                </tr>
-                            </table>                            
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
+          
+             
             </div>
-        </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">      

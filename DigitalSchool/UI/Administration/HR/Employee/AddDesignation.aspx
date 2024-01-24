@@ -162,6 +162,10 @@
 td:hover .update-icon{
     opacity:1;
 }
+.gvTable{
+    margin-top:-18px;
+}
+
 
     </style>
 
@@ -192,7 +196,15 @@ td:hover .update-icon{
     </div>
 
 
-      <div class="bg-white p-3 mb-3">
+  
+ 
+    <div class="main-table">
+
+      
+           
+          <asp:UpdatePanel runat="server" ID="UpdatePannel" ClientIDMode="Static">
+              <ContentTemplate>
+                               <div class="bg-white p-3 mb-3">
       <div class="row">
           <div class="col-md-6">
               <h4 class="text-right fw-bold mb-3" style="float: left;">Add Department</h4>
@@ -214,10 +226,8 @@ td:hover .update-icon{
 
   </div>
 </div>
- 
-    <div class="main-table">
 
-           <div class="btnSection row justify-content-end">
+                         <div class="btnSection row justify-content-end">
          <div class="col-lg-4">
              <div class="search-wrapper d-flex align-items-center border-1 rounded bg-white">
 <asp:TextBox  CssClass="form-control border-0" ID="txtSearch" runat="server" oninput="filterGridView()" placeholder="Type to Search"></asp:TextBox>
@@ -225,10 +235,8 @@ td:hover .update-icon{
              </div>
          </div>
        </div>
-           
-          <asp:UpdatePanel runat="server" ID="UpdatePannel" ClientIDMode="Static">
-              <ContentTemplate>
-                              <div class="gvTable">
+
+                          <div class="gvTable">
                <h4 class="text-right" style="float:left">Designation List</h4> 
                  <asp:GridView runat="server" ID="gvDesgtionlist" OnRowCommand="gvDesgtionlist_RowCommand" AutoGenerateColumns="False" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" 
         DataKeyNames="DesId" GridLines="Vertical" 

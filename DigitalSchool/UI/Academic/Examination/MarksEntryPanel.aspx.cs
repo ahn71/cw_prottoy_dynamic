@@ -912,7 +912,7 @@ namespace DS.UI.Academic.Examination
         protected void btnHideSearchOptions_Click(object sender, EventArgs e)
         {
             divSearchPanel.Visible = false;
-            tblOp.Visible = false;
+          //  tblOp.Visible = false;
         }
 
      

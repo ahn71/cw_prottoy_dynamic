@@ -13,6 +13,7 @@ namespace DS.PropertyEntities.Model.Timetable
         public int RoomCapacity { get; set; }
         public int BuildingId { get; set; }
         public string BuildingName { get; set; }
+        public string Status { get; set; }
 
         bool disposed = false;
         public void Dispose()

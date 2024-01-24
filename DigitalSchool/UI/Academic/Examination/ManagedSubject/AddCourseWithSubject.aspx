@@ -200,7 +200,16 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="bg-white p-3 mb-3">
+
+
+    <div class="main-table">
+                <%--Seaech--%>
+ 
+
+   <asp:UpdatePanel runat="server" ID="upgvTable" ClientIDMode="Static">
+            <ContentTemplate>
+
+                  <div class="bg-white p-3 mb-3">
         <div class="row">
             <div class="col-md-6">
                 <h4 class="text-right fw-bold mb-3" style="float: left;">Add Course With Subject List</h4>
@@ -220,43 +229,25 @@
         <asp:TextBox CssClass="form-control" ID="txtCourseName" runat="server" oninput="validateCourseName();"></asp:TextBox>
         <span id="courseNameError" style="color: red;"></span>
     </div>
-
-    <div class="col-lg-3">
-        <asp:Label runat="server" ID="lblOrdering" Text="Ordering"></asp:Label>
-        <asp:TextBox CssClass="form-control" ID="txtOrdering" runat="server" oninput="validateOrdering();"></asp:TextBox>
-        <span id="orderingError" style="color: red;"></span>
-    </div>
-
-    <div class="col lg-3 mt-3">
+     <div class="col lg-3 mt-3">
         <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" OnClientClick="return validateForm();" OnClick="btnSave_Click" />
     </div>
-
-            </div>
+  </div>
 
   </div>
 
+</div>
+
+                  <div class="btnSection row justify-content-end">
+           <div class="col-lg-4">
+               <div class="search-wrapper d-flex align-items-center border-1 rounded bg-white">
+                   <asp:TextBox CssClass="form-control border-0" runat="server" ID="txtSearch" oninput="filterGridView()" placeholder="Type to Search"></asp:TextBox>
+                   <span class="d-block pe-3"><i class="fas fa-search"></i></span>
+               </div>
+           </div>
+       </div>
  
- 
 
-
-
-
-
-    </div>
-
-    <div class="main-table">
-                <%--Seaech--%>
-        <div class="btnSection row justify-content-end">
-            <div class="col-lg-4">
-                <div class="search-wrapper d-flex align-items-center border-1 rounded bg-white">
-                    <asp:TextBox CssClass="form-control border-0" runat="server" ID="txtSearch" oninput="filterGridView()" placeholder="Type to Search"></asp:TextBox>
-                    <span class="d-block pe-3"><i class="fas fa-search"></i></span>
-                </div>
-            </div>
-        </div>
-
-   <asp:UpdatePanel runat="server" ID="upgvTable" ClientIDMode="Static">
-            <ContentTemplate>
                  <div class="gvTable">
                      <asp:DropDownList runat="server" ID="ddlPageIndex" AutoPostBack="true" EnableViewState="true"  OnSelectedIndexChanged="ddlPageIndex_SelectedIndexChanged">
                         <asp:ListItem Text="Select Page"></asp:ListItem>
@@ -311,6 +302,7 @@
 
      </asp:GridView>
  </div>
+
             </ContentTemplate>
         </asp:UpdatePanel>
        

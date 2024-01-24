@@ -33,6 +33,15 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
 
         /// <summary>
+        /// upgvTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upgvTable;
+
+        /// <summary>
         /// lblSubjectName control.
         /// </summary>
         /// <remarks>
@@ -69,24 +78,6 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         protected global::System.Web.UI.WebControls.TextBox txtCourseName;
 
         /// <summary>
-        /// lblOrdering control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOrdering;
-
-        /// <summary>
-        /// txtOrdering control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOrdering;
-
-        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -103,15 +94,6 @@ namespace DS.UI.Academic.Examination.ManagedSubject
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
-
-        /// <summary>
-        /// upgvTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upgvTable;
 
         /// <summary>
         /// ddlPageIndex control.

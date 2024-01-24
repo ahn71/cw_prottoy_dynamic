@@ -2,28 +2,164 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .tgPanel {
-            width: 100%;
+                      th {
+            font-size: 15px;
         }
-        .tbl-controlPanel td:first-child{
-            text-align: right;
-            padding-right: 5px;
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 25px;
         }
-         .dataTables_length, .dataTables_filter {
-          display: none;
-          padding: 15px;
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
         }
-        #tblClassList_info {
-             display: none;
-            padding: 15px;
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
         }
-        #tblClassList_paginate {
-            display: none;
-            padding: 15px;
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
         }
-        .no-footer {
-           border-bottom: 1px solid #ecedee !important;
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
         }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+
+
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        .active-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+        input#MainContent_chkStauts {
+    width: 20px;
+    display: block;
+    height: 15px;
+}
+       
+        input:focus {
+    box-shadow: 0px 0px 0px 0px !important;
+    border: 1px solid rgba(255,255,255, 0.8);
+}
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+        th {
+          background: #ddd !important;
+          }
+
+        td, th {
+              border: 1px solid #ddd !important;
+             }
+
+        .table {
+            border: 0 !important;
+            margin: 10px 0;
+        }
+        .border-1{
+            border:1px solid #ddd;
+        }
+
+         .update-icon{
+             display:inline-block;
+             padding: 0 6px;
+             height: 30px;
+             width: 30px;
+             line-height:30px;
+             text-align:center;
+             border-radius: 50%;
+             background:#99dde7;
+             color:#1e1e1e;
+             font-size:12px;
+             opacity:0;
+             transition:0.1s all ease;
+         }
+   td:hover .update-icon{
+     opacity:1;
+   }
+
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -50,65 +186,77 @@
             <!--breadcrumbs end -->
         </div>
     </div>
-    <div class="">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <h4 class="text-right" style="float:left">Building Name List</h4>
+
+   <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+              <ContentTemplate>
+                  <div class="tgPanelHead">Add Building Name</div>
+                         <div class="row">
+                             <div class="col-lg-3">
+                                 <label>Building Name</label>
+                                <asp:TextBox ID="txtBuildingName" runat="server" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
+                             </div>
+                             <div class="col-lg-3" style="margin-top:20px;">
+                         <asp:Button CssClass="btn btn-primary" ID="btnSubmit" runat="server" Text="Save" ClientIDMode="Static"
+                            OnClientClick="return validateInputs();" OnClick="btnSubmit_Click" />
+                               &nbsp;
+                             </div>
+                         </div>
+                             
+                               
+              </ContentTemplate>
+          </asp:UpdatePanel>
+     
+ 
+
+  
+                 <h4 class="text-right mt-3">Building Name List</h4>
+    
                 <div class="dataTables_filter_New" style="float: right;margin-right:0px;">
                      <label>
                          Search:
                          <input type="text" class="Search_New" placeholder="type here" />
                      </label>
-                 </div>                
-            </div>
-            <div class="col-md-6"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
+                 </div> 
+               <div class="gvTable">
+          
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnSubmit" />
                     </Triggers>
                     <ContentTemplate>
                         <asp:HiddenField ID="lblBuidlingId" ClientIDMode="Static" runat="server"/>  
-                        <div class="tgPanel">
-                        <div id="divList" class="datatables_wrapper" runat="server"
-                            style="width: 100%; height: auto; max-height: 350px; overflow: auto; overflow-x: hidden;">
-                        </div>
-                            </div>
+                        <asp:GridView runat="server" ID="gvBuldingList" AutoGenerateColumns="false" DataKeyNames="BuildingId" CssClass="table"  BorderColor="#999999" BorderStyle="Double" BorderWidth="1px" CellPadding="2" GridLines="Vertical" 
+      PagerStyle-CssClass="pgr"  Width="100%" OnRowCommand="gvBuldingList_RowCommand">
+                            <Columns>
+                       <asp:TemplateField HeaderText="SL">
+                           <ItemTemplate>
+                                <%#Container.DataItemIndex+1 %>
+                           </ItemTemplate>
+                       </asp:TemplateField>
+
+                       <asp:TemplateField HeaderText="Building Name">
+                           <ItemTemplate>
+                               <asp:Label ID="lblBuldingName" runat="server" Text='<%# Eval("BuildingName") %>'></asp:Label>
+                                   <asp:LinkButton ID="btnUpdate" runat="server" CommandName="Alter" CommandArgument='<%#((GridViewRow)Container).RowIndex %>'>
+                                <span class="update-icon" ><i class="fas fa-edit"></i></span>
+                                  </asp:LinkButton>
+                           </ItemTemplate>          
+                       </asp:TemplateField>   
+                         <asp:TemplateField HeaderText="Status">
+                             <ItemTemplate>
+                                 <label class="switch">
+                                 <asp:CheckBox ID="chkSwitchStatus" runat="server" OnCheckedChanged="chkSwitchStatus_CheckedChanged" AutoPostBack="true" 
+   Checked='<%# Convert.ToBoolean(Eval("Status")) %>' />
+<span class="slider round"></span>
+                             </ItemTemplate>
+                         </asp:TemplateField>
+
+                            </Columns>
+                        </asp:GridView>
+
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-6">
-                <div class="tgPanel">
-                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                        <ContentTemplate>
-                            <div class="tgPanelHead">Add Building Name</div>
-                            <table class="tbl-controlPanel">
-                                <tr>
-                                    <td>Building Name
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtBuildingName" runat="server" ClientIDMode="Static" CssClass="input form-control"></asp:TextBox>
-                                    </td>
-                                </tr> 
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <asp:Button CssClass="btn btn-primary" ID="btnSubmit" runat="server" Text="Save" ClientIDMode="Static"
-                                            OnClientClick="return validateInputs();" OnClick="btnSubmit_Click" />
-                                        &nbsp;<input type="button" class="btn btn-default" value="Clear" onclick="clearIt();" />
-                                    </td>
-                                </tr>                               
-                            </table>                            
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
-            </div>
-        </div>
-    </div>    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
     <script type="text/javascript">
