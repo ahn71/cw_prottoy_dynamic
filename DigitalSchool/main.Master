@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="DS.main" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/Controls/SideMenuControls.ascx" TagPrefix="uc1" TagName="SideMenuControls" %>
 <!DOCTYPE html>
