@@ -492,8 +492,8 @@
 
     <script>
              
-        function removeModal() {
-
+        function removeModal()
+        {
             $('#myModal').modal('hide');
             $('#txtNote').val('');
             

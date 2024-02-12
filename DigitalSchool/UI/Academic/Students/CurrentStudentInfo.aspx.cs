@@ -228,7 +228,7 @@ namespace DS.UI.Academics.Students
                 Response.Redirect(GetRouteUrl("StudentProfileRoute", new { id = StudentId}));
                // Response.Redirect("/UI/Academic/Students/StdProfile.aspx?StudentId=" + StudentId);
              //   ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "goToNewTab('/UI/Academic/Students/StdProfile.aspx?StudentId=" + StudentId+"');", true);  //Open New Tab for Sever side code
-                                                                                                                                                                                                     // Response.Write("<script>window.open('/UI/Academic/Students/StdProfile.aspx?StudentId=" + StudentId+"');</script>");
+                                                                                                                                                                                                     // Response.Write              ("<script>window.open('/UI/Academic/Students/StdProfile.aspx?StudentId=" + StudentId+"');</script>");
             }
             else if(e.CommandName == "Change")
             {

@@ -35,105 +35,158 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 commonTask.LoadPaymentStores(ddlPaymentStore);
                 BatchEntry.GetDropdownlist(dlBatchName, "True");
                 ClassGroupEntry.GetDropDownWithAll(ddlGroup, -1);//-1 as All
-                ExamInfoEntry.GetExamIdListWithExInSl(ddlExam, "All");                 
+                ExamInfoEntry.GetExamIdListWithExInSl(ddlExam, "All");
+                loadFeesCategoryInfo();
                 //stdtypeEntry.GetEntitiesData(ddlStudentType);
 
                 Dataload();
-
-
+                entryPanel.Visible = false;
+                listPanel.Visible = true;
             }
-
+   
 
         }
+
         private void loadFeesCategoryInfo()
         {
             try
             {
-                divFeesCategoryList.Controls.Add(new LiteralControl(""));
-                string condition = "";
-                if (ddlPaymentFor.SelectedIndex > 0)
-                {
-                    condition+=" Where IsNull(fc.PaymentFor,'regular')='" + ddlPaymentFor.SelectedValue + "'";
-                }                 
-                if (dlBatchName.SelectedIndex>0)
-                {
-                    string[] batchClsID = dlBatchName.SelectedValue.Split('_');
-                    if(condition=="")
-                        condition += " Where FC.BatchId='" + batchClsID[0] + "'";
-                    else
-                        condition += " and FC.BatchId='" + batchClsID[0] + "'";
-                }
-                              
-               sqlCmd = @"with dft as (select StoreNameKey, StoreTitle from PaymentStores where StoreNameKey = 'islampurcollegeedubd')
-                 Select FC.FeeCatId,BatchInfo.BatchName,IsNull(BatchInfo.BatchId, 0) as BatchId,ISNULL(BatchInfo.ClassID, 0) as ClassID, convert(varchar(10), FC.DateOfCreation, 105) as DateOfCreation, FC.FeeFine, FC.FeeCatName, DP.DateOfPaymentId, convert(varchar(10), DP.DateOfStart, 105) as 'Start Date', convert(varchar(10), DP.DateOfEnd, 105) as 'End Date', DP.IsActive,ex.ExInId,IsNull(ex.ExInSl, 0) as ExInSl,IsNull(fc.PaymentFor, 'regular') as PaymentFor,IsNull(fc.ClsGrpId, 0) as ClsGrpId,IsNull(FC.StoreNameKey, dft.StoreNameKey) as StoreNameKey,IsNull(str.StoreTitle, dft.StoreTitle) as StoreTitle from FeesCategoryInfo FC INNER JOIN DateOfPayment DP ON(FC.FeeCatId = DP.FeeCatId) Left JOIN BatchInfo ON BatchInfo.BatchId = FC.BatchId left join ExamInfo ex on fc.ExInSl = ex.ExInSl left join PaymentStores as str on FC.StoreNameKey = str.StoreNameKey cross join dft " + condition + " order by FC.FeeCatId desc";
+                sqlCmd = @"SELECT
+                        FCI.FeeCatId,
+                        BI.BatchName,
+                        FCI.FeeCatName,
+                        CONVERT(VARCHAR, DP.DateOfStart, 105) AS DateOfStart,
+                        CONVERT(VARCHAR, DP.DateOfEnd, 105) AS DateOfEnd,
+                        FCI.FeeFine,
+                        SUM(PC.Amount) AS TotalAmount,
+	                    PS.StoreTitle
+                    FROM
+                        FeesCategoryInfo AS FCI
+                    INNER JOIN
+                        BatchInfo AS BI ON FCI.BatchId = BI.BatchId
+                    INNER JOIN
+                        DateOfPayment AS DP ON FCI.FeeCatId = DP.FeeCatId
+                    INNER JOIN
+                        ParticularsCategory AS PC ON FCI.FeeCatId = PC.FeeCatID
+                    LEFT JOIN
+                        ParticularsInfo AS PTI ON PTI.Pid = PC.Pid
+                    LEFT JOIN PaymentStores PS ON PS.StoreNameKey= FCI.StoreNameKey
+                    WHERE
+                        PTI.PStatus = 1
+                    GROUP BY
+                        FCI.FeeCatId,
+                        BI.BatchName,
+                        FCI.FeeCatName,
+                        CONVERT(VARCHAR, DP.DateOfStart, 105),
+                        CONVERT(VARCHAR, DP.DateOfEnd, 105),
+                        FCI.FeeFine,
+	                    PS.StoreTitle
+                    ORDER BY
+                        FCI.FeeCatId DESC
 
-                //DataTable dt = CRUD.ReturnTableNull(sqlCmd);
-                //gv_FeesCatagoryInfo.DataSource = dt;
-                //gv_FeesCatagoryInfo.DataBind();
-
-
-                //DataTable dt = new DataTable();
-                //sqlDB.fillDataTable(sqlCmd, dt);
-                //int totalRows = dt.Rows.Count;
-                //string divInfo = "";
-                //divInfo = " <table id='tblParticularCategory' class='table table-striped table-bordered dt-responsive nowrap' cellspacing='0' width='100%' > ";
-                //divInfo += "<thead>";
-                //divInfo += "<tr>";
-                //divInfo += "<th>Batch Name</th>";
-                //divInfo += "<th>Fee CatName</th>";
-                //divInfo += "<th>Start Date</th>";
-                //divInfo += "<th>End Date</th>";
-                //divInfo += "<th class='numeric'>Fee Fine</th>";
-                //divInfo += "<th>Creation Date</th>";
-                //divInfo += "<th>Exam</th>";
-                //divInfo += "<th>Store</th>";
-                //if (Session["__Update__"].ToString().Equals("true"))
-                //    divInfo += "<th>Edit</th>";
-                //divInfo += "</tr>";
-                //divInfo += "</thead>";
-                //if (totalRows == 0)
-                //{
-                //    divInfo += "<tbody></tbody></table>";
-                //    divFeesCategoryList.Controls.Add(new LiteralControl(divInfo));
-                //    return;
-                //}
-                //divInfo += "<tbody>";
-                //string id = "";
-                //string BatchId = "";
-                //string ClassId = "";
-                //string ExInSl = "0";
-                //string PaymentFor = "";
-                //string ClsGrpId = "0";
-                //string StoreNameKey = "0";
-                //for (int x = 0; x < dt.Rows.Count; x++)
-                //{
-                //    PaymentFor = dt.Rows[x]["PaymentFor"].ToString();
-                //    BatchId = dt.Rows[x]["BatchId"].ToString();
-                //    ClassId = dt.Rows[x]["ClassID"].ToString();
-                //    ExInSl = dt.Rows[x]["ExInSl"].ToString();
-                //    id = dt.Rows[x]["FeeCatId"].ToString();
-                //    ClsGrpId = dt.Rows[x]["ClsGrpId"].ToString();
-                //    StoreNameKey = dt.Rows[x]["StoreNameKey"].ToString();
-                //    divInfo += "<tr id='r_" + id + "'>";
-                //    divInfo += "<td >" + dt.Rows[x]["BatchName"].ToString() + "</td>";
-                //    divInfo += "<td >" + dt.Rows[x]["FeeCatName"].ToString() + "</td>";
-                //    divInfo += "<td >" + dt.Rows[x]["Start Date"].ToString() + "</td>";
-                //    divInfo += "<td >" + dt.Rows[x]["End Date"].ToString() + "</td>";
-                //    divInfo += "<td class='numeric'>" + dt.Rows[x]["FeeFine"].ToString() + "</td>";
-                //    divInfo += "<td >" + dt.Rows[x]["DateOfCreation"].ToString() + "</td>";
-                //    divInfo += "<td >" + dt.Rows[x]["ExInId"].ToString() + "</td>";
-                //    divInfo += "<td >" + dt.Rows[x]["StoreTitle"].ToString() + "</td>";
-                //    if (Session["__Update__"].ToString().Equals("true"))
-                //        divInfo += "<td>" +
-                //            "<img style='width:20px;' src='/Images/gridImages/edit.png'  onclick=\"editFeesCategory(" + id + "," + BatchId + "," + ClassId + "," + ExInSl + ",'" + PaymentFor + "'," + ClsGrpId + ",'" + StoreNameKey + "');\"  />";
-                //}
-                //divInfo += "</tbody>";
-                //divInfo += "<tfoot>";
-                //divInfo += "</table>";
-                //divFeesCategoryList.Controls.Add(new LiteralControl(divInfo));
+                    ";
+                DataTable dt = CRUD.ReturnTableNull(sqlCmd);
+                gvParticularList.DataSource = dt;
+                gvParticularList.DataBind();
             }
-            catch { }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+
+       
+
+        //private void loadFeesCategoryInfo()
+        //{
+        //    try
+        //    {
+        //        divFeesCategoryList.Controls.Add(new LiteralControl(""));
+        //        string condition = "";
+        //        if (ddlPaymentFor.SelectedIndex > 0)
+        //        {
+        //            condition+=" Where IsNull(fc.PaymentFor,'regular')='" + ddlPaymentFor.SelectedValue + "'";
+        //        }                 
+        //        if (dlBatchName.SelectedIndex>0)
+        //        {
+        //            string[] batchClsID = dlBatchName.SelectedValue.Split('_');
+        //            if(condition=="")
+        //                condition += " Where FC.BatchId='" + batchClsID[0] + "'";
+        //            else
+        //                condition += " and FC.BatchId='" + batchClsID[0] + "'";
+        //        }
+
+        //       sqlCmd = @"with dft as (select StoreNameKey, StoreTitle from PaymentStores where StoreNameKey = 'islampurcollegeedubd')
+        //         Select FC.FeeCatId,BatchInfo.BatchName,IsNull(BatchInfo.BatchId, 0) as BatchId,ISNULL(BatchInfo.ClassID, 0) as ClassID, convert(varchar(10), FC.DateOfCreation, 105) as DateOfCreation, FC.FeeFine, FC.FeeCatName, DP.DateOfPaymentId, convert(varchar(10), DP.DateOfStart, 105) as 'Start Date', convert(varchar(10), DP.DateOfEnd, 105) as 'End Date', DP.IsActive,ex.ExInId,IsNull(ex.ExInSl, 0) as ExInSl,IsNull(fc.PaymentFor, 'regular') as PaymentFor,IsNull(fc.ClsGrpId, 0) as ClsGrpId,IsNull(FC.StoreNameKey, dft.StoreNameKey) as StoreNameKey,IsNull(str.StoreTitle, dft.StoreTitle) as StoreTitle from FeesCategoryInfo FC INNER JOIN DateOfPayment DP ON(FC.FeeCatId = DP.FeeCatId) Left JOIN BatchInfo ON BatchInfo.BatchId = FC.BatchId left join ExamInfo ex on fc.ExInSl = ex.ExInSl left join PaymentStores as str on FC.StoreNameKey = str.StoreNameKey cross join dft " + condition + " order by FC.FeeCatId desc";
+
+        //        //DataTable dt = CRUD.ReturnTableNull(sqlCmd);
+        //        //gv_FeesCatagoryInfo.DataSource = dt;
+        //        //gv_FeesCatagoryInfo.DataBind();
+
+
+        //        //DataTable dt = new DataTable();
+        //        //sqlDB.fillDataTable(sqlCmd, dt);
+        //        //int totalRows = dt.Rows.Count;
+        //        //string divInfo = "";
+        //        //divInfo = " <table id='tblParticularCategory' class='table table-striped table-bordered dt-responsive nowrap' cellspacing='0' width='100%' > ";
+        //        //divInfo += "<thead>";
+        //        //divInfo += "<tr>";
+        //        //divInfo += "<th>Batch Name</th>";
+        //        //divInfo += "<th>Fee CatName</th>";
+        //        //divInfo += "<th>Start Date</th>";
+        //        //divInfo += "<th>End Date</th>";
+        //        //divInfo += "<th class='numeric'>Fee Fine</th>";
+        //        //divInfo += "<th>Creation Date</th>";
+        //        //divInfo += "<th>Exam</th>";
+        //        //divInfo += "<th>Store</th>";
+        //        //if (Session["__Update__"].ToString().Equals("true"))
+        //        //    divInfo += "<th>Edit</th>";
+        //        //divInfo += "</tr>";
+        //        //divInfo += "</thead>";
+        //        //if (totalRows == 0)
+        //        //{
+        //        //    divInfo += "<tbody></tbody></table>";
+        //        //    divFeesCategoryList.Controls.Add(new LiteralControl(divInfo));
+        //        //    return;
+        //        //}
+        //        //divInfo += "<tbody>";
+        //        //string id = "";
+        //        //string BatchId = "";
+        //        //string ClassId = "";
+        //        //string ExInSl = "0";
+        //        //string PaymentFor = "";
+        //        //string ClsGrpId = "0";
+        //        //string StoreNameKey = "0";
+        //        //for (int x = 0; x < dt.Rows.Count; x++)
+        //        //{
+        //        //    PaymentFor = dt.Rows[x]["PaymentFor"].ToString();
+        //        //    BatchId = dt.Rows[x]["BatchId"].ToString();
+        //        //    ClassId = dt.Rows[x]["ClassID"].ToString();
+        //        //    ExInSl = dt.Rows[x]["ExInSl"].ToString();
+        //        //    id = dt.Rows[x]["FeeCatId"].ToString();
+        //        //    ClsGrpId = dt.Rows[x]["ClsGrpId"].ToString();
+        //        //    StoreNameKey = dt.Rows[x]["StoreNameKey"].ToString();
+        //        //    divInfo += "<tr id='r_" + id + "'>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["BatchName"].ToString() + "</td>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["FeeCatName"].ToString() + "</td>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["Start Date"].ToString() + "</td>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["End Date"].ToString() + "</td>";
+        //        //    divInfo += "<td class='numeric'>" + dt.Rows[x]["FeeFine"].ToString() + "</td>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["DateOfCreation"].ToString() + "</td>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["ExInId"].ToString() + "</td>";
+        //        //    divInfo += "<td >" + dt.Rows[x]["StoreTitle"].ToString() + "</td>";
+        //        //    if (Session["__Update__"].ToString().Equals("true"))
+        //        //        divInfo += "<td>" +
+        //        //            "<img style='width:20px;' src='/Images/gridImages/edit.png'  onclick=\"editFeesCategory(" + id + "," + BatchId + "," + ClassId + "," + ExInSl + ",'" + PaymentFor + "'," + ClsGrpId + ",'" + StoreNameKey + "');\"  />";
+        //        //}
+        //        //divInfo += "</tbody>";
+        //        //divInfo += "<tfoot>";
+        //        //divInfo += "</table>";
+        //        //divFeesCategoryList.Controls.Add(new LiteralControl(divInfo));
+        //    }
+        //    catch { }
+        //}
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -141,8 +194,8 @@ namespace DS.UI.Administration.Finance.FeeManaged
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "load();", true);
                 if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; loadFeesCategoryInfo(); return; }
-                if(!existAdmissionFee())
-                     saveFeesCategoryInfo();
+                if (!existAdmissionFee())
+                    saveFeesCategoryInfo();
             }
             else updateFeesCategoryInfo();
         }
@@ -292,8 +345,8 @@ namespace DS.UI.Administration.Finance.FeeManaged
             try
             {
                 string[] batchClsID = dlBatchName.SelectedValue.Split('_');
-                SqlCommand cmd = new SqlCommand(" update FeesCategoryInfo  Set FeeFine=@FeeFine, " +
-                                                "FeeCatName=@FeeCatName,ExInSl=@ExInSl,PaymentFor=@PaymentFor,ClsGrpId=@ClsGrpId,StoreNameKey=@StoreNameKey where FeeCatId=@FeeCatId ", DbConnection.Connection);
+                SqlCommand cmd = new SqlCommand("update FeesCategoryInfo  Set FeeFine=@FeeFine, " +
+                                                                "FeeCatName=@FeeCatName,ExInSl=@ExInSl,PaymentFor=@PaymentFor,ClsGrpId=@ClsGrpId,StoreNameKey=@StoreNameKey where FeeCatId=@FeeCatId ", DbConnection.Connection);
 
                 cmd.Parameters.AddWithValue("@FeeCatId", lblFeesCateId.Value.ToString());
                // cmd.Parameters.AddWithValue("@BatchId", batchClsID[0]);
@@ -528,8 +581,176 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 }
             }
         }
+ 
 
-       
+        protected void btnAddFeesCat_Click(object sender, EventArgs e)
+        {
+
+            if(btnAddFeesCat.Text== "Add New Fees Catagory +")
+            {
+                if (listPanel.Visible == true)
+                {
+                    listPanel.Visible = false;
+                    entryPanel.Visible = true;
+                    btnAddFeesCat.Text = "Back To LIst";
+
+                }
+            }
+            else
+            {
+                entryPanel.Visible = false;
+                listPanel.Visible = true;
+                btnAddFeesCat.Text = "Add New Fees Catagory +";
+
+
+            }
+        }
+
+
+        private void loadFeesCategoryDetailes()
+        {
+            try
+            {
+                sqlCmd = @"SELECT
+                        FCI.FeeCatId,
+                        BI.BatchName,
+                        FCI.FeeCatName,
+                        CONVERT(VARCHAR, DP.DateOfStart, 105) AS DateOfStart,
+                        CONVERT(VARCHAR, DP.DateOfEnd, 105) AS DateOfEnd,
+                        FCI.FeeFine,
+                        SUM(PC.Amount) AS TotalAmount,
+	                    PS.StoreTitle,
+	                    FCI.PaymentFor,
+	                    TG.GroupName,
+	                    EXI.ExName
+ 
+	
+                    FROM
+                        FeesCategoryInfo AS FCI
+                    INNER JOIN
+                        BatchInfo AS BI ON FCI.BatchId = BI.BatchId
+                    INNER JOIN
+                        DateOfPayment AS DP ON FCI.FeeCatId = DP.FeeCatId
+                    INNER JOIN
+                        ParticularsCategory AS PC ON FCI.FeeCatId = PC.FeeCatID
+                    INNER JOIN 
+	                    Tbl_Group AS TG ON TG.GroupID =FCI.ClsGrpId
+                    INNER JOIN 
+	                    ExamInfo AS EXI ON FCI.ExInSl = EXI.ExInSl
+                    LEFT JOIN
+                        ParticularsInfo AS PTI ON PTI.Pid = PC.Pid
+                    LEFT JOIN PaymentStores PS ON PS.StoreNameKey= FCI.StoreNameKey
+
+                    WHERE
+                        PTI.PStatus = 1 
+                    GROUP BY
+                        FCI.FeeCatId,
+                        BI.BatchName,
+                        FCI.FeeCatName,
+                        CONVERT(VARCHAR, DP.DateOfStart, 105),
+                        CONVERT(VARCHAR, DP.DateOfEnd, 105),
+                        FCI.FeeFine,
+	                    PS.StoreTitle,
+	                    FCI.PaymentFor,
+	                    TG.GroupName,
+	                    EXI.ExName
+
+                    ORDER BY
+                        FCI.FeeCatId DESC;
+
+
+                    ";
+                dt = CRUD.ReturnTableNull(sqlCmd);
+
+                if (dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+
+                    //lblFeeCatId.Text = "FeeCategory: " + row["FeeCatId"].ToString();
+                    lblBatchName.Text = "Batch Name : "+row["BatchName"].ToString();
+                    lblFeeCatName.Text = "Fees Catagory Name : "+row["FeeCatName"].ToString();
+                    lblDateOfStart.Text ="Starding Date :"+  row["DateOfStart"].ToString();
+                    lblDateOfEnd.Text = "Ending Date :"+ row["DateOfEnd"].ToString();
+                    lblFeeFine.Text = "Fee Fine :" + row["FeeFine"].ToString();
+                    lblPaymentStore.Text = "Payment Store :" + row["StoreTitle"].ToString();
+                    lblTotalAmount.Text = "Total Amount :" + row["TotalAmount"].ToString();
+                    lblPaymentFor.Text = "Payment For :" + row["PaymentFor"].ToString();
+                    lblGroup.Text = "Group :" + row["GroupName"].ToString();
+                    lblExam.Text = "Exam :" + row["ExName"].ToString();
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        protected void gvParticularList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "ViewDetails")
+            {
+                loadFeesCategoryDetailes();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
+
+     
+
+
+
+            }
+        }
+
+
+        //protected void gvParticularList_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    if (e.CommandName == "edit")
+        //    {
+        //        int rowIndex = Convert.ToInt32(e.CommandArgument);
+        //        // Get the data for the selected row using rowIndex
+        //        // You can then use this data to populate the table in the modal dynamically
+
+        //        // Example: Retrieve data from GridView's DataSource
+        //        DataTable dt = ((DataTable)gvParticularList.DataSource);
+        //        DataRow row = dt.Rows[rowIndex];
+
+        //        // Populate the modal's table content using JavaScript
+        //        string script = $@"
+        //    var modalBody = document.getElementById('editModal').getElementsByClassName('modal-body')[0];
+        //    modalBody.innerHTML = '<table class=\"table\"><tr><th>Column1</th><th>Column2</th></tr><tr><td>{row["Column1"]}</td><td>{row["Column2"]}</td></tr></table>';
+        // ";
+        // ClientScript.RegisterStartupScript(this.GetType(), "EditModalScript", script, true);
+        //    }
+        //}
+
+        protected void gvParticularList_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvParticularList.PageIndex = e.NewPageIndex;
+            loadFeesCategoryInfo();
+
+
+        }
+
+        protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int pageSize = Convert.ToInt32(ddlPageSize.SelectedValue);
+            gvParticularList.PageSize = pageSize;
+            loadFeesCategoryInfo();
+    
+        }
+
+        //protected void btnModalClose_Click(object sender, EventArgs e)
+        //{
+        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
+
+        //}
+
+
+
+
 
 
         //protected void ddlGroup_SelectedIndexChanged(object sender, EventArgs e)

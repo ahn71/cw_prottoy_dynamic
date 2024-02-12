@@ -98,6 +98,35 @@
         .amountStyle{
             font-weight:bold;
         }
+        .addFeesCat{
+            margin:20px;
+
+
+        }
+
+        .pagination{
+            width:100px;
+            text-align:center;
+        }
+
+        .pagination a {
+           color: white !important;
+           background-color:forestgreen;
+           padding:7px;
+         }
+
+        .modal-body {
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal-right{
+            display:inline;
+
+        }
+        .modelleft{
+            display:inline;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">    
@@ -125,6 +154,89 @@
         </div>
     </div>
   
+
+ <div>
+            <!-- Your page content -->
+
+     <asp:UpdatePanel runat="server" ID="upFeeCatDetails">
+         <Triggers>
+             <asp:AsyncPostBackTrigger ControlID="gvParticularList" />
+         </Triggers>
+         <ContentTemplate>
+
+             <!-- Button trigger modal -->
+
+<!-- Modal -->
+             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                         <div class="modal-header">
+                             <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <span aria-hidden="true">&times;</span>
+                             </button>
+                         </div>
+                         <div class="modal-body">
+
+                             <div class="modelleft">
+                                 <asp:Label ID="lblPaymentFor" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                 <br />
+                               <asp:Label ID="lblFeeCatName" CssClass="form-control" runat="server" Text=""></asp:Label>
+
+                                 <br />
+                               <asp:Label ID="lblPaymentStore" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                  <br />
+
+                            <asp:Label ID="lblExam" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                 <br /> 
+                               
+                                 <asp:Label ID="lblBatchName" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                 
+     
+                                 <br />
+
+
+
+                             </div>
+
+
+                             <div class="modal-right">
+                                 <asp:Label ID="lblGroup" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                <br />
+                               <asp:Label ID="lblDateOfStart" CssClass="form-control" runat="server" Text=""></asp:Label>
+                             <br />
+                              <asp:Label ID="lblDateOfEnd" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                 <br />
+                              
+
+                                 <br />
+                                 <asp:Label ID="lblFeeFine" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                 <br />
+
+
+                                 <br />
+                              <asp:Label ID="lblTotalAmount" CssClass="form-control" runat="server" Text=""></asp:Label>
+                                 <br />
+                                 
+
+                             </div>
+
+
+
+                        
+                         </div>
+                         <div class="modal-footer">
+                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             <button type="button" class="btn btn-primary">Save changes</button>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+         </ContentTemplate>
+     </asp:UpdatePanel>
+        </div>
+
             <asp:HiddenField ID="lblFeesCateId" ClientIDMode="Static" runat="server"/>
             <div class="">
                 <div class="row">
@@ -148,6 +260,8 @@
                                 <asp:AsyncPostBackTrigger ControlID="ddlPaymentFor" />
                                 <asp:AsyncPostBackTrigger ControlID="ddlParticular" />
                                 <asp:AsyncPostBackTrigger ControlID="btnAddParticular" />
+
+                          
                             </Triggers>
                             <ContentTemplate>
                                 <div class="tgPanel">
@@ -158,22 +272,42 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
+                    <br />
+
+
+                    
+
 
                     <!---------Particular List Section Start -------------------------------------->
+                          <asp:Button runat="server" ID="btnAddFeesCat" CssClass="btn btn-success addFeesCat" Text="Add New Fees Catagory +" OnClick="btnAddFeesCat_Click" />
+                    <asp:DropDownList ID="ddlPageSize" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPageSize_SelectedIndexChanged" CssClass="form-control pagination">
+                        <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                        <asp:ListItem Text="20" Value="20"></asp:ListItem>
+                        <asp:ListItem Text="50" Value="50"></asp:ListItem>
+                     
+                    </asp:DropDownList> <br />
 
-                                <div>
-                                               <asp:GridView ID="gvParticularList" runat="server" AutoGenerateColumns="False" CellPadding="6" CssClass="table table-hover table-striped" Width="100%" >
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                                                   <asp:Panel runat="server" ID="listPanel">
 
-                                     <Columns>
+                        <asp:GridView ID="gvParticularList" runat="server" AutoGenerateColumns="False" CellPadding="6"
+                            CssClass="table table-hover table-striped" Width="100%"
+                            OnRowCommand="gvParticularList_RowCommand" DataKeyNames="FeeCatId" AllowPaging="true"
+                            OnPageIndexChanging="gvParticularList_PageIndexChanging"
+                            PagerStyle-NextPageText="&gt;&gt;" PagerStyle-PreviousPageText="&lt;&lt;"
+                            PagerStyle-CssClass="pagination">
+
+                            <Columns>
                                          <asp:TemplateField HeaderText="Batch Name">
                                              <ItemTemplate >
-                                                 <asp:Label runat="server" ID="lblName" Text=' <%# Eval("Particular") %>'></asp:Label>
+                                                 <asp:Label runat="server" ID="lblBtchName" Text=' <%# Eval("BatchName") %>'></asp:Label>
 
                                              </ItemTemplate>
                                          </asp:TemplateField>
                                          <asp:TemplateField HeaderText="Fee Category Name">
                                              <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+                                                 <asp:Label runat="server" ID="lblFeeCatName" Text=' <%# Eval("FeeCatName") %>'></asp:Label>
 
                                              </ItemTemplate>
                                             
@@ -181,7 +315,7 @@
 
                                          <asp:TemplateField HeaderText="Start Date">
                                              <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+                                                 <asp:Label runat="server" ID="lblDateOFStart" Text=' <%# Eval("DateOfStart") %>'></asp:Label>
 
                                              </ItemTemplate>
 
@@ -189,7 +323,7 @@
 
                                          <asp:TemplateField HeaderText="End Date">
                                              <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+                                                 <asp:Label runat="server" ID="lblDateOfEnd" Text=' <%# Eval("DateOfEnd") %>'></asp:Label>
 
                                              </ItemTemplate>
 
@@ -197,23 +331,23 @@
 
                                          <asp:TemplateField HeaderText="Fee Fine">
                                              <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+                                                 <asp:Label runat="server" ID="lblFeeFine" Text=' <%# Eval("FeeFine") %>'></asp:Label>
 
                                              </ItemTemplate>
 
                                          </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Payment Store">
+                                    <ItemTemplate>
+                                        <asp:Label runat="server" ID="lblStorePayment" Text=' <%# Eval("StoreTitle") %>'></asp:Label>
 
-                                         <asp:TemplateField HeaderText="Particular">
+                                    </ItemTemplate>
+
+                                </asp:TemplateField>
+
+
+                                         <asp:TemplateField HeaderText="Total Amount">
                                              <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-
-                                         </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="Amount">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
+                                                 <asp:Label runat="server" ID="lblTotalAmount" Text=' <%# Eval("TotalAmount") %>'></asp:Label>
 
                                              </ItemTemplate>
 
@@ -221,7 +355,7 @@
 
 
 
-                                         <asp:TemplateField HeaderText="View" HeaderStyle-CssClass="text-center">
+                                         <asp:TemplateField HeaderText="Edit" HeaderStyle-CssClass="text-center">
                                              <ItemTemplate>
                                                  <asp:LinkButton ID="btnEdit" runat="server" CommandName="edit" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
                                        <i class="fa-regular fa-pen-to-square"></i>
@@ -230,104 +364,35 @@
                                              </ItemTemplate>
                                          </asp:TemplateField>
 
-                                         <asp:TemplateField HeaderText="Update" HeaderStyle-CssClass="text-center">
-                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="btnView" runat="server" CommandName="view" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
-                                      <i class="fa-regular fa-eye"></i>
-
-                                                 </asp:LinkButton>
-                                             </ItemTemplate>
-                                         </asp:TemplateField>
-
-
-
-                                     </Columns>
-
-                                 </asp:GridView>           <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" CssClass="table table-hover table-striped" Width="100%" >
-
-                                     <Columns>
-                                         <asp:TemplateField HeaderText="Batch Name">
-                                             <ItemTemplate >
-                                                 <asp:Label runat="server" ID="lblName" Text=' <%# Eval("Particular") %>'></asp:Label>
-
-                                             </ItemTemplate>
-                                         </asp:TemplateField>
-                                         <asp:TemplateField HeaderText="Fee Category Name">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-                                            
-                                        </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="Start Date">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-
-                                         </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="End Date">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-
-                                         </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="Fee Fine">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-
-                                         </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="Particular">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-
-                                         </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="Amount">
-                                             <ItemTemplate>
-                                                 <asp:Label runat="server" ID="lblamount" Text=' <%# Eval("Amount") %>'></asp:Label>
-
-                                             </ItemTemplate>
-
-                                         </asp:TemplateField>
-
-
-
-                                         <asp:TemplateField HeaderText="View" HeaderStyle-CssClass="text-center">
-                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="btnEdit" runat="server" CommandName="edit" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
-                                       <i class="fa-regular fa-pen-to-square"></i>
-
-                                                 </asp:LinkButton>
-                                             </ItemTemplate>
-                                         </asp:TemplateField>
-
-                                         <asp:TemplateField HeaderText="Update" HeaderStyle-CssClass="text-center">
-                                             <ItemTemplate>
-                                                 <asp:LinkButton ID="btnView" runat="server" CommandName="view" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
-                                      <i class="fa-regular fa-eye"></i>
-
-                                                 </asp:LinkButton>
-                                             </ItemTemplate>
-                                         </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Details" HeaderStyle-CssClass="text-center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton  runat="server" ID="btnShowPopup" ClientIDMode="Static"  AutoPostBack="true" CommandName="ViewDetails"
+                                            CommandArgument='<%#((GridViewRow)Container).RowIndex%>'>
+                <i class="fa-regular fa-eye"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
 
 
 
                                      </Columns>
 
                                  </asp:GridView>
-                                 </div>
-                       
+                    </asp:Panel>
+                        </ContentTemplate>
 
+                    </asp:UpdatePanel>
+
+
+
+
+
+
+
+                  
+
+                    
+                    <!------Popup End ------------------>
 
 
 
@@ -345,8 +410,8 @@
                             </Triggers>
                             <ContentTemplate>
 
-
-                                <div class="tgPanel">
+                                <asp:Panel runat="server" ID="entryPanel" >
+                                    <div class="tgPanel">
                                     <asp:HiddenField runat="server" ClientIDMode="Static" ID="hfAcademicInfo" Value="0" />
                                     <div class="tgPanelHead">Fees Category</div>
 
@@ -558,8 +623,7 @@
                                </div>
                                  <!------------End ----------------->
                                     <div class="button-panel">
-                                        <asp:Button CssClass="btn btn-primary" ID="btnSave" ClientIDMode="Static" runat="server" Text="Save"
-                                            OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
+                                        <asp:Button CssClass="btn btn-primary" ID="btnSave" ClientIDMode="Static" runat="server" Text="Save" OnClientClick="return validateInputs();" OnClick="btnSave_Click" />
                                         <input type="button" value="Reset" class="btn btn-default" onclick="clearIt();" />
                                     </div>
 
@@ -567,6 +631,9 @@
          
 
                              </div>
+                                </asp:Panel>
+
+                                
 
 
 
@@ -582,12 +649,54 @@
        
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script type="text/javascript">     
+    <script type="text/javascript">
+
+        //    function getUserInput() {
+        //    // Get the user input
+        //    var userInput = document.getElementById("userInput").value;
+
+        //    // You can now use the userInput variable as needed, for example, display it in an alert.
+        //    alert("User Input: " + userInput);
+
+        //    // Close the modal
+        //    $('#myModal').modal('hide');
+        //}
+
+
+<%--        function showPopup(button) {
+            // Get the popup element
+            var popup = document.getElementById('<%= popup.ClientID %>');
+
+            // Calculate the position based on the button's position
+            var btnRect = button.getBoundingClientRect();
+            var popupLeft = btnRect.right - window.pageXOffset - popup.offsetWidth; // Adjusted for left side
+            var popupTop = btnRect.bottom + window.pageYOffset;
+
+            // Set the popup position
+            popup.style.left = popupLeft - 'px';
+            popup.style.top = popupTop + 'px';
+
+            // Display the popup
+            popup.style.display = 'block';
+        }
+
+
+        
+
+        function hidePopup() {
+            // Get the popup element
+            var popup = document.getElementById('<%= popup.ClientID %>');
+
+        // Hide the popup
+        popup.style.display = 'none';
+    }--%>
+
+
         $(document).ready(function () {
             $(document).on("keyup", '.Search_New', function () {
                 searchTable($(this).val(), 'tblParticularCategory', '');
             });
-           // $("#dlBatchName").select2();
+            // $("#dlBatchName").select2();
             $('#tblParticularCategory').dataTable({
                 //"iDisplayLength": 10,
                 "lengthMenu": [10, 20, 30, 40, 50, 100]
@@ -600,18 +709,18 @@
             });
         }
         function validateInputs() {
-            
+
             if (validateCombo('ddlPaymentFor', '0', "Select Payment For") == false) return false;
             if ($('#hfAcademicInfo').val() == "1") {
-                if (validateCombo('dlBatchName','0',"Select Batch") == false) return false;
-            }             
-            if (validateText('txtFeesCatName', 1, 200, "Enter Fees Category") == false) return false;  
-            //if (validateCombo('ddlPaymentStore', '0', "Select Payment Store") == false) return false;
+                if (validateCombo('dlBatchName', '0', "Select Batch") == false) return false;
+            }
+            if (validateText('txtFeesCatName', 1, 200, "Enter Fees Category") == false) return false;
+            if (validateCombo('ddlPaymentStore', '0', "Select Payment Store") == false) return false;
             if (validateText('txtDateStart', 10, 10, "Select Start Date") == false) return false;
             if (validateText('txtDateEnd', 10, 10, "Select End Date") == false) return false;
             return true;
         }
-        function editFeesCategory(feesCatId, BatchId, ClassId,ExInSl,PaymentFor,ClsGrpId,StoreNameKey) {            
+        function editFeesCategory(feesCatId, BatchId, ClassId, ExInSl, PaymentFor, ClsGrpId, StoreNameKey) {
             $('#ddlPaymentFor').val(PaymentFor);
             $('#lblFeesCateId').val(feesCatId);
             var strBatch = $('#r_' + feesCatId + ' td:nth-child(1)').html();
@@ -622,11 +731,11 @@
             var BatchID = BatchId + '_' + ClassId;
             $("#dlBatchName").prop("disabled", true);
             $('#hfAcademicInfo').val('0');
-           //  $('#dlBatchName option[value='+BatchID+']').attr('selected','selected');        
-             $('#ddlGroup option[value='+ClsGrpId+']').attr('selected','selected');        
-             $('#ddlExam option[value='+ExInSl+']').attr('selected','selected');        
-             $('#ddlPaymentStore option[value='+StoreNameKey+']').attr('selected','selected');        
-            
+            //  $('#dlBatchName option[value='+BatchID+']').attr('selected','selected');        
+            $('#ddlGroup option[value=' + ClsGrpId + ']').attr('selected', 'selected');
+            $('#ddlExam option[value=' + ExInSl + ']').attr('selected', 'selected');
+            $('#ddlPaymentStore option[value=' + StoreNameKey + ']').attr('selected', 'selected');
+
             $('#txtFeesCatName').val(strFeesCatName);
             $('#txtDateStart').val(strStartDate);
             $('#txtDateEnd').val(strEndDate);
@@ -650,7 +759,7 @@
         }
         function load() {
             loaddatatable();
-           // $("#dlBatchName").select2();
+            // $("#dlBatchName").select2();
         }
         var ddlText, ddlValue, ddl, lblMesg;
         function CacheItems() {
@@ -684,5 +793,33 @@
             opt.value = value;
             ddl.options.add(opt);
         }
+
+        //function getUserInput() {
+        //    // Get the user input
+        //    var userInput = document.getElementById("userInput").value;
+
+        //    // You can now use the userInput variable as needed, for example, display it in an alert.
+        //    alert("User Input: " + userInput);
+
+        //    // Close the modal
+        //    $('#myModal').modal('hide');
+        //}
+
+    </script>
+
+    <script>
+
+        function showModal() {
+            $('#myModal').modal('show');
+            $('#myModal').show();
+        }
+        function removeModal() {
+            $('#myModal').modal('hide');
+            $('#myModal').hide();
+            $('#txtNote').val('');
+            $('.modal-backdrop').css('display', 'none');
+
+        }
+
     </script>
 </asp:Content>
