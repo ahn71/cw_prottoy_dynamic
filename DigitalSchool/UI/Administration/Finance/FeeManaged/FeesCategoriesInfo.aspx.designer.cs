@@ -31,15 +31,6 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
         
         /// <summary>
-        /// upFeeCatDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upFeeCatDetails;
-        
-        /// <summary>
         /// lblPaymentFor control.
         /// </summary>
         /// <remarks>
@@ -130,31 +121,22 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         protected global::System.Web.UI.WebControls.Label lblTotalAmount;
         
         /// <summary>
-        /// lblFeesCateId control.
+        /// gvParticularDetailes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField lblFeesCateId;
+        protected global::System.Web.UI.WebControls.GridView gvParticularDetailes;
         
         /// <summary>
-        /// updatepanelFeesSett control.
+        /// UpdatePanel2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatepanelFeesSett;
-        
-        /// <summary>
-        /// divFeesCategoryList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFeesCategoryList;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
         /// btnAddFeesCat control.
@@ -175,15 +157,6 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         protected global::System.Web.UI.WebControls.DropDownList ddlPageSize;
         
         /// <summary>
-        /// UpdatePanel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
-        /// <summary>
         /// listPanel control.
         /// </summary>
         /// <remarks>
@@ -202,15 +175,6 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         protected global::System.Web.UI.WebControls.GridView gvParticularList;
         
         /// <summary>
-        /// updatepanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatepanel1;
-        
-        /// <summary>
         /// entryPanel control.
         /// </summary>
         /// <remarks>
@@ -227,6 +191,15 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfAcademicInfo;
+        
+        /// <summary>
+        /// lblDemo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDemo;
         
         /// <summary>
         /// ddlPaymentFor control.
@@ -265,15 +238,6 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         protected global::System.Web.UI.WebControls.Panel pnlAcademicInfo;
         
         /// <summary>
-        /// ddlExam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlExam;
-        
-        /// <summary>
         /// dlBatchName control.
         /// </summary>
         /// <remarks>
@@ -290,6 +254,15 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGroup;
+        
+        /// <summary>
+        /// ddlExam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlExam;
         
         /// <summary>
         /// txtDateStart control.

@@ -1728,8 +1728,8 @@ S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\PdfSharp.C
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\DigitalSchool.DAL.pdb
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\PdfSharp.resources.dll
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\bin\Debug\de\PdfSharp.Charting.resources.dll
-S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csprojResolveAssemblyReference.cache
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CoreCompileInputs.cache
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csproj.CopyComplete
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.dll
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.pdb
+S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.BLL\obj\Debug\DS.BLL.csprojResolveAssemblyReference.cache

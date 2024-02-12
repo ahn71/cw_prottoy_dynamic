@@ -738,8 +738,8 @@ S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\bin\Deb
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\bin\Debug\PdfSharp.Charting.xml
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\bin\Debug\de\PdfSharp.resources.dll
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\bin\Debug\de\PdfSharp.Charting.resources.dll
-S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\obj\Debug\DS.PropertyEntities.csprojResolveAssemblyReference.cache
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\obj\Debug\DS.PropertyEntities.csproj.CoreCompileInputs.cache
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\obj\Debug\DS.PropertyEntities.csproj.CopyComplete
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\obj\Debug\DS.PropertyEntities.dll
 S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\obj\Debug\DS.PropertyEntities.pdb
+S:\CW_Official_Project\cw_prottoy_dynamic\DigitalSchool.PropertyEntities\obj\Debug\DS.PropertyEntities.csprojResolveAssemblyReference.cache

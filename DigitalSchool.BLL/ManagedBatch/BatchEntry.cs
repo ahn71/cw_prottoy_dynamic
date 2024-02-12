@@ -79,12 +79,22 @@ namespace DS.BLL.ManagedBatch
             dt = CRUD.ReturnTableNull(sql);
             return dt;
         }
-        public DataTable GetEntitiesData(string batchclassID)
+        public DataTable GetEntitiesData(string IsUsed)
         {
-           
+
             sql = string.Format("SELECT CONVERT(varchar(20), BatchID)+'_'"
-                +"+CONVERT(varchar(20), ClassID) as BatchId,[BatchName],[IsUsed],[Year],[ClassID] "
-                + "FROM [dbo].[BatchInfo] WHERE [IsUsed]='" + batchclassID + "'  ORDER BY [ClassID]");
+                + "+CONVERT(varchar(20), ClassID) as BatchId,[BatchName],[IsUsed],[Year],[ClassID] "
+                + "FROM [dbo].[BatchInfo] WHERE [IsUsed]='" + IsUsed + "'  ORDER BY [ClassID]");
+            DataTable dt = new DataTable();
+
+            dt = CRUD.ReturnTableNull(sql);
+            return dt;
+        }
+        public DataTable GetEntitiesDataOnlyBatchId(string IsUsed)
+        {
+
+            sql = string.Format("SELECT BatchId,[BatchName],[IsUsed],[Year],[ClassID] FROM [dbo].[BatchInfo]" +
+                " WHERE [IsUsed]='" + IsUsed + "'  ORDER BY [ClassID]");
             DataTable dt = new DataTable();
 
             dt = CRUD.ReturnTableNull(sql);
@@ -129,10 +139,20 @@ namespace DS.BLL.ManagedBatch
                 dl.Items.Insert(0, new ListItem("...Select...", "0"));
             }
         }
-        public static void GetDropdownlist(DropDownList dl,string BatchClassId)
+        public static void GetDropdownlist(DropDownList dl,string IsUsed)
         {
             BatchEntry batch = new BatchEntry();
-            DataTable dt = batch.GetEntitiesData(BatchClassId);           
+            DataTable dt = batch.GetEntitiesData(IsUsed);           
+            dl.DataValueField = "BatchId";
+            dl.DataTextField = "BatchName";
+            dl.DataSource = dt;
+            dl.DataBind();
+            dl.Items.Insert(0, new ListItem("...Select...", "0"));
+        }
+        public static void GetDropdownlistOnlyBatch(DropDownList dl,string IsUsed)
+        {
+            BatchEntry batch = new BatchEntry();
+            DataTable dt = batch.GetEntitiesDataOnlyBatchId(IsUsed);           
             dl.DataValueField = "BatchId";
             dl.DataTextField = "BatchName";
             dl.DataSource = dt;

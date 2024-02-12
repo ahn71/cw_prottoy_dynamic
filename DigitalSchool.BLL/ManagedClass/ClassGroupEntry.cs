@@ -173,7 +173,7 @@ namespace DS.BLL.ManagedClass
                 dl.Enabled = false;
             }
             else if(dl.Items.Count>1)
-                dl.Items.Insert(0, new ListItem("All", "00"));
+                dl.Items.Insert(0, new ListItem("All", "0"));
 
             
         }

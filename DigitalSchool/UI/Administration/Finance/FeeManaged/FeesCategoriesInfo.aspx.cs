@@ -40,8 +40,10 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 //stdtypeEntry.GetEntitiesData(ddlStudentType);
 
                 Dataload();
-                entryPanel.Visible = false;
+
                 listPanel.Visible = true;
+                entryPanel.Visible = false;
+
             }
    
 
@@ -85,9 +87,13 @@ namespace DS.UI.Administration.Finance.FeeManaged
                         FCI.FeeCatId DESC
 
                     ";
+
                 DataTable dt = CRUD.ReturnTableNull(sqlCmd);
                 gvParticularList.DataSource = dt;
                 gvParticularList.DataBind();
+               
+
+
             }
             catch (Exception)
             {
@@ -96,109 +102,52 @@ namespace DS.UI.Administration.Finance.FeeManaged
             }
         }
 
-       
 
-        //private void loadFeesCategoryInfo()
-        //{
-        //    try
-        //    {
-        //        divFeesCategoryList.Controls.Add(new LiteralControl(""));
-        //        string condition = "";
-        //        if (ddlPaymentFor.SelectedIndex > 0)
-        //        {
-        //            condition+=" Where IsNull(fc.PaymentFor,'regular')='" + ddlPaymentFor.SelectedValue + "'";
-        //        }                 
-        //        if (dlBatchName.SelectedIndex>0)
-        //        {
-        //            string[] batchClsID = dlBatchName.SelectedValue.Split('_');
-        //            if(condition=="")
-        //                condition += " Where FC.BatchId='" + batchClsID[0] + "'";
-        //            else
-        //                condition += " and FC.BatchId='" + batchClsID[0] + "'";
-        //        }
-
-        //       sqlCmd = @"with dft as (select StoreNameKey, StoreTitle from PaymentStores where StoreNameKey = 'islampurcollegeedubd')
-        //         Select FC.FeeCatId,BatchInfo.BatchName,IsNull(BatchInfo.BatchId, 0) as BatchId,ISNULL(BatchInfo.ClassID, 0) as ClassID, convert(varchar(10), FC.DateOfCreation, 105) as DateOfCreation, FC.FeeFine, FC.FeeCatName, DP.DateOfPaymentId, convert(varchar(10), DP.DateOfStart, 105) as 'Start Date', convert(varchar(10), DP.DateOfEnd, 105) as 'End Date', DP.IsActive,ex.ExInId,IsNull(ex.ExInSl, 0) as ExInSl,IsNull(fc.PaymentFor, 'regular') as PaymentFor,IsNull(fc.ClsGrpId, 0) as ClsGrpId,IsNull(FC.StoreNameKey, dft.StoreNameKey) as StoreNameKey,IsNull(str.StoreTitle, dft.StoreTitle) as StoreTitle from FeesCategoryInfo FC INNER JOIN DateOfPayment DP ON(FC.FeeCatId = DP.FeeCatId) Left JOIN BatchInfo ON BatchInfo.BatchId = FC.BatchId left join ExamInfo ex on fc.ExInSl = ex.ExInSl left join PaymentStores as str on FC.StoreNameKey = str.StoreNameKey cross join dft " + condition + " order by FC.FeeCatId desc";
-
-        //        //DataTable dt = CRUD.ReturnTableNull(sqlCmd);
-        //        //gv_FeesCatagoryInfo.DataSource = dt;
-        //        //gv_FeesCatagoryInfo.DataBind();
-
-
-        //        //DataTable dt = new DataTable();
-        //        //sqlDB.fillDataTable(sqlCmd, dt);
-        //        //int totalRows = dt.Rows.Count;
-        //        //string divInfo = "";
-        //        //divInfo = " <table id='tblParticularCategory' class='table table-striped table-bordered dt-responsive nowrap' cellspacing='0' width='100%' > ";
-        //        //divInfo += "<thead>";
-        //        //divInfo += "<tr>";
-        //        //divInfo += "<th>Batch Name</th>";
-        //        //divInfo += "<th>Fee CatName</th>";
-        //        //divInfo += "<th>Start Date</th>";
-        //        //divInfo += "<th>End Date</th>";
-        //        //divInfo += "<th class='numeric'>Fee Fine</th>";
-        //        //divInfo += "<th>Creation Date</th>";
-        //        //divInfo += "<th>Exam</th>";
-        //        //divInfo += "<th>Store</th>";
-        //        //if (Session["__Update__"].ToString().Equals("true"))
-        //        //    divInfo += "<th>Edit</th>";
-        //        //divInfo += "</tr>";
-        //        //divInfo += "</thead>";
-        //        //if (totalRows == 0)
-        //        //{
-        //        //    divInfo += "<tbody></tbody></table>";
-        //        //    divFeesCategoryList.Controls.Add(new LiteralControl(divInfo));
-        //        //    return;
-        //        //}
-        //        //divInfo += "<tbody>";
-        //        //string id = "";
-        //        //string BatchId = "";
-        //        //string ClassId = "";
-        //        //string ExInSl = "0";
-        //        //string PaymentFor = "";
-        //        //string ClsGrpId = "0";
-        //        //string StoreNameKey = "0";
-        //        //for (int x = 0; x < dt.Rows.Count; x++)
-        //        //{
-        //        //    PaymentFor = dt.Rows[x]["PaymentFor"].ToString();
-        //        //    BatchId = dt.Rows[x]["BatchId"].ToString();
-        //        //    ClassId = dt.Rows[x]["ClassID"].ToString();
-        //        //    ExInSl = dt.Rows[x]["ExInSl"].ToString();
-        //        //    id = dt.Rows[x]["FeeCatId"].ToString();
-        //        //    ClsGrpId = dt.Rows[x]["ClsGrpId"].ToString();
-        //        //    StoreNameKey = dt.Rows[x]["StoreNameKey"].ToString();
-        //        //    divInfo += "<tr id='r_" + id + "'>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["BatchName"].ToString() + "</td>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["FeeCatName"].ToString() + "</td>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["Start Date"].ToString() + "</td>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["End Date"].ToString() + "</td>";
-        //        //    divInfo += "<td class='numeric'>" + dt.Rows[x]["FeeFine"].ToString() + "</td>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["DateOfCreation"].ToString() + "</td>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["ExInId"].ToString() + "</td>";
-        //        //    divInfo += "<td >" + dt.Rows[x]["StoreTitle"].ToString() + "</td>";
-        //        //    if (Session["__Update__"].ToString().Equals("true"))
-        //        //        divInfo += "<td>" +
-        //        //            "<img style='width:20px;' src='/Images/gridImages/edit.png'  onclick=\"editFeesCategory(" + id + "," + BatchId + "," + ClassId + "," + ExInSl + ",'" + PaymentFor + "'," + ClsGrpId + ",'" + StoreNameKey + "');\"  />";
-        //        //}
-        //        //divInfo += "</tbody>";
-        //        //divInfo += "<tfoot>";
-        //        //divInfo += "</table>";
-        //        //divFeesCategoryList.Controls.Add(new LiteralControl(divInfo));
-        //    }
-        //    catch { }
-        //}
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            if (lblFeesCateId.Value.ToString().Length == 0)
+
+            if (btnSave.Text == "Save")
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "load();", true);
-                if (Session["__Save__"].ToString().Equals("false")) { lblMessage.InnerText = "warning-> You don't have permission to save!"; loadFeesCategoryInfo(); return; }
+                if (Session["__Save__"].ToString().Equals("false"))
+                {
+                    lblMessage.InnerText = "warning-> You don't have permission to save!";
+                    loadFeesCategoryInfo(); return;
+                }
                 if (!existAdmissionFee())
+                {
                     saveFeesCategoryInfo();
+                }
             }
-            else updateFeesCategoryInfo();
+            else
+            {
+                updateFeesCategoryInfo();
+                
+
+            }
+
         }
+
+        private void ClearGridView()
+        {
+
+            ddlPaymentFor.SelectedValue = "0";
+            txtFeesCatName.Text = "";
+            ddlPaymentStore.SelectedValue = "0";
+            dlBatchName.SelectedValue = "0";
+            ddlExam.SelectedValue = "0";
+            txtDateStart.Text = "";
+            txtDateEnd.Text = "";
+            txtFeesFine.Text = "";
+            ddlGroup.SelectedValue = "0";
+            Dataload();
+            btnSave.Text = "Save";
+
+        }
+
+
+
         private bool existAdmissionFee()
         {
             try {
@@ -250,14 +199,19 @@ namespace DS.UI.Administration.Finance.FeeManaged
                     cmd.Parameters.AddWithValue("@IsActive", "True");
                     result = (int)cmd.ExecuteNonQuery();
 
-
+                    saveParticularsCategory(FeeCatId);
                 }
-                saveParticularsCategory(FeeCatId);
+              
                 if (result > 0)
                 {
-                  //  saveStudentPayment(FeeCatId.ToString(), dlBatchName.SelectedValue);
-                    Clear();
-                    loadFeesCategoryInfo();                   
+                    //  saveStudentPayment(FeeCatId.ToString(), dlBatchName.SelectedValue);
+                    lblMessage.InnerText = "success->Save Successfully.";
+                    backToList();
+                    loadFeesCategoryInfo();
+                    ClearGridView();    
+                   
+                    
+                
                 }
                 else lblMessage.InnerText = "error->Unable to save";
 
@@ -287,11 +241,32 @@ namespace DS.UI.Administration.Finance.FeeManaged
                     cmd.ExecuteNonQuery();
                 }
 
+                dt = new DataTable();
+                ViewState["__Data__"] = dt;
             }
+
             catch (Exception ex)
             {
                 lblMessage.InnerText = "error->" + ex.Message;
                 
+            }
+        }
+        private void deleteParticularsCategory(int FeeCatId)
+        {
+            try
+            {
+                SqlCommand cmd;
+
+                // Create a delete command to remove existing records for the given FeeCatId
+                cmd = new SqlCommand("DELETE FROM ParticularsCategory WHERE FeeCatId = @FeeCatId", DbConnection.Connection);
+                cmd.Parameters.AddWithValue("@FeeCatId", FeeCatId);
+
+                // Execute the delete command
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                lblMessage.InnerText = "Error -> " + ex.Message;
             }
         }
 
@@ -345,11 +320,14 @@ namespace DS.UI.Administration.Finance.FeeManaged
             try
             {
                 string[] batchClsID = dlBatchName.SelectedValue.Split('_');
+                int feecatId = Convert.ToInt32(ViewState["__FeeCatId"]);
                 SqlCommand cmd = new SqlCommand("update FeesCategoryInfo  Set FeeFine=@FeeFine, " +
-                                                                "FeeCatName=@FeeCatName,ExInSl=@ExInSl,PaymentFor=@PaymentFor,ClsGrpId=@ClsGrpId,StoreNameKey=@StoreNameKey where FeeCatId=@FeeCatId ", DbConnection.Connection);
+                                                                                                "FeeCatName=@FeeCatName,ExInSl=@ExInSl,PaymentFor=@PaymentFor,ClsGrpId=@ClsGrpId,StoreNameKey=@StoreNameKey where FeeCatId=@FeeCatId ", DbConnection.Connection);
 
-                cmd.Parameters.AddWithValue("@FeeCatId", lblFeesCateId.Value.ToString());
-               // cmd.Parameters.AddWithValue("@BatchId", batchClsID[0]);
+
+
+                cmd.Parameters.AddWithValue("@FeeCatId", feecatId.ToString());
+                cmd.Parameters.AddWithValue("@BatchId", batchClsID[0]);
                 cmd.Parameters.AddWithValue("@FeeFine", txtFeesFine.Text.Trim());
                 cmd.Parameters.AddWithValue("@FeeCatName", txtFeesCatName.Text.Trim());
                 cmd.Parameters.AddWithValue("@PaymentFor",ddlPaymentFor.SelectedValue);
@@ -357,19 +335,22 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 cmd.Parameters.AddWithValue("@ExInSl",ddlExam.SelectedValue);               
                 cmd.Parameters.AddWithValue("@StoreNameKey", ddlPaymentStore .SelectedValue);             
                 cmd.ExecuteNonQuery();
-                //int FeeCatId = Convert.ToInt32(cmd.ExecuteScalar());
-                //if (FeeCatId > 0)
-                //{
+          
+                if (feecatId > 0)
+                {
                     cmd = new SqlCommand("update DateOfPayment set DateOfStart=@DateOfStart,DateOfEnd=@DateOfEnd,IsActive=@IsActive where FeeCatId=@FeeCatId", DbConnection.Connection);
-                    cmd.Parameters.AddWithValue("@FeeCatId", lblFeesCateId.Value.ToString());
+                    cmd.Parameters.AddWithValue("@FeeCatId", feecatId.ToString());
                     cmd.Parameters.AddWithValue("@DateOfStart", convertDateTime.getCertainCulture(txtDateStart.Text));
                     cmd.Parameters.AddWithValue("@DateOfEnd", convertDateTime.getCertainCulture(txtDateEnd.Text));
                     cmd.Parameters.AddWithValue("@IsActive", "True");
                     cmd.ExecuteNonQuery();
-                //}
+                }
+                deleteParticularsCategory(feecatId);
+                saveParticularsCategory(feecatId);
                 loadFeesCategoryInfo();
-                lblFeesCateId.Value = "";
-                Clear();
+                backToList();
+
+                ClearGridView();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "updateSuccess();", true);
                 return true;
             }
@@ -377,22 +358,23 @@ namespace DS.UI.Administration.Finance.FeeManaged
             {
                 lblMessage.InnerText = "error->" + ex.Message;
                 loadFeesCategoryInfo();
+
                 return false;
             }
         }
 
-        private void Clear()
-        {
-            txtFeesCatName.Text = string.Empty;
-            txtDateStart.Text = string.Empty;
-            txtDateEnd.Text = string.Empty;
-            txtFeesFine.Text = string.Empty;
-            ddlPaymentStore.SelectedValue = "0";
-            if (pnlAcademicInfo.Visible)
-                hfAcademicInfo.Value = "1";
-            else
-                hfAcademicInfo.Value = "0";
-        }
+        //private void Clear()
+        //{
+        //    txtFeesCatName.Text = string.Empty;
+        //    txtDateStart.Text = string.Empty;
+        //    txtDateEnd.Text = string.Empty;
+        //    txtFeesFine.Text = string.Empty;
+        //    ddlPaymentStore.SelectedValue = "0";
+        //    if (pnlAcademicInfo.Visible)
+        //        hfAcademicInfo.Value = "1";
+        //    else
+        //        hfAcademicInfo.Value = "0";
+        //}
 
         protected void dlBatchName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -450,6 +432,7 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 if (amount != "")
                 {
                     DataRow dr = dt.NewRow();
+
                     dr["PId"] = pId;
                     dr["Particular"] = particular;
                     dr["Amount"] = amount;
@@ -472,10 +455,11 @@ namespace DS.UI.Administration.Finance.FeeManaged
         }
 
 
-        private bool IsParticularExists(string particular)
+        private bool IsParticularExists(string particular,DataTable dt)
         {
             // Check if the particular value already exists in the GridView
-            DataTable dt = (DataTable)ViewState["__Data__"];
+             
+            
             foreach (DataRow row in dt.Rows)
             {
                 if (string.Equals(particular, row["Particular"].ToString(), StringComparison.OrdinalIgnoreCase))
@@ -495,12 +479,13 @@ namespace DS.UI.Administration.Finance.FeeManaged
 
         protected void btnAddParticular_Click(object sender, EventArgs e)
         {
+
+
             string particular = ddlParticular.SelectedItem.Text;
             string pId = ddlParticular.SelectedValue;
             string amount = txtAmount.Text.Trim();
-            dt = new DataTable();
             dt = (DataTable)ViewState["__Data__"];
-                if (!IsParticularExists(particular))
+            if (!IsParticularExists(particular,dt))
                 {
                     saveparticularOngv(amount, particular, pId, dt);
                 }
@@ -529,35 +514,17 @@ namespace DS.UI.Administration.Finance.FeeManaged
                              gvParticularInfo.DataBind();
 
                         }
-                    }
+                        else
+                        {
+                                     
+                        }
+                }
 
             }
             catch (Exception ex)
             {
                 // Handle exceptions, log, or display an error message
             }
-
-
-
-
-
-            //try
-            //{
-
-            //    int rIndex = Convert.ToInt32(e.CommandArgument);
-
-            //    if (e.CommandName == "Alter")
-            //    {
-            //        //int PId = Convert.ToInt32(gv_particularInfo.DataKeys[rIndex].Value);
-            //        //ViewState["--PId--"] = PId;
-            //        ddlParticular.SelectedValue = gvParticularInfo.DataKeys[rIndex].Values["PId"].ToString();
-            //        txtAmount.Text = ((Label)gvParticularInfo.Rows[rIndex].FindControl("lblamount")).Text;
-            //        btnAddParticular.Text = "Update Particular";
-            //    }
-
-
-            //}
-            //catch { }
         }
         protected decimal totalAmount = 0;
 
@@ -574,10 +541,10 @@ namespace DS.UI.Administration.Finance.FeeManaged
             else if (e.Row.RowType == DataControlRowType.Footer)
             {
                 // Display the total Amount in the Footer
-                Label lblTotalAmount = (Label)e.Row.FindControl("lblTotalAmount");
-                if (lblTotalAmount != null)
+                Label lblTotalAmountAdded = (Label)e.Row.FindControl("lblTotalAmountAdded");
+                if (lblTotalAmountAdded != null)
                 {
-                    lblTotalAmount.Text = totalAmount.ToString("0.00");
+                    lblTotalAmountAdded.Text = totalAmount.ToString("0.00");
                 }
             }
         }
@@ -594,23 +561,28 @@ namespace DS.UI.Administration.Finance.FeeManaged
                     entryPanel.Visible = true;
                     btnAddFeesCat.Text = "Back To LIst";
 
+
                 }
             }
             else
             {
-                entryPanel.Visible = false;
-                listPanel.Visible = true;
-                btnAddFeesCat.Text = "Add New Fees Catagory +";
-
-
+                backToList();
             }
         }
+        private void backToList()
+        {
+            entryPanel.Visible = false;
+            listPanel.Visible = true;
+            btnAddFeesCat.Text = "Add New Fees Catagory +";
+        }
 
-
-        private void loadFeesCategoryDetailes()
+        private void loadFeesCategoryDetailes(int feeCatId)
         {
             try
             {
+
+                // Get other values as needed from DataKeys
+
                 sqlCmd = @"SELECT
                         FCI.FeeCatId,
                         BI.BatchName,
@@ -623,9 +595,7 @@ namespace DS.UI.Administration.Finance.FeeManaged
 	                    FCI.PaymentFor,
 	                    TG.GroupName,
 	                    EXI.ExName
- 
-	
-                    FROM
+                        FROM
                         FeesCategoryInfo AS FCI
                     INNER JOIN
                         BatchInfo AS BI ON FCI.BatchId = BI.BatchId
@@ -642,7 +612,8 @@ namespace DS.UI.Administration.Finance.FeeManaged
                     LEFT JOIN PaymentStores PS ON PS.StoreNameKey= FCI.StoreNameKey
 
                     WHERE
-                        PTI.PStatus = 1 
+                        PTI.PStatus = 1 and 
+						FCI.FeeCatId = "+ feeCatId +@"
                     GROUP BY
                         FCI.FeeCatId,
                         BI.BatchName,
@@ -656,7 +627,7 @@ namespace DS.UI.Administration.Finance.FeeManaged
 	                    EXI.ExName
 
                     ORDER BY
-                        FCI.FeeCatId DESC;
+                        FCI.FeeCatId DESC
 
 
                     ";
@@ -677,8 +648,20 @@ namespace DS.UI.Administration.Finance.FeeManaged
                     lblPaymentFor.Text = "Payment For :" + row["PaymentFor"].ToString();
                     lblGroup.Text = "Group :" + row["GroupName"].ToString();
                     lblExam.Text = "Exam :" + row["ExName"].ToString();
+                    // Assume 'totalAmount' is a variable containing the total amount
+
+                    ViewState["TotalAmount"] = row["TotalAmount"].ToString();
+
 
                 }
+
+                sqlCmd = "select pc.FeeCatId,PC.PId,pc.Amount,PSI.PName as Particular from ParticularsCategory as pc LEFT Join ParticularsInfo as psi on psi.PId=pc.PId where FeeCatId=" + feeCatId + @"";
+                 dt = CRUD.ReturnTableNull(sqlCmd);
+                gvParticularDetailes.DataSource = dt;
+                gvParticularDetailes.DataBind();
+
+                // Accessing Total Amount in Code-Behind
+ // Assuming lblTotalAmount is a Label control
 
             }
             catch (Exception)
@@ -689,42 +672,133 @@ namespace DS.UI.Administration.Finance.FeeManaged
         }
 
 
-
-        protected void gvParticularList_RowCommand(object sender, GridViewCommandEventArgs e)
+        private void EditloadFeesCategoryDetailes(int feeCatId)
         {
-            if (e.CommandName == "ViewDetails")
+            try
             {
-                loadFeesCategoryDetailes();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
 
-     
+                // Get other values as needed from DataKeys
+
+                sqlCmd = @"SELECT
+                        FCI.FeeCatId,
+                        FCI.BatchId,
+                        FCI.FeeFine,
+                        FCI.FeeCatName,
+                        FCI.ExInSl,
+                        FCI.PaymentFor,
+                        FCI.ClsGrpId,
+                        FCI.StoreNameKey,
+	                    BTI.BatchId,
+	                    BTI.ClassID,
+
+                        CONVERT(VARCHAR, DP.DateOfStart, 105) AS DateOfStart,
+                        CONVERT(VARCHAR, DP.DateOfEnd, 105) AS DateOfEnd
+                    FROM
+                        FeesCategoryInfo AS FCI
+                    INNER JOIN
+                        DateOfPayment AS DP ON FCI.FeeCatId = DP.FeeCatId
+                    LEFT JOIN
+                        BatchInfo AS BTI ON FCI.BatchId = BTI.BatchId
+						where FCI.FeeCatId = " + feeCatId + @" ";
+
+                dt = CRUD.ReturnTableNull(sqlCmd);
+
+                if (dt.Rows.Count > 0) 
+                {
+                    DataRow row = dt.Rows[0];
 
 
 
+                    //lblFeeCatId.Text = "FeeCategory: " + row["FeeCatId"].ToString();
+                    if (dlBatchName != null && dlBatchName.Items.Count > 0)
+                    {
+                        string batchId = row["BatchId"].ToString();
+                        string classId = row["ClassId"].ToString();
+                        string BatchIdjoinClassId = batchId + "_" + classId;
+
+                        dlBatchName.SelectedValue = BatchIdjoinClassId;
+                    }
+                    txtFeesFine.Text = row["FeeFine"].ToString();
+                    txtFeesCatName.Text = row["FeeCatName"].ToString();
+                    ddlExam.SelectedValue = row["ExInSl"].ToString();
+                    ddlPaymentFor.SelectedValue = row["PaymentFor"].ToString();
+                    txtDateStart.Text =  row["DateOfStart"].ToString();
+                    txtDateEnd.Text =  row["DateOfEnd"].ToString();
+
+                    ddlGroup.SelectedValue = row["ClsGrpId"].ToString();
+                    ddlPaymentStore.SelectedValue = row["StoreNameKey"].ToString();
+
+
+                    // Assume 'totalAmount' is a variable containing the total amount
+
+                    //ViewState["TotalAmount"] = row["TotalAmount"].ToString();
+   
+                }
+
+
+                sqlCmd = "select pc.FeeCatId,PC.PId,pc.Amount,PSI.PName as Particular from ParticularsCategory as pc LEFT Join ParticularsInfo as psi on psi.PId=pc.PId where FeeCatId=" + feeCatId + @"";
+                dt = CRUD.ReturnTableNull(sqlCmd);
+
+                ViewState["__Data__"] = dt;
+
+                gvParticularInfo.DataSource = dt;
+                gvParticularInfo.DataBind();
+
+
+
+                // Accessing Total Amount in Code-Behind
+                // Assuming lblTotalAmount is a Label control
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 
 
-        //protected void gvParticularList_RowCommand(object sender, GridViewCommandEventArgs e)
-        //{
-        //    if (e.CommandName == "edit")
-        //    {
-        //        int rowIndex = Convert.ToInt32(e.CommandArgument);
-        //        // Get the data for the selected row using rowIndex
-        //        // You can then use this data to populate the table in the modal dynamically
 
-        //        // Example: Retrieve data from GridView's DataSource
-        //        DataTable dt = ((DataTable)gvParticularList.DataSource);
-        //        DataRow row = dt.Rows[rowIndex];
 
-        //        // Populate the modal's table content using JavaScript
-        //        string script = $@"
-        //    var modalBody = document.getElementById('editModal').getElementsByClassName('modal-body')[0];
-        //    modalBody.innerHTML = '<table class=\"table\"><tr><th>Column1</th><th>Column2</th></tr><tr><td>{row["Column1"]}</td><td>{row["Column2"]}</td></tr></table>';
-        // ";
-        // ClientScript.RegisterStartupScript(this.GetType(), "EditModalScript", script, true);
-        //    }
-        //}
+        protected void gvParticularList_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+           
+
+            if (e.CommandName == "ShowDetailes")
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument); // get the index of the row
+
+                // Access DataKeys using the row index
+                int feeCatId = Convert.ToInt32(gvParticularList.DataKeys[rowIndex]["FeeCatId"]);
+                loadFeesCategoryDetailes(feeCatId);
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
+
+
+
+            }
+            else if(e.CommandName == "Alter")
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument); // get the index of the row
+
+                // Access DataKeys using the row index
+                int feeCatId = Convert.ToInt32(gvParticularList.DataKeys[rowIndex]["FeeCatId"]);
+                ViewState["__FeeCatId"] = feeCatId;
+                EditloadFeesCategoryDetailes(feeCatId);
+
+                if (listPanel.Visible)
+                {
+                    listPanel.Visible = false;
+                    entryPanel.Visible = true;
+                    btnAddFeesCat.Text = "Back To LIst";
+                    btnSave.Text = "Update";
+                }
+
+             }
+        }
+
+
+
 
         protected void gvParticularList_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -736,11 +810,23 @@ namespace DS.UI.Administration.Finance.FeeManaged
 
         protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int pageSize = Convert.ToInt32(ddlPageSize.SelectedValue);
+            int pageSize = Convert.ToInt32(ddlPageSize.SelectedValue); 
             gvParticularList.PageSize = pageSize;
-            loadFeesCategoryInfo();
+            loadFeesCategoryInfo();  
     
         }
+
+        protected void btnTest_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showModal", "showModal();", true);
+        }
+
+
+
+
+
+
+
 
         //protected void btnModalClose_Click(object sender, EventArgs e)
         //{
