@@ -1337,7 +1337,6 @@ D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\HtmlRe
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\PdfSharp.Charting.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\PdfSharp.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\System.Configuration.dll
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\DigitalSchool.DAL.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\DS.PropertyEntities.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\DS.PropertyEntities.dll.config
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\DigitalSchool.SysErrMsgHandler.pdb
@@ -1348,7 +1347,6 @@ D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\HtmlRe
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\HtmlRenderer.PdfSharp.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\PdfSharp.xml
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\PdfSharp.Charting.xml
-D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\DigitalSchool.DAL.pdb
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\de\PdfSharp.resources.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\bin\Debug\de\PdfSharp.Charting.resources.dll
 D:\Running projects github\cw_prottoy_dynamic\DigitalSchool.DAL\obj\Debug\DS.DAL.csproj.CopyComplete
