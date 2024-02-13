@@ -31,6 +31,33 @@ namespace DS.UI.Administration.Finance.FeeManaged {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMessage;
         
         /// <summary>
+        /// lblParticular control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblParticular;
+        
+        /// <summary>
+        /// txtParticular control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtParticular;
+        
+        /// <summary>
+        /// btnParticularSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnParticularSave;
+        
+        /// <summary>
         /// lblPaymentFor control.
         /// </summary>
         /// <remarks>

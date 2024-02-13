@@ -361,20 +361,7 @@ namespace DS.UI.Administration.Finance.FeeManaged
 
                 return false;
             }
-        }
-
-        //private void Clear()
-        //{
-        //    txtFeesCatName.Text = string.Empty;
-        //    txtDateStart.Text = string.Empty;
-        //    txtDateEnd.Text = string.Empty;
-        //    txtFeesFine.Text = string.Empty;
-        //    ddlPaymentStore.SelectedValue = "0";
-        //    if (pnlAcademicInfo.Visible)
-        //        hfAcademicInfo.Value = "1";
-        //    else
-        //        hfAcademicInfo.Value = "0";
-        //}
+        } 
 
         protected void dlBatchName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -419,11 +406,7 @@ namespace DS.UI.Administration.Finance.FeeManaged
             dt.Columns.Add("Amount", typeof(string));
             ViewState["__Data__"] = dt;
             BindGridView();
-        }
-
-     
-
-       
+        }  
 
         public void saveparticularOngv(string amount, string particular,string pId, DataTable dt)
         {
@@ -660,9 +643,6 @@ namespace DS.UI.Administration.Finance.FeeManaged
                 gvParticularDetailes.DataSource = dt;
                 gvParticularDetailes.DataBind();
 
-                // Accessing Total Amount in Code-Behind
- // Assuming lblTotalAmount is a Label control
-
             }
             catch (Exception)
             {
@@ -727,11 +707,6 @@ namespace DS.UI.Administration.Finance.FeeManaged
 
                     ddlGroup.SelectedValue = row["ClsGrpId"].ToString();
                     ddlPaymentStore.SelectedValue = row["StoreNameKey"].ToString();
-
-
-                    // Assume 'totalAmount' is a variable containing the total amount
-
-                    //ViewState["TotalAmount"] = row["TotalAmount"].ToString();
    
                 }
 
@@ -822,32 +797,31 @@ namespace DS.UI.Administration.Finance.FeeManaged
         }
 
 
+        protected void btnParticularSave_Click(object sender, EventArgs e)
+        {
+            if (txtParticular.Text.Trim().Length >0)
+            {
 
+                string query = " Insert into  ParticularsInfo(PName,PStatus) Values ('" + txtParticular.Text + "',1 )";
+                bool IsRowInsert= CRUD.ExecuteNonQuery(query);
 
+                if (IsRowInsert){
+                    lblMessage.InnerText = "success->Particular save successful ";
+                    commonTask.LoadParticular(ddlParticular);
+                    txtParticular.Text = "";
+                }
+                else
+                {
+                    lblMessage.InnerText = "error->This Particular is already exist!";
+                    txtParticular.Text = "";
 
+                }
+            }
+            else
+            {
+                lblMessage.InnerText = "warning->Please insert particular name";
 
-
-
-        //protected void btnModalClose_Click(object sender, EventArgs e)
-        //{
-        //    ScriptManager.RegisterStartupScript(this, this.GetType(), "RemoveScript", "removeModal();", true);
-
-        //}
-
-
-
-
-
-
-        //protected void ddlGroup_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "call me", "load();", true);
-        //    if (dlBatchName.SelectedValue != "0")
-        //    {
-        //        string[] batchClsID = dlBatchName.SelectedValue.Split('_');
-        //        ExamInfoEntry.GetExamIdListWithExInSl(ddlExam, batchClsID[0], ddlGroup.SelectedValue);
-        //    }
-
-        //}
+            }
+        }
     }
 }

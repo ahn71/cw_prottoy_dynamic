@@ -107,7 +107,46 @@
     
     </div>
 
+    <!------Add Particular Section Start -------->
+    <!-- Button trigger modal -->
+<%--        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Launch demo modal
+        </button>--%>
 
+<!-- Modal -->
+        <div class="modal fade" id="ParticularModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <asp:label ID="lblParticular" runat="server" CssClass="form-label" >Please Insert Particular Name </asp:label>
+                  <asp:TextBox ID="txtParticular" runat="server" ClientIDMode="Static" CssClass="input controlLength form-control"></asp:TextBox>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <asp:Button runat="server" ID="btnParticularSave" Text="Save" CssClass="btn btn-success" OnClick="btnParticularSave_Click" />
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+    <!------Add Particular Section End -------->
+
+
+
+
+
+
+
+
+
+
+        <!------Fees Catagory Information Detailes Start -------->
 
                          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog  modal-lg" role="document">
@@ -199,11 +238,11 @@
                 </div>
 
 
-
+      <!------Fees Catagory Information Detailes End -------->
 
 
  
-    <div class="">
+
         <div class="row">
             <div class="col-md-7">
                 <h4 class="text-right" style="float: left">Fees Category Information</h4>
@@ -468,7 +507,7 @@
 
 
                                                         <span class="input-group-btn">
-                                                            <asp:Button runat="server" ID="btnParticular" Text="Add+" CssClass="btn btn-success" /></span>
+                                                            <asp:Button runat="server" ID="btnParticular" data-toggle="modal" Text="Add+" CssClass="btn btn-success" data-target="#ParticularModal" /></span>
                                                     </div>
 
                                                 </div>
@@ -552,7 +591,7 @@
             </asp:UpdatePanel>
 
         </div>
-    </div>
+
 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="server">
